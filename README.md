@@ -1,1 +1,0 @@
-# douglastkaiser.github.io
