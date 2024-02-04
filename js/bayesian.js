@@ -4,6 +4,10 @@ function bayesianAverage(rating, n_votes, globalaverageRating, global_n_Votes) {
 }
 
 function compareRatings() {
+    // Clear output.
+    document.getElementById('bayesian_result').innerText = ''
+    document.getElementById('bayesian_compare_result').innerText = ''
+
     // Assuming a mid-point average rating for the whole system
     const globalaverageRating = parseFloat(document.getElementById('globalaverageRating').value) || 3.5;
     // Assuming a baseline number of total n_votes for normalization
@@ -29,14 +33,17 @@ function compareRatings() {
     const bayesian1 = bayesianAverage(rating1, n_votes1, globalaverageRating, global_n_Votes);
     const bayesian2 = bayesianAverage(rating2, n_votes2, globalaverageRating, global_n_Votes);
 
-    let resultText = `Item 1: Bayesian Average = ${bayesian1.toFixed(2)}\nItem 2: Bayesian Average = ${bayesian2.toFixed(2)}\n`;
+    document.getElementById('bayesian_result').innerText = `Item 1: Bayesian Average = ${bayesian1.toFixed(2)}\nItem 2: Bayesian Average = ${bayesian2.toFixed(2)}`;
+    
+    resultText = ''
     if (bayesian1 > bayesian2) {
-        resultText += '\nItem 1 has a stronger score.';
+        resultText += 'Item 1 has a stronger score.';
     } else if (bayesian2 > bayesian1) {
-        resultText += '\nItem 2 has a stronger score.';
+        resultText += 'Item 2 has a stronger score.';
     } else {
-        resultText += '\nBoth items have equal scores.';
+        resultText += 'Both items have equal scores.';
     }
 
-    document.getElementById('bayesian_result').innerText = resultText;
+    document.getElementById('bayesian_compare_result').innerText = resultText;
+    
 }
