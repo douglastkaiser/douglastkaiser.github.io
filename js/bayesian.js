@@ -33,7 +33,7 @@ function compareRatings() {
     const bayesian1 = bayesianAverage(rating1, n_votes1, globalaverageRating, global_n_Votes);
     const bayesian2 = bayesianAverage(rating2, n_votes2, globalaverageRating, global_n_Votes);
 
-    document.getElementById('bayesian_result').innerText = `Item 1: Bayesian Average = ${bayesian1.toFixed(2)}\nItem 2: Bayesian Average = ${bayesian2.toFixed(2)}`;
+    document.getElementById('bayesian_result').innerText = `Item 1 Bayesian Average = ${bayesian1.toFixed(2)}\nItem 2 Bayesian Average = ${bayesian2.toFixed(2)}`;
     
     resultText = ''
     if (bayesian1 > bayesian2) {
