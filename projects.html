@@ -25,6 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home <i class="fa fa-external-link"></i></a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#bayesianCalc">Bayesian Calc</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#hibernacia">Bat Hibernacia</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#llmama">LLMAMA</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#housing_market_sim">Housing Market Sim</a></li>
@@ -43,6 +44,39 @@
                 </div>
             </section>
             <hr class="m-0" />
+            <!-- Bayesian Calc -->
+            <!-- https://lukasmurdock.com/bayes-average/ -->
+            <section class="resume-section" id="bayesianCalc">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Bayesian Rating Comparison Calculator</h2>
+                    <p class="lead mb-5">This Bayesian Rating Comparison Calculator is designed to help you compare two items
+                        based on their five-star ratings and number of ratings, utilizing an advanced Bayesian average calculation
+                        for a more accurate comparison. Now with the option to customize the system's average rating and total votes!</p>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Item 1</h3>
+                            <input type="number" id="rating1" placeholder="Average Rating" step="0.01" required>
+                            <input type="number" id="n_votes1" placeholder="Number of Ratings" required>
+                            <h3 class="mb-0">Item 2</h3>
+                            <input type="number" id="rating2" placeholder="Average Rating" step="0.01" required>
+                            <input type="number" id="n_votes2" placeholder="Number of Ratings" required>
+                            <br><br>
+                            <h3 class="mb-0">Globals (optional)</h3>
+                            <input type="number" id="globalaverageRating" placeholder="Average Rating (3.5)">
+                            <input type="number" id="global_n_Votes" placeholder="Total Votes (50)">
+                            <br><br>
+                            <button type="button" onclick="compareRatings()">Calculate</button>
+                        </div>
+                    </div>
+                    <h3 id="bayesian_result">Results Here</h3>
+                    <br>
+                    <p class="lead mb-5">You have the option to refine your comparison by specifying a system-wide average rating and total number of votes.
+                        This is particularly useful if you're comparing items within a larger dataset and want to account for the overall average rating and vote count.
+                        Utilizing the optional average rating and total votes fields can provide a more nuanced comparison, especially in cases where the number of
+                        ratings significantly varies between items or when comparing items against a broader context.</p>
+                    <script src="js/bayesian.js"></script>
+                </div>
+            </section>
             <!-- Hibernacia-->
             <section class="resume-section" id="hibernacia">
                 <div class="resume-section-content">
