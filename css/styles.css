@@ -1967,6 +1967,34 @@ progress {
     -webkit-overflow-scrolling: touch;
   }
 }
+
+@media (max-width: 768px) {
+  .resume-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .resume-section h2 {
+      width: 100%;
+      margin-bottom: 1rem;
+  }
+
+  .resume-section ol {
+      width: 100%;
+  }
+
+  .resume-section strong {
+      margin-bottom: 0.5rem;
+  }
+
+  .resume-section blockquote {
+      padding-left: 1rem;
+      border-left: 3px solid var(--bs-gray-300);
+      margin: 0.5rem 0;
+  }
+}
+
 .form-label {
   margin-bottom: 0.5rem;
 }
