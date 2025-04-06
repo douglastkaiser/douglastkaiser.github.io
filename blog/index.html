@@ -25,6 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="../">Home <i class="fa fa-external-link"></i></a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#authorship-with-ai">Authorship with AI</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#tech-centralization">Tech Centeralization</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#closed-loop-govt">Closed Loop Gov't</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#character-gen">Character Generator</a></li>
@@ -35,6 +36,7 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#ai-archetypes">AI Archetypes</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#anti-matter">Anti Matter</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#manual-delusion">Manual Delusion</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#stock-pop-pyramid">Stock Price Population Pyramid</a></li>
                 </ul>
             </div>
         </nav>
@@ -52,17 +54,155 @@
 
             <hr class="m-0" />
 
+            <section class="resume-section" id="authorship-with-ai">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Authorship<span class="text-primary"> in a Chatbot World</span></h2>
+                    <p class="lead mb-5">April 2025</p>
+                    
+                    <p>For good writing to adapt to the modern world of LLMs we need a framework of interaction with these systems. I propose two here; a writer-first system where the LLM fills in roles that might otherwise have been taken by other people but can now be automated, and a Partner system where the LLM takes a more active role from start to finish.</p>
+                    
+                    <h3>You are still The Author</h3>
+                    <p>The basic idea here is to use an LLM in order to be an assistant but not the main driving force behind the work.</p>
+                    <ol>
+                        <li>Speech-to-text in a word document. Stream of consciousness for an idea no matter how well or ill-formed. Little to no editing. The built in Windows Ctrl+h works well for this.</li>
+                        <li>Copy and paste that text which should have almost no grammar punctuation or revisions applied, into an LLM with a prompt to massage the thoughts into something more readable but unchanged in its character. Here the LLM is The Scribe.</li>
+                        <li>Review the output which should now be grammatically correct with all necessary punctuation and organization of thoughts. This could even be improved by using text-to-speech to have it read the result back to you just like a scribe might.</li>
+                        <li>Now use an LLM again but as The Editor. Using again a known specific prompt, have the system critique the writing as an editor might.</li>
+                        <li>Now apply the feedback. New ideas, via speech-to-text if needed, can be made and then reapplied into the existing writing by iterating through this process. A new prompt can be used to come up with The Integrator.</li>
+                        <li>Then get The Publisher. This can vary wildly depending on what artifacts might need to go with it. If it's a blog post then it's a conversion to html that an LLM can do easily. If it requires other built materials then it can get complex fast.</li>
+                    </ol>
+                    
+                    <p>To work more closely with an AI LLM to work back and forth in developing an idea is another story altogether, see Collaborative Partner for more.</p>
+                    
+                    <h4>The Scribe</h4>
+                    <p>Use this prompt to have the LLM act as a scribe on the text-to-speech stream of consciousness output:</p>
+                    <p>Prompt: "Here's a stream of consciousness write up that I did using speech to text. I want you to clean it up and rewrite it in a nice easy to understand way while preserving the tone and all of the ideas expressed. Make good sense of this in a way that is much better to read. Do not add new ideas. The POV should be coming from me as the author of this for my blog. It should be readable and easy to digest for an educated audience. Reorganize these thoughts and ideas as needed to make the most sense."</p>
+                    
+                    <h4>The Editor</h4>
+                    <p>Use this prompt to have the LLM act as an editor on the cleaned up output from the previous step (after personally revising it)</p>
+                    <p>ChatGPT's: "Act as a professional editor. I'm the author of this piece and I've already done a first-pass cleanup. Now I want you to give me clear, thoughtful editorial feedback to make it sharper and more effective without changing my voice or intent. Focus on structure, clarity, flow, tone, and strength of argument. Identify what's working, what could be better, and give specific suggestions for improvement, not just vague praise or rewrites. Assume I'm a competent writer looking to push this to the next level."</p>
+                    <p>Claude: "Please review this piece of writing as an experienced editor would. I want constructive feedback that will help me improve it, not a complete rewrite. Specifically:</p>
+                    <ol>
+                        <li>Identify any unclear sections or ideas that could be developed further</li>
+                        <li>Point out repetitive phrases or words</li>
+                        <li>Suggest ways to strengthen the overall structure and flow</li>
+                        <li>Highlight any weak transitions between ideas</li>
+                        <li>Note if the tone is inconsistent in any places</li>
+                        <li>Recommend areas where more specific examples or details would be helpful</li>
+                        <li>Comment on the effectiveness of the opening and closing</li>
+                    </ol>
+                    <p>Please provide this feedback in a clear, organized format that I can use as a revision guide. Be specific about what works well in addition to what needs improvement."</p>
+                    <p>Meta's: Review the attached text as an editor would, focusing on structure, coherence, and overall flow. Provide feedback on areas that need improvement, suggest alternative phrasings or sentence structures where necessary, and highlight any inconsistencies or gaps in logic. Assume the text is intended for [insert target audience here, e.g., general readers, academic audience, etc.].</p>
+                    <p>After it has given you direction as to where to go next you can then use its editing capabilities to prompt what changes might be needed:</p>
+                    <p>"Give me the piece back with blank spaces or bracketed notes where I should fill in. Like an editor might. Even down to new sections or transitions where I might keep the writing going."</p>
+                    
+                    <h4>The Integrator</h4>
+                    <p>Here is a prompt you can use to integrate new ideas into existing work.</p>
+                    <p>"I have an existing draft and some new ideas I've recorded using speech-to-text. I want you to help me integrate these new thoughts into my current draft in a natural way that maintains flow and coherence.</p>
+                    <p>Here's my current draft: [PASTE CURRENT DRAFT HERE]</p>
+                    <p>Here are my new ideas (stream-of-consciousness): [PASTE NEW SPEECH-TO-TEXT IDEAS HERE]</p>
+                    <p>Please:</p>
+                    <ol>
+                        <li>Identify where these new ideas would fit best within the existing structure</li>
+                        <li>Integrate them seamlessly while preserving my voice and style</li>
+                        <li>Make only necessary adjustments to transitions and flow</li>
+                        <li>Highlight any places where my new ideas contradict or significantly shift from points in the original draft</li>
+                        <li>If any new ideas don't fit well with the current piece, list them separately as 'Ideas for future development'</li>
+                    </ol>
+                    <p>Don't completely restructure my work—just help me weave in these new thoughts in a way that enhances the overall piece."</p>
+                    
+                    <h4>The Publisher</h4>
+                    <p>This can then all be converted into html for posting on a website or blog. This is either a simple step or the most complex and so usage of AI tools varies.</p>
+                    <p>"Convert this to HTML, make no changes to the content, simply convert it in a way that preserves the organization and layout for readability. Assume there is already an existing ccs style:</p>
+                    <p>[paste text here]"</p>
+                    <p>But often this can include many other elements and can't just be boiled down to one use case.</p>
+                    
+                    <h3>Collaborative Partner</h3>
+                    <p>When working with an AI LLM to develop ideas collaboratively, the process becomes more conversational and iterative</p>
+                    <p>The key difference in this approach is that the LLM serves as an active collaborator rather than just processing your existing thoughts. This can be particularly valuable when working through complex problems or when you need to consider multiple angles quickly.</p>
+                    <p>These systems can link sequentially, within the same chat window you can utilize one after the other on the same topic and have it built within a single context window.</p>
+                    
+                    <p>Of course this is a half-way measure between the above system "You are still the Author" and a fully independent AI researcher. Many of such AIs are being built now across many companies, it would seem that it will be the case before long that none of this manual ideation will be necessary in the face of the independent "deep research" system that can automate the whole process. Be wary of these systems as they could sap you of critical thinking.</p>
+                    
+                    <h4>Thought Partner</h4>
+                    <p>Begin by articulating your initial concept to the LLM, even if half-formed. Ask specific questions about potential directions, implications, or gaps in your thinking.</p>
+                    <p>I'm developing an idea about [brief description of your concept]. Here's my current thinking: [explain your initial thoughts]. As my thought partner, please:</p>
+                    <ol>
+                        <li>Identify any promising elements in this concept</li>
+                        <li>Suggest 2-3 directions this idea could develop in</li>
+                        <li>Point out any logical gaps or assumptions I might be making</li>
+                        <li>Ask me 1-2 thoughtful questions that could help clarify or expand my thinking</li>
+                    </ol>
+                    <p>Please focus on helping me refine this concept while keeping its original essence intact.</p>
+                    
+                    <h4>Sounding Board</h4>
+                    <p>Use the LLM to explore multiple perspectives on your idea. Ask it to analyze strengths and weaknesses or to consider how different audiences might respond.</p>
+                    <p>I'd like you to serve as a sounding board for this idea: [describe your idea in detail]. Please analyze this concept from multiple perspectives by:</p>
+                    <ol>
+                        <li>Identifying the 3 greatest strengths of this approach</li>
+                        <li>Pointing out 2-3 potential weaknesses or challenges</li>
+                        <li>Considering how these specific audiences might respond: [list relevant audiences]</li>
+                        <li>Suggesting how I might address the most significant concerns while preserving the core value</li>
+                    </ol>
+                    <p>Your goal is to help me understand how this idea might be received and how to make it more robust.</p>
+                    
+                    <h4>Research Assistant</h4>
+                    <p>Have the LLM suggest relevant concepts, frameworks, or examples that could enrich your thinking. This can help you discover connections you might have missed.</p>
+                    <p>I'm developing this concept: [explain your idea]. I need your help as a research assistant to enrich my understanding. Please suggest:</p>
+                    <ol>
+                        <li>3-4 established frameworks or theories that relate to this idea</li>
+                        <li>Real-world examples or case studies that demonstrate similar approaches</li>
+                        <li>Any adjacent fields or disciplines that might offer valuable insights</li>
+                        <li>Specific concepts or terminology I should be familiar with to develop this further</li>
+                    </ol>
+                    <p>Focus on providing substantive information that would help me develop a more well-rounded understanding of this topic.</p>
+                    
+                    <h4>Structured Exploration</h4>
+                    <p>Use techniques like "steelmanning" (having the LLM present the strongest version of an idea) or counterfactual thinking to push your concept further.</p>
+                    <p>I want to deeply explore this concept: [describe your idea]. Please help me through structured intellectual exercises:</p>
+                    <ol>
+                        <li>Steelman this idea by presenting the strongest possible version of it</li>
+                        <li>Apply counterfactual thinking: How would this idea work if [key assumption] were different?</li>
+                        <li>Conduct a pre-mortem: Assuming this idea failed, what would be the most likely reasons?</li>
+                        <li>Suggest an entirely different approach that could achieve the same goal</li>
+                    </ol>
+                    <p>Your aim is to push my thinking beyond obvious solutions and help me consider this from angles I might have missed.</p>
+                    
+                    <h4>Refinement Through Dialogue</h4>
+                    <p>Engage in back-and-forth exchanges where you build on the LLM's suggestions and it responds to your evolving thoughts. This creates a more dynamic ideation process than the linear scribe-editor workflow.</p>
+                    
+                    <p>We're going to refine this idea through dialogue: [describe current version of your idea]. As we discuss, please:</p>
+                    <ol>
+                        <li>Build directly on my contributions rather than starting fresh each time</li>
+                        <li>Point out connections between new suggestions and elements we've already discussed</li>
+                        <li>Periodically summarize how our thinking has evolved</li>
+                        <li>Flag any contradictions or tensions that emerge in our discussion</li>
+                        <li>Suggest a synthesis when you notice different threads coming together</li>
+                    </ol>
+                    <p>Let's develop this idea through genuine back-and-forth, where each response builds on what came before.</p>
+                </div>
+            </section>
+
             <section class="resume-section" id="tech-centralization">
                 <div class="resume-section-content">
                     <h2 class="mb-5">Technology's Centralizing vs<span class="text-primary"> Democratizing Forces</span></h2>
                     <p class="lead mb-5">December 2024</p>
                     
-                    <p class="mb-5">Technologies can be classified by their tendency to either centralize or democratize power in society, with these effects driven by underlying economic and technological factors. This dynamic isn't new – technological innovations have always caused shifts in society that require rebalancing.</p>
-                    <p class="mb-5">Some technologies inherently lead to centralization due to their fundamental characteristics. Nuclear power is a prime example: the massive economies of scale and rigorous safety requirements mean that only large reactors are viable. This necessitates concentrated funding sources and government oversight, making it a centralizing force despite its benefits.</p>
-                    <p class="mb-5">In contrast, other technologies serve to democratize power and opportunity. Ride-sharing platforms like Uber and Lyft demonstrate this by distributing income-earning opportunities across a broad population, giving people more flexibility with their time and work. While these platforms do extract fees, competition between them helps keep these fees in check, with most of the excess value theoretically flowing to the drivers who compete in an open market.</p>
-                    <p class="mb-5">The car versus train comparison further illustrates this dichotomy. The automobile was a democratizing technology, putting transportation power directly in individuals' hands. Trains, despite their efficiency, are inherently centralizing due to their massive infrastructure requirements, which typically demand government involvement. Both technologies provide clear benefits, but they differ in who controls the levers of power – either a distributed network of individuals or centralized authorities, whether governmental or corporate.</p>
-                    <p class="mb-5">This brings us to one of today's most pressing questions: what will be the impact of AI? Like any transformative technology, its effects could go either way. One scenario is highly centralized: frontier AI models requiring enormous data centers and investment, controlled by a few powerful entities, potentially displacing many workers while concentrating benefits in these centralized hubs. The alternative is more democratic: if AI capabilities plateau at a level that allows for local deployment or small-cluster operation, the benefits could be widely distributed. In this scenario, workers across the economy would gain powerful tools to enhance their productivity, negotiate better compensation, and reclaim their time – all without the technology being centrally controlled by large corporations.</p>
-                    <p class="mb-5">The key distinction often comes down to who captures the excess capital and value created by these technologies – whether it's distributed across many participants or concentrated in the hands of a few central players.</p>
+                    <p>Throughout history, technology has shaped who holds power. The printing press shattered the church’s monopoly on knowledge. The internet broke down barriers to information and communication. Now, AI stands at a crossroads: will it follow in the footsteps of democratizing technologies, or will it become one of the most centralizing forces we’ve ever seen?</p>
+
+                    <p>Technologies tend to either centralize or democratize power in society, driven by underlying economic and technological factors. This dynamic isn’t new—technology has always reshaped society, requiring power shifts.</p>
+                        
+                    <p>Some technologies inherently lead to centralization due to their fundamental characteristics. Nuclear power is a prime example: its massive economies of scale and rigorous safety requirements make only large reactors viable. This necessitates concentrated funding sources and government oversight, reinforcing centralization despite nuclear power’s benefits.</p>
+                        
+                    <p>Conversely, other technologies democratize power and opportunity. The combination of personal computing, the internet, and open-source software exemplifies this shift. Personal computers put computational power into the hands of individuals, breaking reliance on centralized mainframes. The internet further decentralized information sharing, enabling global communication and commerce without gatekeepers. Open-source software then accelerated this trend by making powerful tools freely available, reducing dependence on corporate-controlled ecosystems. Together, these technologies have empowered individuals, startups, and decentralized communities in ways previously unimaginable.</p>
+            
+                    <p>The car-versus-train comparison further illustrates this dichotomy. Automobiles democratized transportation by placing mobility directly in individuals’ hands. Trains, despite their efficiency, are inherently centralizing due to their massive infrastructure requirements, typically demanding government involvement. Both technologies provide clear benefits but differ in who controls the levers of power—either a distributed network of individuals or centralized authorities, whether governmental or corporate.</p>
+            
+                    <p>This brings us to one of today’s most pressing questions: what will be the impact of AI? Like any transformative technology, its effects could go either way. One scenario is highly centralized: frontier AI models requiring enormous data centers and investment, controlled by a few powerful entities, potentially displacing many workers while concentrating benefits within these hubs. The alternative is more democratic: if AI capabilities plateau at a level allowing local deployment or small-cluster operation, the benefits could be widely distributed. Open-source AI efforts could also counterbalance corporate control, ensuring more people have access to advanced AI tools.</p>
+            
+                    <p>However, even in a decentralized scenario, AI presents risks. Open-source AI can empower individuals, but it can also be weaponized by bad actors. AI-generated misinformation, deepfakes, and automated cyber threats could create new forms of power asymmetry, even if the technology itself is widely available. Regulation and ethical safeguards will play a crucial role in shaping whether AI becomes a truly democratizing force or merely shifts power in different ways.</p>
+            
+                    <p>The key question is who captures the excess capital and value generated by these technologies—whether it’s distributed among many participants or concentrated in the hands of a few central players. AI’s trajectory isn’t inevitable; it depends on the choices we make now. Will we shape its development to ensure broad access and empowerment, or will we allow it to consolidate control in the hands of a few? The future is still being written.</p>
                 </div>
             </section>
 
@@ -71,13 +211,19 @@
                     <h2 class="mb-5">Dynamic Feedback Control in <span class="text-primary">Government Policy</span></h2>
                     <p class="lead mb-5">November 2024</p>
 
-                    <p class="mb-5">Government policies can often be thought of as control systems, but many of them function as open-loop systems—static rules that don’t adjust based on outcomes. A clear example of this played out in India, where some states implemented policies to encourage smaller families while others did not. Over time, population shifts altered political representation, leading to unintended consequences. A more effective approach would involve designing policies with active feedback, dynamically adjusting in response to real-world conditions.</p>
-                    <p class="mb-5">Taxes provide a useful example. Instead of a fixed fee, a step up in sophistication would be to structure taxes as a percentage of income, tying them to inflation or median earnings in an area. Taking it further, taxes could be linked to overall wealth or national debt levels, creating a system that adapts to economic conditions rather than remaining rigid. Similarly, congestion pricing in New York City currently functions as a flat fee, but a more effective system would make the cost proportional to real-time congestion levels, smoothing traffic flow rather than imposing a blanket charge.</p>
-                    <p class="mb-5">Of course, dynamic policies come with potential pitfalls. A major one is opacity—if people can’t easily understand how the system works, it introduces confusion and delays in decision-making. But when implemented well, dynamic pricing mechanisms have been effective in balancing supply and demand across industries, and there’s no reason government interventions couldn’t function in a similar way.</p>
-                    <p class="mb-5">Education policy offers another compelling case. A promising liberal idea is to provide more funding to underperforming schools rather than less, ensuring that all students receive a strong baseline education. But execution is key—if funding is simply tied to poor performance without safeguards, it could create perverse incentives for schools to underperform on purpose. A well-designed system would distribute resources dynamically while preventing exploitation.</p>
-                    <p class="mb-5">Housing and zoning policies could benefit from the same approach. When housing prices spike in a city, regulatory barriers to building higher-density developments should be lowered, making it easier to meet demand. A land value tax could naturally enforce this principle by tying taxation to market value, ensuring land is used more efficiently without requiring constant intervention.</p>
-                    <p class="mb-5">This broader idea differs from policies like minimum wage being indexed to inflation. The goal is not just to adjust a number in response to past data but to create an active control loop—something akin to a PID controller—where policies continuously respond to changing conditions in real time. The next logical step would be to model this in a simulated environment. For example, a population growth model could help determine what a stable demographic pyramid looks like and how policies might adapt to medical advances, immigration trends, or economic shocks.</p>
-                    <p class="mb-5">Building such a simulation in Python, perhaps using Google Colab, could reveal fascinating insights about long-term policy stability. By treating governance as an adaptive system rather than a rigid set of rules, we could design smarter policies that evolve with society rather than lag behind it.</p>
+                    <p>Government policies can often be thought of as control systems, but many of them function as open-loop systems—static rules that don’t adjust based on outcomes. A clear example of this played out in India, where some states implemented policies to encourage smaller families while others did not. Over time, population shifts altered political representation, leading to unintended consequences. A more effective approach would involve designing policies with active feedback, dynamically adjusting in response to real-world conditions.</p>
+                    
+                    <p>Taxes provide a useful example. Instead of a fixed fee, a step up in sophistication would be to structure taxes as a percentage of income, tying them to inflation or median earnings in an area. Taking it further, taxes could be linked to overall wealth or national debt levels, creating a system that adapts to economic conditions rather than remaining rigid. Similarly, congestion pricing in New York City currently functions as a flat fee, but a more effective system would make the cost proportional to real-time congestion levels, smoothing traffic flow rather than imposing a blanket charge.</p>
+                    
+                    <p>Of course, dynamic policies come with potential pitfalls. A major one is opacity—if people can’t easily understand how the system works, it introduces confusion and delays in decision-making. But when implemented well, dynamic pricing mechanisms have been effective in balancing supply and demand across industries, and there’s no reason government interventions couldn’t function in a similar way.</p>
+                    
+                    <p>Education policy offers another compelling case. A promising liberal idea is to provide more funding to underperforming schools rather than less, ensuring that all students receive a strong baseline education. But execution is key—if funding is simply tied to poor performance without safeguards, it could create perverse incentives for schools to underperform on purpose. A well-designed system would distribute resources dynamically while preventing exploitation.</p>
+                    
+                    <p>Housing and zoning policies could benefit from the same approach. When housing prices spike in a city, regulatory barriers to building higher-density developments should be lowered, making it easier to meet demand. A land value tax could naturally enforce this principle by tying taxation to market value, ensuring land is used more efficiently without requiring constant intervention.</p>
+                    
+                    <p>This broader idea differs from policies like minimum wage being indexed to inflation. The goal is not just to adjust a number in response to past data but to create an active control loop—something akin to a PID controller—where policies continuously respond to changing conditions in real time. The next logical step would be to model this in a simulated environment. For example, a population growth model could help determine what a stable demographic pyramid looks like and how policies might adapt to medical advances, immigration trends, or economic shocks.</p>
+                    
+                    <p>Building such a simulation in Python, perhaps using Google Colab, could reveal fascinating insights about long-term policy stability. By treating governance as an adaptive system rather than a rigid set of rules, we could design smarter policies that evolve with society rather than lag behind it.</p>
                 </div>
             </section>
 
@@ -86,12 +232,17 @@
                     <h2 class="mb-5">Statistically Accurate <span class="text-primary">Character Generator</span></h2>
                     <p class="lead mb-5">October 2024</p>
 
-                    <p class="mb-5">I want to build a character generator that produces random characters, but with the correct weighted averages for a given population and time period. The idea is that randomness should still reflect real-world demographics. If I set it to Switzerland 200 years ago and ask for three random characters of a certain socioeconomic status, it should generate three Swiss people with a roughly even gender split. Simple enough.</p>
-                    <p class="mb-5">But things get more complicated in the modern world. If I ask for ten random Americans, I’d want the generator to reflect the actual demographics of the U.S. in a way that’s statistically sound. Maybe six of them are white, with a 50/50 gender split, two are Black, and so on. Physical characteristics should also be randomized within realistic parameters—hair color, eye color, height, body type—without falling into stereotypes or biases.</p>
-                    <p class="mb-5">A lot of this comes from the sense that representation in media often feels off in both directions. Hollywood sometimes overrepresents minorities in ways that feel forced, while also engaging in whitewashing, especially in settings like the Midwest where nonwhite characters are often ignored despite existing in real life. The goal here isn’t to push an agenda, just to create an accurate, useful tool that authors, screenwriters, or game designers can use to generate realistic character populations.</p>
-                    <p class="mb-5">Ideally, this could even be integrated into storytelling. Think of something like a Mad Libs system where the core plot beats are laid out first, and character details are inserted afterward. Obviously, you can’t entirely separate identity from story—people’s backgrounds influence their experiences—but for certain types of storytelling, this approach could add flexibility and depth. A big inspiration for this is D&D campaigns, where NPCs are often randomly generated but still need to fit within the world’s logic.</p>
-                    <p class="mb-5">Beyond race and gender, the generator should also account for factors like sexual orientation. If you’re creating a random group of characters, how many of them are likely to be gay? Bisexual? The tool should make sure these elements are represented naturally and proportionally, rather than leaning on outdated assumptions or arbitrary numbers.</p>
-                    <p class="mb-5">The end goal is an online tool that lets users generate characters who feel real, with all the diversity and statistical probability of real human populations, while still embracing the unpredictability that makes randomness interesting.</p>
+                    <p>I want to build a character generator that produces random characters, but with the correct weighted averages for a given population and time period. The idea is that randomness should still reflect real-world demographics. If I set it to Switzerland 200 years ago and ask for three random characters of a certain socioeconomic status, it should generate three Swiss people with a roughly even gender split. Simple enough.</p>
+
+                    <p>But things get more complicated in the modern world. If I ask for ten random Americans, I’d want the generator to reflect the actual demographics of the U.S. in a way that’s statistically sound. Maybe six of them are white, with a 50/50 gender split, two are Black, and so on. Physical characteristics should also be randomized within realistic parameters—hair color, eye color, height, body type—without falling into stereotypes or biases.</p>
+
+                    <p>A lot of this comes from the sense that representation in media often feels off in both directions. Hollywood sometimes overrepresents minorities in ways that feel forced, while also engaging in whitewashing, especially in settings like the Midwest where nonwhite characters are often ignored despite existing in real life. The goal here isn’t to push an agenda, just to create an accurate, useful tool that authors, screenwriters, or game designers can use to generate realistic character populations.</p>
+
+                    <p>Ideally, this could even be integrated into storytelling. Think of something like a Mad Libs system where the core plot beats are laid out first, and character details are inserted afterward. Obviously, you can’t entirely separate identity from story—people’s backgrounds influence their experiences—but for certain types of storytelling, this approach could add flexibility and depth. A big inspiration for this is D&D campaigns, where NPCs are often randomly generated but still need to fit within the world’s logic.</p>
+
+                    <p>Beyond race and gender, the generator should also account for factors like sexual orientation. If you’re creating a random group of characters, how many of them are likely to be gay? Bisexual? The tool should make sure these elements are represented naturally and proportionally, rather than leaning on outdated assumptions or arbitrary numbers.</p>
+
+                    <p>The end goal is an online tool that lets users generate characters who feel real, with all the diversity and statistical probability of real human populations, while still embracing the unpredictability that makes randomness interesting.</p>
                 </div>
             </section>
 
@@ -108,7 +259,41 @@
                 <div class="resume-section-content">
                     <h2 class="mb-5">Planetary Threat <span class="text-primary">Timelines</span></h2>
                     <p class="lead mb-5">Janurary 2025</p>
-                    <p class="mb-5">WIP</p>
+                    <h3>Analyzing Human Survival Rates</h3>
+
+                    <p>As a thought experiment inspired by Neal Stephenson's "Seveneves," I've been considering how humanity's survival chances might vary based on the warning time we receive before a planetary-scale threat. This analysis examines not just survival probabilities for different timeframes, but also how these odds might shift given our current technological capabilities and societal preparedness.</p>
+                        
+                    <h3>The Timeline Breakdown</h3>
+                        
+                    <h4>Seconds to Minutes: The Immediate Threat</h4>
+                    <p>With only seconds of warning, survival chances are effectively zero. Even with minutes of notice, only a handful of VIPs near designated bunkers might survive initially, but long-term survival remains virtually impossible. The brutal reality is that such short notice essentially guarantees extinction.</p>
+                        
+                    <h4>Hours: The First Window of Opportunity</h4>
+                    <p></p>With hours of warning, our odds improve marginally to about 0.1%. Emergency space launches become possible if vehicles like SpaceX's Dragon capsule are ready. We could potentially send emergency supplies to the International Space Station, creating a small survival pocket in orbit. While this might enable a "Dr. Stone" scenario of eventual repopulation, success would be far from guaranteed.</p>
+                        
+                    <h4>Days: Expanded but Chaotic Response</h4>
+                    <p>At the day-scale, survival probability increases to roughly 1%. More launch vehicles could be prepared, and submarines could be retrofitted as survival vessels. However, social chaos becomes a significant factor – panic and desperate attempts to access limited bunker space could actually reduce survival chances for organized efforts.</p>
+                        
+                    <h4>Months: Infrastructure Adaptation</h4>
+                    <p>The monthly timeframe maintains similar survival odds but opens up more sophisticated options. We could potentially convert rocket upper stages into Skylab-style habitats and better outfit existing tunnels and caves. While expanding underground infrastructure would remain challenging, multiple competing survival designs become feasible.</p>
+                        
+                    <h4>Years: Major Engineering Projects</h4>
+                    <p>With years of warning, survival probability jumps to around 10%. This timeframe allows for new spacecraft development, bunker construction, and even lunar or Martian missions. One particularly interesting concept would be using Tunnel Boring Machines (TBMs) in a spiral pattern to create underground cities, maximizing the efficiency of continuous excavation.</p>
+                        
+                    <h4>Decades to Centuries: The Long View</h4>
+                    <p>Longer timeframes present their own challenges. While decades of preparation could theoretically enable near-complete survival, maintaining focus and urgency becomes increasingly difficult. Political conflicts and generational differences can hinder progress, reminiscent of scenarios portrayed in "The Three-Body Problem." With centuries of warning, we might achieve 100% survival – or paradoxically, fail entirely due to human shortsightedness.</p>
+                        
+                    <h3>The Technology Management Perspective</h3>
+                        
+                    <p>Looking at this challenge through a "tech tree" lens (similar to civilization-building games) reveals interesting strategic priorities. A coordinating body might approach it as follows:</p>
+                        
+                    <p>Short-term: Leverage existing systems like Falcon rockets and Starlink for immediate space-based contingencies.</p>
+                    
+                    <p>Medium-term: Scale up TBM manufacturing to enable rapid underground development while maximizing rocket reusability for orbital infrastructure.</p>
+                    
+                    <p>Long-term: Develop humanoid robots for dangerous space operations and establish robust supply chains to orbital habitats.</p>
+                    
+                    <p>Perhaps the most sobering thought is that we might already be somewhere on this timeline without knowing it. The challenge of maintaining morale and social cohesion during such a long-term existential threat response mirrors some current debates about humanity's future – including the controversial approaches of figures like Elon Musk.</p>
                 </div>
             </section>
 
@@ -146,9 +331,24 @@
 
             <section class="resume-section" id="manual-delusion">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">manual Delusion <span class="text-primary">Generator</span></h2>
+                    <h2 class="mb-5">Manual Delusion <span class="text-primary">Generator</span></h2>
                     <p class="lead mb-5">Janurary 2025</p>
                     <p class="mb-5">WIP</p>
+                </div>
+            </section>
+
+            <section class="resume-section" id="stock-pop-pyramid">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Demographic Forces Behind <span class="text-primary">Stock Valuations</span></h2>
+                    <p class="lead mb-5">Janurary 2025</p>
+
+                    <p>Stock prices aren't solely driven by company fundamentals and growth potential. There's an interesting demographic dynamic at play that I've been thinking about. When people are in their working years, they regularly invest portions of their income into stocks as part of their retirement planning. This creates a consistent buying pressure that pushes stock prices above what might be justified by pure financial analysis.</p>
+
+                    <p>This isn't a controversial observation – we all know that many stocks serve as investment vehicles regardless of their underlying strength. Even companies with solid fundamentals might be trading at a premium simply because they're popular retirement account holdings. This suggests that most publicly traded stocks are likely somewhat overvalued relative to their strict financial merits.</p>
+
+                    <p>The flip side of this phenomenon occurs when people reach retirement age. Even if a stock is performing well and represents a sound investment, retirees may need to sell to fund their living expenses. This selling pressure can artificially depress stock prices below their fundamental value.</p>
+
+                    <p>This got me thinking: Could we use demographic data, specifically population pyramids showing the age distribution of a society, to predict whether stocks are likely to be over- or undervalued? Population pyramids are relatively stable and predictable, making them potentially useful for long-term market analysis. We occasionally see evidence of these demographic effects when stocks make significant moves in response to news that doesn't meaningfully impact their business fundamentals or industry conditions.</p>
                 </div>
             </section>
 
