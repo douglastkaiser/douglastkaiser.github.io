@@ -25,6 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="../">Home <i class="fa fa-external-link"></i></a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#authorship-with-ai">Authorship with AI</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#tech-centralization">Tech Centeralization</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#closed-loop-govt">Closed Loop Gov't</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#character-gen">Character Generator</a></li>
@@ -52,6 +53,135 @@
             </section>
 
             <hr class="m-0" />
+
+            <section class="resume-section" id="authorship-with-ai">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Authorship<span class="text-primary"> in a Chatbot World</span></h2>
+                    <p class="lead mb-5">April 2025</p>
+                    
+                    <p>For good writing to adapt to the modern world of LLMs we need a framework of interaction with these systems. I propose two here; a writer-first system where the LLM fills in roles that might otherwise have been taken by other people but can now be automated, and a Partner system where the LLM takes a more active role from start to finish.</p>
+                    
+                    <h3>You are still The Author</h3>
+                    <p>The basic idea here is to use an LLM in order to be an assistant but not the main driving force behind the work.</p>
+                    <ol>
+                        <li>Speech-to-text in a word document. Stream of consciousness for an idea no matter how well or ill-formed. Little to no editing. The built in Windows Ctrl+h works well for this.</li>
+                        <li>Copy and paste that text which should have almost no grammar punctuation or revisions applied, into an LLM with a prompt to massage the thoughts into something more readable but unchanged in its character. Here the LLM is The Scribe.</li>
+                        <li>Review the output which should now be grammatically correct with all necessary punctuation and organization of thoughts. This could even be improved by using text-to-speech to have it read the result back to you just like a scribe might.</li>
+                        <li>Now use an LLM again but as The Editor. Using again a known specific prompt, have the system critique the writing as an editor might.</li>
+                        <li>Now apply the feedback. New ideas, via speech-to-text if needed, can be made and then reapplied into the existing writing by iterating through this process. A new prompt can be used to come up with The Integrator.</li>
+                        <li>Then get The Publisher. This can vary wildly depending on what artifacts might need to go with it. If it's a blog post then it's a conversion to html that an LLM can do easily. If it requires other built materials then it can get complex fast.</li>
+                    </ol>
+                    
+                    <p>To work more closely with an AI LLM to work back and forth in developing an idea is another story altogether, see Collaborative Partner for more.</p>
+                    
+                    <h4>The Scribe</h4>
+                    <p>Use this prompt to have the LLM act as a scribe on the text-to-speech stream of consciousness output:</p>
+                    <p>Prompt: "Here's a stream of consciousness write up that I did using speech to text. I want you to clean it up and rewrite it in a nice easy to understand way while preserving the tone and all of the ideas expressed. Make good sense of this in a way that is much better to read. Do not add new ideas. The POV should be coming from me as the author of this for my blog. It should be readable and easy to digest for an educated audience. Reorganize these thoughts and ideas as needed to make the most sense."</p>
+                    
+                    <h4>The Editor</h4>
+                    <p>Use this prompt to have the LLM act as an editor on the cleaned up output from the previous step (after personally revising it)</p>
+                    <p>ChatGPT's: "Act as a professional editor. I'm the author of this piece and I've already done a first-pass cleanup. Now I want you to give me clear, thoughtful editorial feedback to make it sharper and more effective without changing my voice or intent. Focus on structure, clarity, flow, tone, and strength of argument. Identify what's working, what could be better, and give specific suggestions for improvement, not just vague praise or rewrites. Assume I'm a competent writer looking to push this to the next level."</p>
+                    <p>Claude: "Please review this piece of writing as an experienced editor would. I want constructive feedback that will help me improve it, not a complete rewrite. Specifically:</p>
+                    <ol>
+                        <li>Identify any unclear sections or ideas that could be developed further</li>
+                        <li>Point out repetitive phrases or words</li>
+                        <li>Suggest ways to strengthen the overall structure and flow</li>
+                        <li>Highlight any weak transitions between ideas</li>
+                        <li>Note if the tone is inconsistent in any places</li>
+                        <li>Recommend areas where more specific examples or details would be helpful</li>
+                        <li>Comment on the effectiveness of the opening and closing</li>
+                    </ol>
+                    <p>Please provide this feedback in a clear, organized format that I can use as a revision guide. Be specific about what works well in addition to what needs improvement."</p>
+                    <p>Meta's: Review the attached text as an editor would, focusing on structure, coherence, and overall flow. Provide feedback on areas that need improvement, suggest alternative phrasings or sentence structures where necessary, and highlight any inconsistencies or gaps in logic. Assume the text is intended for [insert target audience here, e.g., general readers, academic audience, etc.].</p>
+                    <p>After it has given you direction as to where to go next you can then use its editing capabilities to prompt what changes might be needed:</p>
+                    <p>"Give me the piece back with blank spaces or bracketed notes where I should fill in. Like an editor might. Even down to new sections or transitions where I might keep the writing going."</p>
+                    
+                    <h4>The Integrator</h4>
+                    <p>Here is a prompt you can use to integrate new ideas into existing work.</p>
+                    <p>"I have an existing draft and some new ideas I've recorded using speech-to-text. I want you to help me integrate these new thoughts into my current draft in a natural way that maintains flow and coherence.</p>
+                    <p>Here's my current draft: [PASTE CURRENT DRAFT HERE]</p>
+                    <p>Here are my new ideas (stream-of-consciousness): [PASTE NEW SPEECH-TO-TEXT IDEAS HERE]</p>
+                    <p>Please:</p>
+                    <ol>
+                        <li>Identify where these new ideas would fit best within the existing structure</li>
+                        <li>Integrate them seamlessly while preserving my voice and style</li>
+                        <li>Make only necessary adjustments to transitions and flow</li>
+                        <li>Highlight any places where my new ideas contradict or significantly shift from points in the original draft</li>
+                        <li>If any new ideas don't fit well with the current piece, list them separately as 'Ideas for future development'</li>
+                    </ol>
+                    <p>Don't completely restructure my work—just help me weave in these new thoughts in a way that enhances the overall piece."</p>
+                    
+                    <h4>The Publisher</h4>
+                    <p>This can then all be converted into html for posting on a website or blog. This is either a simple step or the most complex and so usage of AI tools varies.</p>
+                    <p>"Convert this to HTML, make no changes to the content, simply convert it in a way that preserves the organization and layout for readability. Assume there is already an existing ccs style:</p>
+                    <p>[paste text here]"</p>
+                    <p>But often this can include many other elements and can't just be boiled down to one use case.</p>
+                    
+                    <h3>Collaborative Partner</h3>
+                    <p>When working with an AI LLM to develop ideas collaboratively, the process becomes more conversational and iterative</p>
+                    <p>The key difference in this approach is that the LLM serves as an active collaborator rather than just processing your existing thoughts. This can be particularly valuable when working through complex problems or when you need to consider multiple angles quickly.</p>
+                    <p>These systems can link sequentially, within the same chat window you can utilize one after the other on the same topic and have it built within a single context window.</p>
+                    
+                    <p>Of course this is a half-way measure between the above system "You are still the Author" and a fully independent AI researcher. Many of such AIs are being built now across many companies, it would seem that it will be the case before long that none of this manual ideation will be necessary in the face of the independent "deep research" system that can automate the whole process. Be wary of these systems as they could sap you of critical thinking.</p>
+                    
+                    <h4>Thought Partner</h4>
+                    <p>Begin by articulating your initial concept to the LLM, even if half-formed. Ask specific questions about potential directions, implications, or gaps in your thinking.</p>
+                    <p>I'm developing an idea about [brief description of your concept]. Here's my current thinking: [explain your initial thoughts]. As my thought partner, please:</p>
+                    <ol>
+                        <li>Identify any promising elements in this concept</li>
+                        <li>Suggest 2-3 directions this idea could develop in</li>
+                        <li>Point out any logical gaps or assumptions I might be making</li>
+                        <li>Ask me 1-2 thoughtful questions that could help clarify or expand my thinking</li>
+                    </ol>
+                    <p>Please focus on helping me refine this concept while keeping its original essence intact.</p>
+                    
+                    <h4>Sounding Board</h4>
+                    <p>Use the LLM to explore multiple perspectives on your idea. Ask it to analyze strengths and weaknesses or to consider how different audiences might respond.</p>
+                    <p>I'd like you to serve as a sounding board for this idea: [describe your idea in detail]. Please analyze this concept from multiple perspectives by:</p>
+                    <ol>
+                        <li>Identifying the 3 greatest strengths of this approach</li>
+                        <li>Pointing out 2-3 potential weaknesses or challenges</li>
+                        <li>Considering how these specific audiences might respond: [list relevant audiences]</li>
+                        <li>Suggesting how I might address the most significant concerns while preserving the core value</li>
+                    </ol>
+                    <p>Your goal is to help me understand how this idea might be received and how to make it more robust.</p>
+                    
+                    <h4>Research Assistant</h4>
+                    <p>Have the LLM suggest relevant concepts, frameworks, or examples that could enrich your thinking. This can help you discover connections you might have missed.</p>
+                    <p>I'm developing this concept: [explain your idea]. I need your help as a research assistant to enrich my understanding. Please suggest:</p>
+                    <ol>
+                        <li>3-4 established frameworks or theories that relate to this idea</li>
+                        <li>Real-world examples or case studies that demonstrate similar approaches</li>
+                        <li>Any adjacent fields or disciplines that might offer valuable insights</li>
+                        <li>Specific concepts or terminology I should be familiar with to develop this further</li>
+                    </ol>
+                    <p>Focus on providing substantive information that would help me develop a more well-rounded understanding of this topic.</p>
+                    
+                    <h4>Structured Exploration</h4>
+                    <p>Use techniques like "steelmanning" (having the LLM present the strongest version of an idea) or counterfactual thinking to push your concept further.</p>
+                    <p>I want to deeply explore this concept: [describe your idea]. Please help me through structured intellectual exercises:</p>
+                    <ol>
+                        <li>Steelman this idea by presenting the strongest possible version of it</li>
+                        <li>Apply counterfactual thinking: How would this idea work if [key assumption] were different?</li>
+                        <li>Conduct a pre-mortem: Assuming this idea failed, what would be the most likely reasons?</li>
+                        <li>Suggest an entirely different approach that could achieve the same goal</li>
+                    </ol>
+                    <p>Your aim is to push my thinking beyond obvious solutions and help me consider this from angles I might have missed.</p>
+                    
+                    <h4>Refinement Through Dialogue</h4>
+                    <p>Engage in back-and-forth exchanges where you build on the LLM's suggestions and it responds to your evolving thoughts. This creates a more dynamic ideation process than the linear scribe-editor workflow.</p>
+                    
+                    <p>We're going to refine this idea through dialogue: [describe current version of your idea]. As we discuss, please:</p>
+                    <ol>
+                        <li>Build directly on my contributions rather than starting fresh each time</li>
+                        <li>Point out connections between new suggestions and elements we've already discussed</li>
+                        <li>Periodically summarize how our thinking has evolved</li>
+                        <li>Flag any contradictions or tensions that emerge in our discussion</li>
+                        <li>Suggest a synthesis when you notice different threads coming together</li>
+                    </ol>
+                    <p>Let's develop this idea through genuine back-and-forth, where each response builds on what came before.</p>
+                </div>
+            </section>
 
             <section class="resume-section" id="tech-centralization">
                 <div class="resume-section-content">
