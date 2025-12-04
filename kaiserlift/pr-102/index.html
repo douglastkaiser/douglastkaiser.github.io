@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KaiserLift - Progressive Overload Training</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --fg: #000000;
+            --bg-alt: #f5f5f5;
+            --border: #ccc;
+            --link: #0066cc;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #121212;
+                --fg: #e0e0e0;
+                --bg-alt: #1e1e1e;
+                --border: #333;
+                --link: #66b3ff;
+            }
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+        }
+        .demo-section {
+            background-color: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .demo-section h2 {
+            margin-top: 0;
+        }
+        a {
+            color: var(--link);
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .badge {
+            display: inline-block;
+            background-color: var(--link);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-left: 8px;
+        }
+        ul {
+            margin: 10px 0;
+        }
+        li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🏋️ KaiserLift</h1>
+    <p>
+        Data-driven progressive overload for smarter training.
+        Upload your workout data and get science-based recommendations for your next PRs.
+    </p>
+
+    <div class="demo-section">
+        <h2>💪 Lifting Data <span class="badge">Original</span></h2>
+        <p>
+            Track weight training with Pareto front optimization.
+            Uses 1RM (Epley formula) to compare across rep ranges.
+        </p>
+        <ul>
+            <li>✅ Weight vs Reps analysis</li>
+            <li>✅ 1RM calculations</li>
+            <li>✅ Pareto optimal PR tracking</li>
+            <li>✅ Next workout targets</li>
+        </ul>
+        <p>
+            <strong>→ <a href="lifting/">View Lifting Demo</a></strong>
+        </p>
+    </div>
+
+    <div class="demo-section">
+        <h2>🏃 Running Data <span class="badge">New!</span></h2>
+        <p>
+            Track cardio/running with distance and pace metrics.
+            Uses aerobic degradation model to predict race paces.
+        </p>
+        <ul>
+            <li>✅ Distance vs Pace analysis</li>
+            <li>✅ Pace prediction at any distance</li>
+            <li>✅ Race pace calculator (5K, 10K, etc.)</li>
+            <li>✅ Training target recommendations</li>
+        </ul>
+        <p>
+            <strong>→ <a href="running/">View Running Demo</a></strong>
+        </p>
+    </div>
+
+    <hr style="border: 1px solid var(--border); margin: 40px 0;">
+
+    <h3>📦 Installation</h3>
+    <pre style="background-color: var(--bg-alt); padding: 10px; border-radius: 4px; overflow-x: auto;">uv pip install kaiserlift</pre>
+
+    <h3>🔗 Links</h3>
+    <ul>
+        <li><a href="https://github.com/douglastkaiser/kaiserlift">GitHub Repository</a></li>
+        <li><a href="https://pypi.org/project/kaiserlift/">PyPI Package</a></li>
+        <li><a href="https://www.douglastkaiser.com/projects/#workoutPlanner">Project Overview</a></li>
+    </ul>
+</body>
+</html>
