@@ -11003,3 +11003,37 @@ section.resume-section .resume-section-content {
     padding-bottom: 5rem;
   }
 }
+
+/* Version Footer */
+#version-footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(73, 80, 87, 0.9);
+  font-size: 0.75rem;
+  font-family: "Muli", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  z-index: 1000;
+  border-top-left-radius: 0.25rem;
+}
+
+#version-footer a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+}
+
+#version-footer a:hover {
+  color: #bd5d38;
+  text-decoration: underline;
+}
+
+#version-footer span {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (min-width: 992px) {
+  #version-footer {
+    right: 0;
+    left: auto;
+  }
+}
