@@ -104,11 +104,34 @@
                     <input type="number" id="global_n_Votes" placeholder="Total Votes (50)">
                     <div class="bayesian-note">
                         <h4 class="mb-2">Bayesian Average Equations</h4>
-                        <div class="math-display">B = <span class="fraction"><span class="numerator">n r + m C</span><span class="denominator">n + m</span></span></div>
-                        <p class="math-variables">B: posterior Bayesian average for the item</p>
-                        <p class="math-variables">r: item&rsquo;s observed average rating &nbsp;&nbsp; n: number of item ratings</p>
-                        <p class="math-variables">C: global average rating &nbsp;&nbsp; m: global vote count (strength of prior)</p>
-                        <div class="math-display">Comparison uses each item&rsquo;s B value to decide which score is stronger.</div>
+                        <p class="math-intro">We compute a Bayesian-adjusted rating that blends each item&rsquo;s score with a global prior.</p>
+                        <div class="math-equation">
+                            <span class="math-label">Bayesian average</span>
+                            <div class="math-display">B = <span class="fraction"><span class="numerator">n r + m C</span><span class="denominator">n + m</span></span></div>
+                        </div>
+                        <dl class="math-definitions">
+                            <div class="math-definition">
+                                <dt>B</dt>
+                                <dd>Posterior Bayesian average for the item.</dd>
+                            </div>
+                            <div class="math-definition">
+                                <dt>r</dt>
+                                <dd>Item&rsquo;s observed average rating.</dd>
+                            </div>
+                            <div class="math-definition">
+                                <dt>n</dt>
+                                <dd>Number of ratings for the item.</dd>
+                            </div>
+                            <div class="math-definition">
+                                <dt>C</dt>
+                                <dd>Global average rating.</dd>
+                            </div>
+                            <div class="math-definition">
+                                <dt>m</dt>
+                                <dd>Global vote count (strength of the prior).</dd>
+                            </div>
+                        </dl>
+                        <div class="math-callout">Comparison uses each item&rsquo;s B value to decide which rating is stronger.</div>
                     </div>
                     <script src="../js/bayesian.js"></script>
                 </div>
