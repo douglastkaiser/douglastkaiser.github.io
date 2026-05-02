@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'resume/**'
-      - 'assets/**'
-      - '.github/workflows/build-resume.yml'
   workflow_dispatch:
 
 permissions:
