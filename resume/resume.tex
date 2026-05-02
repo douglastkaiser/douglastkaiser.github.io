@@ -12,8 +12,6 @@
 \usepackage{tabularx}
 \usepackage{array}
 \usepackage{ragged2e}
-\usepackage{caption}
-\captionsetup[table]{labelsep=space}
 
 \definecolor{accent}{HTML}{1F4E79}
 \definecolor{muted}{HTML}{4A4A4A}
@@ -28,7 +26,7 @@
 
 \titleformat{\section}
   {\small\bfseries\color{accent}}{}{0em}{\MakeUppercase}[\color{rulegray}\titlerule]
-\titlespacing*{\section}{0pt}{4pt}{2pt}
+\titlespacing*{\section}{0pt}{1pt}{2pt}
 
 \setlist[itemize]{leftmargin=1.05em, topsep=0pt, itemsep=0.5pt, parsep=0pt, partopsep=0pt}
 \renewcommand\labelitemi{{\color{accent}\textbullet}}
@@ -40,9 +38,9 @@
   \textbf{#1} \textbar{} \textit{#3} \hfill {\color{muted}\textit{#2 \textbar{} #4}}\par\vspace{-2pt}%
 }
 \newcommand{\projectrole}[4]{%
-  \textbf{#1} \textbar{} \textit{#3} \hfill {\color{muted}\textit{#2 \textbar{} #4}}\par\vspace{-2pt}%
+  \textbf{#1} \textbar{} \textit{#3} \hfill {\color{muted}\textit{#2} \textbar{} \textit{#4}}\par\vspace{-2pt}%
 }
-\newcommand{\skillrow}[2]{\textbf{#1:} & #2\\}
+\newcommand{\skillrow}[2]{\textbf{#1} & #2\\}
 
 \begin{document}
 \small
@@ -52,6 +50,7 @@
 \href{https://www.douglastkaiser.com}{douglastkaiser.com} \;\textbar\; \href{https://github.com/douglastkaiser}{github.com/douglastkaiser} \;\textbar\; \href{https://www.linkedin.com/in/douglas-kaiser}{linkedin.com/in/douglas-kaiser}}
 \section{Summary}
 Controls, flight software, and real-time systems engineer with hands-on ownership from simulation to HIL/SIL, bench testing, flight test, and hardware commissioning. Strong match for high-fidelity GNC simulation, C/C++ flight software, deterministic real-time architectures, control-law tuning, nonlinear closed-loop analysis, flight-performance data review, and artificial-gravity attitude dynamics.
+
 
 \section{Technical Skills}
 \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.34in}X}
