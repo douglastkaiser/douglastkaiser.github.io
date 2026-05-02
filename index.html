@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
+        <meta name="description" content="Douglas Kaiser is a GNC, flight-test, and real-time controls engineer focused on simulation, HIL/SIL validation, and flight software for aerospace and high-consequence systems." />
         <meta name="author" content="" />
         <title>Douglas Kaiser Personal Website</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
@@ -20,7 +20,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
                 <span class="d-block d-lg-none">Douglas Kaiser</span>
-                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="..." /></span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="Portrait of Douglas Kaiser" /></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -31,7 +31,7 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link" href="projects/">Projects Page <i class="fa fa-external-link"></i></a></li>
                     <li class="nav-item"><a class="nav-link" href="blog/">Blog <i class="fa fa-external-link"></i></a></li>
-                    <li class="nav-item"><a class="nav-link" href="/assets/resume.pdf" target="_blank" rel="noopener">Resume <i class="fa fa-external-link"></i></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/resume/" target="_blank" rel="noopener">Resume <i class="fa fa-external-link"></i></a></li>
                 </ul>
             </div>
         </nav>
@@ -48,16 +48,61 @@
                         (650) 709-6357 ·
                         <a href="mailto:douglastkaiser@gmail.com">douglastkaiser@gmail.com</a>
                     </div> -->
-                    <p></p>
-                    <p class="lead mb-5">Doug is all about diving deep into the world of autonomous flight,
-                        where he’s turned a passion for aerospace engineering into impact, leading projects
-                        that explore new frontiers. His journey is shaped by a hands-on approach, from tweaking designs
-                        to steering teams through the exciting challenges of making machines that soar on their own.</p>
-                    <div class="social-icons">
-                        <a class="social-icon" href="https://www.linkedin.com/in/douglas-kaiser/"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="social-icon" href="https://github.com/douglastkaiser/"><i class="fab fa-github"></i></a>
-                        <a class="social-icon" href="https://www.douglastkaiser.com/assets/resume.pdf" title="Resume PDF" target="_blank" rel="noopener noreferrer"><i class="fa fa-file-pdf"></i></a>
-                        <!-- <a class="social-icon" href="https://www.instagram.com/dtkaiser/"><i class="fab fa-instagram"></i></a> -->
+                    <p class="lead mb-4">GNC, flight-test, and real-time controls engineer building the bridge from simulation to hardware to flight.</p>
+                    <p class="mb-4">I develop control software, simulation infrastructure, and test systems for high-consequence aerospace and energy hardware. My work spans autonomous aircraft flight testing, spacecraft simulator certification, deterministic real-time C++ controls, HIL/SIL validation, and artificial-gravity spacecraft attitude-control studies.</p>
+                    <div class="cta-links" aria-label="Primary profile links">
+                        <a class="btn btn-outline-primary" href="resume/" target="_blank" rel="noopener">Resume</a>
+                        <a class="btn btn-outline-primary" href="https://github.com/douglastkaiser/" target="_blank" rel="noopener">GitHub</a>
+                        <a class="btn btn-outline-primary" href="https://www.linkedin.com/in/douglas-kaiser/" target="_blank" rel="noopener">LinkedIn</a>
+                        <a class="btn btn-outline-primary" href="mailto:douglastkaiser@gmail.com">Email</a>
+                    </div>
+                    <!-- Optional: add a PDF at assets/resume.pdf and update Resume links if you prefer direct PDF delivery. -->
+                    <div class="social-icons" aria-label="Social links">
+                        <a class="social-icon" href="https://www.linkedin.com/in/douglas-kaiser/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="social-icon" href="https://github.com/douglastkaiser/" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a class="social-icon" href="https://www.douglastkaiser.com/resume/" title="Resume" target="_blank" rel="noopener noreferrer" aria-label="Resume"><i class="fa fa-file-pdf"></i></a>
+                    </div>
+                </div>
+            </section>
+            <hr class="m-0" />
+            <section class="resume-section" id="selected-work">
+                <div class="resume-section-content">
+                    <h2 class="mb-4">Selected <span class="text-primary">Aerospace &amp; Controls Work</span></h2>
+                    <div class="selected-work-grid">
+                        <article class="work-card">
+                            <h3>Real-Time Controls &amp; HIL &mdash; Commonwealth Fusion Systems</h3>
+                            <ul>
+                                <li>Designed core components of <em>Neutrino</em>, an in-house real-time controls framework focused on determinism, cycle-time reliability, safety, and hardware integration.</li>
+                                <li>Built UDP/IPC/TCP communications pathways for deterministic C++ real-time systems.</li>
+                                <li>Developed HIL test stands, software-only testing systems, test framework infrastructure, and module-level unit testing workflows.</li>
+                                <li>Built Tritium Injector control and test software and supported quench detection/protection through PF magnet testing.</li>
+                            </ul>
+                        </article>
+                        <article class="work-card">
+                            <h3>Flight Test &amp; Flight Controls &mdash; Merlin Labs</h3>
+                            <ul>
+                                <li>Served as an onboard/backseat LongEZ flight-test engineer and actively tuned flight-control parameters during flight.</li>
+                                <li>Accumulated the most flight hours at the company and contributed across CozE, LongEZ, and King Air flight-test campaigns.</li>
+                                <li>Developed C/C++ and Python flight software in ROS for autonomous flight controls.</li>
+                                <li>Created and used an online model-fit and tuning tool during flight-test operations.</li>
+                            </ul>
+                        </article>
+                        <article class="work-card">
+                            <h3>Spacecraft Simulation &mdash; Draper / Dream Chaser</h3>
+                            <ul>
+                                <li>Wrote test and simulation code for the Dream Chaser flight software computer simulator.</li>
+                                <li>Supported quality-control and certification workflows for simulator and software validation.</li>
+                                <li>Built data-visualization dashboards for trade-space exploration and decision support.</li>
+                            </ul>
+                        </article>
+                        <article class="work-card">
+                            <h3>Artificial Gravity &amp; Attitude Control &mdash; Cornell CUGravity</h3>
+                            <ul>
+                                <li>Led ACS work and project management for an artificial-gravity CubeSat concept with a spinning/deployable architecture.</li>
+                                <li>Ran CMG trade studies and developed 2-D/3-D dynamics models.</li>
+                                <li>Built flight-code simulation infrastructure to evaluate attitude-control behavior.</li>
+                            </ul>
+                        </article>
                     </div>
                 </div>
             </section>
@@ -68,21 +113,21 @@
                     <h2 class="mb-5">Professional <span class="text-primary">Experiences</span></h2>
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
-                            <h3 class="mb-0">Senior Real Time Controls and Simulation Engineer</h3>
+                            <h3 class="mb-0">Senior Real-Time Controls and Simulation Engineer</h3>
                             <div class="subheading mb-3">Commonwealth Fusion Systems</div>
                             <p>Currently working on turning Fusion Energy from science fiction to science fact.</p>
                             <li>Led a cross-functional team in developing, testing, and deploying real-time control software for SPARC tokamak subsystems under rapid development timelines</li>
-                            <li>Designed core components of \textit{Neutrino}, a greenfield, in-house real-time controls framework, focused on determinism, safety, and hardware integration</li>
+                            <li>Designed core components of <em>Neutrino</em>, a greenfield, in-house real-time controls framework, focused on determinism, safety, and hardware integration</li>
                             <li>Developed and tested PLC features for industrial subsystems using both on-device SCL and internal Python-based codegeneration tools</li>
                             <li>Validated magnet quench protection algorithms via full-stack simulation and experimental tests at MIT’s Plasma Science and Fusion Center using prototype cable-based high temperature superconducting magnets</li>
                             <br>
-                            <img class="img-embed" src="assets/img/SPARC_2020.jpg"/>
+                            <img class="img-embed" src="assets/img/SPARC_2020.jpg" alt="SPARC tokamak rendering"/>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary">September 2022 - Present</span></div>
                     </div>
                     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
                         <div class="flex-grow-1">
-                            <h3 class="mb-0">Real Time Controls Engineer</h3>
+                            <h3 class="mb-0">Real-Time Controls Engineer</h3>
                             <div class="subheading mb-3">Merlin Aerospace</div>
                             <li>Designed and implemented Flight Software features for the autonomous system.</li>
                             <li>Operating in the ROS environment and coding in C/C++ and Python.</li>
@@ -91,7 +136,7 @@
                             <li>Developed and executed tuning pipeline for the flight control stack on a new airframe.</li>
                             <li>Created and utilized an on-line tuning tool to verify model fit mid-flight.</li>
                             <br>
-                            <img class="img-embed" src="assets/img/merlin.jpg"/>
+                            <img class="img-embed" src="assets/img/merlin.jpg" alt="Merlin aircraft flight test"/>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary">November 2020 - August 2022</span></div>
                     </div>
@@ -101,24 +146,24 @@
                             <div class="subheading mb-3">Draper Labs</div>
                             <li>Wrote test and simulation code for quality control and certification of the Sierra Nevada Dream Chaser space plane flight software computer simulator.</li>
                             <li>Developed an interactive dashboard using Python's Dash to assist the customer in visualizing trade space exploration data points to understand the relationship between tunable design parameters and system level performance.</li>
-                            <li>Researched and implemented a scoring metric to determine a design's closeness to optimality during a trade space analysis, allowing a users to select acceptable levels of non-optimality and evaluate a design's performance across changing missions sets.</li>
+                            <li>Researched and implemented a scoring metric to determine a design's closeness to optimality during a trade space analysis, allowing users to select acceptable levels of non-optimality and evaluate a design's performance across changing missions sets.</li>
                             <br>
-                            <img class="img-embed" src="assets/img/DreamChaser.jpg"/>
+                            <img class="img-embed" src="assets/img/DreamChaser.jpg" alt="Dream Chaser spacecraft"/>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary">June 2019 - November 2020</span></div>
                     </div>
                     <div class="d-flex flex-column flex-md-row justify-content-between">
                         <div class="flex-grow-1">
                             <h3 class="mb-0">Controls and Flight Test Engineer</h3>
-                            <div class="subheading mb-3">Pivotol Aero (then Opener)</div>
+                            <div class="subheading mb-3">Pivotal Aero (then Opener)</div>
                             <li>Designed, implemented, and tested control algorithms for autonomous and pilot controlled flight.</li>
                             <li>Improved and updated existing user interface for autonomous controls.</li>
                             <li>Wrote and modified firmware for interacting with and processing sensor data and communication routing.</li>
                             <li>Performed field testing and tuning of flight control changes including mechanical field repairs,
                                 in-flight control tuning, and fast iterating code modifications.</li>
-                            <li>Lead full cycle of proposal to verification and validation on flight hardware on multiple projects.</li>
+                            <li>Led the full cycle from proposal through verification and validation on flight hardware across multiple projects.</li>
                             <br>
-                            <img class="img-embed" src="assets/img/blackfly.jpg"/>
+                            <img class="img-embed" src="assets/img/blackfly.jpg" alt="BlackFly aircraft"/>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary">March 2017 - May 2019</span></div>
                     </div>
@@ -130,7 +175,7 @@
                             <li>Produced engineering analysis on network flow simulations</li>
                             <li>Upgraded large scale Simulink transient flow models</li>
                             <li>Upgraded 5 million node ANSYS model for accuracy and computational speed</li>
-                            <li>Created MATALAB processes for compensating lens deformation</li>
+                            <li>Created MATLAB processes for compensating lens deformation</li>
                             <li>Wrote automation scripts for engineering analysis</li>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary">August 2014 - January 2015 and June 2015 - August 2015</span></div>
@@ -164,9 +209,9 @@
                             <p>CUGravity aimed to be the first successful demonstration of artificial gravity in space. A 3U configuration, the satellite will split into three sections in space and use magnetic torque coils to spin up to achieve and sustain Mars level gravity.</p>
                             <li>Conceived of project, Formulated initial design, Pitched to professors</li>
                             <li>Managed a team of 8 Master's students and 1 undergraduate, Interfaced with college administration, Found funding for project</li>
-                            <li>Lead the Attitude Control team; designed and built 2-D, 3-D dynamic models and full simulation of flight code</li>
+                            <li>Led the Attitude Control team; designed and built 2-D and 3-D dynamic models and full simulation of flight code</li>
                             <br>
-                            <img class="img-embed" src="assets/img/cugravity.jfif"/>
+                            <img class="img-embed" src="assets/img/cugravity.jfif" alt="CUGravity concept rendering"/>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary">August 2016 - December 2016</span></div>
                     </div>
@@ -192,7 +237,7 @@
                                 mission objectives. This high-agility feature allows satellites like Violet to capture
                                 images of multiple targets on Earth within a short timeframe, significantly enhancing
                                 the satellite's operational flexibility and efficiency.</p>
-                            <img class="img-embed" src="assets/img/violet.jfif"/>
+                            <img class="img-embed" src="assets/img/violet.jfif" alt="Violet nanosatellite"/>
                             <br><br>
                             <div class="subheading mb-3">ACS Member of the <a href="https://archive.ph/20121211160732/http://cusat.cornell.edu/">CUSat Nanosat-04 Project</a> Team</div>
                             <p>The CUSat program was a student-led project that aimed to design,
@@ -201,7 +246,7 @@
                                 using two satellites to inspect each other in space, providing valuable data on
                                 the condition and performance of satellites without requiring direct human intervention.</p>
                             <p>It launched on a Falcon 9 in 2013.</p>
-                            <img class="img-embed" src="assets/img/cusat.jfif"/>
+                            <img class="img-embed" src="assets/img/cusat.jfif" alt="CUSat nanosatellite"/>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary">August 2012 - May 2016</span></div>
                     </div>
