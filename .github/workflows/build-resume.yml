@@ -36,18 +36,30 @@ jobs:
           root_file: resume.tex
           working_directory: resume
 
-      - name: Copy PDF to publish path
+      - name: Stage site for artifact upload
         run: |
-          mkdir -p assets
-          cp resume/resume.pdf assets/resume.pdf
+          mkdir -p dist
+          rsync -a --exclude '.git' --exclude 'dist' ./ dist/
+          mkdir -p dist/assets
+          cp resume/resume.pdf dist/assets/resume.pdf
 
-      - name: Assert resume artifact exists
-        run: test -f assets/resume.pdf
+      - name: Assert staged artifact contains site root and resume
+        run: |
+          test -f dist/index.html
+          test -f dist/assets/resume.pdf
+
+      - name: Show staged artifact contents
+        run: |
+          echo "Top-level artifact entries:"
+          ls -la dist | sed -n '1,40p'
+          echo
+          echo "Assets entries (truncated):"
+          ls -la dist/assets | sed -n '1,60p'
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
 
   deploy:
     environment:
