@@ -1,4 +1,4 @@
-name: Build Resume PDF
+name: Build and Deploy Pages
 
 on:
   push:
@@ -6,21 +6,29 @@ on:
       - main
     paths:
       - 'resume/**'
+      - 'assets/**'
       - '.github/workflows/build-resume.yml'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  build-resume:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
       - name: Build resume PDF
         uses: xu-cheng/latex-action@v3
@@ -33,15 +41,22 @@ jobs:
           mkdir -p assets
           cp resume/resume.pdf assets/resume.pdf
 
-      - name: Commit and push updated PDF
-        run: |
-          if git diff --quiet -- assets/resume.pdf; then
-            echo "No changes to assets/resume.pdf"
-            exit 0
-          fi
+      - name: Assert resume artifact exists
+        run: test -f assets/resume.pdf
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/resume.pdf
-          git commit -m "chore: rebuild resume PDF"
-          git push origin HEAD:main
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
