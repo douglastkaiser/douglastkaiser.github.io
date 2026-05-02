@@ -1,37 +1,107 @@
-\documentclass[11pt]{article}
+\documentclass[10pt,letterpaper]{extarticle}
 
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.42in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \usepackage{enumitem}
-\setlist[itemize]{leftmargin=*, topsep=2pt, itemsep=2pt}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{ragged2e}
+
+\definecolor{accent}{HTML}{1F4E79}
+\definecolor{muted}{HTML}{4A4A4A}
+\definecolor{rulegray}{HTML}{B8C4D0}
+
 \pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\baselinestretch}{0.93}
+\raggedbottom
+
+\titleformat{\section}
+  {\small\bfseries\color{accent}}{}{0em}{\MakeUppercase}[\color{rulegray}\titlerule]
+\titlespacing*{\section}{0pt}{4pt}{2pt}
+
+\setlist[itemize]{leftmargin=1.05em, topsep=0pt, itemsep=0.5pt, parsep=0pt, partopsep=0pt}
+\renewcommand\labelitemi{{\color{accent}\textbullet}}
+
+\newcommand{\name}[1]{\begin{center}{\LARGE\bfseries\color{accent} #1}\end{center}\vspace{-7pt}}
+\newcommand{\tagline}[1]{\begin{center}{\footnotesize\bfseries #1}\end{center}\vspace{-7pt}}
+\newcommand{\contact}[1]{\begin{center}{\scriptsize\color{muted} #1}\end{center}\vspace{-6pt}}
+\newcommand{\role}[4]{%
+  \textbf{#1} \textbar{} \textit{#3} \hfill {\color{muted}\textit{#2 \textbar{} #4}}\par\vspace{-2pt}%
+}
+\newcommand{\projectrole}[4]{%
+  \textbf{#1} \textbar{} \textit{#3} \hfill {\color{muted}\textit{#2 \textbar{} #4}}\par\vspace{-2pt}%
+}
+\newcommand{\skillrow}[2]{\textbf{#1:} & #2\\}
 
 \begin{document}
+\small
+\name{Douglas Kaiser}
+\tagline{GNC Simulation \& Controls Engineer \textbar{} Real-Time C++ Systems \textbar{} Flight Test \& Hardware Validation}
+\contact{\href{mailto:douglastkaiser@gmail.com}{douglastkaiser@gmail.com} \;\textbar\; (650) 709-6357 \;\textbar\; \href{https://www.douglastkaiser.com}{douglastkaiser.com} \;\textbar\; \href{https://github.com/douglastkaiser}{github.com/douglastkaiser} \;\textbar\; \href{https://www.linkedin.com/in/douglas-kaiser}{linkedin.com/in/douglas-kaiser}\\
+Relocating to Orange County / Long Beach, CA}
 
-\begin{center}
-    {\LARGE Your Name}\\
-    City, State \textbar{} \href{mailto:you@example.com}{you@example.com} \textbar{} (555) 555-5555 \textbar{} \href{https://example.com}{example.com}
-\end{center}
+\section{Summary}
+Controls, flight software, and real-time systems engineer with hands-on ownership from simulation to HIL/SIL, bench testing, flight test, and hardware commissioning. Strong match for high-fidelity GNC simulation, C/C++ flight software, deterministic real-time architectures, control-law tuning, nonlinear closed-loop analysis, flight-performance data review, and artificial-gravity attitude dynamics.
 
-\section*{Summary}
-Brief professional summary highlighting your experience, strengths, and goals.
+\section{Technical Skills}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.34in}X}
+\skillrow{Programming}{C/C++, Python, MATLAB, Simulink, Bash, Java, VBA}
+\skillrow{Real-Time Software}{Deterministic C++ systems, cycle-time management, UDP/IPC/TCP communications, algorithm optimization, safe C++ practices, module/unit test frameworks}
+\skillrow{GNC / Controls}{Flight controls, attitude dynamics, ADCS, CMGs, control-law tuning, nonlinear simulation, model validation, flight-data analysis}
+\skillrow{Test / Simulation}{HIL test stands, SIL/software-only test systems, real-time controls, V\&V, regression testing, hardware commissioning}
+\skillrow{Tools}{ROS, Linux, Simscape, STK, Goddard cFS, ANSYS, SolidWorks, Python Dash, Git; DoD Secret Clearance}
+\end{tabularx}
 
-\section*{Experience}
-\textbf{Job Title} \hfill Company Name \hfill Start -- End\\
-Location
+\section{Experience}
+\role{Commonwealth Fusion Systems}{Devens, MA}{Senior Real-Time Controls \& Simulation Engineer}{Sep 2022 -- Present}
 \begin{itemize}
-    \item Accomplishment or responsibility with measurable impact.
-    \item Another accomplishment demonstrating scope, ownership, or outcomes.
+  \item Designed core components of \textit{Neutrino}, a greenfield real-time controls framework emphasizing determinism, cycle-time reliability, safety, and hardware integration for SPARC subsystem commissioning.
+  \item Developed UDP/IPC/TCP communications and C++ real-time software patterns for high-consequence control systems, with emphasis on cycle-time management, algorithm optimization, and safe C++ practices.
+  \item Built and supported HIL test stands, software-only test systems, testing infrastructure, and module unit-test frameworks for rapid control-software development and validation.
+  \item Developed control and test software for the tritium injector system and supported the quench-detection/protection system through poloidal-field magnet test campaigns.
 \end{itemize}
 
-\section*{Education}
-\textbf{Degree}, Major \hfill School Name \hfill Graduation Date\\
-Location
+\role{Merlin Labs}{Boston, MA}{Flight Test / Controls / Flight Software Engineer}{Nov 2020 -- Aug 2022}
+\begin{itemize}
+  \item Served as onboard flight-test engineer in the backseat of a LongEZ, actively tuning flight-control parameters mid-flight and accumulating the most flight hours of anyone at the company.
+  \item Flew and supported flight-test campaigns across three aircraft types: CozE, LongEZ, and King Air; analyzed flight data to iterate control behavior and flight-software performance.
+  \item Designed and implemented C/C++ and Python flight-software features for autonomous aircraft in a ROS-based flight software environment.
+  \item Developed a flight-control tuning pipeline and online model-fit tool used during flight test to validate control-model behavior and guide rapid tuning decisions.
+\end{itemize}
 
-\section*{Skills}
-Skill category: skill 1, skill 2, skill 3
+\role{Draper}{Cambridge, MA}{Systems / Flight Software Engineer}{Jun 2019 -- Nov 2020}
+\begin{itemize}
+  \item Developed test and simulation code for quality control and certification of the Sierra Nevada Dream Chaser flight software computer simulator.
+  \item Built a Python Dash dashboard for customer-facing trade-space exploration, connecting tunable design parameters to system-level performance outcomes.
+  \item Researched and implemented an optimality scoring metric to compare candidate designs across changing mission sets and acceptable non-optimality levels.
+\end{itemize}
+
+\role{Pivotal Aero / Opener}{Palo Alto, CA}{Controls / Flight Test Engineer}{Mar 2017 -- May 2019}
+\begin{itemize}
+  \item Designed, implemented, and tested control algorithms for autonomous and pilot-controlled eVTOL flight on deployed flight hardware.
+  \item Wrote firmware for sensor-data processing and communication routing; debugged controls, electrical, and mechanical issues during field test campaigns.
+  \item Performed flight-control tuning, in-field code modifications, and verification/validation for multiple hardware projects from proposal through test completion.
+\end{itemize}
+
+\section{Education \& Spacecraft Projects}
+\textbf{Cornell University} \hfill {\color{muted}\textit{Ithaca, NY}}\\
+M.Eng. Aerospace Engineering, Aerospace Controls \hfill {\color{muted}\textit{Dec 2016}}\quad B.S. Mechanical Engineering \hfill {\color{muted}\textit{May 2016}}\vspace{1pt}
+
+\projectrole{Cornell Artificial Gravity CubeSat / CUGravity}{Ithaca, NY}{Project Manager \& ACS Lead}{Aug 2016 -- Dec 2016}
+\begin{itemize}
+  \item Conceived and led an artificial-gravity CubeSat using a deployable spinning architecture; managed 8 M.Eng. students and 1 undergraduate through initial design, funding, and approvals.
+  \item Led ACS/CMG trade studies and built 2-D/3-D dynamics models plus flight-code simulation for attitude control and spin-up/spin-maintenance analysis.
+\end{itemize}
+
+\textbf{Additional spacecraft and research:} Violet Nanosat ACS Team Lead / I\&T Engineer; CUSat ADCNS member; Technion Aerospace guidance and navigation lab researcher; ASML engineering analysis intern.
 
 \end{document}
