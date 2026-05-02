@@ -72,3 +72,40 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  post_deploy_smoke_check:
+    name: Post-deploy smoke check
+    runs-on: ubuntu-latest
+    needs: deploy
+
+    steps:
+      - name: Verify resume PDF endpoint and headers
+        run: |
+          set -euo pipefail
+
+          URL="https://www.douglastkaiser.com/assets/resume.pdf"
+          HEADER_FILE="$(mktemp)"
+
+          echo "Checking: ${URL}"
+          STATUS_CODE="$(curl -sS -L -o /dev/null -D "$HEADER_FILE" -w "%{http_code}" "$URL")"
+          CONTENT_TYPE="$(awk 'BEGIN{IGNORECASE=1} /^content-type:/{sub(/\r$/, "", $0); sub(/^content-type:[[:space:]]*/, "", $0); print tolower($0); exit}' "$HEADER_FILE")"
+
+          echo "HTTP status: ${STATUS_CODE}"
+          echo "Content-Type: ${CONTENT_TYPE}"
+
+          test "${STATUS_CODE}" = "200"
+          test "${CONTENT_TYPE}" = "application/pdf"
+
+      - name: Confirm endpoint is not a 404 page
+        run: |
+          set -euo pipefail
+
+          URL="https://www.douglastkaiser.com/assets/resume.pdf"
+          BODY_FILE="$(mktemp)"
+
+          curl -sS -L "$URL" -o "$BODY_FILE"
+
+          FILE_TYPE="$(file -b --mime-type "$BODY_FILE")"
+          echo "Downloaded MIME type: ${FILE_TYPE}"
+
+          test "${FILE_TYPE}" = "application/pdf"
