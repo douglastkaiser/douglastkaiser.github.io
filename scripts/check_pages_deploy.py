@@ -65,6 +65,7 @@ def run():
     failed_internal = []
     failed_external = []
     resume_assertions = []
+    resume_target_checks = []
 
     for label, ua in UAS.items():
         status, body = fetch(BASE, ua)
@@ -77,6 +78,10 @@ def run():
         resume_links = [h for h in hrefs if urldefrag(h).url == EXPECTED_RESUME or urldefrag(urlparse(h).path).url == EXPECTED_RESUME]
         resume_visible = len(resume_links) > 0
         resume_assertions.append((label, resume_visible, resume_links))
+
+        resume_url = urljoin(BASE, EXPECTED_RESUME.lstrip('/'))
+        resume_code, resume_err = check_status(resume_url, ua)
+        resume_target_checks.append((label, resume_url, resume_code, resume_err))
 
         internal_urls, external_urls = set(), set()
         for href in hrefs:
@@ -106,6 +111,13 @@ def run():
         resume_ok = resume_ok and ok
         print(f'- [{label}] visible={visible}, matches_target={ok}, hrefs={links}')
 
+    print('\nResume target status checks:')
+    resume_target_ok = True
+    for label, url, code, err in resume_target_checks:
+        ok = (err is None and code is not None and code < 400)
+        resume_target_ok = resume_target_ok and ok
+        print(f'- [{label}] url={url}, status={code}, err={err}, ok={ok}')
+
     print('\nExternal link failures (non-blocking):')
     if failed_external:
         for item in failed_external:
@@ -123,6 +135,9 @@ def run():
     if not resume_ok:
         print('\nFAIL: Resume link assertion failed.')
         return 2
+    if not resume_target_ok:
+        print('\nFAIL: Resume target URL is not reachable.')
+        return 3
     if failed_internal:
         print('\nFAIL: Internal broken links detected.')
         return 1
