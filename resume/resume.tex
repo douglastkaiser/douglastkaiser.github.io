@@ -35,7 +35,7 @@
 \newcommand{\tagline}[1]{\begin{center}{\footnotesize\bfseries #1}\end{center}\vspace{-10pt}}
 \newcommand{\contact}[1]{\begin{center}{\scriptsize\color{muted} #1}\end{center}\vspace{-10pt}}
 \newcommand{\role}[4]{%
-  \textbf{#1} \textbar{} \textit{#3} \hfill {\color{muted}\textit{#2} \textbar{} \textit{#4}}\par\vspace{-2pt}%
+  \textbf{#1} \textbar{} \textit{#3} \hfill {\color{muted}\if\relax\detokenize{#2}\relax\else\textit{#2} \textbar{} \fi\textit{#4}}\par\vspace{-2pt}%
 }
 \newcommand{\projectrole}[4]{%
   \textbf{#1} \textbar{} \textit{#3} \hfill {\color{muted}\textit{#2} \textbar{} \textit{#4}}\par\vspace{-2pt}%
@@ -61,7 +61,12 @@ Senior real-time controls and GNC engineer with $\sim$10 years building determin
 \end{tabularx}
 
 \section{Experience}
-\role{Commonwealth Fusion Systems}{Devens, MA}{Senior Real-Time Controls \& Simulation Engineer}{Sep 2022 - Present}
+\role{Vast Space}{}{Staff Flight Software Engineer}{Aug 2026 - Present}
+\begin{itemize}
+  \item Implement guidance, navigation, and control (GNC) algorithms in real-time flight software control systems
+\end{itemize}
+
+\role{Commonwealth Fusion Systems}{Devens, MA}{Senior Real-Time Controls \& Simulation Engineer}{Sep 2022 - Aug 2026}
 \begin{itemize}
   \item Designed core components of \textit{Neutrino}, a greenfield real-time controls framework emphasizing determinism, cycle-time reliability, safety, and hardware integration for SPARC, the prototype Tokamak Fusion Plant, subsystem commissioning
   \item Developed UDP/IPC/TCP communications and C++ real-time software patterns for high-consequence control systems, with emphasis on cycle-time management, algorithm optimization, and safe C++ practices

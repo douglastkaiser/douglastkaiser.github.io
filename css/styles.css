@@ -11129,25 +11129,33 @@ section.resume-section .resume-section-content {
   margin: 0 0 1.75rem;
 }
 
-.selected-work-grid {
+.strengths-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
 }
 
-.work-card {
-  border: 1px solid rgba(0, 0, 0, 0.08);
+.strength-card {
+  min-width: 0;
+  border: 1px solid rgba(189, 93, 56, 0.16);
+  border-top: 3px solid #bd5d38;
   border-radius: 0.5rem;
-  padding: 1rem;
-  background: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  background: #fcfaf8;
 }
 
-.work-card h3 {
-  font-size: 1.35rem;
+.strength-card h3 {
+  font-size: 1.75rem;
   margin-bottom: 0.75rem;
 }
 
-.work-card ul {
+.strength-card p {
   margin-bottom: 0;
+  line-height: 1.7;
+}
+
+@media (min-width: 768px) {
+  .strengths-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
