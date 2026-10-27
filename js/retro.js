@@ -76,10 +76,10 @@
 
         function updateMode() {
             root.classList.toggle('retro-mode', enabled);
-            toggle.textContent = enabled ? '[ return to the present ]' : '[1996]';
+            toggle.textContent = enabled ? '[ return to the present ]' : '[1994]';
             toggle.setAttribute('aria-pressed', String(enabled));
             toggle.setAttribute('aria-label', enabled ? 'Return to the modern website' : 'Switch to neo-retro 90s minimalism');
-            toggle.title = enabled ? 'Return to the present' : 'A different entrance. Try 1996.';
+            toggle.title = enabled ? 'Return to the present' : 'A different entrance. Try 1994.';
             selectSection();
         }
 
