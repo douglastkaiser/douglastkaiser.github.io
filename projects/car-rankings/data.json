@@ -1,0 +1,3643 @@
+{
+  "updated": "2026-11-14",
+  "categories": [
+    {
+      "key": "cost",
+      "label": "5-year cost",
+      "short": "Cost",
+      "default": 1
+    },
+    {
+      "key": "eco",
+      "label": "Eco-friendliness",
+      "short": "Eco",
+      "default": 1
+    },
+    {
+      "key": "mountain",
+      "label": "Mountain trips",
+      "short": "Trips",
+      "default": 1
+    },
+    {
+      "key": "lux",
+      "label": "Comfort",
+      "short": "Cabin",
+      "default": 1
+    },
+    {
+      "key": "commute",
+      "label": "Commute assistance",
+      "short": "Assist",
+      "default": 1
+    },
+    {
+      "key": "maintenance",
+      "label": "Maintenance (optional)",
+      "short": "Upkeep",
+      "default": 0
+    }
+  ],
+  "sources": {
+    "aceee": {
+      "title": "ACEEE published Green Scores",
+      "url": "https://greenercars.org/greenercars-ratings/",
+      "year": 2024,
+      "scope": "Historical US configurations; none is an exact 2026 rating",
+      "checked": "2026-11-14"
+    },
+    "aceee_method": {
+      "title": "ACEEE lifecycle methodology",
+      "url": "https://greenercars.org/greenercars-ratings/how-we-determine-ratings/",
+      "year": "2024 methodology",
+      "scope": "Manufacturing, batteries, energy supply, use and disposal estimates",
+      "checked": "2026-11-14"
+    },
+    "aceee_coverage": {
+      "title": "GreenerCars coverage notice",
+      "url": "https://greenercars.org/",
+      "year": "2026 notice",
+      "scope": "New rankings paused; published scores through model year 2024",
+      "checked": "2026-11-14"
+    },
+    "ncap": {
+      "title": "Green NCAP lifecycle assessments",
+      "url": "https://www.greenncap.com/european-lca-results/",
+      "year": "2025–2026",
+      "scope": "European assumptions; context only, not mixed with ACEEE scores",
+      "checked": "2026-11-14"
+    },
+    "repairpal": {
+      "title": "RepairPal reliability methodology",
+      "url": "https://repairpal.com/reliability",
+      "year": "2010–2019 vehicles in published methodology",
+      "scope": "Historical repair frequency, severity and cost; not a 2026 forecast",
+      "checked": "2026-11-14"
+    },
+    "cr_adas": {
+      "title": "Consumer Reports assistance evaluation",
+      "url": "https://www.consumerreports.org/cars/car-safety/active-driving-assistance-systems-review-a2103632203/",
+      "year": 2023,
+      "scope": "System evaluation approach; not exact-trim 2026 test results",
+      "checked": "2026-11-14"
+    },
+    "iihs_adas": {
+      "title": "IIHS partial automation safeguards",
+      "url": "https://www.iihs.org/ratings/partial-automation-safeguards",
+      "year": "System-specific test years",
+      "scope": "Monitoring and misuse safeguards, not lane-centering performance",
+      "checked": "2026-11-14"
+    },
+    "roof": {
+      "title": "Thule ski and snowboard carrier fit guide",
+      "url": "https://www.thule.com/en-us/winter-racks/ski-and-snowboard-racks",
+      "year": "Current fit guide",
+      "scope": "Reference only; exact year, roof, bars and carrier must be matched",
+      "checked": "2026-11-14"
+    },
+    "chains": {
+      "title": "Caltrans chain controls",
+      "url": "https://dot.ca.gov/travel/winter-driving-tips/chain-controls",
+      "year": "Current guidance",
+      "scope": "California winter road access; AWD does not remove all chain requirements",
+      "checked": "2026-11-14"
+    },
+    "tesla_service": {
+      "title": "Tesla Model Y maintenance intervals",
+      "url": "https://service.tesla.com/docs/Public/diy/modely/en_us/GUID-A84FDD77-7A8C-42F6-9385-E3F9CEE245A4.html",
+      "year": "Current online manual",
+      "scope": "Service requirements vary with build date; verify the vehicle manual",
+      "checked": "2026-11-14"
+    },
+    "model_nx": {
+      "title": "Lexus NX",
+      "url": "https://pressroom.lexus.com/2026-lexus-nx-adds-grades-and-drivetrain/",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_ux": {
+      "title": "Lexus UX",
+      "url": "https://www.lexus.com/models/UX-hybrid",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_cx50": {
+      "title": "Mazda CX-50 packaging",
+      "url": "https://news.mazdausa.com/2025-09-16-2026-Mazda-CX-50-Pricing-and-Packaging",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_rav4": {
+      "title": "Toyota RAV4 launch and equipment",
+      "url": "https://pressroom.toyota.com/the-next-adventure-begins-2026-rav4-arrives-this-winter/",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_x3": {
+      "title": "BMW X3 equipment",
+      "url": "https://www.bmwusa.com/vehicles/x-series/x3/bmw-x3.html",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_cx30": {
+      "title": "Mazda CX-30 equipment",
+      "url": "https://www.mazdausa.com/vehicles/cx-30/compare-vehicle-specs-and-trims",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_sportage": {
+      "title": "Kia Sportage equipment",
+      "url": "https://www.kiamedia.com/us/en/models/sportage-hev/2026/features",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_cx5": {
+      "title": "Mazda CX-5 equipment",
+      "url": "https://www.mazdausa.com/vehicles/cx-5/compare-vehicle-specs-and-trims",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_ioniq5": {
+      "title": "Hyundai IONIQ 5 equipment",
+      "url": "https://www.hyundaiusa.com/us/en/vehicles/ioniq-5",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_mache": {
+      "title": "Ford Mach-E order guide",
+      "url": "https://www.fromtheroad.ford.com/content/dam/fordmediasite/us/en/library/2026/order-guides/2026_Ford_Mustang_Mach-E_Order_Guide.pdf",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_crv": {
+      "title": "Honda CR-V features by trim",
+      "url": "https://www.hondainfocenter.com/2026/CR-V/Feature-Guide/Features-by-Trim/",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_forester": {
+      "title": "Subaru Forester Hybrid features",
+      "url": "https://www.subaru.com/vehicles/forester/hybrid/2026/features.html",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_rogue": {
+      "title": "Nissan Rogue specifications",
+      "url": "https://usa.nissannews.com/en-US/releases/2026-nissan-rogue-specifications",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_leaf": {
+      "title": "Nissan LEAF specifications",
+      "url": "https://www.nissanusa.com/vehicles/electric-cars/leaf/specs-trims.html",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_tucson": {
+      "title": "Hyundai Tucson Hybrid Limited",
+      "url": "https://www.hyundaiusa.com/us/en/vehicles/tucson-hybrid/limited",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_solterra": {
+      "title": "Subaru Solterra equipment",
+      "url": "https://www.subaru.com/vehicles/solterra.html",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_bz": {
+      "title": "Toyota bZ equipment",
+      "url": "https://www.toyota.com/bz/",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_modely": {
+      "title": "Tesla Model Y manual",
+      "url": "https://www.tesla.com/ownersmanual/modely/en_us/",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_ev6": {
+      "title": "Kia EV6 equipment",
+      "url": "https://www.kiamedia.com/us/en/models/ev6/2026/features",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_rdx": {
+      "title": "Acura RDX equipment",
+      "url": "https://acuranews.com/en-US/releases/2026-acura-rdx-specifications-features",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_x2": {
+      "title": "BMW X2 equipment",
+      "url": "https://www.bmwusa.com/vehicles/x-series/x2/bmw-x2-overview.html",
+      "year": "2027 live overview; reference only for 2026 shortlist",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_x1": {
+      "title": "BMW X1 equipment",
+      "url": "https://www.bmwusa.com/vehicles/x-series/x1/bmw-x1.html",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_gv70": {
+      "title": "Genesis GV70 equipment",
+      "url": "https://www.genesis.com/us/en/build-and-price/2026/gv70",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_bmw4": {
+      "title": "BMW 4 Series Gran Coupe equipment",
+      "url": "https://www.bmwusa.com/vehicles/4-series/gran-coupe/overview.html",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_niro": {
+      "title": "Kia Niro HEV equipment",
+      "url": "https://www.kiamedia.com/us/en/models/niro-hev/2026/features",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_outlander": {
+      "title": "Mitsubishi Outlander trim equipment",
+      "url": "https://www.mitsubishicars.com/cars-and-suvs/outlander/trims",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_mini": {
+      "title": "MINI Countryman equipment",
+      "url": "https://www.miniusa.com/model/countryman.html",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_xc40": {
+      "title": "Volvo XC40 equipment",
+      "url": "https://www.volvocars.com/us/cars/xc40/specifications/",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_gla": {
+      "title": "Mercedes-Benz GLA equipment",
+      "url": "https://www.mbusa.com/en/vehicles/class/gla/suv",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_q3": {
+      "title": "Audi Q3 equipment",
+      "url": "https://www.audiusa.com/en/models/q3/q3/",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_seltos": {
+      "title": "Kia Seltos trim equipment",
+      "url": "https://www.kiamedia.com/us/en/models/seltos/2026/features",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_compass": {
+      "title": "Jeep Compass assistance equipment",
+      "url": "https://www.jeep.com/compass/technology.html",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_terrain": {
+      "title": "GMC Terrain fleet specifications",
+      "url": "https://www.gmfleet.com/content/dam/gmfleet/na/us/en/index/pdfs/suvs/02-pdfs/2026%20GMC%20Terrain.pdf",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_corsair": {
+      "title": "Lincoln Corsair Premiere equipment",
+      "url": "https://www.fordpro.com/en-us/fleet-vehicles/lincoln-corsair/",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_equinox": {
+      "title": "Chevrolet Equinox equipment",
+      "url": "https://www.chevrolet.com/suvs/previous-year/equinox",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "model_tiguan": {
+      "title": "Volkswagen Tiguan equipment",
+      "url": "https://www.vw.com/en/models/tiguan.html",
+      "year": "2026 shortlist; online pages may roll forward",
+      "scope": "Manufacturer equipment reference; inspect exact US trim and window sticker",
+      "checked": "2026-11-14"
+    },
+    "mazda_cts": {
+      "title": "Mazda CX-50 Hybrid CTS manual",
+      "url": "https://www.mazdausa.com/static/manuals/2026/cx-50-hev/contents/65470300.html",
+      "year": 2026,
+      "scope": "Manual describes CTS, but does not establish Premium-trim fitment",
+      "checked": "2026-11-14"
+    },
+    "ford_adas": {
+      "title": "Ford Mach-E package changes",
+      "url": "https://www.fromtheroad.ford.com/us/en/articles/2026/whats-new-2026-ford-mustang-mach-e.html",
+      "year": 2026,
+      "scope": "Technology Package required for BlueCruise on Premium; excluded here",
+      "checked": "2026-11-14"
+    },
+    "crv_adas": {
+      "title": "Honda Traffic Jam Assist manual",
+      "url": "https://techinfo.honda.com/rjanisis/pubs/OM/AH/A3D42626IOM/enu/details/131288047-405788.html",
+      "year": 2026,
+      "scope": "Low-speed steering assistance with LKAS active and lane markings detected",
+      "checked": "2026-11-14"
+    },
+    "corsair_ca": {
+      "title": "Ford Pro California availability",
+      "url": "https://www.fordpro.com/en-us/fleet-vehicles/lincoln-corsair/",
+      "year": 2026,
+      "scope": "Lists Premiere/Reserve as unavailable for purchase in California; retained for continuity, needs resolution",
+      "checked": "2026-11-14"
+    }
+  },
+  "cars": [
+    {
+      "id": "nx",
+      "name": "Lexus NX 350h",
+      "five": 50500,
+      "year": 2026,
+      "trim": "Premium AWD · Hybrid",
+      "otd": 54800,
+      "efficiency": "39 MPG",
+      "eco": {
+        "benchmark_score": 57,
+        "benchmark_model": "Lexus NX 350h AWD",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical predecessor; Premium wheels/emissions certification not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Lexus NX 350h AWD"
+      },
+      "mountain": {
+        "components": [
+          3,
+          3,
+          5
+        ],
+        "cargo": "Three seats plus bags is plausible; the shorter cargo area makes a roof carrier the safer gear plan.",
+        "winter": "Road-oriented hybrid AWD; winter tire choice matters more than the luxury trim.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_nx",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium AWD · Hybrid"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "Lexus Safety System+ 3.0: full-speed radar cruise and Lane Tracing Assist. Confirm resume-after-stop behavior in a test drive.",
+        "package": "Standard suite; no paid driving package assumed.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_nx"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium AWD · Hybrid"
+      },
+      "maintenance": {
+        "components": [
+          4,
+          3,
+          4
+        ],
+        "note": "Established Toyota/Lexus hybrid family is a useful historical reference; it is not a measured 2026 failure rate.",
+        "upkeep": "Routine hybrid/engine service remains; Lexus/Toyota familiarity helps, but hybrid diagnostics still need a qualified shop.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_nx"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Premium AWD · Hybrid"
+      },
+      "comfort": {
+        "rank": 4,
+        "note": "Quiet, well-finished Lexus cabin with comfortable Premium-grade equipment.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_nx"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium AWD · Hybrid"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Premium AWD · Hybrid"
+      }
+    },
+    {
+      "id": "cx50",
+      "name": "Mazda CX-50 Hybrid",
+      "five": 47600,
+      "year": 2026,
+      "trim": "Premium AWD · AWD",
+      "otd": 43500,
+      "efficiency": "38 MPG",
+      "eco": {
+        "benchmark_score": 57,
+        "benchmark_model": "Toyota RAV4 Hybrid AWD",
+        "benchmark_year": 2024,
+        "status": "Cross-model estimate",
+        "note": "Cross-model hybrid benchmark; shared hybrid technology is not a verified CX-50 lifecycle result.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Toyota RAV4 Hybrid AWD"
+      },
+      "mountain": {
+        "components": [
+          4,
+          4,
+          5
+        ],
+        "cargo": "Long cargo shape helps bags and boots; retain two front seats and one rear seat, or put long gear on the roof.",
+        "winter": "Hybrid AWD and useful crossover clearance; inspect tire size and chain instructions.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_cx50",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          0,
+          2
+        ],
+        "note": "Premium lists radar cruise with Stop and Go. A CTS manual exists, but Premium fitment is not established; no continuous lane-centering credit.",
+        "package": "CTS is not assumed merely because the owner manual describes it.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_cx50",
+          "mazda_cts"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          3,
+          3,
+          4
+        ],
+        "note": "The hybrid system has related Toyota history, but the Mazda installation has less long-term evidence.",
+        "upkeep": "Engine and hybrid service remain; verify parts sharing rather than assuming Toyota parts interchange.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_cx50"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Premium AWD · AWD"
+      },
+      "comfort": {
+        "rank": 22,
+        "note": "Good tactile controls and upscale Mazda finish; still mainstream rather than luxury.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_cx50"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Premium AWD · AWD"
+      }
+    },
+    {
+      "id": "rav4",
+      "name": "Toyota RAV4 Hybrid",
+      "five": 42100,
+      "year": 2026,
+      "trim": "XLE Premium AWD · AWD",
+      "otd": 42600,
+      "efficiency": "41 MPG",
+      "eco": {
+        "benchmark_score": 57,
+        "benchmark_model": "Toyota RAV4 Hybrid AWD",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Previous generation; 2026 redesign and hybrid changes are not captured.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Toyota RAV4 Hybrid AWD"
+      },
+      "mountain": {
+        "components": [
+          4,
+          4,
+          5
+        ],
+        "cargo": "Practical rear cabin and luggage area; roof-carried skis keep the rear passenger and wet gear separate.",
+        "winter": "Hybrid AWD is useful for plowed mountain access; this is not a Woodland tire setup.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_rav4",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "XLE Premium AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "Toyota Safety Sense 4.0 includes full-speed radar cruise and Lane Tracing Assist; new system performance is provisional.",
+        "package": "Standard suite; optional higher-grade assistance excluded.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_rav4"
+        ],
+        "source_year": 2026,
+        "configuration": "XLE Premium AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          3,
+          3,
+          5
+        ],
+        "note": "Mature hybrid lineage helps context; the redesigned 2026 vehicle still has unproven new components.",
+        "upkeep": "Widely serviced hybrid family; scheduled engine upkeep remains, with qualified high-voltage service needed.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_rav4"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "XLE Premium AWD · AWD"
+      },
+      "comfort": {
+        "rank": 30,
+        "note": "Solid functional space, but fewer plush details than the luxury contenders.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_rav4"
+        ],
+        "source_year": 2026,
+        "configuration": "XLE Premium AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "XLE Premium AWD · AWD"
+      }
+    },
+    {
+      "id": "ux",
+      "name": "Lexus UX 300h",
+      "five": 47200,
+      "year": 2026,
+      "trim": "Premium AWD · AWD",
+      "otd": 47900,
+      "efficiency": "42 MPG",
+      "eco": {
+        "benchmark_score": 55,
+        "benchmark_model": "Lexus UX 250h AWD",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Previous hybrid powertrain; not a published UX 300h result.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Lexus UX 250h AWD"
+      },
+      "mountain": {
+        "components": [
+          2,
+          2,
+          5
+        ],
+        "cargo": "Tight rear seat and small luggage area; three adults plus gear makes roof carriage especially important.",
+        "winter": "Small road crossover with hybrid AWD; low clearance limits deeper snow.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_ux",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "Lexus radar cruise and Lane Tracing Assist are the comparison basis; exact 2026 system/version needs confirmation.",
+        "package": "No optional advanced driving package assumed.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_ux"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          4,
+          3,
+          4
+        ],
+        "note": "Hybrid-family history is useful, but UX 250h evidence does not directly establish UX 300h outcomes.",
+        "upkeep": "Routine engine/hybrid maintenance; competent independent hybrid service is a plausible route to verify locally.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_ux"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Premium AWD · AWD"
+      },
+      "comfort": {
+        "rank": 10,
+        "note": "Lexus material quality and quietness in a small, rather snug cabin.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_ux"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Premium AWD · AWD"
+      }
+    },
+    {
+      "id": "x3",
+      "name": "BMW X3",
+      "five": 70300,
+      "year": 2026,
+      "trim": "30 xDrive AWD · Gas",
+      "otd": 57500,
+      "efficiency": "29 MPG",
+      "eco": {
+        "benchmark_score": 44,
+        "benchmark_model": "BMW X3 xDrive30i",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Previous generation; new mild-hybrid powertrain not captured.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 BMW X3 xDrive30i"
+      },
+      "mountain": {
+        "components": [
+          4,
+          4,
+          4
+        ],
+        "cargo": "Room for a rear adult and bags; long gear is a roof-carrier candidate without consuming rear seating.",
+        "winter": "AWD and useful clearance; check road-tire fitment rather than assuming winter tires.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_x3",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "30 xDrive AWD · Gas"
+      },
+      "commute": {
+        "components": [
+          0,
+          0,
+          2
+        ],
+        "note": "Base configuration has no confirmed ACC/continuous steering package; ordinary Active Driving Assistant is not Driving Assistant Professional.",
+        "package": "Driving Assistance Plus/Professional and Premium packages are not included or credited.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_x3"
+        ],
+        "source_year": 2026,
+        "configuration": "30 xDrive AWD · Gas"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          3
+        ],
+        "note": "New generation/mild-hybrid hardware limits how much older X3 history can establish.",
+        "upkeep": "Turbo engine, AWD and electronics add service tasks; confirm nearby BMW-specialist diagnostic access.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_x3"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "30 xDrive AWD · Gas"
+      },
+      "comfort": {
+        "rank": 2,
+        "note": "Spacious premium cabin with good ride isolation; assistance is scored separately.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_x3"
+        ],
+        "source_year": 2026,
+        "configuration": "30 xDrive AWD · Gas"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "30 xDrive AWD · Gas"
+      }
+    },
+    {
+      "id": "cx30",
+      "name": "Mazda CX-30",
+      "five": 47000,
+      "year": 2026,
+      "trim": "2.5 S Premium AWD · AWD",
+      "otd": 38600,
+      "efficiency": "27 MPG",
+      "eco": {
+        "benchmark_score": 51,
+        "benchmark_model": "Mazda CX-30 4WD, 2.5L, 26 city / 33 highway",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical non-turbo configuration; certification and exact current equipment not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Mazda CX-30 4WD, 2.5L, 26 city / 33 highway"
+      },
+      "mountain": {
+        "components": [
+          2,
+          3,
+          4
+        ],
+        "cargo": "Small rear cabin and short load area; roof gear reduces crowding but cannot add passenger legroom.",
+        "winter": "AWD helps on access roads; winter tire/chain clearance needs checking.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_cx30",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "2.5 S Premium AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          0,
+          2
+        ],
+        "note": "Radar cruise with Stop and Go is the planning basis. Lane-keep correction is not continuous centering; exact trim fitment needs confirmation.",
+        "package": "No Traffic Jam Assist or CTS upgrade credited.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_cx30"
+        ],
+        "source_year": 2026,
+        "configuration": "2.5 S Premium AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          4,
+          3,
+          4
+        ],
+        "note": "Established non-turbo powertrain is a simpler historical comparison; actual 2026 failure frequency is unknown.",
+        "upkeep": "Conventional engine/AWD servicing; confirm local parts availability and service intervals.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_cx30"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "2.5 S Premium AWD · AWD"
+      },
+      "comfort": {
+        "rank": 24,
+        "note": "Near-luxury fit and finish, offset by limited rear-seat room.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_cx30"
+        ],
+        "source_year": 2026,
+        "configuration": "2.5 S Premium AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "2.5 S Premium AWD · AWD"
+      }
+    },
+    {
+      "id": "sportage",
+      "name": "Kia Sportage Hybrid",
+      "five": 50200,
+      "year": 2026,
+      "trim": "SX-Prestige AWD · AWD",
+      "otd": 46000,
+      "efficiency": "35 MPG",
+      "eco": {
+        "benchmark_score": 53,
+        "benchmark_model": "Kia Sportage Hybrid AWD",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical hybrid AWD; current wheels, consumption and certification may differ.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Kia Sportage Hybrid AWD"
+      },
+      "mountain": {
+        "components": [
+          4,
+          3,
+          5
+        ],
+        "cargo": "Roomy rear seating and luggage shape suit three adults; use roof storage for long skis.",
+        "winter": "Hybrid AWD; large SX-Prestige road wheels warrant a winter tire/chain check.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_sportage",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "SX-Prestige AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "SX-Prestige includes highway assistance and stop/go cruise; verify the HDA version and monitoring on the actual vehicle.",
+        "package": "Selected top hybrid trim; no extra paid driving subscription assumed.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_sportage"
+        ],
+        "source_year": 2026,
+        "configuration": "SX-Prestige AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          3,
+          3,
+          4
+        ],
+        "note": "Turbo-hybrid history is relevant but exact 2026 electronics/trim outcomes are unmeasured.",
+        "upkeep": "Engine, hybrid and AWD maintenance; warranty coverage changes who pays, not disruption.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_sportage"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "SX-Prestige AWD · AWD"
+      },
+      "comfort": {
+        "rank": 18,
+        "note": "Excellent feature value on SX Prestige; not quite premium-brand refinement.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_sportage"
+        ],
+        "source_year": 2026,
+        "configuration": "SX-Prestige AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "SX-Prestige AWD · AWD"
+      }
+    },
+    {
+      "id": "cx5",
+      "name": "Mazda CX-5",
+      "five": 51400,
+      "year": 2026,
+      "trim": "2.5 S Premium Plus AWD · AWD",
+      "otd": 44400,
+      "efficiency": "26 MPG",
+      "eco": {
+        "benchmark_score": 49,
+        "benchmark_model": "Mazda CX-5 4WD, 2.5L, 26 city / 31 highway",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Older configuration; current redesign/trim and EPA figure not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Mazda CX-5 4WD, 2.5L, 26 city / 31 highway"
+      },
+      "mountain": {
+        "components": [
+          3,
+          4,
+          4
+        ],
+        "cargo": "Usable rear seating and bags; a narrow folded section may help, but long-item clearance is unmeasured.",
+        "winter": "AWD crossover; current tire fitment and generation-specific clearance need confirmation.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_cx5",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "2.5 S Premium Plus AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          0,
+          2
+        ],
+        "note": "Radar cruise with Stop and Go is the planning basis; generation/trim changes need checking before crediting CTS.",
+        "package": "No unverified CTS/Traffic Jam Assist equipment credited.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_cx5"
+        ],
+        "source_year": 2026,
+        "configuration": "2.5 S Premium Plus AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          3,
+          3,
+          4
+        ],
+        "note": "Previous non-turbo CX-5 history helps only if the current engine/generation matches.",
+        "upkeep": "Engine/AWD upkeep; confirm changed 2026 parts and diagnostics before extrapolating older repairs.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_cx5"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "2.5 S Premium Plus AWD · AWD"
+      },
+      "comfort": {
+        "rank": 13,
+        "note": "Premium Plus trim has an upscale feel and good ride isolation.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_cx5"
+        ],
+        "source_year": 2026,
+        "configuration": "2.5 S Premium Plus AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "2.5 S Premium Plus AWD · AWD"
+      }
+    },
+    {
+      "id": "ioniq5",
+      "name": "Hyundai IONIQ 5",
+      "five": 54300,
+      "year": 2026,
+      "trim": "SEL AWD · EV",
+      "otd": 51800,
+      "efficiency": "106 MPGe",
+      "eco": {
+        "benchmark_score": 57,
+        "benchmark_model": "Hyundai Ioniq 5 Long range AWD, 4,500 lb test class",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical battery/wheel configuration; 2026 battery changes not captured.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Hyundai Ioniq 5 Long range AWD, 4,500 lb test class"
+      },
+      "mountain": {
+        "components": [
+          4,
+          3,
+          3
+        ],
+        "cargo": "Flat-floor cabin helps the third adult; cargo length behind an occupied rear seat still needs a board test.",
+        "winter": "AWD helps, but road clearance and winter tires constrain snow access.",
+        "trip": "Cold weather, climbing and a roof load can reduce range. Current charging hardware differs from older models; plan the actual route and a charging reserve.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_ioniq5",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "SEL AWD · EV"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "SEL offers highway assistance with adaptive cruise and lane following; validate centering smoothness and stop/restart limits.",
+        "package": "SEL equipment only; no autonomous-driving option assumed.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_ioniq5"
+        ],
+        "source_year": 2026,
+        "configuration": "SEL AWD · EV"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          5,
+          3
+        ],
+        "note": "Do not equate low routine EV service with low unscheduled-failure risk; newer charging hardware needs evidence.",
+        "upkeep": "No engine oil service; tires, brake fluid, cabin filters and model-specific coolant schedules still apply.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_ioniq5"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "SEL AWD · EV"
+      },
+      "comfort": {
+        "rank": 19,
+        "note": "Airy flat-floor interior and smooth EV drive; materials stay mainstream.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_ioniq5"
+        ],
+        "source_year": 2026,
+        "configuration": "SEL AWD · EV"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "SEL AWD · EV"
+      }
+    },
+    {
+      "id": "mache",
+      "name": "Ford Mustang Mach-E",
+      "five": 54600,
+      "year": 2026,
+      "trim": "Premium eAWD · EV",
+      "otd": 51300,
+      "efficiency": "100 MPGe",
+      "eco": {
+        "benchmark_score": 57,
+        "benchmark_model": "Tesla Model Y Long Range AWD",
+        "benchmark_year": 2024,
+        "status": "Cross-model estimate",
+        "note": "Cross-model midsize AWD EV benchmark; not a Ford score. Battery size/chemistry and mass can change the comparison.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Tesla Model Y Long Range AWD"
+      },
+      "mountain": {
+        "components": [
+          4,
+          3,
+          3
+        ],
+        "cargo": "Useful luggage space and a rear seat for the third adult; prefer roof gear over assuming diagonal board fit.",
+        "winter": "AWD traction; lower road-oriented body and tires limit deeper snow.",
+        "trip": "Cold weather, climbing and a roof load can reduce range. Current charging hardware differs from older models; plan the actual route and a charging reserve.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_mache",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium eAWD · EV"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "Score the hands-on adaptive-cruise/lane-centering baseline. No BlueCruise hands-free credit for the unoptioned Premium.",
+        "package": "2026 Premium needs Technology Package to activate BlueCruise, plus an active plan; both excluded.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_mache",
+          "ford_adas"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium eAWD · EV"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          5,
+          3
+        ],
+        "note": "New EV repair history does not yet establish a reliable 2026 failure-frequency estimate.",
+        "upkeep": "Low engine-related upkeep; high-voltage, charging and software repairs require suitable equipment.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_mache"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Premium eAWD · EV"
+      },
+      "comfort": {
+        "rank": 16,
+        "note": "Spacious, calm EV cabin; premium feel depends on personal taste.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_mache"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium eAWD · EV"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Premium eAWD · EV"
+      }
+    },
+    {
+      "id": "crv",
+      "name": "Honda CR-V Hybrid",
+      "five": 44000,
+      "year": 2026,
+      "trim": "Sport-L AWD · AWD",
+      "otd": 45600,
+      "efficiency": "37 MPG",
+      "eco": {
+        "benchmark_score": 56,
+        "benchmark_model": "Honda CR-V AWD, 2.0L hybrid",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical hybrid AWD; trim and emissions certification not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Honda CR-V AWD, 2.0L hybrid"
+      },
+      "mountain": {
+        "components": [
+          5,
+          3,
+          5
+        ],
+        "cargo": "Generous rear-seat and luggage packaging is a strong starting point for three adults, boots and bags.",
+        "winter": "Hybrid AWD; practical on maintained routes with appropriate winter tires.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_crv",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Sport-L AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "Honda Sensing includes Low-Speed Follow, LKAS and Traffic Jam Assist for low-speed steering; compare restart behavior in traffic.",
+        "package": "Standard suite on Sport-L; no subscription assumed.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_crv",
+          "crv_adas"
+        ],
+        "source_year": 2026,
+        "configuration": "Sport-L AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          4,
+          3,
+          5
+        ],
+        "note": "Established hybrid-family service experience is useful context; no exact 2026 failure rate is claimed.",
+        "upkeep": "Engine/hybrid upkeep remains; broad Honda familiarity supports a reasonable service-access estimate.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_crv"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Sport-L AWD · AWD"
+      },
+      "comfort": {
+        "rank": 20,
+        "note": "Comfortable roomy cabin, but Sport-L materials are still mainstream.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_crv"
+        ],
+        "source_year": 2026,
+        "configuration": "Sport-L AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Sport-L AWD · AWD"
+      }
+    },
+    {
+      "id": "forester",
+      "name": "Subaru Forester Hybrid",
+      "five": 45700,
+      "year": 2026,
+      "trim": "Limited AWD · AWD",
+      "otd": 44200,
+      "efficiency": "35 MPG",
+      "eco": {
+        "benchmark_score": 57,
+        "benchmark_model": "Toyota RAV4 Hybrid AWD",
+        "benchmark_year": 2024,
+        "status": "Cross-model estimate",
+        "note": "Cross-model hybrid AWD benchmark; no published Forester Hybrid score in this source.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Toyota RAV4 Hybrid AWD"
+      },
+      "mountain": {
+        "components": [
+          5,
+          5,
+          5
+        ],
+        "cargo": "Upright cabin and accessible luggage space suit three adults; roof gear preserves the rear bench.",
+        "winter": "AWD, X-MODE and clearance are useful for snowy access; no exemption from tire/chain rules.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_forester",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          4
+        ],
+        "note": "EyeSight adaptive cruise and lane centering are the basis; Limited driver monitoring and new emergency-stop features require exact-build checks.",
+        "package": "No hands-free driving assumed; monitoring quality is an editorial estimate.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_forester"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          3,
+          4
+        ],
+        "note": "New Subaru hybrid installation has limited long-term evidence despite related hybrid technology.",
+        "upkeep": "Engine, AWD and hybrid service; verify new battery/powertrain parts and diagnostic coverage.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_forester"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Limited AWD · AWD"
+      },
+      "comfort": {
+        "rank": 32,
+        "note": "Airy, practical interior; trim focuses on utility over indulgence.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_forester"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Limited AWD · AWD"
+      }
+    },
+    {
+      "id": "rogue",
+      "name": "Nissan Rogue Rock Creek",
+      "five": 49300,
+      "year": 2026,
+      "trim": "Rock Creek AWD + Premium Package",
+      "otd": 40200,
+      "efficiency": "29 MPG",
+      "eco": {
+        "benchmark_score": 49,
+        "benchmark_model": "Honda CR-V AWD, 1.5L turbo",
+        "benchmark_year": 2024,
+        "status": "Cross-model estimate",
+        "note": "Cross-model turbo AWD benchmark; Rogue variable-compression engine and Rock Creek tires are not modeled.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Honda CR-V AWD, 1.5L turbo"
+      },
+      "mountain": {
+        "components": [
+          5,
+          5,
+          4
+        ],
+        "cargo": "Upright cargo area and Rock Creek roof-rack equipment offer a useful group-trip layout.",
+        "winter": "AWD, higher-profile all-terrain tires and hill-descent control help access; all-terrain does not automatically mean winter-rated.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_rogue",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Rock Creek AWD + Premium Package"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "Rock Creek specifications list hands-on ProPILOT Assist; do not credit hands-free ProPILOT 2.1 from other models.",
+        "package": "Premium Package is already selected for the power liftgate; no added driving package assumed.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_rogue"
+        ],
+        "source_year": 2026,
+        "configuration": "Rock Creek AWD + Premium Package"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          4
+        ],
+        "note": "Older Rogue averages cannot isolate current variable-compression turbo engine and CVT risk.",
+        "upkeep": "Turbo/CVT/AWD upkeep; verify service bulletins and exact engine history rather than brand averages.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_rogue"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Rock Creek AWD + Premium Package"
+      },
+      "comfort": {
+        "rank": 31,
+        "note": "Functional Rock Creek cabin with durability emphasized over plushness.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_rogue"
+        ],
+        "source_year": 2026,
+        "configuration": "Rock Creek AWD + Premium Package"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Rock Creek AWD + Premium Package"
+      }
+    },
+    {
+      "id": "leaf",
+      "name": "Nissan LEAF",
+      "five": 50900,
+      "year": 2026,
+      "trim": "Platinum+ FWD · EV",
+      "otd": 44400,
+      "efficiency": "103 MPGe",
+      "eco": {
+        "benchmark_score": 66,
+        "benchmark_model": "Nissan LEAF FWD",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Previous generation and battery; redesigned 2026 crossover may differ materially.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Nissan LEAF FWD"
+      },
+      "mountain": {
+        "components": [
+          2,
+          2,
+          3
+        ],
+        "cargo": "New body shape needs a fresh three-person cargo check; do not reuse the old hatchback cargo dimensions.",
+        "winter": "FWD and road-oriented clearance; suitable tires matter for winter access.",
+        "trip": "Cold weather, climbing and a roof load can reduce range. Current charging hardware differs from older models; plan the actual route and a charging reserve.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_leaf",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Platinum+ FWD · EV"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "Platinum+ lists hands-on ProPILOT Assist; no hands-free 2.1 upgrade credited.",
+        "package": "No extra driving subscription or unlisted package assumed.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_leaf"
+        ],
+        "source_year": 2026,
+        "configuration": "Platinum+ FWD · EV"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          5,
+          3
+        ],
+        "note": "Redesigned battery/thermal/charging platform should not inherit the older LEAF reliability score.",
+        "upkeep": "No engine service; verify new battery repair procedures and local certified service capacity.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_leaf"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Platinum+ FWD · EV"
+      },
+      "comfort": {
+        "rank": 26,
+        "note": "Modern equipment and calm electric drive, but not luxury-grade materials.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_leaf"
+        ],
+        "source_year": 2026,
+        "configuration": "Platinum+ FWD · EV"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Platinum+ FWD · EV"
+      }
+    },
+    {
+      "id": "tucson",
+      "name": "Hyundai Tucson Hybrid",
+      "five": 52200,
+      "year": 2026,
+      "trim": "Limited AWD · AWD",
+      "otd": 48000,
+      "efficiency": "36 MPG",
+      "eco": {
+        "benchmark_score": 52,
+        "benchmark_model": "Hyundai Tucson Hybrid AWD, non-Blue",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical hybrid configuration; current certification not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Hyundai Tucson Hybrid AWD, non-Blue"
+      },
+      "mountain": {
+        "components": [
+          4,
+          3,
+          5
+        ],
+        "cargo": "Rear cabin and luggage area suit three people; roof gear avoids folding away the needed rear position.",
+        "winter": "Hybrid AWD; Limited road wheels need a chain and winter tire check.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_tucson",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "Limited lists Highway Driving Assist, smart cruise and lane following; highway operation has road/weather limitations.",
+        "package": "Included Limited equipment; no higher-system version assumed.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_tucson"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          3,
+          3,
+          4
+        ],
+        "note": "Related turbo-hybrid service history is relevant but not a measured 2026 forecast.",
+        "upkeep": "Engine/hybrid/AWD upkeep; check scheduled coolant and transmission requirements.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_tucson"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Limited AWD · AWD"
+      },
+      "comfort": {
+        "rank": 15,
+        "note": "Generous cabin features and a comfortable everyday ride; assistance is scored separately.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_tucson"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Limited AWD · AWD"
+      }
+    },
+    {
+      "id": "solterra",
+      "name": "Subaru Solterra",
+      "five": 53200,
+      "year": 2026,
+      "trim": "Limited AWD · EV",
+      "otd": 47000,
+      "efficiency": "117 MPGe",
+      "eco": {
+        "benchmark_score": 66,
+        "benchmark_model": "Subaru Solterra Limited/Touring AWD",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical battery and charging generation; updated 2026 hardware not captured.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Subaru Solterra Limited/Touring AWD"
+      },
+      "mountain": {
+        "components": [
+          3,
+          5,
+          3
+        ],
+        "cargo": "Rear seating is useful; modest luggage depth means checking boots/bags with the third adult seated.",
+        "winter": "AWD, clearance and X-MODE favor access; verify the exact current tire and chain instructions.",
+        "trip": "Cold weather, climbing and a roof load can reduce range. Current charging hardware differs from older models; plan the actual route and a charging reserve.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_solterra",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited AWD · EV"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "EyeSight-family adaptive cruise and lane tracing are the planning basis; confirm the changed 2026 suite and monitoring.",
+        "package": "No unverified hands-free features credited.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_solterra"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited AWD · EV"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          5,
+          3
+        ],
+        "note": "Updated EV platform/charging hardware means older Solterra history is only partial evidence.",
+        "upkeep": "Low routine engine-related upkeep; confirm Subaru high-voltage service capability and parts access.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_solterra"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Limited AWD · EV"
+      },
+      "comfort": {
+        "rank": 27,
+        "note": "Functional cabin with EV quietness; less luxurious trim execution.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_solterra"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited AWD · EV"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Limited AWD · EV"
+      }
+    },
+    {
+      "id": "bz",
+      "name": "Toyota bZ",
+      "five": 54600,
+      "year": 2026,
+      "trim": "Limited AWD · EV",
+      "otd": 52100,
+      "efficiency": "103 MPGe",
+      "eco": {
+        "benchmark_score": 66,
+        "benchmark_model": "Toyota bZ4X Limited AWD",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Predecessor; 2026 bZ battery/powertrain updates not captured.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Toyota bZ4X Limited AWD"
+      },
+      "mountain": {
+        "components": [
+          3,
+          3,
+          3
+        ],
+        "cargo": "Three seats plus luggage is plausible; roof long gear rather than assuming seats-down cargo applies.",
+        "winter": "AWD crossover, with tire/chain compatibility still configuration dependent.",
+        "trip": "Cold weather, climbing and a roof load can reduce range. Current charging hardware differs from older models; plan the actual route and a charging reserve.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_bz",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited AWD · EV"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "Toyota adaptive cruise and Lane Tracing Assist are the planning basis; verify the 2026 software and resume limits.",
+        "package": "No unlisted advanced driving option credited.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_bz"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited AWD · EV"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          5,
+          3
+        ],
+        "note": "Updated bZ hardware should not be assigned old Toyota hybrid reliability by association.",
+        "upkeep": "No engine oil changes; verify EV-specific coolant, brake and battery-service requirements.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_bz"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Limited AWD · EV"
+      },
+      "comfort": {
+        "rank": 23,
+        "note": "Relaxed electric drive, but cabin materials are more utilitarian.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_bz"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited AWD · EV"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Limited AWD · EV"
+      }
+    },
+    {
+      "id": "modely",
+      "name": "Tesla Model Y",
+      "five": 56200,
+      "year": 2026,
+      "trim": "Premium AWD · EV",
+      "otd": 55000,
+      "efficiency": "117 MPGe",
+      "eco": {
+        "benchmark_score": 57,
+        "benchmark_model": "Tesla Model Y Long Range AWD",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Pre-refresh vehicle; Premium configuration and current battery not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Tesla Model Y Long Range AWD"
+      },
+      "mountain": {
+        "components": [
+          5,
+          3,
+          3
+        ],
+        "cargo": "Large luggage areas favor three adults plus bags; roof gear avoids unverified board pass-through.",
+        "winter": "AWD helps; road tires and packed-snow clearance need checking.",
+        "trip": "Cold weather, climbing and a roof load can reduce range. Current charging hardware differs from older models; plan the actual route and a charging reserve.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_modely",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium AWD · EV"
+      },
+      "commute": {
+        "components": [
+          4,
+          0,
+          3
+        ],
+        "note": "Traffic-aware cruise is the conservative baseline. Confirm whether Autosteer is actually included in this 2026 order before giving steering credit.",
+        "package": "FSD purchase/subscription excluded; Autosteer entitlement remains unverified.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_modely"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium AWD · EV"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          5,
+          2
+        ],
+        "note": "Refresh-specific repair history is limited; no claim that older Model Y averages predict this build.",
+        "upkeep": "Low scheduled engine-related service; Tesla-specific diagnostics/body/high-voltage access may restrict repair choices.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_modely",
+          "tesla_service"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Premium AWD · EV"
+      },
+      "comfort": {
+        "rank": 21,
+        "note": "Minimalist cabin with generous space; spare controls may not feel luxurious.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_modely"
+        ],
+        "source_year": 2026,
+        "configuration": "Premium AWD · EV"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Premium AWD · EV"
+      }
+    },
+    {
+      "id": "ev6",
+      "name": "Kia EV6",
+      "five": 59900,
+      "year": 2026,
+      "trim": "Wind AWD · EV",
+      "otd": 55100,
+      "efficiency": "102 MPGe",
+      "eco": {
+        "benchmark_score": 57,
+        "benchmark_model": "Kia EV6 Long Range AWD, 19-inch wheels",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical battery and wheels; current battery not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Kia EV6 Long Range AWD, 19-inch wheels"
+      },
+      "mountain": {
+        "components": [
+          3,
+          3,
+          3
+        ],
+        "cargo": "Sloped rear body restricts bulky luggage more than floor volume suggests; roof gear is worth considering.",
+        "winter": "AWD helps traction; road-oriented clearance remains a limitation.",
+        "trip": "Cold weather, climbing and a roof load can reduce range. Current charging hardware differs from older models; plan the actual route and a charging reserve.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_ev6",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Wind AWD · EV"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "Wind highway-assistance/lane-following configuration is the planning basis; verify current HDA version and standard equipment.",
+        "package": "No GT-Line or paid assistance upgrade credited.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_ev6"
+        ],
+        "source_year": 2026,
+        "configuration": "Wind AWD · EV"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          5,
+          3
+        ],
+        "note": "Current battery and charging updates limit extrapolation from older EV6 repairs.",
+        "upkeep": "No engine upkeep; check coolant schedule and availability of high-voltage-qualified local repairers.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_ev6"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Wind AWD · EV"
+      },
+      "comfort": {
+        "rank": 14,
+        "note": "Comfortable seating, quiet EV drive and well-presented cabin materials.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_ev6"
+        ],
+        "source_year": 2026,
+        "configuration": "Wind AWD · EV"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Wind AWD · EV"
+      }
+    },
+    {
+      "id": "rdx",
+      "name": "Acura RDX",
+      "five": 63800,
+      "year": 2026,
+      "trim": "Technology SH-AWD · Gas",
+      "otd": 53800,
+      "efficiency": "23 MPG",
+      "eco": {
+        "benchmark_score": 44,
+        "benchmark_model": "Acura RDX AWD, non-A-Spec",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical engine/drivetrain; current equipment and certification not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Acura RDX AWD, non-A-Spec"
+      },
+      "mountain": {
+        "components": [
+          4,
+          4,
+          4
+        ],
+        "cargo": "Useful rear seat and luggage area; plan a carrier for long skis rather than losing a passenger position.",
+        "winter": "SH-AWD and crossover clearance help access; tires remain the limiting factor on ice.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_rdx",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Technology SH-AWD · Gas"
+      },
+      "commute": {
+        "components": [
+          4,
+          3,
+          3
+        ],
+        "note": "AcuraWatch includes Low-Speed Follow and LKAS; confirm low-speed steering/version and manual resume limits.",
+        "package": "Technology trim only; do not infer hands-free assistance from the trim name.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_rdx"
+        ],
+        "source_year": 2026,
+        "configuration": "Technology SH-AWD · Gas"
+      },
+      "maintenance": {
+        "components": [
+          3,
+          2,
+          4
+        ],
+        "note": "Established model history is more relevant than for an all-new platform, but not an exact 2026 rate.",
+        "upkeep": "Turbo/AWD maintenance and scheduled drivetrain fluids; verify Acura-specialist access.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_rdx"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Technology SH-AWD · Gas"
+      },
+      "comfort": {
+        "rank": 5,
+        "note": "Premium appointments and comfortable seats with sporty Acura character.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_rdx"
+        ],
+        "source_year": 2026,
+        "configuration": "Technology SH-AWD · Gas"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Technology SH-AWD · Gas"
+      }
+    },
+    {
+      "id": "x2",
+      "name": "BMW X2",
+      "five": 65000,
+      "year": 2026,
+      "trim": "xDrive28i AWD · Gas",
+      "otd": 50300,
+      "efficiency": "27 MPG",
+      "eco": {
+        "benchmark_score": 49,
+        "benchmark_model": "BMW X2 xDrive28i",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical configuration; certification and wheels not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 BMW X2 xDrive28i"
+      },
+      "mountain": {
+        "components": [
+          3,
+          3,
+          4
+        ],
+        "cargo": "Coupe-like rear roof reduces tall luggage space; test the rear adult and gear together.",
+        "winter": "AWD road crossover; check wheel/tire and chain constraints.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_x2",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "xDrive28i AWD · Gas"
+      },
+      "commute": {
+        "components": [
+          0,
+          0,
+          2
+        ],
+        "note": "No ACC/continuous-steering option is named in this configuration, so neither is credited.",
+        "package": "Driving Assistance Professional not included; adding it requires a new OTD check.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_x2"
+        ],
+        "source_year": 2026,
+        "configuration": "xDrive28i AWD · Gas"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          3
+        ],
+        "note": "Platform-level history is a weak substitute for current model/powertrain evidence.",
+        "upkeep": "Turbo/AWD servicing and BMW-specific diagnostics may require a specialist.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_x2"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "xDrive28i AWD · Gas"
+      },
+      "comfort": {
+        "rank": 8,
+        "note": "BMW cabin materials and seating; firmer ride trades away some comfort.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_x2"
+        ],
+        "source_year": 2026,
+        "configuration": "xDrive28i AWD · Gas"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "xDrive28i AWD · Gas"
+      }
+    },
+    {
+      "id": "x1",
+      "name": "BMW X1",
+      "five": 65100,
+      "year": 2026,
+      "trim": "xDrive28i (base) · AWD",
+      "otd": 48700,
+      "efficiency": "28 MPG",
+      "eco": {
+        "benchmark_score": 49,
+        "benchmark_model": "BMW X1 xDrive28i",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical configuration; certification and wheels not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 BMW X1 xDrive28i"
+      },
+      "mountain": {
+        "components": [
+          3,
+          3,
+          4
+        ],
+        "cargo": "More upright than X2; a third adult and bags are plausible but long-item fit is unmeasured.",
+        "winter": "AWD crossover; tire selection and chain compatibility need checking.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_x1",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "xDrive28i (base) · AWD"
+      },
+      "commute": {
+        "components": [
+          0,
+          0,
+          2
+        ],
+        "note": "Base xDrive28i receives no unverified adaptive-cruise or lane-centering credit.",
+        "package": "Driving Assistance Professional not included; adding it requires a new OTD check.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_x1"
+        ],
+        "source_year": 2026,
+        "configuration": "xDrive28i (base) · AWD"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          3
+        ],
+        "note": "Current platform and electronics differ from much of RepairPal’s older X1 coverage.",
+        "upkeep": "Turbo/AWD servicing; independent BMW expertise is useful but needs a local check.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_x1"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "xDrive28i (base) · AWD"
+      },
+      "comfort": {
+        "rank": 6,
+        "note": "Good cabin materials and seating for a small luxury crossover; assistance is scored separately.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_x1"
+        ],
+        "source_year": 2026,
+        "configuration": "xDrive28i (base) · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "xDrive28i (base) · AWD"
+      }
+    },
+    {
+      "id": "gv70",
+      "name": "Genesis GV70",
+      "five": 69100,
+      "year": 2026,
+      "trim": "2.5T AWD · Gas",
+      "otd": 55100,
+      "efficiency": "23 MPG",
+      "eco": {
+        "benchmark_score": 41,
+        "benchmark_model": "Genesis GV70 AWD 2.5L, 19 city / 26 highway",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical lower-efficiency 2.5L configuration used conservatively; exact emissions variant unconfirmed.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Genesis GV70 AWD 2.5L, 19 city / 26 highway"
+      },
+      "mountain": {
+        "components": [
+          3,
+          3,
+          4
+        ],
+        "cargo": "Rear adult and luggage are plausible; sloped hatch means a roof carrier is preferable for long gear.",
+        "winter": "AWD helps; this road-focused trim needs winter tires and a clearance check.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_gv70",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "2.5T AWD · Gas"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "Base 2.5T AWD lists Highway Driving Assist and smart cruise; validate stop/go behavior and actual HDA version.",
+        "package": "Base equipment only; no higher-trim HDA2 credit assumed.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_gv70"
+        ],
+        "source_year": 2026,
+        "configuration": "2.5T AWD · Gas"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          3
+        ],
+        "note": "Recent platform and refresh have limited long-term failure evidence.",
+        "upkeep": "Turbo/AWD maintenance; verify service availability, parts lead times and access to diagnostics.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_gv70"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "2.5T AWD · Gas"
+      },
+      "comfort": {
+        "rank": 1,
+        "note": "Rich materials, excellent detailing and distinctly upscale atmosphere.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_gv70"
+        ],
+        "source_year": 2026,
+        "configuration": "2.5T AWD · Gas"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "2.5T AWD · Gas"
+      }
+    },
+    {
+      "id": "bmw4",
+      "name": "BMW 430i Gran Coupe",
+      "five": 70200,
+      "year": 2026,
+      "trim": "RWD · Powered hatch · Gas",
+      "otd": 56700,
+      "efficiency": "30 MPG",
+      "eco": {
+        "benchmark_score": 49,
+        "benchmark_model": "BMW 430i Gran Coupe RWD",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical configuration; 2026 powertrain changes not captured.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 BMW 430i Gran Coupe RWD"
+      },
+      "mountain": {
+        "components": [
+          2,
+          1,
+          4
+        ],
+        "cargo": "Liftback opening helps bags, but low rear seating and long skis complicate a three-adult load.",
+        "winter": "RWD and low ground clearance call for a conservative winter-access assessment.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_bmw4",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "RWD · Powered hatch · Gas"
+      },
+      "commute": {
+        "components": [
+          0,
+          0,
+          2
+        ],
+        "note": "No adaptive-cruise or steering-assistance package is listed for this RWD configuration.",
+        "package": "Driving Assistance Professional not included or credited.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_bmw4"
+        ],
+        "source_year": 2026,
+        "configuration": "RWD · Powered hatch · Gas"
+      },
+      "maintenance": {
+        "components": [
+          3,
+          2,
+          3
+        ],
+        "note": "Established engine-family history is useful, but current mild-hybrid/electronics changes remain a caveat.",
+        "upkeep": "Turbo-engine upkeep; RWD avoids a front AWD driveline, while diagnostics still require BMW-capable tools.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_bmw4"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "RWD · Powered hatch · Gas"
+      },
+      "comfort": {
+        "rank": 3,
+        "note": "Premium cockpit, supportive seating and smooth grand-touring character.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_bmw4"
+        ],
+        "source_year": 2026,
+        "configuration": "RWD · Powered hatch · Gas"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "RWD · Powered hatch · Gas"
+      }
+    },
+    {
+      "id": "niro",
+      "name": "Kia Niro Hybrid",
+      "five": 40900,
+      "year": 2026,
+      "trim": "SX FWD · FWD",
+      "otd": 38200,
+      "efficiency": "53 MPG",
+      "eco": {
+        "benchmark_score": 59,
+        "benchmark_model": "Kia Niro FWD, non-FE",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical non-FE configuration used conservatively; SX wheel/efficiency match not established.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Kia Niro FWD, non-FE"
+      },
+      "mountain": {
+        "components": [
+          2,
+          2,
+          5
+        ],
+        "cargo": "Small rear cabin and luggage area make three adults plus gear a tight load; roof gear helps only the gear.",
+        "winter": "FWD road crossover; suitable tires and chain compatibility are important.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_niro",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "SX FWD · FWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "SX navigation-based smart cruise and highway assistance are the planning basis; confirm exact model-year fitment.",
+        "package": "Hybrid SX only; do not borrow HDA2 equipment from the Niro EV.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_niro"
+        ],
+        "source_year": 2026,
+        "configuration": "SX FWD · FWD"
+      },
+      "maintenance": {
+        "components": [
+          4,
+          3,
+          4
+        ],
+        "note": "Established hybrid lineage provides context; exact-generation transmission/battery evidence is still needed.",
+        "upkeep": "Engine and hybrid service remain; confirm dual-clutch service and local hybrid diagnostic support.",
+        "repairability": "Independent diagnostic/parts access and repair labor are not benchmarked for this exact build. Battery module repairability is unverified.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_niro"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "SX FWD · FWD"
+      },
+      "comfort": {
+        "rank": 34,
+        "note": "Practical SX equipment, yet materials and noise isolation are not upscale.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_niro"
+        ],
+        "source_year": 2026,
+        "configuration": "SX FWD · FWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "SX FWD · FWD"
+      }
+    },
+    {
+      "id": "outlander",
+      "name": "Mitsubishi Outlander",
+      "five": 53900,
+      "year": 2026,
+      "trim": "SE S-AWC · AWD",
+      "otd": 41200,
+      "efficiency": "27 MPG",
+      "eco": {
+        "benchmark_score": 48,
+        "benchmark_model": "Mitsubishi Outlander 4WD 2.5L",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Previous engine; 2026 powertrain updates not captured.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Mitsubishi Outlander 4WD 2.5L"
+      },
+      "mountain": {
+        "components": [
+          4,
+          4,
+          4
+        ],
+        "cargo": "Fold the third row only, keeping the second-row adult seated; maximum all-seats-folded volume is irrelevant.",
+        "winter": "S-AWC helps on snow access; verify the changed 2026 configuration before using older specifications.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_outlander",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "SE S-AWC · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "SE lists MI-PILOT Assist with Navi-link, adaptive cruise Stop & Go and lane assistance.",
+        "package": "SE equipment only; restart and lane-centering performance remain estimates.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_outlander"
+        ],
+        "source_year": 2026,
+        "configuration": "SE S-AWC · AWD"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          4
+        ],
+        "note": "Changed 2026 engine means older 2.5L Outlander reliability cannot be transferred directly.",
+        "upkeep": "Verify current engine/CVT/AWD maintenance and parts coverage rather than using the old schedule.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_outlander"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "SE S-AWC · AWD"
+      },
+      "comfort": {
+        "rank": 29,
+        "note": "Useful three-row flexibility, but materials and refinement are not top tier.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_outlander"
+        ],
+        "source_year": 2026,
+        "configuration": "SE S-AWC · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "SE S-AWC · AWD"
+      }
+    },
+    {
+      "id": "mini",
+      "name": "MINI Countryman S ALL4",
+      "five": 61600,
+      "year": 2026,
+      "trim": "Signature Plus AWD · AWD",
+      "otd": 43800,
+      "efficiency": "27 MPG",
+      "eco": {
+        "benchmark_score": 47,
+        "benchmark_model": "MINI Cooper S Countryman ALL4",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Previous generation; redesigned Countryman mass and powertrain not captured.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 MINI Cooper S Countryman ALL4"
+      },
+      "mountain": {
+        "components": [
+          3,
+          3,
+          4
+        ],
+        "cargo": "New larger body helps rear accommodation; verify three-person luggage with the hatch closed.",
+        "winter": "ALL4 traction is useful; road tires still require winter preparation.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_mini",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Signature Plus AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          0,
+          0,
+          2
+        ],
+        "note": "Signature Plus alone does not verify Driving Assistant Plus; no unverified adaptive cruise or centering credited.",
+        "package": "Additional assistance package excluded pending exact order and price.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_mini"
+        ],
+        "source_year": 2026,
+        "configuration": "Signature Plus AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          3
+        ],
+        "note": "New generation is not directly represented by older Countryman repair averages.",
+        "upkeep": "Turbo/AWD upkeep; MINI-capable diagnostic access and current-generation parts need checking.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_mini"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Signature Plus AWD · AWD"
+      },
+      "comfort": {
+        "rank": 17,
+        "note": "Distinctive cabin textures and seating; ride refinement matters more here than the interface.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_mini"
+        ],
+        "source_year": 2026,
+        "configuration": "Signature Plus AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Signature Plus AWD · AWD"
+      }
+    },
+    {
+      "id": "xc40",
+      "name": "Volvo XC40",
+      "five": 63800,
+      "year": 2026,
+      "trim": "B5 Core AWD · AWD",
+      "otd": 48100,
+      "efficiency": "26 MPG",
+      "eco": {
+        "benchmark_score": 48,
+        "benchmark_model": "Volvo XC40 B5 AWD",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical configuration; exact certification not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Volvo XC40 B5 AWD"
+      },
+      "mountain": {
+        "components": [
+          3,
+          3,
+          4
+        ],
+        "cargo": "Upright small-SUV shape helps bags; three adults plus long gear still benefits from roof carriage.",
+        "winter": "AWD helps on maintained access roads; tire/chain limits need confirming.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_xc40",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "B5 Core AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          0,
+          0,
+          2
+        ],
+        "note": "Core does not establish the optional Pilot Assist/ACC equipment in this shortlist; neither gets credit until the order confirms it.",
+        "package": "No optional Pilot Assist package assumed.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_xc40"
+        ],
+        "source_year": 2026,
+        "configuration": "B5 Core AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          3
+        ],
+        "note": "Mild-hybrid/software changes limit transfer from older XC40 repair histories.",
+        "upkeep": "Turbo/AWD/mild-hybrid upkeep; qualified Volvo diagnostics may narrow shop choices.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_xc40"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "B5 Core AWD · AWD"
+      },
+      "comfort": {
+        "rank": 9,
+        "note": "Scandinavian design, excellent seating and restrained premium materials.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_xc40"
+        ],
+        "source_year": 2026,
+        "configuration": "B5 Core AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "B5 Core AWD · AWD"
+      }
+    },
+    {
+      "id": "gla",
+      "name": "Mercedes-Benz GLA 250",
+      "five": 64800,
+      "year": 2026,
+      "trim": "4MATIC AWD · AWD",
+      "otd": 49100,
+      "efficiency": "28 MPG",
+      "eco": {
+        "benchmark_score": 50,
+        "benchmark_model": "Mercedes-Benz GLA 250 4MATIC",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical configuration; exact certification not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Mercedes-Benz GLA 250 4MATIC"
+      },
+      "mountain": {
+        "components": [
+          2,
+          2,
+          4
+        ],
+        "cargo": "Compact rear cabin and load area make a roof carrier particularly useful for the three-person scenario.",
+        "winter": "AWD road crossover with limited deep-snow clearance.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_gla",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "4MATIC AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          0,
+          0,
+          2
+        ],
+        "note": "The selected GLA has no Driver Assistance Package, so DISTRONIC and Active Steering Assist are not credited.",
+        "package": "Optional driving package excluded; verify availability and OTD before adding.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_gla"
+        ],
+        "source_year": 2026,
+        "configuration": "4MATIC AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          3
+        ],
+        "note": "Older GLA histories do not isolate the current engine, electronics and hybrid updates.",
+        "upkeep": "Turbo/AWD servicing; verify Mercedes-capable diagnostics and parts availability.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_gla"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "4MATIC AWD · AWD"
+      },
+      "comfort": {
+        "rank": 7,
+        "note": "Screen presentation and entry-luxury cabin materials; evaluate seats and ride on a test drive.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_gla"
+        ],
+        "source_year": 2026,
+        "configuration": "4MATIC AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "4MATIC AWD · AWD"
+      }
+    },
+    {
+      "id": "q3",
+      "name": "Audi Q3",
+      "five": 65200,
+      "year": 2026,
+      "trim": "S line quattro · AWD",
+      "otd": 49100,
+      "efficiency": "25 MPG",
+      "eco": {
+        "benchmark_score": 44,
+        "benchmark_model": "Audi Q3 S line quattro",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Previous generation/configuration; current powertrain and certification not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Audi Q3 S line quattro"
+      },
+      "mountain": {
+        "components": [
+          3,
+          3,
+          4
+        ],
+        "cargo": "Three adults plus bags is plausible; current-generation dimensions and roof fit need checking.",
+        "winter": "Quattro helps traction; do not infer winter tire capability from the badge.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_q3",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "S line quattro · AWD"
+      },
+      "commute": {
+        "components": [
+          0,
+          0,
+          2
+        ],
+        "note": "S line alone does not establish adaptive cruise or continuous steering; exact 2026 generation/trim specification needs checking.",
+        "package": "No unlisted driver-assistance package credited.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_q3"
+        ],
+        "source_year": 2026,
+        "configuration": "S line quattro · AWD"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          3
+        ],
+        "note": "Generation/powertrain changes need checking before using historical Q3 repair averages.",
+        "upkeep": "Turbo/AWD servicing; Audi-capable diagnostics and current parts coverage matter.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_q3"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "S line quattro · AWD"
+      },
+      "comfort": {
+        "rank": 12,
+        "note": "Solid cabin materials and seating, with compact rear accommodation.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_q3"
+        ],
+        "source_year": 2026,
+        "configuration": "S line quattro · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "S line quattro · AWD"
+      }
+    },
+    {
+      "id": "seltos",
+      "name": "Kia Seltos",
+      "five": 47900,
+      "year": 2026,
+      "trim": "SX AWD · AWD",
+      "otd": 36200,
+      "efficiency": "25 MPG",
+      "eco": {
+        "benchmark_score": 47,
+        "benchmark_model": "Kia Seltos AWD, 1.6L turbo",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical SX-like turbo configuration; exact trim/certification not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Kia Seltos AWD, 1.6L turbo"
+      },
+      "mountain": {
+        "components": [
+          3,
+          3,
+          4
+        ],
+        "cargo": "Boxy small-crossover packaging helps luggage; test the rear adult before assuming board clearance.",
+        "winter": "AWD helps; SX road tire fitment needs a winter/chain check.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_seltos",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "SX AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "SX specifications list Smart Cruise Control with Stop and Go and Highway Driving Assist.",
+        "package": "Included SX equipment; no subscription assumed.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_seltos"
+        ],
+        "source_year": 2026,
+        "configuration": "SX AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          3,
+          2,
+          4
+        ],
+        "note": "SX turbo/transmission history must be separated from simpler non-turbo Seltos models.",
+        "upkeep": "Turbo/AWD upkeep; confirm exact transmission schedule and competent local service.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_seltos"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "SX AWD · AWD"
+      },
+      "comfort": {
+        "rank": 33,
+        "note": "Small-class road noise and simpler materials limit the cabin-comfort estimate.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_seltos"
+        ],
+        "source_year": 2026,
+        "configuration": "SX AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "SX AWD · AWD"
+      }
+    },
+    {
+      "id": "compass",
+      "name": "Jeep Compass",
+      "five": 56300,
+      "year": 2026,
+      "trim": "Limited Altitude 4×4 · AWD",
+      "otd": 41100,
+      "efficiency": "26 MPG",
+      "eco": {
+        "benchmark_score": 48,
+        "benchmark_model": "Jeep Compass 4x4, 2.0L",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical configuration; current equipment and certification not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Jeep Compass 4x4, 2.0L"
+      },
+      "mountain": {
+        "components": [
+          3,
+          4,
+          4
+        ],
+        "cargo": "Upright luggage shape is useful but smaller than the roomiest group-trip options.",
+        "winter": "4x4 helps winter access; Limited Altitude is not a Trailhawk and gets no trail-tire credit.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_compass",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited Altitude 4×4 · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          0,
+          2
+        ],
+        "note": "Adaptive cruise Stop and Go is the planning baseline; Active Lane Management is not continuous lane centering.",
+        "package": "Optional Active Driving Assist/Driver Assist Group is not selected or credited.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_compass"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited Altitude 4×4 · AWD"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          4
+        ],
+        "note": "Older Compass averages mix engines and transmissions; they do not establish current 2.0T reliability.",
+        "upkeep": "Turbo/4x4 upkeep; general service access is plausible, exact parts and diagnostics still need checking.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_compass"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Limited Altitude 4×4 · AWD"
+      },
+      "comfort": {
+        "rank": 36,
+        "note": "Durable mainstream cabin; selected trim prioritizes toughness over refinement.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_compass"
+        ],
+        "source_year": 2026,
+        "configuration": "Limited Altitude 4×4 · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Limited Altitude 4×4 · AWD"
+      }
+    },
+    {
+      "id": "terrain",
+      "name": "GMC Terrain",
+      "five": 57300,
+      "year": 2026,
+      "trim": "AT4 AWD · AWD",
+      "otd": 45700,
+      "efficiency": "25 MPG",
+      "eco": {
+        "benchmark_score": 47,
+        "benchmark_model": "GMC Terrain AWD, 1.5L",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Previous generation; AT4 equipment and current powertrain not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 GMC Terrain AWD, 1.5L"
+      },
+      "mountain": {
+        "components": [
+          4,
+          4,
+          4
+        ],
+        "cargo": "Upright body suits a rear adult and bags; a roof carrier is the long-gear candidate.",
+        "winter": "AT4 AWD setup supports access; inspect actual snow certification and chain instructions.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_terrain",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "AT4 AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          0,
+          2
+        ],
+        "note": "AT4 specifications list adaptive cruise and lane keep/departure warning; lane keep is not continuous centering.",
+        "package": "No Super Cruise credit; not listed for this configuration.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_terrain"
+        ],
+        "source_year": 2026,
+        "configuration": "AT4 AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          4
+        ],
+        "note": "New generation/transmission limits comparison with historical Terrain reliability data.",
+        "upkeep": "Engine/AWD service; confirm current transmission schedule and AT4 tire replacement availability.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_terrain"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "AT4 AWD · AWD"
+      },
+      "comfort": {
+        "rank": 28,
+        "note": "AT4 priorities favor utility and robust trim rather than softness.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_terrain"
+        ],
+        "source_year": 2026,
+        "configuration": "AT4 AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "AT4 AWD · AWD"
+      }
+    },
+    {
+      "id": "corsair",
+      "name": "Lincoln Corsair",
+      "five": 63000,
+      "year": 2026,
+      "trim": "Premiere AWD · AWD",
+      "otd": 47800,
+      "efficiency": "24 MPG",
+      "eco": {
+        "benchmark_score": 44,
+        "benchmark_model": "Lincoln Corsair AWD, 2.0L",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Historical configuration; exact trim and certification not matched.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Lincoln Corsair AWD, 2.0L"
+      },
+      "mountain": {
+        "components": [
+          3,
+          3,
+          4
+        ],
+        "cargo": "Sliding rear seat trades legroom against luggage; assess both with the third adult in place.",
+        "winter": "AWD road crossover; cabin softness is not evidence of poor traction.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_corsair",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "Premiere AWD · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "Intelligent adaptive cruise with lane centering is the planning basis; confirm Premiere equipment group.",
+        "package": "No BlueCruise hands-free credit or subscription assumed; California purchase availability is unresolved.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_corsair"
+        ],
+        "source_year": 2026,
+        "configuration": "Premiere AWD · AWD"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          4
+        ],
+        "note": "Older Corsair evidence is only partial; California purchase availability needs resolving first.",
+        "upkeep": "Turbo/AWD upkeep; verify local Lincoln/Ford service and configuration-specific parts.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_corsair"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "Premiere AWD · AWD"
+      },
+      "comfort": {
+        "rank": 11,
+        "note": "Quiet-focused Lincoln cabin and a soft, upscale driving character.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_corsair"
+        ],
+        "source_year": 2026,
+        "configuration": "Premiere AWD · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "Premiere AWD · AWD"
+      },
+      "eligibility_note": "Ford Pro lists 2026 Premiere/Reserve unavailable for purchase in California. Retained in this 36-car cohort for continuity; resolve eligibility before shortlisting.",
+      "eligibility_sources": [
+        "corsair_ca"
+      ]
+    },
+    {
+      "id": "equinox",
+      "name": "Chevrolet Equinox",
+      "five": 52700,
+      "year": 2026,
+      "trim": "RS AWD + liftgate package · AWD",
+      "otd": 42100,
+      "efficiency": "26 MPG",
+      "eco": {
+        "benchmark_score": 48,
+        "benchmark_model": "Chevrolet Equinox AWD, 1.5L",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Previous generation; current transmission and RS equipment not captured.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Chevrolet Equinox AWD, 1.5L"
+      },
+      "mountain": {
+        "components": [
+          4,
+          3,
+          4
+        ],
+        "cargo": "Useful rear cabin and upright luggage area; keep a rear seating position when checking long gear.",
+        "winter": "AWD helps on maintained routes; RS styling does not establish winter tire capability.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_equinox",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "RS AWD + liftgate package · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          0,
+          2
+        ],
+        "note": "Adaptive cruise and lane keep are listed; lane-departure correction does not earn continuous-centering credit.",
+        "package": "Gas RS only; do not borrow Super Cruise from Equinox EV.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_equinox"
+        ],
+        "source_year": 2026,
+        "configuration": "RS AWD + liftgate package · AWD"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          5
+        ],
+        "note": "New generation/transmission means older Equinox averages are not an exact forecast.",
+        "upkeep": "Engine/AWD maintenance; broad Chevrolet service availability is an estimate, not a local shop census.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_equinox"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "RS AWD + liftgate package · AWD"
+      },
+      "comfort": {
+        "rank": 35,
+        "note": "Straightforward cabin materials and seating, with less plushness than premium alternatives.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_equinox"
+        ],
+        "source_year": 2026,
+        "configuration": "RS AWD + liftgate package · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "RS AWD + liftgate package · AWD"
+      }
+    },
+    {
+      "id": "tiguan",
+      "name": "Volkswagen Tiguan",
+      "five": 54100,
+      "year": 2026,
+      "trim": "SE 4MOTION · AWD",
+      "otd": 41300,
+      "efficiency": "25 MPG",
+      "eco": {
+        "benchmark_score": 46,
+        "benchmark_model": "Volkswagen Tiguan 4Motion, non-R-Line",
+        "benchmark_year": 2024,
+        "status": "Historical estimate",
+        "note": "Previous generation; new engine and curb weight not captured.",
+        "sources": [
+          "aceee",
+          "aceee_method"
+        ],
+        "source_year": 2024,
+        "configuration": "2024 Volkswagen Tiguan 4Motion, non-R-Line"
+      },
+      "mountain": {
+        "components": [
+          4,
+          3,
+          4
+        ],
+        "cargo": "Practical rear cabin and luggage shape; verify current-generation carrier and seat-fold geometry.",
+        "winter": "4MOTION helps traction; winter tire/chain fit remains configuration dependent.",
+        "trip": "Refueling is straightforward; climbing, winter weather and a roof load increase fuel use. No exact trip range is claimed.",
+        "roof": "Candidate roof-carrier route; exact 2026 roof, bar span, dynamic load limit, carrier capacity and hatch clearance are unverified. Do not assume three boards fit a two-board carrier.",
+        "interior_fit": "Unmeasured: check actual board/ski length with the driver, front passenger and one rear adult seated; no all-rear-seats-folded fit claim.",
+        "status": "Editorial estimate · fit pending",
+        "sources": [
+          "model_tiguan",
+          "roof",
+          "chains"
+        ],
+        "source_year": 2026,
+        "configuration": "SE 4MOTION · AWD"
+      },
+      "commute": {
+        "components": [
+          4,
+          4,
+          3
+        ],
+        "note": "IQ.DRIVE/Travel Assist is the planning basis for SE; confirm current-generation stop/go and monitoring behavior.",
+        "package": "No optional hands-free or paid driving package assumed.",
+        "status": "Editorial estimate · verify exact build",
+        "sources": [
+          "model_tiguan"
+        ],
+        "source_year": 2026,
+        "configuration": "SE 4MOTION · AWD"
+      },
+      "maintenance": {
+        "components": [
+          2,
+          2,
+          4
+        ],
+        "note": "Redesigned vehicle/engine should not inherit a precise older Tiguan reliability rating.",
+        "upkeep": "Turbo/AWD maintenance; verify current fluid intervals and VW-capable diagnostic access.",
+        "repairability": "Independent diagnostic access, parts lead times and component-level repair labor are unverified for this exact build.",
+        "status": "Low-confidence editorial estimate",
+        "sources": [
+          "repairpal",
+          "model_tiguan"
+        ],
+        "source_year": "Historical 2010–2019 + 2026 equipment reference",
+        "configuration": "SE 4MOTION · AWD"
+      },
+      "comfort": {
+        "rank": 25,
+        "note": "Clean, useful layout; selected SE remains more basic than premium alternatives.",
+        "status": "Carried-forward cabin estimate",
+        "sources": [
+          "model_tiguan"
+        ],
+        "source_year": 2026,
+        "configuration": "SE 4MOTION · AWD"
+      },
+      "cost": {
+        "status": "Carried-forward planning estimate",
+        "sources": [],
+        "source_year": "2026 shortlist",
+        "configuration": "SE 4MOTION · AWD"
+      }
+    }
+  ]
+}

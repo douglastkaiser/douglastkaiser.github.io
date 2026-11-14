@@ -1,0 +1,147 @@
+<!doctype html>
+<!--
+BEGIN CAR DECISION HANDOFF
+$handoff
+END CAR DECISION HANDOFF
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Compare 36 new-car configurations by ownership cost, lifecycle eco-friendliness, mountain trips, comfort, commute assistance and optional upkeep.">
+<title>Car rankings — interactive comparison</title>
+<style>
+:root{--ink:#1b2c27;--muted:#61736b;--bg:#f6f8f6;--line:#dfebe3;--green:#11764b;--pbg:#dcf3e5;--red:#a43b48;--rbg:#fce5e8;--gbg:#eaf0eb}
+*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:auto}body{font:14px/1.35 system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif;color:var(--ink);margin:0;background:var(--bg)}main{max-width:1040px;margin:0 auto;padding:19px 12px 35px}body.modal-open{overflow:hidden}a,button,input,summary{-webkit-tap-highlight-color:transparent}a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}h1{font-size:clamp(24px,4vw,31px);letter-spacing:-1.1px;margin:0}.count{font-size:.51em;color:#61736b;font-weight:500}header p{font-size:11px;color:var(--muted);margin:3px 0 0}#indicator{font-size:10px;color:#915727;background:#fff1da;border:1px solid #ecd0a4;border-radius:30px;padding:7px 10px;max-width:142px;text-align:center;flex-shrink:0}#indicator.active{background:#e8f8ee;border-color:#b4dec6;color:#0b7a45}
+.controls{background:#fff;border:1px solid var(--line);padding:13px;border-radius:12px;margin-bottom:12px}.control-label{font-weight:750;font-size:12px;margin-bottom:9px;display:flex;justify-content:space-between;gap:8px}.control-label span{font-weight:500;color:var(--muted);font-size:11px}.sliders{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}.slider-unit{min-width:0}.slider-unit .line{display:flex;align-items:center;justify-content:space-between;gap:4px;margin-bottom:3px;font-size:11px;min-height:30px}.slider-unit label{font-weight:650}.slider-unit output{font-weight:800;color:var(--green);font-variant-numeric:tabular-nums;white-space:nowrap}.slider-unit input{width:100%;accent-color:var(--green);height:28px;margin:0;touch-action:pan-y;cursor:pointer}.leaderline{display:flex;justify-content:space-between;gap:8px;margin-top:8px;font-size:11px;color:var(--muted)}.leaderline button{border:0;background:none;font:inherit;color:var(--green);text-decoration:underline;cursor:pointer;padding:2px 5px}.scoring-note{font-size:11px;color:var(--muted);margin:0 1px 12px}.scoring-note a{color:var(--green)}
+.head,.car{display:grid;grid-template-columns:28px minmax(180px,1fr) 64px minmax(275px,1.15fr) 12px;gap:10px;align-items:center}.head{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:750;padding:0 13px 7px}.head .cells{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));text-align:center}.car{background:#fff;color:inherit;text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:7px 13px;min-height:43px;margin-bottom:4px;cursor:pointer}.car:hover,.car:focus-visible{background:#e9f7ef;border-color:#8fcba9}.car.first{border-color:#8fcba9}.rank{font-size:11px;color:#61736b;font-weight:750}.name{font-size:13px;font-weight:700;letter-spacing:-.14px}.availability{display:block;font-size:10px;font-weight:500;color:#915727}.total{font-size:19px;font-weight:850;text-align:center;font-variant-numeric:tabular-nums}.total-heading{text-align:center}.cells{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;text-align:center}.cell{display:flex;justify-content:center}.pill{display:inline-flex;align-items:center;justify-content:center;width:33px;height:25px;border-radius:6px;font-size:12px;font-weight:750;font-variant-numeric:tabular-nums}.positive{background:var(--pbg);color:var(--green)}.negative{background:var(--rbg);color:var(--red)}.neutral{background:var(--gbg);color:var(--muted)}.upkeep-off [data-category="maintenance"] .pill{background:var(--gbg);color:var(--muted)}.arrow{color:#61736b;font-size:20px;font-weight:500}.foot{font-size:10px;color:var(--muted);margin:12px 1px 0;display:flex;flex-wrap:wrap;gap:5px 14px;align-items:center}.foot a,.source{color:var(--green)}
+.modal{display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:12px}.modal:target{display:flex}.scrim{position:absolute;inset:0;background:rgba(13,32,24,.54)}.modal-panel{position:relative;width:min(670px,100%);max-height:min(88dvh,900px);overflow:auto;background:#fff;border-radius:14px;box-shadow:0 20px 70px rgba(0,0,0,.25);padding:20px 22px;overscroll-behavior:contain;overflow-wrap:anywhere}.modal-header{display:flex;justify-content:space-between;gap:12px;align-items:start}.modal-header small{font-size:10px;color:var(--green);font-weight:800;text-transform:uppercase;letter-spacing:.07em}.modal-header h2{margin:4px 0 3px;font-size:24px;letter-spacing:-.7px}.modal-trim{font-size:12px;color:var(--muted);margin:0}.close{width:38px;height:38px;display:grid;place-items:center;border-radius:30px;background:var(--bg);color:#435c4e;font-size:25px;text-decoration:none;line-height:1;flex-shrink:0}.close:hover{background:#e2eee6}.statrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:17px 0 8px}.statrow>div{background:#f3f7f4;padding:11px 7px;border-radius:8px;text-align:center}.statrow small{font-size:10px;display:block;color:var(--muted);margin-bottom:4px}.statrow b{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums}.statrow [data-total]{color:var(--green)}.assessment{border-top:1px solid var(--line);padding:11px 0}.assess-head{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.assess-head h3{font-weight:800;font-size:13px;margin:0}.assess-head .pill{width:27px;height:21px;font-size:11px}.tiernote{color:var(--muted);font-size:11px}.assessment p{font-size:12px;color:#50645a;margin:6px 0 0;line-height:1.5}.assessment .status{font-size:10px;color:#805017}.assessment .component,.assessment .evidence,.evidence{font-size:10px;color:var(--muted)}.evidence{margin:6px 0 12px}.source-list{display:flex;gap:5px 12px;flex-wrap:wrap}.source-list .source{font-size:10px}.modal-foot{border-top:1px solid var(--line);padding-top:12px;margin-top:6px;display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:10px}.notice{background:#fff3df;border:1px solid #ecd0a4;color:#805017;border-radius:8px;padding:10px;font-size:12px}.rubric{margin:8px 0}.rubric summary{font-size:11px;color:var(--green);cursor:pointer;padding:5px 0}
+@media(max-width:900px){.sliders{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 18px}.slider-unit .line{min-height:20px}}
+@media(max-width:650px){main{padding:13px 8px 27px}header{align-items:start}h1{font-size:25px}#indicator{max-width:115px}.controls{padding:10px}.sliders{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 18px}.slider-unit .line{min-height:28px}.slider-unit input{height:31px}.control-label{margin-bottom:5px}.control-label span{max-width:155px;text-align:right}.head{display:none}.car{grid-template-columns:21px minmax(0,1fr) 40px 15px;grid-template-rows:auto auto;column-gap:6px;row-gap:3px;padding:7px 8px}.rank{grid-column:1;grid-row:1}.name{grid-column:2;grid-row:1;font-size:12px}.total{grid-column:3;grid-row:1;font-size:19px}.arrow{grid-column:4;grid-row:1}.cells{grid-column:2/5;grid-row:2;gap:3px}.cell{display:flex;flex-direction:column;align-items:center}.cell:after{content:attr(data-label);font-size:9px;color:var(--muted)}.pill{height:22px;width:100%;max-width:42px}.modal-panel{padding:15px;max-height:89dvh}.modal-header h2{font-size:21px}.statrow{gap:5px;margin:12px 0 8px}.statrow>div{padding:9px 4px}.statrow b{font-size:13px}.statrow small{font-size:9px}.scoring-note{font-size:10px}}
+@media print{.controls,#indicator{display:none}.car{break-inside:avoid}.modal{display:none!important}}
+</style>
+</head>
+<body>
+<main class="upkeep-off" id="main">
+<header><div><h1>Car rankings <span class="count">$count</span></h1><p>New-car shortlist · Factory power liftgate · Est. under $$60k OTD · Tap a car for details</p></div><span id="indicator">Open in a browser for sliders</span></header>
+<section class="controls" aria-label="Category weights">
+<div class="control-label">Category weights <span>Five at 1× · Optional upkeep at 0× · Range 0–3×</span></div>
+<div class="sliders">
+$controls
+</div>
+<div class="leaderline"><span id="leader" aria-live="polite" aria-atomic="true">$leader</span><button type="button" id="reset">Reset weights</button></div>
+</section>
+<p class="scoring-note">Relative estimates, not test ratings. Eco uses named 2024 lifecycle benchmarks; mountain trips assume 3 adults + gear. Upkeep starts off. <a href="#method">Method &amp; sources</a></p>
+<noscript><p class="notice">Default rankings and car details work offline. Enable JavaScript in your browser to change weights.</p></noscript>
+<div class="head"><span>#</span><span>Vehicle</span><span class="total-heading">Total</span><div class="cells">$headers</div><span></span></div>
+<section id="ranking" aria-label="Vehicle ranking">
+$rows
+</section>
+<div class="foot"><span>+1 top 12 · 0 middle 12 · −1 bottom 12 in each category.</span><span>Cost means estimated five-year ownership.</span><span>Research updated $updated; exact-build checks pending.</span><a href="#method">Scoring method &amp; cautions</a></div>
+</main>
+<section class="modal" id="method" aria-labelledby="method-title">
+<a class="scrim" href="#ranking" aria-label="Close method"></a>
+<div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="method-title" tabindex="-1">
+<div class="modal-header"><div><small>How scoring works</small><h2 id="method-title">Scoring method</h2></div><a class="close" href="#ranking" aria-label="Close method">×</a></div>
+<section class="assessment"><div class="assess-head"><h3>Relative tiers, fixed while weights change</h3></div><p>Each category assigns exactly twelve +1, twelve 0, and twelve −1 scores. Higher is better. Rank underlying evidence first; break identical values alphabetically by vehicle name. A tier boundary can separate effectively tied cars. These are relative shortlist positions, not absolute quality ratings.</p><p>Total = sum of each tier score × its weight. Five core weights start at 1×; optional maintenance starts at 0×. Reset restores those defaults. Equal totals sort by lower five-year ownership cost, then name. All weights at zero intentionally sorts entirely by cost, then name.</p></section>
+<section class="assessment"><div class="assess-head"><h3>Eco-friendliness: use an existing lifecycle benchmark</h3></div><p>ACEEE Green Scores consider manufacturing, battery materials, fuel/electricity supply, driving emissions and disposal estimates. We use published 2024 configuration scores as comparison anchors, not current-model test results. This avoids directly ranking EV MPGe against gasoline MPG. No new lifecycle formula or extra battery penalty is added.</p><p>New ACEEE rankings are paused. Every row identifies its historical comparison model and any generation, wheel, powertrain or cross-model mismatch. Its tier uses that benchmark’s score unchanged; it is not a calculated 2026 score. Cross-model anchors and major redesigns are particularly uncertain.</p><p>Green NCAP is a useful second source, but its European electricity/lifetime assumptions and changing methods prevent direct numerical mixing here. Environmental damage is broader than what either source can fully measure.</p><p class="source-list">$source_aceee $source_coverage $source_ncap</p></section>
+<section class="assessment"><div class="assess-head"><h3>Mountain trips: three adults plus gear</h3></div><p>40% carrying practicality + 35% winter access + 25% trip practicality. Assess two front occupants and one rear adult, boots/bags and long skis or snowboards. Do not use maximum cargo volume with all rear seats folded as proof of fit. Roof storage is considered alongside cabin space, but every listed carrier route is conditional until exact fit is checked.</p><p>Carrying inputs are conservative editorial estimates of cabin/luggage usefulness and the likely roof-storage route, not verified board-fit measurements. Fit the actual gear; confirm rack feet/bars, roof load limit, carrier capacity for all travelers, panoramic-roof restrictions and hatch clearance. Obtain an accessory quote: rack/box costs are extra and not included in the inherited cost numbers. A roof load increases drag, height and loading effort; no exact range penalty is claimed.</p><p>Winter access considers tires, chains, traction and clearance. AWD gets no automatic top tier; an outdoor trim does not prove winter-rated tires. Trip practicality considers cold-weather range, refueling/charging, climbing and roof-load effects. Current EV hardware is assessed provisionally rather than inheriting an old charging reputation.</p><p class="source-list">$source_roof $source_chains</p></section>
+<section class="assessment"><div class="assess-head"><h3>Commute assistance replaces looks</h3></div><p>40% stop-and-go adaptive cruise + 35% continuous lane centering + 25% monitoring/usability. Score the named configuration only. A manual describing an optional feature does not establish trim fitment. Unselected packages, paid subscriptions and unconfirmed Autosteer entitlements receive no credit; adding them requires equipment and OTD rechecks.</p><p>Manufacturer equipment is the capability baseline; performance, restart timing, speed limits and monitoring remain flagged editorial estimates pending an exact-build test. Consumer Reports provides a useful evaluation approach. IIHS assesses safeguards against inattention/misuse; its ratings are not lane-centering performance scores. Neither source is presented as having tested every 2026 trim here.</p><p class="source-list">$source_cr $source_iihs</p></section>
+<section class="assessment"><div class="assess-head"><h3>Optional sixth metric: reliability &amp; maintenance burden</h3></div><p>50% fewer disruptive failures + 30% less routine service effort + 20% easier service access. This is intentionally low-confidence and off by default. Historical model/powertrain evidence, routine service needs and likely diagnostic access inform an editorial comparison; exact 2026 failure rates and Orange County shop access have not been established.</p><p>RepairPal supplies an existing historical framework based on repair cost, frequency and severity, but its published methodology describes older model years. These component inputs are not RepairPal scores. New generations, new hybrids and changed EV hardware need explicit uncertainty; brand reputation alone is not an exact-build reliability result.</p><p>Repairability is distinct from reliability. Record parts/diagnostic access and component/battery repair evidence as notes, without inventing a fixability number. Dollar maintenance/repair expenses remain in five-year cost; this optional score emphasizes time, disruption and effort. The dimensions can still overlap, so choose the weight deliberately.</p><p class="source-list">$source_repairpal</p></section>
+<details class="rubric"><summary>What the 0–5 editorial inputs mean</summary><p class="evidence">0 = no credited capability; 1 = very constrained; 2 = constrained or weak evidence; 3 = workable baseline; 4 = useful capability with caveats; 5 = strongest planning fit in this cohort. Each component is an estimate, not a measured rating. Weighted composites order the cars before equal thirds are assigned. Displayed ranks include alphabetical tie-breaks. No confidence bonus/penalty is silently added.</p></details>
+<section class="assessment"><div class="assess-head"><h3>Cost, comfort and eligibility</h3></div><p>Cost numbers are carried-forward planning estimates: OTD minus resale, plus energy, insurance, upkeep and registration; financing excluded. They are not fresh dealer or ownership quotes. Comfort retains cabin/seating/ride/noise judgments and excludes commute assistance.</p><p>The 36-car shortlist retains the factory power-hatch, compact-ish size and estimated $$60,000 OTD criteria in Orange County. Verify exact model year, trim, packages, availability and dealer quote. The Corsair is flagged because Ford Pro lists the 2026 Premiere as unavailable for purchase in California; it remains in the cohort for continuity, not as verified eligible inventory.</p><p>External links are evidence references. The table, scoring, methods and details require no network; following a source link does.</p></section>
+</div>
+</section>
+$modals
+<script id="ranking-data" type="application/json">$runtime_json</script>
+<script>
+(function () {
+  'use strict';
+  var data = JSON.parse(document.getElementById('ranking-data').textContent);
+  var categories = data.categories, cars = data.cars;
+  var rank = document.getElementById('ranking'), main = document.getElementById('main');
+  var inputs = {}, rows = {}, totals = {};
+  categories.forEach(function (cat) { inputs[cat.key] = document.getElementById('w-' + cat.key); });
+  Array.prototype.forEach.call(rank.querySelectorAll('.car'), function (row) { rows[row.dataset.id] = row; });
+  cars.forEach(function (car) { totals[car.id] = document.querySelector('[data-total="' + car.id + '"]'); });
+  function signed(value) { return value > 0 ? '+' + value : value < 0 ? '−' + Math.abs(value) : '0'; }
+  function nameOrder(a, b) {
+    var left = a.name.toLowerCase(), right = b.name.toLowerCase();
+    return left < right ? -1 : left > right ? 1 : 0;
+  }
+  function redraw() {
+    var weights = {};
+    categories.forEach(function (cat) {
+      weights[cat.key] = Number(inputs[cat.key].value);
+      document.getElementById('v-' + cat.key).textContent = weights[cat.key] + '×';
+    });
+    var ordered = cars.map(function (car) {
+      var total = categories.reduce(function (sum, cat) { return sum + car.scores[cat.key] * weights[cat.key]; }, 0);
+      return { id: car.id, name: car.name, five: car.five, total: total };
+    });
+    ordered.sort(function (a, b) { return b.total - a.total || a.five - b.five || nameOrder(a, b); });
+    var fragment = document.createDocumentFragment();
+    ordered.forEach(function (car, i) {
+      var row = rows[car.id];
+      row.querySelector('.rank').textContent = String(i + 1).padStart(2, '0');
+      row.querySelector('.total').textContent = signed(car.total);
+      row.classList.toggle('first', i === 0);
+      totals[car.id].textContent = signed(car.total);
+      fragment.appendChild(row);
+    });
+    rank.appendChild(fragment);
+    main.classList.toggle('upkeep-off', weights.maintenance === 0);
+    document.getElementById('leader').textContent = 'Leader: ' + ordered[0].name + ' (' + signed(ordered[0].total) + ')';
+    var indicator = document.getElementById('indicator');
+    indicator.textContent = '● Live'; indicator.classList.add('active');
+  }
+  categories.forEach(function (cat) {
+    inputs[cat.key].addEventListener('input', redraw);
+    inputs[cat.key].addEventListener('change', redraw);
+  });
+  document.getElementById('reset').addEventListener('click', function () {
+    categories.forEach(function (cat) { inputs[cat.key].value = String(cat.default); });
+    redraw();
+  });
+  var activePanel = null, returnFocus = null, pendingOpener = null;
+  main.addEventListener('click', function (event) {
+    var anchor = event.target.closest('a[href^="#"]');
+    if (anchor) pendingOpener = anchor;
+  });
+  function syncDialog() {
+    var target = document.getElementById(location.hash.slice(1));
+    var panel = target && target.classList.contains('modal') ? target.querySelector('.modal-panel') : null;
+    if (panel) {
+      if (!activePanel) returnFocus = pendingOpener || document.activeElement;
+      pendingOpener = null;
+      activePanel = panel;
+      document.body.classList.add('modal-open');
+      main.inert = true;
+      panel.focus({ preventScroll: true });
+    } else {
+      var previous = activePanel;
+      activePanel = null;
+      document.body.classList.remove('modal-open');
+      main.inert = false;
+      if (previous && returnFocus && returnFocus.isConnected) returnFocus.focus({ preventScroll: true });
+    }
+  }
+  document.addEventListener('keydown', function (event) {
+    if (!activePanel) return;
+    if (event.key === 'Escape') { event.preventDefault(); location.hash = 'ranking'; }
+    if (event.key === 'Tab') {
+      var focusable = Array.prototype.filter.call(activePanel.querySelectorAll('a[href],button,input,summary,[tabindex="0"]'), function (el) { return el.getClientRects().length > 0; });
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (!first) { event.preventDefault(); return; }
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === activePanel)) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && (document.activeElement === last || document.activeElement === activePanel)) { event.preventDefault(); first.focus(); }
+    }
+  });
+  window.addEventListener('hashchange', syncDialog);
+  redraw();
+  syncDialog();
+})();
+</script>
+</body>
+</html>
