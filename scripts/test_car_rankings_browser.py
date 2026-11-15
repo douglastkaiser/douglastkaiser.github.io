@@ -60,35 +60,56 @@ def check_pareto(page, cars, defaults, output, uri):
             input.dispatchEvent(new Event('input', {bubbles: true}));
         }); }''', values)
 
-    def network(nodes, edges):
-        check(page.locator('#pareto-stage .pareto-node').count() == nodes, 'Wrong Pareto profile count')
-        page.wait_for_function("n => document.querySelectorAll('#pareto-links [data-better]').length === n", arg=edges)
+    def network():
+        active = [key for key in build.KEYS if float(page.locator('#w-' + key).input_value()) > 0]
+        profiles = set(tuple(c['scores'][key] for key in active) for c in cars)
+        def dominates(a, b):
+            return all(x >= y for x, y in zip(a, b)) and any(x > y for x, y in zip(a, b))
+        edges = [(a, b) for a in profiles for b in profiles if dominates(a, b)
+                 and not any(dominates(a, middle) and dominates(middle, b) for middle in profiles)]
+        remaining, layers = set(profiles), 0
+        while remaining:
+            front = {p for p in remaining if not any(dominates(other, p) for other in remaining)}
+            remaining -= front
+            layers += 1
+        check(page.locator('#pareto-stage .pareto-node').count() == len(profiles), 'Wrong Pareto profile count')
+        page.wait_for_function("n => document.querySelectorAll('#pareto-links [data-better]').length === n", arg=len(edges))
+        check(page.locator('#pareto-stage .pareto-layer').count() == layers, 'Wrong Pareto layer count')
 
     page.set_viewport_size({'width': 1280, 'height': 900})
     page.goto(uri)
     page.locator('#tab-pareto').click()
     check(page.locator('#pareto').is_visible(), 'Pareto tab did not open')
     check(not page.locator('#rankings-view').is_visible(), 'Rankings did not hide')
-    check('45 comparable · 5 levels' in page.locator('#pareto-coverage').inner_text(), 'Full cohort missing')
+    check(f'{len(cars)} comparable · 5 levels' in page.locator('#pareto-coverage').inner_text(), 'Full cohort missing')
     check(page.locator('#pareto-scale,#pareto-incomplete,#pareto-without-eco').count() == 0, 'Obsolete controls remain')
-    network(44, 74)
-    check(page.locator('#pareto-stage .pareto-layer').count() == 5, 'Wrong default layers')
+    network()
     page.locator('#pareto-car').select_option('gti')
-    check(page.locator('#pareto-alternative').input_value() == 'tiguan', 'Wrong next dominator for GTI')
-    check('Volkswagen Tiguan' in page.locator('.next-upgrade').inner_text(), 'Next dominator not explained')
+    active = [key for key in build.KEYS if defaults[key] > 0]
+    target = byid['gti']
+    dominators = [c for c in cars if all(c['scores'][k] >= target['scores'][k] for k in active)
+                  and any(c['scores'][k] > target['scores'][k] for k in active)]
+    expected = min(dominators, key=lambda c: (sum(c['scores'][k] * defaults[k] for k in build.KEYS), c['five'], build.name_key(c)))
+    check(page.locator('#pareto-alternative').input_value() == expected['id'], 'Wrong next dominator for GTI')
+    check(expected['name'] in page.locator('.next-upgrade').inner_text(), 'Next dominator not explained')
     page.wait_for_function("document.querySelectorAll('#pareto-links .is-path').length > 0")
     positions = page.locator('.pareto-node').evaluate_all('nodes => nodes.map(n => [n.offsetLeft,n.offsetTop])')
     weights({'cost': 2})
     check(page.locator('.pareto-node').evaluate_all('nodes => nodes.map(n => [n.offsetLeft,n.offsetTop])') == positions, 'Positive weights moved nodes')
-    network(44, 74)
+    network()
     page.locator('#reset').click()
     page.screenshot(path=str(output / 'pareto-desktop.png'), full_page=True)
 
-    page.locator('#pareto-car').select_option('x1')
-    check(page.locator('#pareto-stage .is-selected [data-primary]').inner_text() == byid['x1']['name'], 'Equivalent member selection lost')
+    profiles = {}
+    for car in cars:
+        profiles.setdefault(tuple(car['scores'][k] for k in active), []).append(car)
+    members = next(group for group in profiles.values() if len(group) > 1)
+    primary, other = members[:2]
+    page.locator('#pareto-car').select_option(primary['id'])
+    check(page.locator('#pareto-stage .is-selected [data-primary]').inner_text() == primary['name'], 'Equivalent member selection lost')
     page.locator('#pareto-stage .is-selected details summary').click()
-    page.locator('#pareto-stage .is-selected details [data-select="cx30"]').click()
-    check(page.locator('#pareto-car').input_value() == 'cx30', 'Shared node member button failed')
+    page.locator(f'#pareto-stage .is-selected details [data-select="{other["id"]}"]').click()
+    check(page.locator('#pareto-car').input_value() == other['id'], 'Shared node member button failed')
     page.locator('#pareto-list-button').click()
     check(page.locator('#pareto-list').is_visible(), 'Grouped list did not open')
     page.locator('#pareto-list [data-select="gti"]').first.click()
@@ -99,10 +120,10 @@ def check_pareto(page, cars, defaults, output, uri):
     check(page.locator('#pareto-stage .is-selected').count() == 1, 'Proxy-scored car missing from graph')
     check('Missing active-metric evidence' not in page.locator('#pareto-comparison').inner_text(), 'Proxy excluded')
     weights({'eco': 0})
-    network(40, 72)
+    network()
     check(page.locator('#pareto-car').input_value() == 'civic', 'Metric toggle lost selection')
     weights({'eco': 1})
-    network(44, 74)
+    network()
     page.locator('#pareto-comparison a').first.click()
     check(page.locator('#detail-civic [data-total]').inner_text() == build.signed(byid['civic']['total']), 'Pareto dialog total drift')
     check('Estimated lifecycle assessment:' in page.locator('#detail-civic').inner_text(), 'Proxy rationale missing')
@@ -140,13 +161,13 @@ def check_pareto(page, cars, defaults, output, uri):
         page.locator('#pareto-network-button').click()
 
     weights({key: 0 for key in build.KEYS})
-    network(1, 0)
+    network()
     check('No active metrics' in page.locator('#pareto-comparison').inner_text(), 'All-zero state missing')
     weights({**defaults, 'maintenance': 1})
-    network(44, 59)
+    network()
     page.locator('#reset').click()
     check(float(page.locator('#w-maintenance').input_value()) == 0, 'Pareto reset did not restore maintenance')
-    network(44, 74)
+    network()
 
     # Both old scale query values must preserve view/dialog and use five-level scores.
     for scale in (3, 5):
@@ -188,7 +209,7 @@ def main():
             for key in build.KEYS:
                 cell = page.locator(f'#ranking [data-id="{car["id"]}"] [data-category="{key}"]')
                 check(cell.inner_text() == build.signed(car['scores'][key]), 'Row score mismatch')
-                check(cell.get_attribute('aria-label').endswith(build.signed(car['scores'][key])), 'Accessible score mismatch')
+                check(cell.get_attribute('aria-label').startswith(f'{next(cat["label"] for cat in data["categories"] if cat["key"] == key)}: {build.signed(car["scores"][key])} relative to this comparison group'), 'Accessible score mismatch')
         for weights in cases:
             page.evaluate('''weights => { Object.entries(weights).forEach(([key, value]) => {
                 const input = document.getElementById('w-' + key); input.value = String(value);
@@ -209,6 +230,22 @@ def main():
             check(float(page.locator('#w-' + key).input_value()) == defaults[key], 'Reset weights drift')
         check(page.locator('#ranking .car.first').count() == 1, 'Leader styling drift')
         check_commute_slider(page, cars)
+        upkeep = page.locator('#w-maintenance')
+        upkeep.focus(); upkeep.press('End')
+        for car in cars:
+            expected = build.signed(car['total'] + 3 * car['scores']['maintenance'])
+            check(page.locator(f'#ranking [data-id="{car["id"]}"] .total').inner_text() == expected, 'Maintenance contribution incorrect')
+            check(page.locator(f'#detail-{car["id"]} [data-total]').inner_text() == expected, 'Maintenance dialog contribution incorrect')
+        # Order changes with weighting, but every vehicle retains its category assessment.
+        for car in cars:
+            check(page.locator(f'#ranking [data-id="{car["id"]}"] [data-category=maintenance] .pill').inner_text() == build.signed(car['scores']['maintenance']), 'Maintenance weight changed category score')
+        page.locator('#reset').click()
+        page.goto(uri + '#detail-tucsonphev')
+        eco_text = page.locator('#detail-tucsonphev [data-assessment=eco]').inner_text()
+        check('60/100' in eco_text and 'relative to this comparison group' in eco_text, 'Eco raw assessment or relative explanation missing')
+        check('Evidence confidence (not scored)' in page.locator('#detail-tucsonphev [data-assessment=maintenance]').inner_text(), 'Maintenance confidence missing')
+        page.keyboard.press('Escape')
+        page.wait_for_function("!document.getElementById('main').inert")
         check(page.evaluate('document.documentElement.scrollWidth <= innerWidth'), 'Desktop horizontal overflow')
         page.screenshot(path=str(output / 'desktop.png'))
         opener = page.locator('#ranking [data-id="civic"]')

@@ -172,7 +172,14 @@ def validate(data):
         commute = car['commute']
         if not commute.get('system') or len(commute.get('component_notes', [])) != 3 or any(not isinstance(note, str) or not note.strip() for note in commute['component_notes']):
             raise ValueError('Commute assessments need a selected system and three component rationales')
+        maintenance = car['maintenance']
+        if not isinstance(maintenance.get('confidence'), str) or not maintenance['confidence'].strip():
+            raise ValueError('Maintenance needs a separate evidence-confidence description')
+        if len(maintenance.get('component_notes', [])) != 3 or any(not isinstance(note, str) or not note.strip() for note in maintenance['component_notes']):
+            raise ValueError('Maintenance needs three component rationales')
         eco = car['eco']
+        if not isinstance(eco.get('review_note'), str) or not eco['review_note'].strip():
+            raise ValueError('Eco needs a configuration-specific review note')
         if not finite(eco.get('assessment_score'), 0, 100) or eco.get('basis') not in ('historical', 'proxy'):
             raise ValueError('Eco needs a finite assessment score and historical/proxy basis')
         if eco['basis'] == 'historical':
@@ -191,6 +198,11 @@ def validate(data):
             for proxy in proxies:
                 if not all(proxy.get(k) for k in ('model', 'year', 'source')) or not finite(proxy.get('score'), 0, 100) or proxy['source'] not in eco['sources']:
                     raise ValueError('Invalid lifecycle proxy record')
+                record = proxy.get('record', {})
+                if not all(record.get(k) for k in ('make', 'model', 'engine', 'drive', 'emissions', 'city', 'highway', 'weight')) or record.get('year') != proxy['year'] or record.get('score') != proxy['score']:
+                    raise ValueError('Lifecycle proxies must preserve a consistent historical source record')
+                if proxy['model'] != f'{record["make"]} {record["model"]} · {record["engine"]} · {record["drive"]}':
+                    raise ValueError('Lifecycle proxy label must identify its exact historical record')
         for key, note in car['equipment'].get('estimates', {}).items():
             if key not in ('power_liftgate', 'adaptive_cruise', 'lane_centering') or not isinstance(note, str) or not note.strip():
                 raise ValueError('Equipment estimates need a capability and rationale')
@@ -293,7 +305,8 @@ def assessment(data, car, cat):
                 f'{escape(str(p["year"]))} {escape(p["model"])} ({p["score"]}/100)'
                 for p in info['proxy_records']) + '.</p>'
             body += f'<p>{escape(info["adjustment_note"])}</p>'
-        body += f'<p>{escape(info["note"])}</p>'
+        body += (f'<p>{escape(info["note"])}</p><p class="evidence">{escape(info["review_note"])}</p>'
+                 '<p class="evidence">The −2 to +2 band is relative to this comparison group. Zero means middle band, not zero environmental benefit. Adding vehicles can change the band without changing the underlying lifecycle assessment.</p>')
     elif key == 'mountain':
         body = (f'<p><b>Three adults + gear:</b> {escape(info["note"])}</p>'
                 f'<p><b>Interior:</b> {escape(info["interior_fit"])}</p><p><b>Roof route:</b> {escape(info["roof"])}</p>'
@@ -308,7 +321,10 @@ def assessment(data, car, cat):
         body = (f'<p>{escape(info["note"])}</p><p><b>Selected equipment:</b> {escape(info["package"])}</p>'
                 + rationale + '<p class="evidence">Component values compare supported tasks and editorial usefulness. Road conditions, restart limits, software and driver supervision still matter. A higher capability score is not a safety certification.</p>' + component_text(car, key))
     else:
-        body = (f'<p>{escape(info["note"])}</p><p>{escape(info["upkeep"])}</p><p><b>Repairability:</b> {escape(info["repairability"])}</p>'
+        rationale = ''.join(f'<p><b>{escape(name)}:</b> {escape(note)}</p>'
+                            for name, note in zip(COMPONENTS[key][0], info['component_notes']))
+        body = (f'<p>{escape(info["note"])}</p><p><b>Evidence confidence (not scored):</b> {escape(info["confidence"])}</p>'
+                + rationale + f'<p>{escape(info["upkeep"])}</p><p><b>Repairability:</b> {escape(info["repairability"])}</p>'
                 '<p class="evidence">No current-model failure rate or numeric repairability rating is claimed. Dollar upkeep is already in Cost; this optional dimension concerns time and disruption.</p>' + component_text(car, key))
     ties = sum(value(other, key) == value(car, key) for other in prepare_values(data, key))
     if ties > 1:
@@ -326,7 +342,9 @@ def row(car, cats, rank):
     cells = []
     for cat in cats:
         key = cat['key']
-        label = f'{cat["label"]}: {signed(car["scores"][key])}'
+        label = f'{cat["label"]}: {signed(car["scores"][key])} relative to this comparison group'
+        if key == 'eco':
+            label += f'; lifecycle assessment {car["eco"]["assessment_score"]}/100; {car["eco"]["status"]}'
         cells.append(f'<span class="cell" data-category="{key}" data-label="{escape(cat["short"])}" title="{escape(label)}" aria-label="{escape(label)}">{pill(car["scores"][key])}</span>')
     return (f'<a class="car{" first" if rank == 1 else ""}" data-id="{car["id"]}" href="#detail-{car["id"]}" aria-label="Details for {escape(car["name"])}">'
             f'<span class="rank">{rank:02}</span><span class="name">{escape(car["name"])}</span><strong class="total">{signed(car["total"])}</strong>'
@@ -369,6 +387,8 @@ def render(data):
                'Edit scripts/car_rankings_pareto.js for the embedded network engine and interface.\n'
                'See audit.md for screened candidates, old/new ranks and outstanding evidence gaps.\n')
     counts = ' · '.join(f'{n} {label}' for label, n in sorted(Counter(c['powertrain'] for c in cars).items()))
+    body_counts = ' · '.join(f'{n} {label}' for label, n in sorted(Counter(c['body_style'] for c in cars).items()))
+    historical_count = sum(c['eco']['basis'] == 'historical' for c in cars)
     return Template((PAGE / 'template.html').read_text()).substitute(
         handoff=handoff, count=len(cars), updated=escape(data['updated']), controls='\n'.join(controls),
         annual_miles=f'{data["assumptions"]["annual_miles"]:,}', tax_rate=f'{data["assumptions"]["sales_tax_rate"] * 100:g}',
@@ -380,7 +400,8 @@ def render(data):
         rows='\n'.join(row(c, cats, i + 1) for i, c in enumerate(cars)), leader=f'Leader: {escape(cars[0]["name"])} ({signed(cars[0]["total"])})',
         modals='\n'.join(modal(data, c) for c in cars), runtime_json=runtime_json,
         pareto_script=(ROOT / 'scripts/car_rankings_pareto.js').read_text(),
-        lineup=counts,
+        lineup=counts, body_lineup=body_counts, historical_count=historical_count,
+        proxy_count=len(cars) - historical_count, screened_count=len(data['screened']),
         **{'source_' + k: link(data['sources'][v]) for k, v in dict(aceee='aceee_method', coverage='aceee_coverage', ncap='ncap',
             cr='cr_adas', iihs='iihs_adas', repairpal='repairpal', roof='roof', chains='chains', sce='sce', tax='tax', dmv='dmv', resale='resale', gas='gas', doe='doe').items()})
 

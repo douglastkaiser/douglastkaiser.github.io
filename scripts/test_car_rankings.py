@@ -157,7 +157,8 @@ class RankingsTests(unittest.TestCase):
 
     def test_proxy_eco_has_a_score_rank_and_explained_sources(self):
         proxies = [c for c in self.cars if c['eco']['basis'] == 'proxy']
-        self.assertEqual(len(proxies), 25)
+        self.assertTrue(proxies)
+        self.assertIn(f'The other {len(proxies)} assessments', self.html)
         for car in proxies:
             html = build.assessment(self.data, car, self.data['categories'][1])
             self.assertIn('Estimated lifecycle assessment:', html)
@@ -228,7 +229,7 @@ class RankingsTests(unittest.TestCase):
                 self.assertTrue(eco['proxy_records'])
                 self.assertTrue(eco['adjustment_note'])
             self.assertTrue(all(type(car['equipment'][k]) is bool for k in ('power_liftgate','adaptive_cruise','lane_centering')))
-        self.assertEqual(historical, 20)
+        self.assertIn(f'{historical} retained assessments', self.html)
         for cid in ('cx50', 'equinoxev'):
             car = next(c for c in self.cars if c['id'] == cid)
             self.assertIn('estimated fitment', car['equipment']['estimates']['lane_centering'])
@@ -242,6 +243,59 @@ class RankingsTests(unittest.TestCase):
         self.assertNotIn('fetch(', self.html); self.assertNotIn('XMLHttpRequest', self.html)
         for stale in ('exactly twelve','forced equal thirds','Factory power liftgate','36-car shortlist','Carried-forward MPG','retained planning input'):
             self.assertNotIn(stale, self.html)
+
+    def test_maintenance_confidence_does_not_change_scores(self):
+        data = deepcopy(self.data)
+        for c in data['cars']:
+            c['maintenance']['confidence'] = 'Different uncertainty description; no numeric adjustment'
+            c['audit_note'] = 'New generation and new powertrain'
+        expected = {c['id']: c['scores'] for c in self.cars}
+        self.assertEqual(expected, {c['id']: c['scores'] for c in build.prepare(data)})
+
+    def test_redesign_and_phev_complexity_are_not_maintenance_penalties(self):
+        byid = {c['id']: c for c in self.cars}
+        for c in self.cars:
+            m = c['maintenance']
+            self.assertEqual(m['components'][0], 3)
+            self.assertEqual(m['components'][2], 3)
+            self.assertEqual(m['components'][1], 5 if c['powertrain'] == 'EV' else 3)
+            self.assertEqual(len(m['component_notes']), 3)
+            html = build.assessment(self.data, c, self.data['categories'][5])
+            self.assertIn('Evidence confidence (not scored):', html)
+            for note in m['component_notes']:
+                self.assertIn(escape(note), html)
+        self.assertEqual(byid['rav4']['scores']['maintenance'], 0)
+        self.assertEqual(byid['rav4']['maintenance']['components'], byid['corollacross']['maintenance']['components'])
+        self.assertEqual(byid['rav4phev']['maintenance']['components'], byid['rav4']['maintenance']['components'])
+
+    def test_eco_preserves_published_anchors_and_explains_relative_bands(self):
+        byid = {c['id']: c for c in self.cars}
+        self.assertEqual(byid['tucsonphev']['eco']['assessment_score'], 60)
+        self.assertEqual(byid['sportagephev']['eco']['assessment_score'], 61)
+        for cid, score, model in [('model3', 55, 'Model 3 RWD'), ('modely', 57, 'Model Y Long Range AWD'), ('solterra', 66, 'SOLTERRA AWD')]:
+            self.assertEqual(byid[cid]['eco']['assessment_score'], score)
+            self.assertEqual(byid[cid]['eco']['proxy_records'][0]['record']['model'], model)
+        for c in self.cars:
+            html = build.assessment(self.data, c, self.data['categories'][1])
+            self.assertIn('relative to this comparison group', html)
+            self.assertIn('Zero means middle band, not zero environmental benefit', html)
+            self.assertIn(f'/100', html)
+            self.assertIn(f'#{c["ranks"]["eco"]} of {len(self.cars)} assessed', html)
+            for p in c['eco'].get('proxy_records', []):
+                self.assertEqual(p['score'], p['record']['score'])
+
+    def test_expansion_covers_missing_segments_without_mislabeling_wagons(self):
+        byid = {c['id']: c for c in self.cars}
+        self.assertTrue({'sienna', 'odyssey', 'carnivalhybrid', 'maverickhybrid', 'santacruz', 'outback', 'crownsignia', 'santafehybrid', 'sorentohybrid', 'highlanderhybrid', 'pilot', 'palisade'} <= byid.keys())
+        self.assertEqual(byid['sienna']['body_style'], 'Minivan')
+        self.assertEqual(byid['maverickhybrid']['body_style'], 'Pickup')
+        self.assertEqual(byid['outback']['body_style'], 'Crossover')
+        self.assertEqual(byid['crownsignia']['body_style'], 'Crossover')
+        self.assertEqual(byid['maverickhybrid']['energy']['epa_id'], '50086')
+        self.assertEqual(byid['maverickhybrid']['energy']['mpg'], 36)
+        self.assertTrue({'ranger', 'pacificaphev', 'v60'} <= {c['id'] for c in self.data['screened']} - byid.keys())
+        for kind, count in Counter(c['body_style'] for c in self.cars).items():
+            self.assertIn(f'{count} {kind}', self.html)
 
     def test_shared_assumptions_render_from_inputs(self):
         data = deepcopy(self.data)
@@ -285,6 +339,12 @@ class RankingsTests(unittest.TestCase):
         rejects(lambda d: d['cars'][0]['commute'].update(system=''))
         rejects(lambda d: d['cars'][0]['commute'].update(component_notes=[]))
         rejects(lambda d: d['cars'][0]['commute'].update(component_notes=['valid', None, 'valid']))
+        rejects(lambda d: d['cars'][0]['maintenance'].update(confidence=''))
+        rejects(lambda d: d['cars'][0]['maintenance'].update(component_notes=[]))
+        rejects(lambda d: d['cars'][0]['maintenance'].update(component_notes=['valid', None, 'valid']))
+        rejects(lambda d: d['cars'][0]['eco'].update(review_note=''))
+        rejects(lambda d: d['cars'][0]['eco']['proxy_records'][0]['record'].update(score=1))
+        rejects(lambda d: d['cars'][0]['eco']['proxy_records'][0].update(model='Unrelated model'))
         rejects(lambda d: d['cars'].clear())
         rejects(lambda d: d['cars'].append(deepcopy(d['cars'][0])))
         rejects(lambda d: d['cars'][0]['price'].update(msrp=100000))
