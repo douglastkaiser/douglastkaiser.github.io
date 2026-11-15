@@ -1,8 +1,10 @@
 # Car rankings evidence and market-coverage audit
 
+**Latest:** [November 15 full scoring audit](scoring-audit.md) supersedes the earlier score/rank summaries below. It covers all six categories, corrections, all 57 current results and cost sensitivity.
+
 Research checked November 14, 2026. Implementation baseline: `2518f55a1f9ca5958c674ad1a9365dc5bc67272e` (fetched and fast-forwarded from `main`). `data.json` contains research inputs; `index.html` is generated from the data and template. Prior audits and original screening decisions remain available in Git history.
 
-## Findings and current results
+## November 14 baseline findings
 
 - **57 ranked configurations from 73 screened candidates**, including 12 additions. This is a representative market comparison, not an exhaustive inventory or sales-weighted sample.
 - Body styles: 37 Crossover; 9 Hatchback; 3 Minivan; 2 Pickup; 6 Sedan. Powertrains: 10 EV; 18 Gas; 25 Hybrid; 4 PHEV.
@@ -11,6 +13,26 @@ Research checked November 14, 2026. Implementation baseline: `2518f55a1f9ca5958c
 - The audit also found same-model lifecycle records omitted in favor of unrelated comparisons. Model 3’s 67-point proxy becomes 55 using the historical RWD record; Model Y’s 65 becomes 57 using its model-family AWD record. Current efficiency alone cannot quantify an eight- or twelve-point lifecycle uplift.
 - **20 historical anchors and 37 editorial proxies**, all numeric and included in rankings and Pareto comparisons. Counts in the page method are derived from the data. There are 55 exact model-year EPA records and two retained Toyota manufacturer references/conversions.
 - All prices describe reference configurations. Local stock, transaction price, future resale, current-model failure rates, exact cold-weather range and actual gear fit remain unverified.
+
+## November 15 trip consistency audit (before the general audit)
+
+Reviewed all 57 selected configurations and all 171 trip-component inputs. Preserved the 40% carrying / 35% winter access / 25% trip practicality weights and full-cohort tier calculation. The issue was unsupported editorial inputs, not a percentile calculation bug.
+
+Five EVs had a 4/5 trip-practicality input without a sourced loaded-winter route assessment. All ten EVs now share a provisional 3/5 replenishment baseline. EPA range and manufacturer charging claims remain context; neither establishes cold-weather usable range, arrival reserve, charger availability or stop duration. A future higher input requires explicit route evidence, and is not prohibited by powertrain. This is a planning assumption, not a measured equivalence between EVs.
+
+Gas, hybrid and PHEV 5/5 inputs describe rapid liquid-fuel replenishment only. They do not establish better carrying, winter grip or overall trip performance. PHEV electric miles are not assumed to cover the mountain trip. A low-clearance sedan still loses carrying and access points. No EV-only roof-drag penalty or free winter-tire/roof-carrier equipment is assumed.
+
+Carrying and winter inputs remain editorial estimates with their existing configuration evidence; no new physical fit tests, stopping-distance results or clearance measurements were performed. Every car now exposes all three component rationales and a review note. AWD, brand, model refresh and maximum folded-seat cargo volume cannot substitute for a route or three-adult gear-fit assessment. The updated validation rejects missing rationales and unsupported EV trip upgrades.
+
+| Vehicle | Components: before → after | Trips band: before → after |
+| --- | --- | --- |
+| Subaru Solterra | [4, 4, 4] → [4, 4, 3] | +2 → +1 |
+| Nissan LEAF | [3, 2, 4] → [3, 2, 3] | −1 → −2 |
+| Tesla Model Y | [5, 2, 4] → [5, 2, 3] | 0 → 0 |
+| Chevrolet Equinox EV | [4, 2, 4] → [4, 2, 3] | 0 → −1 |
+| Tesla Model 3 | [2, 1, 4] → [2, 1, 3] | −2 → −2 |
+
+Other vehicles retain their trip inputs and bands. Totals, order and Pareto comparisons are regenerated from the revised inputs. The November 14 rank table below is historical; the live page contains the current order. Other categories were not re-researched in this trip-specific follow-up.
 
 ## Eco re-evaluation
 
@@ -78,7 +100,7 @@ No model-specific new-vehicle resale forecast was invented: additions use the ex
 - **Wagons:** no current assisted new US wagon under the OTD ceiling was established. V60 is explicitly screened. Subaru classifies 2026 Outback as an SUV, and Toyota markets Crown Signia as an SUV, so both remain crossovers in the existing body-style taxonomy. Older-model new wagon inventory requires a quote.
 - The field still favors crossovers and efficient drivetrains; it does not represent every US model, equal body-style shares or local sales shares. Large trucks, true wagons, additional three-row EVs and near-duplicate trims are not automatically added to satisfy quotas.
 
-## Current ranks and score changes
+## November 14 baseline ranks and score changes
 
 Default weights remain 1× for the first five categories and 0× for Maintenance. These comparisons include both corrected evidence and cohort-expansion effects; existing prices and cost assumptions did not change.
 

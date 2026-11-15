@@ -126,6 +126,60 @@ class RankingsTests(unittest.TestCase):
         self.assertEqual(byid['model3']['calculated_cost']['subscriptions'], 99 * 12 * 5)
         self.assertEqual(byid['mache']['calculated_cost']['subscriptions'], 0)
 
+    def test_trip_rationales_and_unsupported_upgrade_validation(self):
+        for car in self.cars:
+            html = build.assessment(self.data, car, self.data['categories'][2])
+            for note in car['mountain']['component_notes']:
+                self.assertIn(escape(note), html)
+        data = deepcopy(self.data)
+        solterra = next(c for c in data['cars'] if c['id'] == 'solterra')
+        solterra['mountain']['components'][2] = 4
+        with self.assertRaisesRegex(ValueError, 'EV trip upgrade'):
+            build.prepare(data)
+        # Verified route evidence can support an upgrade; this is not an EV cap.
+        solterra['mountain']['trip_route_evidence'] = 'Example evidence supplied by a future route study: loaded winter range, arrival reserve and charger-stop plan.'
+        build.prepare(data)
+        solterra['mountain']['component_notes'] = []
+        with self.assertRaisesRegex(ValueError, 'three component rationales'):
+            build.prepare(data)
+
+    def test_trip_strengths_do_not_substitute_for_replenishment(self):
+        cars = {c['id']: c for c in self.cars}
+        self.assertEqual(cars['solterra']['scores']['mountain'], 1)
+        self.assertGreater(build.value(cars['forester'], 'mountain'), build.value(cars['solterra'], 'mountain'))
+        self.assertGreater(build.value(cars['outback'], 'mountain'), build.value(cars['solterra'], 'mountain'))
+        # Fast refueling does not turn a restricted sedan into a top trip choice.
+        self.assertEqual(cars['corolla']['mountain']['components'][2], 5)
+        self.assertLess(cars['corolla']['scores']['mountain'], 0)
+
+    def test_unsupported_comfort_and_eco_adjustments_are_rejected(self):
+        data = deepcopy(self.data)
+        data['cars'][0]['comfort']['components'][0] = 4
+        with self.assertRaisesRegex(ValueError, 'road-test evidence'):
+            build.prepare(data)
+        data = deepcopy(self.data)
+        data['cars'][0]['comfort']['component_notes'] = []
+        with self.assertRaisesRegex(ValueError, 'four component rationales'):
+            build.prepare(data)
+        data = deepcopy(self.data)
+        data['cars'][0]['eco']['assessment_score'] += 1
+        with self.assertRaisesRegex(ValueError, 'unadjusted anchor mean'):
+            build.prepare(data)
+
+    def test_equipment_and_same_model_references_are_credited(self):
+        cars = {c['id']: c for c in self.cars}
+        equinox = cars['equinoxev']['eco']
+        self.assertEqual(equinox['assessment_score'], 52)
+        self.assertEqual(equinox['proxy_records'][0]['record']['model'], 'EQUINOX EV FWD')
+        solterra = cars['solterra']
+        self.assertTrue(solterra['equipment']['power_liftgate'])
+        self.assertEqual(solterra['comfort']['components'][3], 5)
+        self.assertEqual(solterra['commute']['components'], [4, 5, 4])
+        for car in self.cars:
+            html = build.assessment(self.data, car, self.data['categories'][3])
+            for note in car['comfort']['component_notes']:
+                self.assertIn(escape(note), html)
+
     def test_commute_components_have_specific_rendered_rationales(self):
         for car in self.cars:
             info = car['commute']
@@ -415,10 +469,19 @@ class CostTests(unittest.TestCase):
             self.assertEqual(build.registration(value,False,self.a),build.dollars(76+34+tif+value*.0065+30))
             self.assertEqual(build.dollars(build.registration(value,True,self.a)-build.registration(value,False,self.a)),121)
         car=deepcopy(self.byid['bolt']);a=build.calculate_cost(car,self.a);car['powertrain']='Gas'
-        # Isolate registration arithmetic: five registrations, not six.
+        # New dealer-purchased EVs are exempt initially; only four renewals pay RIF.
         base=build.registration(a['purchase'],False,self.a)
-        self.assertEqual(a['first_registration']-base,121)
+        self.assertEqual(a['first_registration'],base)
         self.assertEqual(build.dollars(a['renewals']-sum(build.registration(a['purchase']*v,False,self.a) for v in self.a['renewal_value_factors'])),484)
+
+    def test_pickup_weight_fees_apply_to_initial_registration_and_renewals(self):
+        for cid, fee in [('maverickhybrid', 24), ('santacruz', 80)]:
+            car = deepcopy(self.byid[cid])
+            with_fee = build.calculate_cost(car, self.a)
+            car['cost']['annual_weight_fee'] = 0
+            without = build.calculate_cost(car, self.a)
+            self.assertAlmostEqual(with_fee['otd'] - without['otd'], fee, places=2)
+            self.assertAlmostEqual(with_fee['five'] - without['five'], 5 * fee, places=2)
 
     def test_selected_package_and_subscriptions_are_charged(self):
         bmw=self.byid['x1'];c=build.calculate_cost(bmw,self.a)

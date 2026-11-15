@@ -30,10 +30,10 @@ def dollars(number):
     return float(Decimal(str(number)).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP))
 
 
-def registration(value, ev, assumptions):
+def registration(value, ev, assumptions, *, initial=False, weight_fee=0):
     # Current DMV schedules; county fees are a disclosed allowance, not a DMV quote.
     tif = 33 if value < 5000 else 66 if value < 25000 else 132 if value < 35000 else 198 if value < 60000 else 231
-    return dollars(76 + 34 + tif + value * .0065 + assumptions['county_fee_allowance'] + (121 if ev else 0))
+    return dollars(76 + 34 + tif + value * .0065 + assumptions['county_fee_allowance'] + (121 if ev and not initial else 0) + weight_fee)
 
 
 def calculate_cost(car, assumptions):
@@ -41,7 +41,8 @@ def calculate_cost(car, assumptions):
     purchase = dollars(price['msrp'] + price['destination'] + sum(o['price'] for o in price['options']))
     taxable = dollars(purchase + assumptions['document_fee'])
     sales_tax = dollars(Decimal(str(taxable)) * Decimal(str(assumptions['sales_tax_rate'])))
-    first_registration = registration(purchase, car['powertrain'] == 'EV', assumptions)
+    weight_fee = car['cost'].get('annual_weight_fee', 0)
+    first_registration = registration(purchase, car['powertrain'] == 'EV', assumptions, initial=True, weight_fee=weight_fee)
     otd = dollars(taxable + sales_tax + first_registration)
     miles = assumptions['annual_miles'] * assumptions['years']
     electric_share = energy.get('electric_mile_share', 1 if car['powertrain'] == 'EV' else 0)
@@ -52,7 +53,7 @@ def calculate_cost(car, assumptions):
     fuel = dollars(gallons * gas_price)
     electricity = dollars(kwh * assumptions['electricity_per_kwh'])
     resale = dollars(purchase * (1 - car['cost']['depreciation_fraction']))
-    renewals = sum(registration(purchase * factor, car['powertrain'] == 'EV', assumptions) for factor in assumptions['renewal_value_factors'])
+    renewals = sum(registration(purchase * factor, car['powertrain'] == 'EV', assumptions, weight_fee=weight_fee) for factor in assumptions['renewal_value_factors'])
     insurance = assumptions['insurance_per_year'] * assumptions['years']
     upkeep = assumptions['routine_upkeep_per_mile'][car['powertrain']] * miles
     repair_reserve = assumptions['repair_reserve_per_year'] * assumptions['years']
@@ -156,6 +157,8 @@ def validate(data):
             raise ValueError('Invalid fuel grade')
         if not finite(car['cost']['depreciation_fraction'], 0, 1):
             raise ValueError('Invalid depreciation assumption')
+        if not finite(car['cost'].get('annual_weight_fee', 0)) or (car['body_style'] == 'Pickup' and 'annual_weight_fee' not in car['cost']):
+            raise ValueError('Pickup registration requires an explicit nonnegative weight-fee allowance')
         if not finite(car['commute'].get('subscription_per_year', 0)):
             raise ValueError('Invalid subscription cost')
         for key, (names, _) in COMPONENTS.items():
@@ -172,11 +175,23 @@ def validate(data):
         commute = car['commute']
         if not commute.get('system') or len(commute.get('component_notes', [])) != 3 or any(not isinstance(note, str) or not note.strip() for note in commute['component_notes']):
             raise ValueError('Commute assessments need a selected system and three component rationales')
+        mountain = car['mountain']
+        if len(mountain.get('component_notes', [])) != 3 or any(not isinstance(note, str) or not note.strip() for note in mountain['component_notes']):
+            raise ValueError('Mountain assessments need three component rationales')
+        if not mountain.get('review_note'):
+            raise ValueError('Mountain assessments need a review note')
+        if car['powertrain'] == 'EV' and mountain['components'][2] > 3 and not mountain.get('trip_route_evidence', '').strip():
+            raise ValueError('An EV trip upgrade needs loaded winter range, reserve and charging-plan evidence for the route')
         maintenance = car['maintenance']
         if not isinstance(maintenance.get('confidence'), str) or not maintenance['confidence'].strip():
             raise ValueError('Maintenance needs a separate evidence-confidence description')
         if len(maintenance.get('component_notes', [])) != 3 or any(not isinstance(note, str) or not note.strip() for note in maintenance['component_notes']):
             raise ValueError('Maintenance needs three component rationales')
+        comfort = car['comfort']
+        if len(comfort.get('component_notes', [])) != 4 or any(not isinstance(note, str) or not note.strip() for note in comfort['component_notes']) or not comfort.get('review_note'):
+            raise ValueError('Comfort needs four component rationales and a review note')
+        if comfort['components'][0] != 3 and not comfort.get('ride_test_evidence', '').strip():
+            raise ValueError('A ride/noise departure from baseline needs comparable road-test evidence')
         eco = car['eco']
         if not isinstance(eco.get('review_note'), str) or not eco['review_note'].strip():
             raise ValueError('Eco needs a configuration-specific review note')
@@ -203,6 +218,8 @@ def validate(data):
                     raise ValueError('Lifecycle proxies must preserve a consistent historical source record')
                 if proxy['model'] != f'{record["make"]} {record["model"]} · {record["engine"]} · {record["drive"]}':
                     raise ValueError('Lifecycle proxy label must identify its exact historical record')
+            if eco.get('proxy_method') != 'unadjusted_anchor_mean' or not math.isclose(eco['assessment_score'], sum(p['score'] for p in proxies) / len(proxies), abs_tol=1e-9):
+                raise ValueError('Eco proxy must use the disclosed unadjusted anchor mean')
         for key, note in car['equipment'].get('estimates', {}).items():
             if key not in ('power_liftgate', 'adaptive_cruise', 'lane_centering') or not isinstance(note, str) or not note.strip():
                 raise ValueError('Equipment estimates need a capability and rationale')
@@ -308,13 +325,19 @@ def assessment(data, car, cat):
         body += (f'<p>{escape(info["note"])}</p><p class="evidence">{escape(info["review_note"])}</p>'
                  '<p class="evidence">The −2 to +2 band is relative to this comparison group. Zero means middle band, not zero environmental benefit. Adding vehicles can change the band without changing the underlying lifecycle assessment.</p>')
     elif key == 'mountain':
+        rationale = ''.join(f'<p><b>{escape(name)}:</b> {escape(note)}</p>'
+                            for name, note in zip(COMPONENTS[key][0], info['component_notes']))
         body = (f'<p><b>Three adults + gear:</b> {escape(info["note"])}</p>'
                 f'<p><b>Interior:</b> {escape(info["interior_fit"])}</p><p><b>Roof route:</b> {escape(info["roof"])}</p>'
                 f'<p><b>Winter:</b> {escape(info["winter"])}</p><p><b>Trip:</b> {escape(info["trip"])}</p>'
+                + rationale + f'<p class="evidence">{escape(info["review_note"])}</p>'
                 '<p class="evidence">Rack/box and winter tires cost extra and are excluded from the base cost comparison for every vehicle. Exact gear fit, roof load and hatch/trunk clearance remain unmeasured.</p>' + component_text(car, key))
     elif key == 'lux':
         lift = 'Selected configuration has a verified power liftgate.' if car['equipment']['power_liftgate'] is True else 'Selected configuration is assessed as a manual rear opening.'
-        body = f'<p>{escape(info["note"])}</p><p>{lift} Liftgate is 10% of Comfort only; body style never determines eligibility. Assistance is separate.</p>' + component_text(car, key)
+        rationale = ''.join(f'<p><b>{escape(name)}:</b> {escape(note)}</p>'
+                            for name, note in zip(COMPONENTS[key][0], info['component_notes']))
+        body = (f'<p>{escape(info["note"])}</p><p>{lift} Liftgate is 10% of Comfort only; body style never determines eligibility. Assistance is separate.</p>'
+                + rationale + f'<p class="evidence">{escape(info["review_note"])}</p>' + component_text(car, key))
     elif key == 'commute':
         rationale = ''.join(f'<p><b>{escape(name)}:</b> {escape(note)}</p>'
                             for name, note in zip(COMPONENTS[key][0], info['component_notes']))
