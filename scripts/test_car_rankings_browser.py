@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 """Offline browser regression check. Requires Playwright + `playwright install chromium`.
+Set CHROMIUM_EXECUTABLE to use an installed Chromium. Set CAR_RANKINGS_TEST_URL
+to an allowed localhost URL to serve the HTML in-process when file URLs are blocked;
+contexts remain offline and external runtime requests still fail the test.
 
 Run: python3 scripts/test_car_rankings_browser.py
 Screenshots are written to /tmp/car-rankings-preview, outside the repository.
 """
 import json
 from pathlib import Path
+import os
 from playwright.sync_api import sync_playwright
 
 import build_car_rankings as build
@@ -16,38 +20,97 @@ def check(condition, message):
         raise AssertionError(message)
 
 
-def check_commute_slider(page, cars):
-    # Exercise actual keyboard and pointer input, rather than setting the value in JS.
+def read_weights(page):
+    return page.locator('.range-wrap input').evaluate_all("inputs => Object.fromEntries(inputs.map(i => [i.id.slice(2), Number(i.value)]))")
+
+
+def score(car, weights):
+    return sum(car['scores'][key] * round(weights[key] * 100) for key in build.KEYS) / 100
+
+
+def signed(value):
+    value = round(value, 2)
+    return ('+' if value > 0 else '−' if value < 0 else '') + f'{abs(value):g}'
+
+
+def verify_allocation(page, cars):
+    weights = read_weights(page)
+    units = sum(round(w * 100) for w in weights.values())
+    check(units in (0, 500), f'Budget drift: {weights}')
+    expected = sorted(cars, key=lambda car: (-score(car, weights), car['five'], build.name_key(car)))
+    check(page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)') == [c['id'] for c in expected], 'Allocation ranking mismatch')
+    for car in cars:
+        total = signed(score(car, weights))
+        check(page.locator(f'#ranking [data-id="{car["id"]}"] .total').inner_text() == total, 'Allocation row total incorrect')
+        check(page.locator(f'#detail-{car["id"]} [data-total]').inner_text() == total, 'Allocation dialog total incorrect')
+    for key, value in weights.items():
+        check(page.locator('#unit-' + key).evaluate("(el, off) => el.classList.contains('is-off') === off", value == 0), 'Off styling mismatch')
+        check(page.locator('#segment-' + key).evaluate('(el, value) => Math.abs(parseFloat(el.style.width) - value * 20) < .001', value), 'Overview share mismatch')
+    return weights
+
+
+def check_commute_slider(page, cars, output):
     slider = page.locator('#w-commute')
-    initial_order = page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)')
-    original_pills = page.locator('#ranking .car').evaluate_all("rows => Object.fromEntries(rows.map(r => [r.dataset.id, r.querySelector('[data-category=commute]').textContent]))")
-    slider.focus()
-    slider.press('Home')
-    check(page.locator('#v-commute').inner_text() == '0×', 'Commute keyboard Home failed')
+    box = slider.bounding_box()
+    thumb_x = box['x'] + 10 + (box['width'] - 20) * .2
+    center_y = box['y'] + box['height'] / 2
+    page.mouse.move(thumb_x, center_y); page.mouse.down()
+    page.mouse.move(box['x'] + box['width'] * .65, center_y, steps=8)
+    check(read_weights(page)['commute'] > 3, 'Real dragging did not move the direct slider')
+    check(read_weights(page)['cost'] < 1, 'Real dragging did not move linked sliders')
+    check(page.locator('#unit-cost').evaluate("el => el.style.getPropertyValue('--previous')") == '20%', 'Ghost marker lost interaction start')
+    check(page.locator('#unit-commute').evaluate("el => el.classList.contains('is-direct')"), 'Direct manipulation indicator missing')
+    page.screenshot(path=str(output / 'allocation-dragging.png'))
+    page.mouse.up()
+    verify_allocation(page, cars)
+    page.locator('#reset').click()
+    slider.focus(); slider.press('Home')
+    check(page.locator('#v-commute').inner_text() == 'Off', 'Zero did not turn category off')
+    check(read_weights(page)['cost'] == 1.25, 'Freed points did not redistribute')
+    verify_allocation(page, cars)
     slider.press('ArrowRight')
-    check(page.locator('#v-commute').inner_text() == '0.5×', 'Commute half-step failed')
-    for car in cars:
-        baseline = sum(car['scores'][key] for key in build.KEYS[:-1] if key != 'commute')
-        row = page.locator(f'#ranking [data-id="{car["id"]}"]')
-        check(row.locator('.total').inner_text() == build.signed(baseline + .5 * car['scores']['commute']), 'Half-weight commute total incorrect')
+    check(read_weights(page)['commute'] == .01, 'Fine keyboard step failed')
     slider.press('End')
-    check(page.locator('#v-commute').inner_text() == '3×', 'Commute keyboard End failed')
+    weights = verify_allocation(page, cars)
+    check(weights['commute'] == 4.96 and weights['cost'] == .01, 'Upper bound silently disabled categories')
+    check(weights['maintenance'] == 0, 'Redistribution enabled an off category')
+    check(page.locator('#unit-cost').evaluate("el => el.classList.contains('is-adjusted')"), 'Automatic-change feedback missing')
+    page.screenshot(path=str(output / 'allocation-adjusted.png'))
+    # Category values themselves must remain intact even as rows reorder.
     for car in cars:
-        expected = car['total'] + 2 * car['scores']['commute']
-        check(page.locator(f'#ranking [data-id="{car["id"]}"] .total').inner_text() == build.signed(expected), 'Commute weight did not change total correctly')
-        check(page.locator(f'#detail-{car["id"]} [data-total]').inner_text() == build.signed(expected), 'Commute weight did not update dialog total')
-    check(page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)') != initial_order, 'Commute slider had no effect on rankings')
-    check(page.locator('#ranking .car').evaluate_all("rows => Object.fromEntries(rows.map(r => [r.dataset.id, r.querySelector('[data-category=commute]').textContent]))") == original_pills, 'Weight changed underlying category ratings')
+        for key in build.KEYS:
+            check(page.locator(f'#ranking [data-id="{car["id"]}"] [data-category="{key}"] .pill').inner_text() == build.signed(car['scores'][key]), 'Allocation changed underlying rating')
+    page.locator('#reset').click()
+    maintenance = page.locator('#w-maintenance')
+    maintenance.focus(); maintenance.press('End')
+    weights = verify_allocation(page, cars)
+    check(weights['maintenance'] == 4.95 and weights['cost'] == .01, 'Dragging an off category did not reactivate it')
+    page.screenshot(path=str(output / 'allocation-six-active.png'))
+    for key in build.KEYS:
+        control = page.locator('#w-' + key)
+        control.focus(); control.press('Home')
+    verify_allocation(page, cars)
+    check('No priorities' in page.locator('#allocation-caption').inner_text(), 'All-off caption missing')
+    page.screenshot(path=str(output / 'allocation-all-off.png'))
+    maintenance.focus(); maintenance.press('ArrowRight')
+    check(read_weights(page)['maintenance'] == 5, 'Sole active category does not fill pool')
+    verify_allocation(page, cars)
+    page.screenshot(path=str(output / 'allocation-one-active.png'))
     page.locator('#reset').click()
     page.set_viewport_size({'width': 390, 'height': 844})
     box = slider.bounding_box()
-    slider.click(position={'x': box['width'] * .83, 'y': box['height'] / 2})
-    actual_weight = float(slider.input_value())
-    check(actual_weight > 1, 'Mobile pointer did not change commute weight')
-    car = next(c for c in cars if c['id'] == 'model3')
-    check(page.locator('#ranking [data-id="model3"] .total').inner_text() == build.signed(car['total'] + (actual_weight - 1) * car['scores']['commute']), 'Mobile commute contribution incorrect')
+    slider.click(position={'x': box['width'] * .7, 'y': box['height'] / 2})
+    check(read_weights(page)['commute'] > 1, 'Mobile pointer did not change allocation')
+    verify_allocation(page, cars)
+    page.screenshot(path=str(output / 'allocation-mobile-adjusted.png'))
     page.locator('#reset').click()
-    check(slider.input_value() == '1', 'Commute reset failed')
+    check(slider.input_value() == '1', 'Allocation reset failed')
+    page.emulate_media(reduced_motion='reduce')
+    slider.focus(); slider.press('ArrowRight')
+    check(page.locator('#unit-cost .slider-previous').evaluate("el => getComputedStyle(el).display") == 'none', 'Reduced motion retained ghost markers')
+    check(page.locator('#unit-cost .slider-thumb').evaluate("el => getComputedStyle(el).transitionDuration") == '0s', 'Reduced motion retained transitions')
+    page.locator('#reset').click()
+    page.emulate_media(reduced_motion='no-preference')
     page.set_viewport_size({'width': 1280, 'height': 900})
 
 
@@ -189,19 +252,21 @@ def check_pareto(page, cars, defaults, output, uri):
 def main():
     data = json.loads((build.PAGE / 'data.json').read_text())
     cars = build.prepare(data)
-    uri = (build.PAGE / 'index.html').as_uri()
+    uri = os.environ.get('CAR_RANKINGS_TEST_URL', (build.PAGE / 'index.html').as_uri())
     output = Path('/tmp/car-rankings-preview'); output.mkdir(exist_ok=True)
     defaults = {c['key']: c['default'] for c in data['categories']}
     cases = [defaults, {k: 0 for k in build.KEYS}]
     cases += [{k: 3 if k == chosen else 0 for k in build.KEYS} for chosen in build.KEYS]
     cases += [dict(zip(build.KEYS, (0.5, 2, 1.5, 3, 0, 2.5)))]
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=True, executable_path=os.environ.get('CHROMIUM_EXECUTABLE'))
         context = browser.new_context(viewport={'width': 1280, 'height': 900}, offline=True)
+        if os.environ.get('CAR_RANKINGS_TEST_URL'):
+            context.route(uri.split('#')[0].split('?')[0] + '*', lambda route: route.fulfill(path=str(build.PAGE / 'index.html'), content_type='text/html'))
         page = context.new_page()
         errors, remote_requests = [], []
         page.on('pageerror', lambda error: errors.append(str(error)))
-        page.on('request', lambda request: remote_requests.append(request.url) if request.url.startswith(('http:', 'https:')) else None)
+        page.on('request', lambda request: remote_requests.append(request.url) if request.url.startswith(('http:', 'https:')) and not request.url.startswith(uri) else None)
         page.goto(uri)
         check(page.locator('#indicator').inner_text() == '● Live', 'JavaScript did not start offline')
         check(page.locator('#ranking .car').count() == len(cars), 'Missing ranking rows')
@@ -210,30 +275,34 @@ def main():
                 cell = page.locator(f'#ranking [data-id="{car["id"]}"] [data-category="{key}"]')
                 check(cell.inner_text() == build.signed(car['scores'][key]), 'Row score mismatch')
                 check(cell.get_attribute('aria-label').startswith(f'{next(cat["label"] for cat in data["categories"] if cat["key"] == key)}: {build.signed(car["scores"][key])} relative to this comparison group'), 'Accessible score mismatch')
-        for weights in cases:
+        for requested in cases:
+            page.locator('#reset').click()
             page.evaluate('''weights => { Object.entries(weights).forEach(([key, value]) => {
                 const input = document.getElementById('w-' + key); input.value = String(value);
                 input.dispatchEvent(new Event('input', {bubbles: true}));
-            }); }''', weights)
-            expected = sorted(cars, key=lambda c: (-sum(c['scores'][k] * weights[k] for k in build.KEYS), c['five'], build.name_key(c)))
+            }); }''', requested)
+            weights = read_weights(page)
+            verify_allocation(page, cars)
+            expected = sorted(cars, key=lambda c: (-score(c, weights), c['five'], build.name_key(c)))
             actual = page.locator('#ranking .car').evaluate_all("rows => rows.map(row => ({id:row.dataset.id, total:row.querySelector('.total').textContent, rank:row.querySelector('.rank').textContent}))")
             check([c['id'] for c in actual] == [c['id'] for c in expected], f'Python/browser order mismatch: {weights}')
             for i, (a, e) in enumerate(zip(actual, expected), 1):
-                score = sum(e['scores'][k] * weights[k] for k in build.KEYS)
-                check(a['total'] == build.signed(score), f'Wrong row total: {e["id"]}')
+                total = score(e, weights)
+                check(a['total'] == signed(total), f'Wrong row total: {e["id"]}')
                 check(a['rank'] == f'{i:02}', 'Wrong displayed rank')
-                check(page.locator(f'[data-total="{e["id"]}"]').inner_text() == build.signed(score), 'Dialog total drift')
+                check(page.locator(f'[data-total="{e["id"]}"]').inner_text() == signed(total), 'Dialog total drift')
             check(page.locator('#main').evaluate("el => el.classList.contains('upkeep-off')") == (weights['maintenance'] == 0), 'Upkeep state drift')
         page.locator('#reset').click()
         check(page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)') == [c['id'] for c in cars], 'Reset order drift')
         for key in build.KEYS:
             check(float(page.locator('#w-' + key).input_value()) == defaults[key], 'Reset weights drift')
         check(page.locator('#ranking .car.first').count() == 1, 'Leader styling drift')
-        check_commute_slider(page, cars)
+        check_commute_slider(page, cars, output)
         upkeep = page.locator('#w-maintenance')
         upkeep.focus(); upkeep.press('End')
+        weights = verify_allocation(page, cars)
         for car in cars:
-            expected = build.signed(car['total'] + 3 * car['scores']['maintenance'])
+            expected = signed(score(car, weights))
             check(page.locator(f'#ranking [data-id="{car["id"]}"] .total').inner_text() == expected, 'Maintenance contribution incorrect')
             check(page.locator(f'#detail-{car["id"]} [data-total]').inner_text() == expected, 'Maintenance dialog contribution incorrect')
         # Order changes with weighting, but every vehicle retains its category assessment.
@@ -247,6 +316,7 @@ def main():
         page.keyboard.press('Escape')
         page.wait_for_function("!document.getElementById('main').inert")
         check(page.evaluate('document.documentElement.scrollWidth <= innerWidth'), 'Desktop horizontal overflow')
+        page.evaluate('scrollTo(0,0)')
         page.screenshot(path=str(output / 'desktop.png'))
         opener = page.locator('#ranking [data-id="civic"]')
         opener.click()
@@ -281,6 +351,8 @@ def main():
         check(not remote_requests, f'Runtime requested network: {remote_requests}')
         context.close()
         fallback = browser.new_context(java_script_enabled=False, offline=True, viewport={'width':390,'height':844})
+        if os.environ.get('CAR_RANKINGS_TEST_URL'):
+            fallback.route(uri.split('#')[0].split('?')[0] + '*', lambda route: route.fulfill(path=str(build.PAGE / 'index.html'), content_type='text/html'))
         page = fallback.new_page(); page.goto(uri)
         check(page.locator('#ranking .car').count() == len(cars), 'No-JS rows missing')
         check(page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)') == [c['id'] for c in cars], 'Static fallback order mismatch')

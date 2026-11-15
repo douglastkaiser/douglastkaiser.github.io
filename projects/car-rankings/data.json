@@ -33,7 +33,7 @@
     },
     {
       "key": "maintenance",
-      "label": "Maintenance (optional)",
+      "label": "Maintenance",
       "short": "Upkeep",
       "default": 0
     }

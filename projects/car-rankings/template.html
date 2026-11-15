@@ -8,7 +8,7 @@ END CAR DECISION HANDOFF
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Compare researched new-car configurations by ownership cost, lifecycle eco-friendliness, mountain trips, comfort, commute assistance and optional upkeep.">
+<meta name="description" content="Compare researched new-car configurations by ownership cost, lifecycle eco-friendliness, mountain trips, comfort, commute assistance and upkeep.">
 <title>Car rankings — interactive comparison</title>
 <style>
 :root{--ink:#1b2c27;--muted:#61736b;--bg:#f6f8f6;--line:#dfebe3;--green:#11764b;--pbg:#dcf3e5;--red:#a43b48;--rbg:#fce5e8;--gbg:#eaf0eb}
@@ -29,17 +29,30 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 @media(max-width:650px){.pareto-toolbar{gap:10px}.pareto-toolbar label{flex:1;min-width:160px}.pareto-toolbar select{width:100%;font-size:16px}.pareto-views{width:100%}.view-tabs button,.pareto-button,.pareto-node button,.pareto-node summary{min-height:44px}#pareto-comparison{padding:12px}.selected-summary{flex-wrap:wrap}.metric-comparison{font-size:11px}}
 @media(max-width:650px){.pareto-scroll{max-height:480px}}
 @media print{.view-tabs,.pareto-toolbar,.pareto-scroll{display:none}#pareto-list{display:block!important}#pareto-comparison{break-inside:avoid}}
+
+/* The overview and controls share category colors; score colors retain their meaning. */
+.controls{padding:10px 12px;border-radius:12px}.control-label{align-items:center;margin-bottom:7px}.control-label .allocation-title{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}#allocation-caption{font-size:12px;font-variant-numeric:tabular-nums}
+.allocation-bar{height:8px;display:flex;overflow:hidden;border-radius:5px;background:#eaf0ed;outline:1px solid #dce6df;margin-bottom:9px}.allocation-bar>span{flex:none;height:100%;background:var(--accent);box-shadow:inset -1px 0 #ffffff80}.all-off .allocation-bar{background:repeating-linear-gradient(135deg,#f5f7f5 0 5px,#e8eee9 5px 6px)}
+.sliders{grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}.slider-unit{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:28px 32px;column-gap:4px;align-items:center;background:#fafcfb;border:1px solid #e1e9e4;border-radius:7px;padding:3px 7px 0}.slider-unit .line{grid-column:1;grid-row:1;min-height:0;margin:0;font-size:10px;gap:4px}.slider-unit label[for]{display:flex;align-items:center;gap:5px;line-height:1.2}.category-swatch{width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:var(--accent)}.slider-unit .range-wrap{grid-column:1/-1;grid-row:2;min-width:0}.slider-unit output{grid-column:2;grid-row:1;justify-self:end;font-size:12px;line-height:1;color:var(--accent);letter-spacing:-.3px}.slider-unit.is-off{background:#fff;border-style:dashed}.is-off .category-swatch{background:transparent;box-shadow:inset 0 0 0 1.5px var(--muted)}.is-off output{color:var(--muted);font-size:11px;letter-spacing:0}.is-off label[for]{color:var(--muted)}
+.range-wrap{position:relative;height:32px}.slider-unit .range-wrap input{position:absolute;inset:0;appearance:none;-webkit-appearance:none;width:100%;height:32px;margin:0;opacity:0;z-index:2;touch-action:pan-y}.range-wrap input::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:20px;height:20px}.range-wrap input::-moz-range-thumb{width:20px;height:20px;border:0}.slider-rail{position:absolute;left:10px;right:10px;top:14px;height:4px;border-radius:4px;background:#dfe7e2;pointer-events:none}.slider-fill{position:absolute;inset:0 auto 0 0;width:var(--share);border-radius:inherit;background:var(--accent)}.slider-thumb{position:absolute;left:var(--share);top:50%;width:18px;height:18px;transform:translate(-50%,-50%);border-radius:50%;background:#fff;border:2px solid var(--accent);box-shadow:0 1px 3px #18342422}.is-off .slider-thumb{border-color:#96a69c;background:#f6f8f6}.slider-previous{position:absolute;left:var(--previous);top:50%;height:14px;width:3px;transform:translate(-50%,-50%);border-radius:2px;background:var(--accent);opacity:0}.is-adjusted .slider-previous,.is-direct .slider-previous{opacity:.4}.slider-stop{position:absolute;left:var(--limit);top:-3px;height:10px;border-left:1px solid #899b90;display:none}.has-limit .slider-stop{display:block}.is-direct{outline:2px solid var(--accent);outline-offset:1px;background:#fff}.is-adjusted{box-shadow:inset 0 0 0 1px var(--accent)}.slider-unit:has(.range-wrap input:focus-visible){outline:2px solid var(--ink);outline-offset:2px}
+.is-discrete .slider-thumb{transition:left 180ms ease}.is-discrete .slider-fill,.is-discrete .allocation-bar>span{transition:width 180ms ease}.slider-previous{transition:opacity 180ms ease}.leaderline{align-items:center;margin-top:4px}.leaderline button{min-height:28px;padding:4px 6px}.category-off .pill{background:var(--gbg);color:var(--muted)}.head [data-category].category-off{opacity:.55}.assessment.category-off .assess-head h3{color:var(--muted)}
+@media(max-width:900px){.sliders{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.controls{padding:8px}.sliders{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.slider-unit{padding:2px 6px 0;grid-template-rows:28px 44px}.range-wrap,.slider-unit .range-wrap input{height:44px}.slider-rail{top:20px}.slider-unit .line{font-size:10px;min-height:0}.slider-unit label[for]{gap:4px}.allocation-bar{margin-bottom:8px}.control-label span{max-width:none}#allocation-caption{font-size:11px}}
+@media(pointer:coarse){.slider-unit{grid-template-rows:28px 44px}.range-wrap,.slider-unit .range-wrap input{height:44px}.slider-rail{top:20px}}
+@media(prefers-reduced-motion:reduce){.controls *{transition:none!important}.slider-previous{display:none}}
 </style>
 </head>
 <body>
 <main class="upkeep-off" id="main">
 <header><div><h1>Car rankings <span class="count">$count</span></h1><p>New cars · All body styles · Est. under $$60k OTD · Tap a car for details</p></div><span id="indicator">Open in a browser for sliders</span></header>
-<section class="controls" aria-label="Category weights">
-<div class="control-label">Category weights <span>Five at 1× · Optional upkeep at 0× · Range 0–3×</span></div>
+<section class="controls" aria-label="Priority allocation">
+<div class="control-label"><span class="allocation-title">Priorities</span><span id="allocation-caption">5 points</span></div>
+<div class="allocation-bar" id="allocation-bar" role="img" aria-label="Five points shared equally across five priorities">$allocation_segments</div>
+<div id="allocation-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div>
 <div class="sliders">
 $controls
 </div>
-<div class="leaderline"><span id="leader" aria-live="polite" aria-atomic="true">$leader</span><button type="button" id="reset">Reset weights</button></div>
+<div class="leaderline"><span id="leader">$leader</span><button type="button" id="reset">Reset</button></div>
 </section>
 <p class="scoring-note">Evidence-informed estimates, not test ratings. Sliders change weighted totals and order; category scores stay fixed. Equal evidence shares tiers. All $count cars have all six scores, using best estimates where evidence is incomplete. Scores are relative to this comparison group: 0 means middle band. Three adults + gear; upkeep starts off. <a href="#method">Method &amp; sources</a></p>
 <noscript><p class="notice">Default rankings and car details work offline. Enable JavaScript in your browser to change weights.</p></noscript>
@@ -73,20 +86,23 @@ $rows
 <a class="scrim" href="#ranking" aria-label="Close method"></a>
 <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="method-title" tabindex="-1">
 <div class="modal-header"><div><small>How scoring works</small><h2 id="method-title">Scoring method</h2></div><a class="close" href="#ranking" aria-label="Close method">×</a></div>
-<section class="assessment"><div class="assess-head"><h3>Equal evidence earns equal scores</h3></div><p>Every category orders its underlying assessments across all $count cars, then places each group of equal values by its midpoint percentile: (number strictly better + half the tied group) / cohort count. Bands at 20%, 40%, 60% and 80% receive +2, +1, 0, −1 and −2 from highest to lowest; exact boundaries go toward zero. Groups stay together, so band sizes vary and some bands can be empty. Category ranks are shared. Adding a candidate can change relative tiers; these are shortlist comparisons, not absolute quality ratings.</p><p>Total = sum of each category score × its weight. Five categories start at 1×; Maintenance starts at 0×. Tiers remain fixed while sliders change. Equal totals sort by lower five-year cost, then name. All weights at zero sort by cost. Reset restores defaults.</p><p>Every car receives a numeric assessment for every metric. Where exact evidence is incomplete, the best available proxy or editorial estimate is used, with its basis in the details. A zero is a middle-band result. Uncertainty does not introduce a separate bonus or penalty.</p></section>
+<section class="assessment"><div class="assess-head"><h3>Equal evidence earns equal scores</h3></div><p>Every category orders its underlying assessments across all $count cars, then places each group of equal values by its midpoint percentile: (number strictly better + half the tied group) / cohort count. Bands at 20%, 40%, 60% and 80% receive +2, +1, 0, −1 and −2 from highest to lowest; exact boundaries go toward zero. Groups stay together, so band sizes vary and some bands can be empty. Category ranks are shared. Adding a candidate can change relative tiers; these are shortlist comparisons, not absolute quality ratings.</p><p>Total = sum of each category score × its allocated points. Active categories share five points; changing one redistributes the remainder proportionally. Every category can be turned off. Five categories start at one point each; Maintenance starts off. Tiers remain fixed while allocations change. Equal totals sort by lower five-year cost, then name. With all categories off, totals are zero and cars sort by cost. Reset restores defaults.</p><p>Every car receives a numeric assessment for every metric. Where exact evidence is incomplete, the best available proxy or editorial estimate is used, with its basis in the details. A zero is a middle-band result. Uncertainty does not introduce a separate bonus or penalty.</p></section>
 <section class="assessment"><div class="assess-head"><h3>Pareto paths</h3></div><p>A direct upgrade is no worse on every active tier and better on at least one, with no intermediate score profile between the two. Equal profiles share a node. Each layer removes the remaining non-dominated profiles. The preferred path repeatedly chooses the lowest-scoring direct dominator; equal totals break by calculated five-year cost, then name. This tie-break is display order, not an additional dominance metric.</p><p>All $count cars participate, including those with proxy estimates. Rankings, Pareto comparisons and research dialogs use the same five-level scores calculated across the full cohort. Positive weight changes cannot change dominance; turning a metric on or off can. More levels expose more tradeoffs, not more precise evidence.</p></section>
 <section class="assessment"><div class="assess-head"><h3>Ownership: one visible five-year calculation</h3></div><p>New vehicles of any body style, estimated at or below $$60,000 out the door in Orange County. Prices use the named model year and configuration, published MSRP, destination and selected packages. No assumed dealer discount, markup or contingent rebate. MSRP in the breakdown excludes destination so it is added exactly once. A published US configuration is not a claim of current stock at a particular dealer. Model years may overlap during the sales year.</p><p><b>Five-year cost = OTD − resale + gasoline + electricity + four registration renewals + insurance + routine upkeep + repair reserve + selected assistance subscriptions.</b> Financing is excluded. First registration and sales tax appear once, inside OTD. Roof carriers and winter tires are extra for every vehicle; no carrier purchase is assumed in the base cost.</p><p>Common scenario: $annual_miles miles/year for five years; $tax_rate% Irvine sales tax baseline (other OC cities differ); $$$document_fee taxable document fee; current DMV registration/CHP/TIF/VLF schedules plus a $$$county_fee annual county-fee allowance. Renewal value factors are 90%, 80%, 70%, 60% of purchase price, explicit planning approximations rather than a DMV calculation. EV road fees are included. Rates are held constant for this comparison.</p><p>Nearby public charging is assumed available at ordinary local electricity cost, $$$electricity_rate/kWh, with no installation charge, availability penalty or retail charging markup, as requested. This is a comparison assumption, not a posted public-station tariff. Gasoline is held at the checked OC AAA reference: $$$regular_rate regular / $$$premium_rate premium per gallon. The EPA record’s fuel grade is costed; premium-fuel references do not establish that regular is prohibited. EPA wall-energy consumption already includes charging losses; none are added twice.</p><p>PHEVs use a disclosed 60% electric-mile scenario and 40% gasoline miles; this assumes regular access to charging and is not an EPA prediction for your driving. Gas-mode MPG and electrical consumption are separate. Resale uses the identified historical model or segment depreciation benchmark; new generations/powertrains use segment assumptions, not invented exact-build forecasts. The applied fraction and its scope appear in each Cost assessment.</p><p>Insurance is a common $$$insurance_year/year allowance, not a personalized or model-specific quote. Routine upkeep allowances are $gas_upkeep¢/mile gas, $hybrid_upkeep¢ hybrid/PHEV, and $ev_upkeep¢ EV, including tires. Repairs add a common $$$repair_year/year reserve. These round planning inputs are not measured 2026 expenses; the DOE study supports the maintenance-cost distinction, not these exact allowances. Resale and insurance are substantial uncertainties; compare quotes and sensitivity before a purchase.</p><p class="source-list">$source_sce $source_gas $source_tax $source_dmv $source_resale $source_doe</p></section>
 <section class="assessment"><div class="assess-head"><h3>Comfort includes the liftgate</h3></div><p>40% ride/noise + 30% seating + 20% cabin ergonomics + 10% assessed power liftgate. Each component is 0–5; a selected power liftgate assessed as present earns 5 on that component and a manual opening earns 0. Automatic trunk unlatching alone is not a powered liftgate. Body style and power liftgate never determine eligibility. Comfort does not include driver assistance.</p><p>Ride, noise and seating judgments are editorial estimates based on the named configuration’s equipment and packaging, not instrumented road tests. A luxury badge, screen size or trim price does not independently establish comfort. Notes identify the tradeoffs; small component differences need a test drive.</p></section>
 <section class="assessment"><div class="assess-head"><h3>Eco: historical lifecycle anchors and best estimates</h3></div><p>ACEEE Green Scores consider manufacturing, energy supply, use and disposal impacts. Published US coverage ends at model year 2024. $historical_count retained assessments use comparable historical configurations and preserve their original source records. They are historical comparison anchors, not measured current-model results.</p><p>The other $proxy_count assessments are editorial lifecycle proxies on the same 0–100 comparison scale. Prefer a historical configuration in the same model family and powertrain, then a similar vehicle class; current efficiency, packaging and battery changes inform coarse adjustments. Each detail names the proxy models, their published scores and the adjustment rationale. Redesigns and different models receive estimates rather than purported exact published ratings.</p><p>The ownership-cost assumption of 60% electric PHEV miles does not recalculate a historical lifecycle score. Charging habits affect real-world impacts. No direct MPG-versus-MPGe comparison or mixing of European Green NCAP scores is used. Efficient use-phase consumption alone is not a full lifecycle assessment. Proxy values incorporate judgment and remain approximate; five-level tiers do not imply additional measurement precision.</p><p class="source-list">$source_aceee $source_coverage $source_ncap</p></section>
 <section class="assessment"><div class="assess-head"><h3>Mountain trips: three adults and their gear</h3></div><p>40% carrying usefulness + 35% winter access + 25% trip practicality. Assess two front occupants, one rear adult, bags and long ski/snowboard gear. Maximum cargo with every rear seat folded does not prove fit. Sedan access and low clearance affect usefulness; AWD alone does not prove good winter tires or stopping ability.</p><p>Carrying estimates use the manufacturer’s packaging evidence, with verified dimensions where available. Gear fit is unmeasured. Roof routes remain conditional on exact roof, bars/feet, load rating, carrier capacity and clearance. Roof loads add drag, height and handling/loading costs. Current EV range and charging hardware inform trip estimates, without claiming an exact cold-weather or roof-load range penalty.</p><p class="source-list">$source_roof $source_chains</p></section>
 <section class="assessment"><div class="assess-head"><h3>Commute assistance: selected equipment, not options you did not buy</h3></div><p>40% traffic/speed control + 35% steering coverage + 25% supervision/usability. Each selected system has its own component rationale. Traffic/speed 4 means ordinary stop/go following; 5 adds supported route-aware speed or intersection handling. Steering 0 means corrective support only, 3 means speed-limited centering, 4 means ordinary continuous centering, and 5 adds assisted lane changes or route turns. Supervision/usability 3 is the hands-on baseline; 4 credits documented attention-monitoring or coordinated driver-inactivity response. These are editorial capability estimates, not independent performance scores. A lane-departure warning or corrective lane-keeping system receives no continuous-centering credit. A manual describing optional equipment does not prove trim fitment. Where fitment evidence is incomplete, use the best estimate for the selected grade and explain it in the details; optional equipment is not automatically credited.</p><p>Costs include selected assistance options and any credited paid subscription over five years; temporary trials do not establish permanent entitlement. Unselected hands-free upgrades receive no credit. Honda/Acura lane-centering operating speeds, restart behavior and other system limits remain important. These are capability estimates, not independent performance or safety ratings; IIHS safeguards ratings are not steering-quality scores.</p><p class="source-list">$source_cr $source_iihs</p></section>
-<section class="assessment"><div class="assess-head"><h3>Maintenance is optional and uncertain</h3></div><p>50% fewer disruptions + 30% less routine service effort + 20% service access. This is a low-confidence editorial comparison and starts at 0×. Evidence confidence is shown separately and never enters the calculation. Without applicable failure evidence, every vehicle uses the same 3/5 disruption baseline; neither a redesign nor a new powertrain is penalized, and age or brand reputation alone earns no reliability bonus. Service access also uses a shared 3/5 baseline without a local shop census. Gas, hybrid and PHEV routine effort shares a 3/5 baseline because comparable schedule/time evidence has not established a difference; no PHEV complexity penalty is applied. EVs receive 5/5 routine effort for fewer scheduled engine-related tasks in the DOE framework, while tires, brakes and other service remain. These are disclosed estimates, not exact-build maintenance schedules.</p><p>Dollar service and repair allowances are already in Cost. This optional category emphasizes time, effort and disruption, so consider overlap when weighting it. RepairPal describes a historical methodology; the components here are not RepairPal ratings, a local shop census, failure probabilities or numeric repairability scores.</p><p class="source-list">$source_repairpal</p></section>
+<section class="assessment"><div class="assess-head"><h3>Maintenance evidence and uncertainty</h3></div><p>50% fewer disruptions + 30% less routine service effort + 20% service access. This is a low-confidence editorial comparison and starts off. Evidence confidence is shown separately and never enters the calculation. Without applicable failure evidence, every vehicle uses the same 3/5 disruption baseline; neither a redesign nor a new powertrain is penalized, and age or brand reputation alone earns no reliability bonus. Service access also uses a shared 3/5 baseline without a local shop census. Gas, hybrid and PHEV routine effort shares a 3/5 baseline because comparable schedule/time evidence has not established a difference; no PHEV complexity penalty is applied. EVs receive 5/5 routine effort for fewer scheduled engine-related tasks in the DOE framework, while tires, brakes and other service remain. These are disclosed estimates, not exact-build maintenance schedules.</p><p>Dollar service and repair allowances are already in Cost. This category emphasizes time, effort and disruption, so consider overlap when weighting it. RepairPal describes a historical methodology; the components here are not RepairPal ratings, a local shop census, failure probabilities or numeric repairability scores.</p><p class="source-list">$source_repairpal</p></section>
 <details class="rubric"><summary>Editorial component rubric</summary><p class="evidence">0 = assessed as absent; 1 = very constrained; 2 = constrained; 3 = workable baseline; 4 = useful capability with caveats; 5 = unusually strong fit. Each assessment shows its inputs and rationale. Estimated fitment is identified with its evidence and rationale; it is distinct from verified equipment. Capability components describe planning usefulness, not laboratory results or failure rates. No hidden confidence bonus or penalty is applied.</p></details>
 <section class="assessment"><div class="assess-head"><h3>Audit and evidence limitations</h3></div><p>$body_lineup. $lineup.</p><p>Representative market comparison: $count ranked configurations from $screened_count screened candidates. The field adds minivans, compact pickups and larger family SUVs alongside sedans and hatchbacks, without quotas or a fixed count. It is not an exhaustive market inventory. Outback and Crown Signia retain their manufacturer SUV classification; no verified new assisted wagon under the budget was established. Every removed and newly screened candidate is documented in the <a class="source" href="audit.md">audit report</a>. Remaining gaps include dealer quotes, individual insurance, actual gear fit, future resale and current-model lifecycle/reliability measurements.</p><p>Source dates and scope appear with each configuration. The comparison, details and sliders work offline; external evidence links need a network.</p></section>
 </div>
 </section>
 $modals
 <script id="ranking-data" type="application/json">$runtime_json</script>
+<script>
+$allocation_script
+</script>
 <script>
 $pareto_script
 </script>
@@ -96,12 +112,14 @@ $pareto_script
   var data = JSON.parse(document.getElementById('ranking-data').textContent);
   var categories = data.categories, cars = data.cars;
   var rank = document.getElementById('ranking'), main = document.getElementById('main');
-  var inputs = {}, rows = {}, totals = {};
+  var inputs = {}, rows = {}, totals = {}, allocation = {}, interaction = null, settleTimer = null, held = false;
+  var controls = document.querySelector('.controls');
+  categories.forEach(function (cat) { allocation[cat.key] = cat.default * 100; });
   categories.forEach(function (cat) { inputs[cat.key] = document.getElementById('w-' + cat.key); });
   Array.prototype.forEach.call(rank.querySelectorAll('.car'), function (row) { rows[row.dataset.id] = row; });
   cars.forEach(function (car) { totals[car.id] = document.querySelector('[data-total="' + car.id + '"]'); });
   var pareto = CarPareto.createView({ data: data, inputs: inputs, redraw: redraw });
-  function signed(value) { return value > 0 ? '+' + value : value < 0 ? '−' + Math.abs(value) : '0'; }
+  function signed(value) { return value > 0 ? '+' + CarAllocation.number(value) : value < 0 ? '−' + CarAllocation.number(Math.abs(value)) : '0'; }
   function nameOrder(a, b) {
     var left = a.name.toLowerCase(), right = b.name.toLowerCase();
     return left < right ? -1 : left > right ? 1 : 0;
@@ -109,11 +127,25 @@ $pareto_script
   function redraw() {
     var weights = {};
     categories.forEach(function (cat) {
-      weights[cat.key] = Number(inputs[cat.key].value);
-      document.getElementById('v-' + cat.key).textContent = weights[cat.key] + '×';
+      var key = cat.key, units = allocation[key], unit = document.getElementById('unit-' + key);
+      weights[key] = units / 100;
+      inputs[key].value = String(weights[key]);
+      inputs[key].setAttribute('aria-valuetext', units ? CarAllocation.number(weights[key]) + ' points' : 'Off');
+      document.getElementById('v-' + key).textContent = units ? CarAllocation.number(weights[key]) + ' pt' : 'Off';
+      unit.classList.toggle('is-off', !units);
+      unit.style.setProperty('--share', units / 5 + '%');
+      var others = categories.filter(function (c) { return c.key !== key && allocation[c.key] > 0; }).length;
+      unit.style.setProperty('--limit', (500 - others) / 5 + '%');
+      unit.classList.toggle('has-limit', others > 0);
+      document.getElementById('segment-' + key).style.width = units / 5 + '%';
+      document.querySelectorAll('[data-category="' + key + '"], [data-assessment="' + key + '"]').forEach(function (el) { el.classList.toggle('category-off', !units); });
     });
+    var activeCount = categories.filter(function (cat) { return allocation[cat.key] > 0; }).length;
+    document.getElementById('allocation-caption').textContent = activeCount ? '5 points' : 'No priorities · sorted by cost';
+    document.getElementById('allocation-bar').setAttribute('aria-label', activeCount ? categories.map(function (cat) { return cat.label + ': ' + (allocation[cat.key] ? CarAllocation.number(weights[cat.key]) + ' points' : 'off'); }).join(', ') : 'No priorities selected; sorted by estimated five-year cost');
+    controls.classList.toggle('all-off', !activeCount);
     var ordered = cars.map(function (car) {
-      var total = categories.reduce(function (sum, cat) { return sum + car.scores[cat.key] * weights[cat.key]; }, 0);
+      var total = CarAllocation.total(car, weights);
       return { id: car.id, name: car.name, five: car.five, total: total };
     });
     ordered.sort(function (a, b) { return b.total - a.total || a.five - b.five || nameOrder(a, b); });
@@ -133,13 +165,58 @@ $pareto_script
     indicator.textContent = '● Live'; indicator.classList.add('active');
     pareto.update(weights);
   }
+  function begin(key) {
+    clearTimeout(settleTimer);
+    controls.classList.remove('is-discrete');
+    if (interaction && interaction.key === key) return;
+    interaction = { key: key, before: Object.assign({}, allocation) };
+    categories.forEach(function (cat) {
+      var unit = document.getElementById('unit-' + cat.key);
+      unit.style.setProperty('--previous', allocation[cat.key] / 5 + '%');
+      unit.classList.toggle('is-direct', cat.key === key);
+      unit.classList.remove('is-adjusted');
+    });
+  }
+  function feedback() {
+    categories.forEach(function (cat) {
+      document.getElementById('unit-' + cat.key).classList.toggle('is-adjusted', cat.key !== interaction.key && allocation[cat.key] !== interaction.before[cat.key]);
+    });
+  }
+  function finish() {
+    if (!interaction) return;
+    clearTimeout(settleTimer);
+    var summary = categories.map(function (cat) { return cat.label + ': ' + (allocation[cat.key] ? CarAllocation.number(allocation[cat.key] / 100) + ' points' : 'off'); }).join(', ');
+    document.getElementById('allocation-status').textContent = summary;
+    interaction = null;
+    settleTimer = setTimeout(function () {
+      controls.classList.remove('is-discrete');
+      controls.querySelectorAll('.slider-unit').forEach(function (unit) { unit.classList.remove('is-direct', 'is-adjusted'); });
+    }, 650);
+  }
   categories.forEach(function (cat) {
-    inputs[cat.key].addEventListener('input', redraw);
-    inputs[cat.key].addEventListener('change', redraw);
+    var key = cat.key, input = inputs[key];
+    input.addEventListener('pointerdown', function () { held = true; begin(key); });
+    input.addEventListener('keydown', function (event) {
+      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'].indexOf(event.key) >= 0) { held = true; begin(key); }
+    });
+    input.addEventListener('input', function () {
+      begin(key);
+      allocation = CarAllocation.set(allocation, key, Number(input.value) * 100, interaction.before);
+      feedback(); redraw();
+      // Synthetic input and assistive technology may not emit a matching release.
+      if (!held) { clearTimeout(settleTimer); settleTimer = setTimeout(finish, 450); }
+    });
+    input.addEventListener('change', finish);
+    input.addEventListener('blur', release);
+    input.addEventListener('keyup', release);
   });
+  function release() { held = false; finish(); }
+  document.addEventListener('pointerup', release);
+  document.addEventListener('pointercancel', release);
   document.getElementById('reset').addEventListener('click', function () {
-    categories.forEach(function (cat) { inputs[cat.key].value = String(cat.default); });
-    redraw();
+    begin(null); controls.classList.add('is-discrete');
+    categories.forEach(function (cat) { allocation[cat.key] = cat.default * 100; });
+    feedback(); redraw(); finish();
   });
   var activePanel = null, returnFocus = null, pendingOpener = null;
   main.addEventListener('click', function (event) {

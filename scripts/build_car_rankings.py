@@ -96,7 +96,7 @@ def finite(number, minimum=0, maximum=math.inf):
 
 def validate(data):
     if tuple(c['key'] for c in data['categories']) != KEYS or [c['default'] for c in data['categories']] != [1, 1, 1, 1, 1, 0]:
-        raise ValueError('Preserve six categories, five 1× defaults and optional upkeep at 0×')
+        raise ValueError('Preserve six categories, five one-point defaults and upkeep initially off')
     a, cars = data['assumptions'], data['cars']
     if a['years'] != 5 or not finite(a['annual_miles'], 1) or len(a['renewal_value_factors']) != a['years'] - 1:
         raise ValueError('Invalid ownership period')
@@ -325,7 +325,7 @@ def assessment(data, car, cat):
                             for name, note in zip(COMPONENTS[key][0], info['component_notes']))
         body = (f'<p>{escape(info["note"])}</p><p><b>Evidence confidence (not scored):</b> {escape(info["confidence"])}</p>'
                 + rationale + f'<p>{escape(info["upkeep"])}</p><p><b>Repairability:</b> {escape(info["repairability"])}</p>'
-                '<p class="evidence">No current-model failure rate or numeric repairability rating is claimed. Dollar upkeep is already in Cost; this optional dimension concerns time and disruption.</p>' + component_text(car, key))
+                '<p class="evidence">No current-model failure rate or numeric repairability rating is claimed. Dollar upkeep is already in Cost; this dimension concerns time and disruption.</p>' + component_text(car, key))
     ties = sum(value(other, key) == value(car, key) for other in prepare_values(data, key))
     if ties > 1:
         body += f'<p class="evidence">{ties} vehicles share this underlying value and receive the same tier and category rank.</p>'
@@ -362,16 +362,22 @@ def modal(data, car):
             f'<div><small>Est. five-year cost</small><b>{money(car["five"])}</b></div><div><small>Energy reference</small><b>{escape(energy_label)}</b></div></div>'
             f'<p class="evidence">{escape(e["note"])} {escape(car["equipment"]["note"])}</p>' + evidence(data, e)
             + '<div class="details">' + ''.join(assessment(data, car, cat) for cat in data['categories']) + '</div>'
-            '<div class="modal-foot">Upkeep starts at 0× · <a class="source" href="#method">Method and assumptions</a></div></div></section>')
+            '<div class="modal-foot">Maintenance starts off · <a class="source" href="#method">Method and assumptions</a></div></div></section>')
 
 
 def render(data):
     cars, cats = prepare(data), data['categories']
-    controls = []
-    for cat in cats:
-        key = cat['key']
-        controls.append(f'<div class="slider-unit"><div class="line"><label for="w-{key}">{escape(cat["label"])}</label><output id="v-{key}" for="w-{key}">{cat["default"]}×</output></div>'
-                        f'<input id="w-{key}" type="range" value="{cat["default"]}" min="0" max="3" step="0.5" aria-label="{escape(cat["label"])} weight"></div>')
+    controls, segments = [], []
+    accents = ('#3978a8', '#7465ac', '#b47737', '#ac6084', '#41888b', '#737c96')
+    for cat, accent in zip(cats, accents):
+        key, value = cat['key'], cat['default']
+        off = ' is-off' if not value else ''
+        controls.append(f'<div class="slider-unit{off}" id="unit-{key}" style="--accent:{accent};--share:{value * 20}%;--previous:{value * 20}%">'
+                        f'<div class="line"><label for="w-{key}"><i class="category-swatch" aria-hidden="true"></i>{escape(cat["label"])}</label>'
+                        f'</div><output id="v-{key}" for="w-{key}" aria-live="off">{str(value) + " pt" if value else "Off"}</output>'
+                        f'<div class="range-wrap"><div class="slider-rail" aria-hidden="true"><span class="slider-fill"></span><span class="slider-previous"></span><span class="slider-stop"></span><span class="slider-thumb"></span></div>'
+                        f'<input id="w-{key}" type="range" value="{value}" min="0" max="5" step="0.01" aria-label="{escape(cat["label"])} allocation" aria-valuetext="{str(value) + " points" if value else "Off"}"></div></div>')
+        segments.append(f'<span id="segment-{key}" style="--accent:{accent};width:{value * 20}%" aria-hidden="true"></span>')
     payload = dict(categories=cats, cars=[{k: c[k] for k in ('id', 'name', 'five', 'scores')} for c in cars])
     runtime_json = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c').replace('&', '\\u0026')
     handoff = (f'Generated {data["updated"]}. Edit data.json + template.html; run python3 scripts/build_car_rankings.py.\n'
@@ -381,15 +387,17 @@ def render(data):
                'Comfort = 40% ride/noise + 30% seating + 20% ergonomics + 10% verified power liftgate.\n'
                'Cost calculated from sourced inputs and disclosed allowances; 12k miles/year, five years; no financing.\n'
                'Nearby charging at ordinary OC electricity rate by user assumption; no home installation or retail charging markup.\n'
-               'Keep offline fallback, accessible hash dialogs, source context and optional maintenance.\n'
+               'Keep offline fallback, accessible hash dialogs, source context and equally optional categories.\n'
                'Pareto paths includes every car, equivalent groups and direct dominance links.\n'
                'Rankings, Pareto and dialogs share one five-level scores object.\n'
                'Edit scripts/car_rankings_pareto.js for the embedded network engine and interface.\n'
+               'Edit scripts/car_rankings_allocation.js for the fixed five-point allocation engine.\n'
                'See audit.md for screened candidates, old/new ranks and outstanding evidence gaps.\n')
     counts = ' · '.join(f'{n} {label}' for label, n in sorted(Counter(c['powertrain'] for c in cars).items()))
     body_counts = ' · '.join(f'{n} {label}' for label, n in sorted(Counter(c['body_style'] for c in cars).items()))
     historical_count = sum(c['eco']['basis'] == 'historical' for c in cars)
     return Template((PAGE / 'template.html').read_text()).substitute(
+        allocation_segments=''.join(segments), allocation_script=(ROOT / 'scripts/car_rankings_allocation.js').read_text(),
         handoff=handoff, count=len(cars), updated=escape(data['updated']), controls='\n'.join(controls),
         annual_miles=f'{data["assumptions"]["annual_miles"]:,}', tax_rate=f'{data["assumptions"]["sales_tax_rate"] * 100:g}',
         document_fee=f'{data["assumptions"]["document_fee"]:g}', county_fee=f'{data["assumptions"]["county_fee_allowance"]:g}',

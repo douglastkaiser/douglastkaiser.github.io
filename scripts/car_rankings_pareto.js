@@ -7,7 +7,7 @@
     return left < right ? -1 : left > right ? 1 : 0;
   }
   function total(car, weights) {
-    return Object.keys(weights).reduce(function (sum, key) { return sum + car.scores[key] * weights[key]; }, 0);
+    return Object.keys(weights).reduce(function (sum, key) { return sum + car.scores[key] * Math.round(weights[key] * 100); }, 0) / 100;
   }
   function ascending(weights) {
     return function (a, b) { return total(a, weights) - total(b, weights) || a.five - b.five || nameOrder(a, b); };
@@ -78,7 +78,7 @@
     var state = { active: false, presentation: 'network', selected: null, comparison: null };
     var frame = null, revealSelection = false;
     function el(id) { return document.getElementById(id); }
-    function signed(n) { return n > 0 ? '+' + n : n < 0 ? '−' + Math.abs(n) : '0'; }
+    function signed(n) { var text = String(Math.round(Math.abs(n) * 100) / 100); return n > 0 ? '+' + text : n < 0 ? '−' + text : '0'; }
     function money(n) { return '$' + (n / 1000).toFixed(1) + 'k'; }
     function escape(text) {
       return String(text).replace(/[&<>"']/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]; });
@@ -223,7 +223,7 @@
         var key = cat.key, active = currentWeights[key] > 0;
         var comparable = !!compared;
         var delta = comparable ? compared.scores[key] - car.scores[key] : null;
-        return '<tr data-metric="' + key + '"' + (!active ? ' class="ignored"' : '') + '><th scope="row">' + escape(cat.label) + '<small>' + currentWeights[key] + '×' + (!active ? ' · ignored' : '') + '</small></th><td>' + scoreText(car, key) + '</td><td>' + (compared ? scoreText(compared, key) : '—') + '</td><td' + (active && delta > 0 ? ' class="improvement"' : '') + '>' + (!active ? 'Ignored' : delta === null ? '—' : delta === 0 ? 'Equal' : signed(delta) + '<small> (' + signed(delta * currentWeights[key]) + ' weighted)</small>') + '</td></tr>';
+        return '<tr data-metric="' + key + '"' + (!active ? ' class="ignored"' : '') + '><th scope="row">' + escape(cat.label) + '<small>' + currentWeights[key] + ' pt' + (!active ? ' · ignored' : '') + '</small></th><td>' + scoreText(car, key) + '</td><td>' + (compared ? scoreText(compared, key) : '—') + '</td><td' + (active && delta > 0 ? ' class="improvement"' : '') + '>' + (!active ? 'Ignored' : delta === null ? '—' : delta === 0 ? 'Equal' : signed(delta) + '<small> (' + signed(delta * currentWeights[key]) + ' weighted)</small>') + '</td></tr>';
       }).join('') + '</tbody></table>';
       el('pareto-comparison').innerHTML = html;
       var announcement = car.name + ', ' + scaleLabel + ', score ' + signed(total(car, currentWeights)) + '. ' +
