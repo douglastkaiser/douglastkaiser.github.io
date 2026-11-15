@@ -74,15 +74,22 @@ def value(car, key):
     return sum(x * w for x, w in zip(info['components'], COMPONENTS[key][1]))
 
 
-def tiers(values):
+def tiers(values, levels=3):
     """Competition ranks and midpoint tiers. None is absent evidence, never a rank."""
+    if levels not in (3, 5):
+        raise ValueError('Only three or five scoring levels are supported')
     counts = Counter(v for v in values if v is not None)
     n, better, result = sum(counts.values()), 0, {None: (0, None)}
     for raw in sorted(counts, reverse=True):
         group = counts[raw]
         # Integer comparisons avoid rounding at exactly 1/3 and 2/3.
         midpoint_twice = 2 * better + group
-        score = 1 if 3 * midpoint_twice < 2 * n else -1 if 3 * midpoint_twice > 4 * n else 0
+        if levels == 3:
+            score = 1 if 3 * midpoint_twice < 2 * n else -1 if 3 * midpoint_twice > 4 * n else 0
+        else:
+            # Exact fifth boundaries go toward zero, symmetrically.
+            p = 5 * midpoint_twice
+            score = 2 if p < 2 * n else 1 if p < 4 * n else 0 if p <= 6 * n else -1 if p <= 8 * n else -2
         result[raw] = (score, better + 1)
         better += group
     return [result[v] for v in values]
@@ -193,12 +200,16 @@ def prepare(data):
     for car in cars:
         car['calculated_cost'] = calculate_cost(car, data['assumptions'])
         car['otd'], car['five'] = car['calculated_cost']['otd'], car['calculated_cost']['five']
-        car['scores'], car['ranks'], car['assessed_counts'] = {}, {}, {}
+        car['scores'], car['scores5'], car['assessed'] = {}, {}, {}
+        car['ranks'], car['assessed_counts'] = {}, {}
     for key in KEYS:
         vals = [value(c, key) for c in cars]
         count = sum(v is not None for v in vals)
         for car, (score, rank) in zip(cars, tiers(vals)):
             car['scores'][key], car['ranks'][key], car['assessed_counts'][key] = score, rank, count
+            car['assessed'][key] = rank is not None
+        for car, (score, _) in zip(cars, tiers(vals, levels=5)):
+            car['scores5'][key] = score
     for car in cars:
         car['total'] = sum(car['scores'][cat['key']] * cat['default'] for cat in data['categories'])
     return sorted(cars, key=lambda c: (-c['total'], c['five'], name_key(c)))
@@ -332,7 +343,7 @@ def render(data):
         key = cat['key']
         controls.append(f'<div class="slider-unit"><div class="line"><label for="w-{key}">{escape(cat["label"])}</label><output id="v-{key}" for="w-{key}">{cat["default"]}×</output></div>'
                         f'<input id="w-{key}" type="range" value="{cat["default"]}" min="0" max="3" step="0.5" aria-label="{escape(cat["label"])} weight"></div>')
-    payload = dict(categories=cats, cars=[{k: c[k] for k in ('id', 'name', 'five', 'scores')} for c in cars])
+    payload = dict(categories=cats, cars=[{k: c[k] for k in ('id', 'name', 'five', 'scores', 'scores5', 'assessed')} for c in cars])
     runtime_json = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c').replace('&', '\\u0026')
     handoff = (f'Generated {data["updated"]}. Edit data.json + template.html; run python3 scripts/build_car_rankings.py.\n'
                f'{len(cars)} new-car configurations; all body styles; <= $60k estimated OTD, Orange County/Irvine tax baseline.\n'
@@ -342,6 +353,9 @@ def render(data):
                'Cost calculated from sourced inputs and disclosed allowances; 12k miles/year, five years; no financing.\n'
                'Nearby charging at ordinary OC electricity rate by user assumption; no home installation or retail charging markup.\n'
                'Keep offline fallback, accessible hash dialogs, source context and optional maintenance.\n'
+               'Pareto paths uses complete active-metric coverage, equivalent groups and direct dominance links.\n'
+               'Experimental five-level scores preserve ties; only the Pareto view uses them.\n'
+               'Edit scripts/car_rankings_pareto.js for the embedded network engine and interface.\n'
                'See audit.md for screened candidates, old/new ranks and outstanding evidence gaps.\n')
     coverage = sum(c['eco']['benchmark_score'] is not None for c in cars)
     counts = ' · '.join(f'{n} {label}' for label, n in sorted(Counter(c['powertrain'] for c in cars).items()))
@@ -354,7 +368,9 @@ def render(data):
         gas_upkeep=f'{data["assumptions"]["routine_upkeep_per_mile"]["Gas"] * 100:g}', hybrid_upkeep=f'{data["assumptions"]["routine_upkeep_per_mile"]["Hybrid"] * 100:g}', ev_upkeep=f'{data["assumptions"]["routine_upkeep_per_mile"]["EV"] * 100:g}',
         headers=''.join(f'<span data-category="{c["key"]}" title="{escape(c["label"])}">{escape(c["short"])}</span>' for c in cats),
         rows='\n'.join(row(c, cats, i + 1) for i, c in enumerate(cars)), leader=f'Leader: {escape(cars[0]["name"])} ({signed(cars[0]["total"])})',
-        modals='\n'.join(modal(data, c) for c in cars), runtime_json=runtime_json, eco_coverage=f'{coverage}/{len(cars)}', lineup=counts,
+        modals='\n'.join(modal(data, c) for c in cars), runtime_json=runtime_json,
+        pareto_script=(ROOT / 'scripts/car_rankings_pareto.js').read_text(),
+        eco_coverage=f'{coverage}/{len(cars)}', lineup=counts,
         **{'source_' + k: link(data['sources'][v]) for k, v in dict(aceee='aceee_method', coverage='aceee_coverage', ncap='ncap',
             cr='cr_adas', iihs='iihs_adas', repairpal='repairpal', roof='roof', chains='chains', sce='sce', tax='tax', dmv='dmv', resale='resale', gas='gas', doe='doe').items()})
 

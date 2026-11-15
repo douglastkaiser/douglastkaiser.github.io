@@ -44,6 +44,16 @@ class TierTests(unittest.TestCase):
         self.assertEqual(build.tiers([None, 3, 2, 1]), [(0, None), (1, 1), (0, 2), (-1, 3)])
         self.assertEqual(build.tiers([None, None]), [(0, None), (0, None)])
 
+    def test_five_level_boundaries_go_toward_neutral(self):
+        self.assertEqual(build.tiers([5, 5, 3, 1, 1], 5), [(1, 1), (1, 1), (0, 3), (-1, 4), (-1, 4)])
+        self.assertEqual([s for s, _ in build.tiers([5, 4, 4, 3, 2], 5)], [2, 0, 0, -1, -2])
+        self.assertEqual([s for s, _ in build.tiers([5, 4, 3, 3, 2], 5)], [2, 1, 0, 0, -2])
+        self.assertEqual(build.tiers([9] * 7, 5), [(0, 1)] * 7)
+        self.assertEqual(build.tiers([None, 5, 4, 3, 2, 1], 5), [(0, None), (2, 1), (1, 2), (0, 3), (-1, 4), (-2, 5)])
+        self.assertEqual(build.tiers([], 5), [])
+        with self.assertRaises(ValueError):
+            build.tiers([1], 4)
+
 
 class RankingsTests(unittest.TestCase):
     @classmethod
@@ -97,6 +107,23 @@ class RankingsTests(unittest.TestCase):
         self.assertEqual([c['id'] for c in runtime['cars']], [c['id'] for c in self.cars])
         for c, r in zip(self.cars, runtime['cars']):
             self.assertEqual(c['scores'], r['scores']); self.assertEqual(c['five'], r['five'])
+
+    def test_pareto_coverage_and_experimental_scores_preserve_evidence(self):
+        self.assertEqual(sum(c['assessed']['eco'] for c in self.cars), 20)
+        for key in build.KEYS:
+            groups = {}
+            for car in self.cars:
+                raw = build.value(car, key)
+                self.assertIs(car['assessed'][key], raw is not None)
+                self.assertIn(car['scores5'][key], (-2, -1, 0, 1, 2))
+                if raw in groups:
+                    self.assertEqual(car['scores5'][key], groups[raw])
+                groups[raw] = car['scores5'][key]
+                if raw is None:
+                    self.assertEqual(car['scores5'][key], 0)
+        original = deepcopy(self.data)
+        build.prepare(self.data)
+        self.assertEqual(self.data, original)
 
     def test_input_order_and_names_do_not_change_category_scores(self):
         data = deepcopy(self.data); random.Random(42).shuffle(data['cars'])

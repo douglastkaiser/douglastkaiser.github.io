@@ -30,6 +30,7 @@ jobs:
         run: |
           python3 -B scripts/test_car_rankings.py
           python3 -B scripts/build_car_rankings.py --check
+          node --test scripts/test_car_rankings_pareto.js
 
       - name: Build resume PDF
         uses: xu-cheng/latex-action@v3
