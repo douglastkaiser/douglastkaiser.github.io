@@ -2,6 +2,7 @@
 """Offline arithmetic, evidence contracts and generation tests (standard library only)."""
 from collections import Counter
 from copy import deepcopy
+from html import escape
 from html.parser import HTMLParser
 from decimal import Decimal, ROUND_HALF_UP
 import json
@@ -22,7 +23,8 @@ class PageParser(HTMLParser):
 
 class TierTests(unittest.TestCase):
     def test_distinct_values_and_arbitrary_sizes(self):
-        self.assertEqual(build.tiers([3, 2, 1]), [(1, 1), (0, 2), (-1, 3)])
+        self.assertEqual(build.tiers([5, 4, 3, 2, 1]), [(2, 1), (1, 2), (0, 3), (-1, 4), (-2, 5)])
+        self.assertEqual(build.tiers([3, 2, 1]), [(2, 1), (0, 2), (-2, 3)])
         self.assertEqual(build.tiers([2, 1]), [(1, 1), (-1, 2)])
         self.assertEqual(build.tiers([4]), [(0, 1)])
         self.assertEqual(build.tiers([]), [])
@@ -32,27 +34,18 @@ class TierTests(unittest.TestCase):
             self.assertEqual([rank for _, rank in result], list(range(n, 0, -1)))
 
     def test_equal_values_keep_shared_tier_and_rank(self):
-        self.assertEqual(build.tiers([5, 4, 4, 4, 1]), [(1, 1), (0, 2), (0, 2), (0, 2), (-1, 5)])
+        self.assertEqual(build.tiers([5, 4, 4, 4, 1]), [(2, 1), (0, 2), (0, 2), (0, 2), (-2, 5)])
         self.assertEqual(build.tiers([9] * 7), [(0, 1)] * 7)
 
-    def test_exact_third_boundaries_are_middle(self):
-        self.assertEqual(build.tiers([3, 3, 2]), [(0, 1), (0, 1), (-1, 3)])
-        self.assertEqual(build.tiers([3, 2, 2]), [(1, 1), (0, 2), (0, 2)])
-        self.assertEqual(build.tiers([10, 9, 9, 8, 7, 6])[1:3], [(0, 2)] * 2)
+    def test_fifth_boundaries_go_toward_neutral(self):
+        self.assertEqual(build.tiers([5, 5, 3, 1, 1]), [(1, 1), (1, 1), (0, 3), (-1, 4), (-1, 4)])
+        self.assertEqual([s for s, _ in build.tiers([5, 4, 4, 3, 2])], [2, 0, 0, -1, -2])
+        self.assertEqual([s for s, _ in build.tiers([5, 4, 3, 3, 2])], [2, 1, 0, 0, -2])
 
-    def test_unknowns_are_not_in_percentile_denominator(self):
-        self.assertEqual(build.tiers([None, 3, 2, 1]), [(0, None), (1, 1), (0, 2), (-1, 3)])
-        self.assertEqual(build.tiers([None, None]), [(0, None), (0, None)])
-
-    def test_five_level_boundaries_go_toward_neutral(self):
-        self.assertEqual(build.tiers([5, 5, 3, 1, 1], 5), [(1, 1), (1, 1), (0, 3), (-1, 4), (-1, 4)])
-        self.assertEqual([s for s, _ in build.tiers([5, 4, 4, 3, 2], 5)], [2, 0, 0, -1, -2])
-        self.assertEqual([s for s, _ in build.tiers([5, 4, 3, 3, 2], 5)], [2, 1, 0, 0, -2])
-        self.assertEqual(build.tiers([9] * 7, 5), [(0, 1)] * 7)
-        self.assertEqual(build.tiers([None, 5, 4, 3, 2, 1], 5), [(0, None), (2, 1), (1, 2), (0, 3), (-1, 4), (-2, 5)])
-        self.assertEqual(build.tiers([], 5), [])
-        with self.assertRaises(ValueError):
-            build.tiers([1], 4)
+    def test_incomplete_and_nonfinite_values_are_rejected(self):
+        for invalid in (None, float('nan'), float('inf'), -float('inf'), True, '3'):
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                build.tiers([5, invalid, 1])
 
 
 class RankingsTests(unittest.TestCase):
@@ -80,7 +73,7 @@ class RankingsTests(unittest.TestCase):
                 if raw in groups:
                     self.assertEqual(groups[raw], pair)
                 groups[raw] = pair
-            self.assertTrue(set(c['scores'][key] for c in self.cars) <= {-1, 0, 1})
+            self.assertTrue(set(c['scores'][key] for c in self.cars) <= {-2, -1, 0, 1, 2})
 
     def test_each_row_has_one_detail_and_no_duplicate_ids(self):
         rows = [a for tag, a in self.elements if tag == 'a' and 'car' in a.get('class', '').split()]
@@ -108,22 +101,44 @@ class RankingsTests(unittest.TestCase):
         for c, r in zip(self.cars, runtime['cars']):
             self.assertEqual(c['scores'], r['scores']); self.assertEqual(c['five'], r['five'])
 
-    def test_pareto_coverage_and_experimental_scores_preserve_evidence(self):
-        self.assertEqual(sum(c['assessed']['eco'] for c in self.cars), 20)
-        for key in build.KEYS:
-            groups = {}
-            for car in self.cars:
-                raw = build.value(car, key)
-                self.assertIs(car['assessed'][key], raw is not None)
-                self.assertIn(car['scores5'][key], (-2, -1, 0, 1, 2))
-                if raw in groups:
-                    self.assertEqual(car['scores5'][key], groups[raw])
-                groups[raw] = car['scores5'][key]
-                if raw is None:
-                    self.assertEqual(car['scores5'][key], 0)
-        original = deepcopy(self.data)
-        build.prepare(self.data)
-        self.assertEqual(self.data, original)
+    def test_one_complete_score_payload(self):
+        runtime = json.loads(self.html.split('<script id="ranking-data" type="application/json">')[1].split('</script>')[0])
+        for car in runtime['cars']:
+            self.assertEqual(set(car), {'id', 'name', 'five', 'scores'})
+            self.assertEqual(set(car['scores']), set(build.KEYS))
+            self.assertTrue(all(type(v) is int and -2 <= v <= 2 for v in car['scores'].values()))
+        for car in self.cars:
+            self.assertTrue(all(car['ranks'][k] is not None for k in build.KEYS))
+            self.assertEqual(set(car['assessed_counts'].values()), {len(self.cars)})
+        for stale in ('scores5', 'unscored', 'experimental', 'Current 3 levels', 'pareto-scale', 'pareto-incomplete'):
+            self.assertNotIn(stale, self.html)
+
+    def test_selected_commute_capabilities_affect_ratings(self):
+        byid = {c['id']: c for c in self.cars}
+        # Selected paid/advanced features must not collapse into the basic profile.
+        for enhanced, basic in (('model3', 'mache'), ('modely', 'mache'),
+                                ('ioniq5', 'tucson'), ('cx5', 'cx30'),
+                                ('niro', 'k4'), ('ev6', 'k4'), ('gti', 'mache')):
+            self.assertGreater(build.value(byid[enhanced], 'commute'), build.value(byid[basic], 'commute'))
+            self.assertGreater(byid[enhanced]['scores']['commute'], byid[basic]['scores']['commute'])
+        self.assertLess(byid['bolt']['scores']['commute'], byid['mache']['scores']['commute'])
+        self.assertLess(build.value(byid['rdx'], 'commute'), build.value(byid['crv'], 'commute'))
+        self.assertEqual(byid['model3']['calculated_cost']['subscriptions'], 99 * 12 * 5)
+        self.assertEqual(byid['mache']['calculated_cost']['subscriptions'], 0)
+
+    def test_commute_components_have_specific_rendered_rationales(self):
+        for car in self.cars:
+            info = car['commute']
+            self.assertTrue(info['system'])
+            self.assertEqual(len(info['component_notes']), 3)
+            html = build.assessment(self.data, car, self.data['categories'][4])
+            for value, note in zip(info['components'], info['component_notes']):
+                self.assertTrue(note.startswith(f'{value}/5:'))
+                self.assertIn(escape(note), html)
+            self.assertIn(escape(info['system']), html)
+        for cid, excluded in (('mache', 'BlueCruise unselected'), ('bolt', 'Super Cruise unselected')):
+            car = next(c for c in self.cars if c['id'] == cid)
+            self.assertIn(excluded, car['commute']['system'])
 
     def test_input_order_and_names_do_not_change_category_scores(self):
         data = deepcopy(self.data); random.Random(42).shuffle(data['cars'])
@@ -140,19 +155,19 @@ class RankingsTests(unittest.TestCase):
         self.assertEqual({c['scores']['lux'] for c in result}, {0})
         self.assertEqual({c['ranks']['lux'] for c in result}, {1})
 
-    def test_missing_eco_renders_dash_and_no_rank(self):
-        missing = [c for c in self.cars if c['eco']['benchmark_score'] is None]
-        self.assertTrue(missing)
-        for c in missing:
-            self.assertEqual(c['scores']['eco'], 0); self.assertIsNone(c['ranks']['eco'])
-            html = build.assessment(self.data, c, self.data['categories'][1])
-            self.assertIn('Unscored', html); self.assertIn('class="pill unscored">—', html)
-            self.assertNotIn('joint #', html)
-        data = deepcopy(self.data)
-        for c in data['cars']:
-            c['eco'].update(benchmark_score=None, benchmark_year=None, status='Unscored')
-        self.assertTrue(all(c['scores']['eco'] == 0 for c in build.prepare(data)))
-        self.assertIn('0/' + str(len(data['cars'])), build.render(data))
+    def test_proxy_eco_has_a_score_rank_and_explained_sources(self):
+        proxies = [c for c in self.cars if c['eco']['basis'] == 'proxy']
+        self.assertEqual(len(proxies), 25)
+        for car in proxies:
+            html = build.assessment(self.data, car, self.data['categories'][1])
+            self.assertIn('Estimated lifecycle assessment:', html)
+            self.assertIn('not a published ACEEE rating', html)
+            self.assertIn(car['eco']['adjustment_note'], html)
+            self.assertNotIn('—</span>', html)
+            self.assertIsNotNone(car['ranks']['eco'])
+            for proxy in car['eco']['proxy_records']:
+                self.assertIn(str(proxy['score']) + '/100', html)
+                self.assertIn(self.data['sources'][proxy['source']]['url'], html)
 
     def test_any_cohort_size_works(self):
         for n in (1, 2, 5, 7, 11):
@@ -195,18 +210,30 @@ class RankingsTests(unittest.TestCase):
         y = next(c for c in self.data['cars'] if c['id'] == 'modely')
         self.assertEqual(y['energy']['epa_model'], 'Model Y Standard RWD (18in Wheels)')
 
-    def test_all_evidence_is_scoped_and_unscored_eco_is_explicit(self):
-        for c in self.data['cars']:
+    def test_all_evidence_is_scoped_and_estimates_are_distinct(self):
+        historical = 0
+        for car in self.data['cars']:
             for key in ('cost','eco','mountain','comfort','commute','maintenance'):
-                info = c[key]
+                info = car[key]
                 for name in ('status','source_year','configuration','note','sources'): self.assertTrue(info[name])
-            e = c['eco']
-            if e['benchmark_score'] is not None:
-                self.assertEqual(e['benchmark_score'], e['benchmark_record']['score'])
-                self.assertTrue(e['comparable']); self.assertEqual(e['benchmark_record']['year'], 2024)
-                self.assertEqual(e['benchmark_record']['make'].casefold(), c['manufacturer'].casefold())
+            eco = car['eco']
+            self.assertTrue(build.finite(eco['assessment_score'], 0, 100))
+            if eco['basis'] == 'historical':
+                historical += 1
+                self.assertEqual(eco['assessment_score'], eco['benchmark_record']['score'])
+                self.assertEqual(eco['benchmark_score'], eco['benchmark_record']['score'])
+                self.assertTrue(eco['comparable'])
             else:
-                self.assertEqual(e['status'], 'Unscored')
+                self.assertIsNone(eco['benchmark_score'])
+                self.assertTrue(eco['proxy_records'])
+                self.assertTrue(eco['adjustment_note'])
+            self.assertTrue(all(type(car['equipment'][k]) is bool for k in ('power_liftgate','adaptive_cruise','lane_centering')))
+        self.assertEqual(historical, 20)
+        for cid in ('cx50', 'equinoxev'):
+            car = next(c for c in self.cars if c['id'] == cid)
+            self.assertIn('estimated fitment', car['equipment']['estimates']['lane_centering'])
+            html = build.assessment(self.data, car, self.data['categories'][4])
+            self.assertIn('estimated fitment', html)
 
     def test_no_runtime_network_or_stale_method_claims(self):
         for tag, attrs in self.elements:
@@ -244,6 +271,20 @@ class RankingsTests(unittest.TestCase):
         def rejects(change):
             data = deepcopy(self.data); change(data)
             with self.assertRaises(ValueError): build.prepare(data)
+        for invalid in (None, float('nan'), float('inf'), -1, 101, True):
+            rejects(lambda d, invalid=invalid: d['cars'][0]['eco'].update(assessment_score=invalid))
+        rejects(lambda d: d['cars'][0]['eco'].pop('assessment_score'))
+        rejects(lambda d: d['cars'][0]['eco'].update(basis='unscored'))
+        rejects(lambda d: d['cars'][0]['eco'].update(proxy_records=[]))
+        rejects(lambda d: d['cars'][0]['eco'].update(adjustment_note=''))
+        rejects(lambda d: d['cars'][0]['eco']['proxy_records'][0].update(source='nonexistent'))
+        rejects(lambda d: d['cars'][0]['eco'].update(benchmark_score=50))
+        rejects(lambda d: next(c for c in d['cars'] if c['eco']['basis'] == 'historical')['eco'].update(assessment_score=0))
+        rejects(lambda d: d['cars'][0]['equipment'].update(power_liftgate=None))
+        rejects(lambda d: d['cars'][0]['equipment'].update(lane_centering=None))
+        rejects(lambda d: d['cars'][0]['commute'].update(system=''))
+        rejects(lambda d: d['cars'][0]['commute'].update(component_notes=[]))
+        rejects(lambda d: d['cars'][0]['commute'].update(component_notes=['valid', None, 'valid']))
         rejects(lambda d: d['cars'].clear())
         rejects(lambda d: d['cars'].append(deepcopy(d['cars'][0])))
         rejects(lambda d: d['cars'][0]['price'].update(msrp=100000))

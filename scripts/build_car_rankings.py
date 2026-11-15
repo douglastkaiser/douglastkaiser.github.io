@@ -17,7 +17,7 @@ KEYS = ('cost', 'eco', 'mountain', 'lux', 'commute', 'maintenance')
 COMPONENTS = {
     'mountain': (('Carrying', 'Winter access', 'Trip practicality'), (40, 35, 25)),
     'lux': (('Ride/noise', 'Seating', 'Cabin ergonomics', 'Power liftgate'), (40, 30, 20, 10)),
-    'commute': (('Stop/go', 'Continuous centering', 'Monitoring/usability'), (40, 35, 25)),
+    'commute': (('Traffic/speed control', 'Steering coverage', 'Supervision/usability'), (40, 35, 25)),
     'maintenance': (('Less disruption', 'Less routine upkeep', 'Service access'), (50, 30, 20)),
 }
 
@@ -69,27 +69,22 @@ def value(car, key):
     if key == 'cost':
         return -car['five']
     if key == 'eco':
-        return car['eco']['benchmark_score']
+        return car['eco']['assessment_score']
     info = car['comfort' if key == 'lux' else key]
     return sum(x * w for x, w in zip(info['components'], COMPONENTS[key][1]))
 
 
-def tiers(values, levels=3):
-    """Competition ranks and midpoint tiers. None is absent evidence, never a rank."""
-    if levels not in (3, 5):
-        raise ValueError('Only three or five scoring levels are supported')
-    counts = Counter(v for v in values if v is not None)
-    n, better, result = sum(counts.values()), 0, {None: (0, None)}
+def tiers(values):
+    """Five midpoint-percentile bands with shared competition ranks."""
+    if any(not finite(v, -math.inf) for v in values):
+        raise ValueError('Every assessment needs a finite numeric value')
+    counts = Counter(values)
+    n, better, result = len(values), 0, {}
     for raw in sorted(counts, reverse=True):
         group = counts[raw]
-        # Integer comparisons avoid rounding at exactly 1/3 and 2/3.
-        midpoint_twice = 2 * better + group
-        if levels == 3:
-            score = 1 if 3 * midpoint_twice < 2 * n else -1 if 3 * midpoint_twice > 4 * n else 0
-        else:
-            # Exact fifth boundaries go toward zero, symmetrically.
-            p = 5 * midpoint_twice
-            score = 2 if p < 2 * n else 1 if p < 4 * n else 0 if p <= 6 * n else -1 if p <= 8 * n else -2
+        # Exact 20/40/60/80 percent boundaries go toward zero.
+        p = 5 * (2 * better + group)
+        score = 2 if p < 2 * n else 1 if p < 4 * n else 0 if p <= 6 * n else -1 if p <= 8 * n else -2
         result[raw] = (score, better + 1)
         better += group
     return [result[v] for v in values]
@@ -138,8 +133,8 @@ def validate(data):
                 raise ValueError('Invalid price')
         if any(not o.get('name') or not finite(o['price']) for o in car['price']['options']):
             raise ValueError('Invalid selected option')
-        if any(type(car['equipment'][k]) not in (bool, type(None)) for k in ('power_liftgate', 'adaptive_cruise', 'lane_centering')):
-            raise ValueError('Equipment status must be true, false or explicitly unknown')
+        if any(type(car['equipment'][k]) is not bool for k in ('power_liftgate', 'adaptive_cruise', 'lane_centering')):
+            raise ValueError('Equipment needs a verified or estimated boolean assessment')
         e = car['energy']
         if e['epa_year'] != car['year'] or e['epa_make'] != car['manufacturer']:
             raise ValueError('Energy reference model year/manufacturer mismatch')
@@ -169,21 +164,36 @@ def validate(data):
             if len(components) != len(names) or any(type(v) is not int or not 0 <= v <= 5 for v in components):
                 raise ValueError(f'Invalid components: {car["id"]}/{key}')
         if car['comfort']['components'][3] != (5 if car['equipment']['power_liftgate'] is True else 0):
-            raise ValueError('Only verified selected power liftgates receive comfort credit')
+            raise ValueError('Liftgate component must match the selected equipment assessment')
         if car['equipment']['lane_centering'] is not True and car['commute']['components'][1] != 0:
-            raise ValueError('Unconfirmed/corrective-only steering cannot receive centering credit')
+            raise ValueError('Absent/corrective-only steering cannot receive centering credit')
         if car['equipment']['adaptive_cruise'] is not True and car['commute']['components'][0] != 0:
-            raise ValueError('Unconfirmed adaptive cruise cannot receive stop/go credit')
+            raise ValueError('Absent adaptive cruise cannot receive stop/go credit')
+        commute = car['commute']
+        if not commute.get('system') or len(commute.get('component_notes', [])) != 3 or any(not isinstance(note, str) or not note.strip() for note in commute['component_notes']):
+            raise ValueError('Commute assessments need a selected system and three component rationales')
         eco = car['eco']
-        if eco['benchmark_score'] is not None:
-            if not finite(eco['benchmark_score'], 0, 100) or eco['benchmark_year'] != 2024 or not eco.get('benchmark_record') or not eco.get('comparable'):
-                raise ValueError('Scored eco needs a comparable historical source record')
+        if not finite(eco.get('assessment_score'), 0, 100) or eco.get('basis') not in ('historical', 'proxy'):
+            raise ValueError('Eco needs a finite assessment score and historical/proxy basis')
+        if eco['basis'] == 'historical':
+            if not finite(eco.get('benchmark_score'), 0, 100) or eco['benchmark_year'] != 2024 or not eco.get('benchmark_record') or not eco.get('comparable'):
+                raise ValueError('Historical eco needs a comparable source record')
             if eco['benchmark_record']['year'] != eco['benchmark_year'] or eco['benchmark_record']['make'].casefold() != car['manufacturer'].casefold():
                 raise ValueError('Eco anchor must match the manufacturer and historical year')
-            if float(eco['benchmark_record']['score']) != eco['benchmark_score']:
-                raise ValueError('Eco value must match its source record')
-        elif eco['status'] != 'Unscored':
-            raise ValueError('Missing evidence must be explicitly unscored')
+            if float(eco['benchmark_record']['score']) != eco['benchmark_score'] or eco['assessment_score'] != eco['benchmark_score']:
+                raise ValueError('Historical assessment must match its source record')
+        else:
+            if eco.get('benchmark_score') is not None or eco.get('benchmark_record') is not None or eco.get('comparable'):
+                raise ValueError('Proxy estimates must not masquerade as published same-model benchmarks')
+            proxies = eco.get('proxy_records', [])
+            if not proxies or not eco.get('adjustment_note'):
+                raise ValueError('Proxy eco needs source records and an adjustment rationale')
+            for proxy in proxies:
+                if not all(proxy.get(k) for k in ('model', 'year', 'source')) or not finite(proxy.get('score'), 0, 100) or proxy['source'] not in eco['sources']:
+                    raise ValueError('Invalid lifecycle proxy record')
+        for key, note in car['equipment'].get('estimates', {}).items():
+            if key not in ('power_liftgate', 'adaptive_cruise', 'lane_centering') or not isinstance(note, str) or not note.strip():
+                raise ValueError('Equipment estimates need a capability and rationale')
         for key in ('cost', 'eco', 'mountain', 'comfort', 'commute', 'maintenance'):
             info = car[key]
             if not all(info.get(k) for k in ('status', 'source_year', 'configuration', 'note')):
@@ -200,16 +210,13 @@ def prepare(data):
     for car in cars:
         car['calculated_cost'] = calculate_cost(car, data['assumptions'])
         car['otd'], car['five'] = car['calculated_cost']['otd'], car['calculated_cost']['five']
-        car['scores'], car['scores5'], car['assessed'] = {}, {}, {}
+        car['scores'] = {}
         car['ranks'], car['assessed_counts'] = {}, {}
     for key in KEYS:
         vals = [value(c, key) for c in cars]
-        count = sum(v is not None for v in vals)
+        count = len(cars)
         for car, (score, rank) in zip(cars, tiers(vals)):
             car['scores'][key], car['ranks'][key], car['assessed_counts'][key] = score, rank, count
-            car['assessed'][key] = rank is not None
-        for car, (score, _) in zip(cars, tiers(vals, levels=5)):
-            car['scores5'][key] = score
     for car in cars:
         car['total'] = sum(car['scores'][cat['key']] * cat['default'] for cat in data['categories'])
     return sorted(cars, key=lambda c: (-c['total'], c['five'], name_key(c)))
@@ -227,9 +234,9 @@ def exact_money(n):
     return f'${n:,.2f}'
 
 
-def pill(n, missing=False):
-    style = 'unscored' if missing else 'positive' if n > 0 else 'negative' if n < 0 else 'neutral'
-    return f'<span class="pill {style}">{"—" if missing else signed(n)}</span>'
+def pill(n):
+    style = 'positive' if n > 0 else 'negative' if n < 0 else 'neutral'
+    return f'<span class="pill {style}">{signed(n)}</span>'
 
 
 def link(src):
@@ -268,20 +275,24 @@ def cost_details(car, assumptions):
 
 def assessment(data, car, cat):
     key = cat['key']; info = car['comfort' if key == 'lux' else key]
-    missing = car['ranks'][key] is None
-    tier = 'Unscored · contributes 0; evidence missing' if missing else {1: 'Upper tier', 0: 'Middle tier', -1: 'Lower tier'}[car['scores'][key]]
-    rank_text = '' if missing else f' · #{car["ranks"][key]} of {car["assessed_counts"][key]} assessed'
+    tier = {2: 'Highest band', 1: 'Upper band', 0: 'Middle band', -1: 'Lower band', -2: 'Lowest band'}[car['scores'][key]]
+    rank_text = f' · #{car["ranks"][key]} of {car["assessed_counts"][key]} assessed'
     head = (f'<section class="assessment" data-assessment="{key}"><div class="assess-head"><h3>{escape(cat["label"])}</h3>'
-            f'{pill(car["scores"][key], missing)}<span class="tiernote">{tier}{rank_text}</span></div>'
+            f'{pill(car["scores"][key])}<span class="tiernote">{tier}{rank_text}</span></div>'
             f'<p class="status">{escape(info["status"])}</p>')
     if key == 'cost':
         body = cost_details(car, data['assumptions'])
     elif key == 'eco':
-        if missing:
-            body = '<p>No comparable published lifecycle score verified. This is missing evidence, not an average environmental rating. Other category weights are not increased to compensate.</p>'
-        else:
+        if info['basis'] == 'historical':
             body = (f'<p><b>Historical 2024 Green Score: {info["benchmark_score"]}/100</b> — {escape(info["benchmark_model"])}. '
                     'This is a comparison anchor, not a current-model test rating.</p>')
+        else:
+            body = (f'<p><b>Estimated lifecycle assessment: {info["assessment_score"]}/100</b>. '
+                    'Editorial proxy estimate on the historical Green Score scale; not a published ACEEE rating for this car.</p>')
+            body += '<p>Lifecycle proxies: ' + '; '.join(
+                f'{escape(str(p["year"]))} {escape(p["model"])} ({p["score"]}/100)'
+                for p in info['proxy_records']) + '.</p>'
+            body += f'<p>{escape(info["adjustment_note"])}</p>'
         body += f'<p>{escape(info["note"])}</p>'
     elif key == 'mountain':
         body = (f'<p><b>Three adults + gear:</b> {escape(info["note"])}</p>'
@@ -289,18 +300,19 @@ def assessment(data, car, cat):
                 f'<p><b>Winter:</b> {escape(info["winter"])}</p><p><b>Trip:</b> {escape(info["trip"])}</p>'
                 '<p class="evidence">Rack/box and winter tires cost extra and are excluded from the base cost comparison for every vehicle. Exact gear fit, roof load and hatch/trunk clearance remain unmeasured.</p>' + component_text(car, key))
     elif key == 'lux':
-        lift = 'Selected configuration has a verified power liftgate.' if car['equipment']['power_liftgate'] is True else 'No power-liftgate credit: manual opening or unverified selected fitment.'
+        lift = 'Selected configuration has a verified power liftgate.' if car['equipment']['power_liftgate'] is True else 'Selected configuration is assessed as a manual rear opening.'
         body = f'<p>{escape(info["note"])}</p><p>{lift} Liftgate is 10% of Comfort only; body style never determines eligibility. Assistance is separate.</p>' + component_text(car, key)
     elif key == 'commute':
+        rationale = ''.join(f'<p><b>{escape(name)}:</b> {escape(note)}</p>'
+                            for name, note in zip(COMPONENTS[key][0], info['component_notes']))
         body = (f'<p>{escape(info["note"])}</p><p><b>Selected equipment:</b> {escape(info["package"])}</p>'
-                '<p class="evidence">Component values compare credited capabilities, not tested system performance. Check speed limits, restart behavior, driver supervision and operating conditions in the exact-build manual.</p>' + component_text(car, key))
+                + rationale + '<p class="evidence">Component values compare supported tasks and editorial usefulness. Road conditions, restart limits, software and driver supervision still matter. A higher capability score is not a safety certification.</p>' + component_text(car, key))
     else:
         body = (f'<p>{escape(info["note"])}</p><p>{escape(info["upkeep"])}</p><p><b>Repairability:</b> {escape(info["repairability"])}</p>'
                 '<p class="evidence">No current-model failure rate or numeric repairability rating is claimed. Dollar upkeep is already in Cost; this optional dimension concerns time and disruption.</p>' + component_text(car, key))
-    if not missing:
-        ties = sum(value(other, key) == value(car, key) for other in prepare_values(data, key))
-        if ties > 1:
-            body += f'<p class="evidence">{ties} vehicles share this underlying value and receive the same tier and category rank.</p>'
+    ties = sum(value(other, key) == value(car, key) for other in prepare_values(data, key))
+    if ties > 1:
+        body += f'<p class="evidence">{ties} vehicles share this underlying value and receive the same tier and category rank.</p>'
     return head + body + evidence(data, info) + '</section>'
 
 
@@ -313,12 +325,11 @@ def prepare_values(data, key):
 def row(car, cats, rank):
     cells = []
     for cat in cats:
-        key = cat['key']; missing = car['ranks'][key] is None
-        label = f'{cat["label"]}: ' + ('unscored; missing evidence; contributes zero' if missing else signed(car['scores'][key]))
-        cells.append(f'<span class="cell" data-category="{key}" data-label="{escape(cat["short"])}" title="{escape(label)}" aria-label="{escape(label)}">{pill(car["scores"][key], missing)}</span>')
-    warning = '<small class="availability">Eco unscored · see evidence</small>' if car['eco']['benchmark_score'] is None else ''
+        key = cat['key']
+        label = f'{cat["label"]}: {signed(car["scores"][key])}'
+        cells.append(f'<span class="cell" data-category="{key}" data-label="{escape(cat["short"])}" title="{escape(label)}" aria-label="{escape(label)}">{pill(car["scores"][key])}</span>')
     return (f'<a class="car{" first" if rank == 1 else ""}" data-id="{car["id"]}" href="#detail-{car["id"]}" aria-label="Details for {escape(car["name"])}">'
-            f'<span class="rank">{rank:02}</span><span class="name">{escape(car["name"])}{warning}</span><strong class="total">{signed(car["total"])}</strong>'
+            f'<span class="rank">{rank:02}</span><span class="name">{escape(car["name"])}</span><strong class="total">{signed(car["total"])}</strong>'
             f'<span class="cells">{"".join(cells)}</span><span class="arrow" aria-hidden="true">›</span></a>')
 
 
@@ -343,21 +354,20 @@ def render(data):
         key = cat['key']
         controls.append(f'<div class="slider-unit"><div class="line"><label for="w-{key}">{escape(cat["label"])}</label><output id="v-{key}" for="w-{key}">{cat["default"]}×</output></div>'
                         f'<input id="w-{key}" type="range" value="{cat["default"]}" min="0" max="3" step="0.5" aria-label="{escape(cat["label"])} weight"></div>')
-    payload = dict(categories=cats, cars=[{k: c[k] for k in ('id', 'name', 'five', 'scores', 'scores5', 'assessed')} for c in cars])
+    payload = dict(categories=cats, cars=[{k: c[k] for k in ('id', 'name', 'five', 'scores')} for c in cars])
     runtime_json = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c').replace('&', '\\u0026')
     handoff = (f'Generated {data["updated"]}. Edit data.json + template.html; run python3 scripts/build_car_rankings.py.\n'
                f'{len(cars)} new-car configurations; all body styles; <= $60k estimated OTD, Orange County/Irvine tax baseline.\n'
                'Keys: cost, eco, mountain, lux, commute, maintenance. First five default 1; maintenance 0.\n'
-               'Tiers use equal-value midpoint percentiles; ties share scores/ranks. Missing eco is unscored, contributes 0.\n'
+               'Five-level tiers use full-cohort midpoint percentiles; ties share scores/ranks. Every metric has an assessment.\n'
                'Comfort = 40% ride/noise + 30% seating + 20% ergonomics + 10% verified power liftgate.\n'
                'Cost calculated from sourced inputs and disclosed allowances; 12k miles/year, five years; no financing.\n'
                'Nearby charging at ordinary OC electricity rate by user assumption; no home installation or retail charging markup.\n'
                'Keep offline fallback, accessible hash dialogs, source context and optional maintenance.\n'
-               'Pareto paths uses complete active-metric coverage, equivalent groups and direct dominance links.\n'
-               'Experimental five-level scores preserve ties; only the Pareto view uses them.\n'
+               'Pareto paths includes every car, equivalent groups and direct dominance links.\n'
+               'Rankings, Pareto and dialogs share one five-level scores object.\n'
                'Edit scripts/car_rankings_pareto.js for the embedded network engine and interface.\n'
                'See audit.md for screened candidates, old/new ranks and outstanding evidence gaps.\n')
-    coverage = sum(c['eco']['benchmark_score'] is not None for c in cars)
     counts = ' · '.join(f'{n} {label}' for label, n in sorted(Counter(c['powertrain'] for c in cars).items()))
     return Template((PAGE / 'template.html').read_text()).substitute(
         handoff=handoff, count=len(cars), updated=escape(data['updated']), controls='\n'.join(controls),
@@ -370,7 +380,7 @@ def render(data):
         rows='\n'.join(row(c, cats, i + 1) for i, c in enumerate(cars)), leader=f'Leader: {escape(cars[0]["name"])} ({signed(cars[0]["total"])})',
         modals='\n'.join(modal(data, c) for c in cars), runtime_json=runtime_json,
         pareto_script=(ROOT / 'scripts/car_rankings_pareto.js').read_text(),
-        eco_coverage=f'{coverage}/{len(cars)}', lineup=counts,
+        lineup=counts,
         **{'source_' + k: link(data['sources'][v]) for k, v in dict(aceee='aceee_method', coverage='aceee_coverage', ncap='ncap',
             cr='cr_adas', iihs='iihs_adas', repairpal='repairpal', roof='roof', chains='chains', sce='sce', tax='tax', dmv='dmv', resale='resale', gas='gas', doe='doe').items()})
 

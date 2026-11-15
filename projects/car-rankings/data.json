@@ -1037,6 +1037,34 @@
       "year": 2026,
       "scope": "Describes optional Hands-On Steering Assist and connected-plan conditions; does not establish selected LT1 hardware/entitlement. LKA alone is corrective.",
       "checked": "2026-11-14"
+    },
+    "aceee_2024_greenest": {
+      "title": "ACEEE 2024 Greenest List and lifecycle explanation",
+      "url": "https://www.aceee.org/news/electric-vehicles-top-2024-greenercars-rankings-prices-drop/",
+      "year": 2024,
+      "scope": "Published 2024 top-12 table; historical proxy records, not current-year or exact-trim ratings",
+      "checked": "2026-11-14"
+    },
+    "tesla_fsd_manual": {
+      "title": "Tesla FSD (Supervised) owner manual",
+      "url": "https://www.tesla.com/ownersmanual/modely/en_us/GUID-2CB60804-9CEA-4F4B-8B04-09B991368DC5.html",
+      "year": "Current online manual",
+      "scope": "Supervised route following, intersections, lane changes and cabin-camera attention monitoring; feature/software version varies. Shared system context for selected Model 3 and Model Y subscriptions.",
+      "checked": "2026-11-14"
+    },
+    "vw_travel_assist": {
+      "title": "Volkswagen Travel Assist and Emergency Assist",
+      "url": "https://www.vw.com/en/iq-drive/travel-assist.html",
+      "year": "Current system guide",
+      "scope": "Hands-on steering/speed assistance and response to driver inactivity; system description, not exact-trim performance testing.",
+      "checked": "2026-11-14"
+    },
+    "ev6_assist_matrix": {
+      "title": "Kia 2026 EV6 comparison matrix",
+      "url": "https://www.kia.com/us/en/ev6/specs-compare",
+      "year": 2026,
+      "scope": "2026 Light/Light Long Range/Wind/GT-Line matrix; navigation-based SCC with curve control and selected-grade highway assistance; do not borrow HDA2 from higher trims.",
+      "checked": "2026-11-14"
     }
   },
   "screened": [
@@ -1054,7 +1082,7 @@
       "id": "cx50",
       "name": "Mazda CX-50 Hybrid",
       "decision": "Retained / configuration re-audited",
-      "reason": "Preferred is the entry hybrid and already has a powered hatch and heated driver-adjustable seats. MRCC is credited; CTS fitment is unverified and receives no centering credit.",
+      "reason": "Estimated absent for the selected Hybrid Preferred: the available equipment description supports MRCC, while CTS continuous centering is not established for this grade. Best estimate is adaptive cruise with corrective lane support, so centering input remains 0/5. This is estimated fitment, not a verified absence.",
       "sources": [
         "cx50"
       ]
@@ -1148,7 +1176,7 @@
       "id": "forester",
       "name": "Subaru Forester Hybrid",
       "decision": "Retained / configuration re-audited",
-      "reason": "Revised entry hybrid price; EyeSight with lane centering, heated seats and standard powered rear gate. Useful roof/cargo packaging and 8.7-inch clearance; new hybrid longevity remains unknown.",
+      "reason": "Revised entry hybrid price; EyeSight with lane centering, heated seats and standard powered rear gate. Useful roof/cargo packaging and 8.7-inch clearance; new hybrid longevity is estimated conservatively.",
       "sources": [
         "forester"
       ]
@@ -1509,7 +1537,7 @@
       "id": "equinoxev",
       "name": "Chevrolet Equinox EV",
       "decision": "Added",
-      "reason": "Base LT1 has ACC. Corrective lane keeping is not continuous centering. The owner manual also describes optional Hands-On Steering Assist with connected-plan requirements; selected-trim hardware and entitlement are unverified, so no centering capability is inferred from the manual.",
+      "reason": "Estimated absent for the selected base LT1: the available trim evidence supports ACC and corrective lane keeping. The manual describes optional Hands-On Steering Assist with connected-plan conditions; base-grade fitment/entitlement is not established. Best estimate is no continuous centering (0/5), rather than crediting an unselected option. This is estimated fitment, not a verified absence.",
       "sources": [
         "equinoxev"
       ]
@@ -1699,15 +1727,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Standard FWD",
         "sources": [
           "nx",
           "nx_specs"
         ],
-        "note": "Standard FWD includes Lexus Safety System+ 3.0 and the standard power rear door; no Premium or hands-free-door option is selected. Rear space is adequate; long gear needs a verified carrier route.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Lexus Safety System+ 3.0: DRCC and Lane Tracing Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Standard FWD — Lexus Safety System+ 3.0: DRCC and Lane Tracing Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Lexus Safety System+ 3.0: DRCC and Lane Tracing Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -1736,15 +1770,33 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "Standard FWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "nx"
+          "nx",
+          "epa_49462"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 57,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Honda CR-V FWD · 2.0L 4, auto CVT · FWD",
+            "score": 58,
+            "source": "aceee"
+          },
+          {
+            "year": 2024,
+            "model": "KIA Sportage Hybrid FWD · 1.6L 4, auto · FWD",
+            "score": 56,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Between the 58-point CR-V and 56-point Sportage hybrid crossover anchors. The selected 40-MPG FWD hybrid supports the same broad lifecycle class; premium fuel and luxury equipment do not justify a precision adjustment."
       }
     },
     {
@@ -1860,14 +1912,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Base FWD",
         "sources": [
           "ux"
         ],
-        "note": "Base seats are power adjustable; ventilation and the powered rear door belong to higher grades. Tight rear seating and luggage room constrain three-adult trips.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Lexus Safety System+ 3.0: DRCC and Lane Tracing Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Base FWD — Lexus Safety System+ 3.0: DRCC and Lane Tracing Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Lexus Safety System+ 3.0: DRCC and Lane Tracing Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -1895,15 +1953,27 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "Base FWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "ux"
+          "ux",
+          "epa_50050"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 60,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "TOYOTA COROLLA CROSS HYBRID AWD · 2.0L 4, auto CVT Awd · AWD",
+            "score": 60,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Carry the 60-point compact hybrid crossover proxy without adjustment. The 43-MPG FWD UX has similar efficiency to the 42-MPG Corolla Cross hybrid; different battery, emissions certification and packaging remain estimated."
       }
     },
     {
@@ -1913,7 +1983,7 @@
       "trim": "Preferred eAWD",
       "body_style": "Crossover",
       "powertrain": "Hybrid",
-      "audit_note": "Preferred is the entry hybrid and already has a powered hatch and heated driver-adjustable seats. MRCC is credited; CTS fitment is unverified and receives no centering credit.",
+      "audit_note": "Estimated absent for the selected Hybrid Preferred: the available equipment description supports MRCC, while CTS continuous centering is not established for this grade. Best estimate is adaptive cruise with corrective lane support, so centering input remains 0/5. This is estimated fitment, not a verified absence.",
       "price": {
         "msrp": 34750,
         "destination": 1595,
@@ -1928,11 +1998,14 @@
         "california_eligible": true,
         "power_liftgate": true,
         "adaptive_cruise": true,
-        "lane_centering": null,
+        "lane_centering": false,
         "sources": [
           "cx50"
         ],
-        "note": "Preferred is the entry hybrid and already has a powered hatch and heated driver-adjustable seats. MRCC is credited; CTS fitment is unverified and receives no centering credit."
+        "note": "Estimated absent for the selected Hybrid Preferred: the available equipment description supports MRCC, while CTS continuous centering is not established for this grade. Best estimate is adaptive cruise with corrective lane support, so centering input remains 0/5. This is estimated fitment, not a verified absence.",
+        "estimates": {
+          "lane_centering": "Estimated absent for the selected Hybrid Preferred: the available equipment description supports MRCC, while CTS continuous centering is not established for this grade. Best estimate is adaptive cruise with corrective lane support, so centering input remains 0/5. This is estimated fitment, not a verified absence."
+        }
       },
       "energy": {
         "epa_id": "50010",
@@ -2019,14 +2092,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Preferred eAWD",
         "sources": [
           "cx50"
         ],
-        "note": "Preferred is the entry hybrid and already has a powered hatch and heated driver-adjustable seats. MRCC is credited; CTS fitment is unverified and receives no centering credit.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited. Continuous lane-centering fitment is unverified; centering component is zero, not an assertion that the feature is absent."
+        "note": "Assessment of the selected Mazda Radar Cruise Control; corrective lane support. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Preferred eAWD — Mazda Radar Cruise Control; corrective lane support. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Mazda Radar Cruise Control; corrective lane support",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "0/5: selected build is assessed as having corrective lane support rather than continuous centering. Estimated absent for the selected Hybrid Preferred: the available equipment description supports MRCC, while CTS continuous centering is not established for this grade. Best estimate is adaptive cruise with corrective lane support, so centering input remains 0/5. This is estimated fitment, not a verified absence.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -2054,15 +2133,27 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "Preferred eAWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "cx50"
+          "cx50",
+          "epa_50010"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 56,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "KIA Sportage Hybrid FWD · 1.6L 4, auto · FWD",
+            "score": 56,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Carry the 56-point hybrid crossover proxy without adjustment. The 38-MPG eAWD CX-50 has lower fuel economy than the 42-MPG FWD Sportage, but a different drive configuration and lifecycle inventory do not support a precise numerical correction."
       }
     },
     {
@@ -2178,14 +2269,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "LE FWD",
         "sources": [
           "rav4"
         ],
-        "note": "New generation, entry LE with Toyota Safety Sense 4.0. No power-door upgrade. Useful cabin and luggage area; FWD tires and clearance remain relevant for winter.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Toyota Safety Sense 4.0: DRCC and Lane Tracing Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "LE FWD — Toyota Safety Sense 4.0: DRCC and Lane Tracing Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Toyota Safety Sense 4.0: DRCC and Lane Tracing Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -2213,15 +2310,33 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "LE FWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "rav4"
+          "rav4",
+          "epa_50285"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 59,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Honda CR-V FWD · 2.0L 4, auto CVT · FWD",
+            "score": 58,
+            "source": "aceee"
+          },
+          {
+            "year": 2024,
+            "model": "TOYOTA COROLLA CROSS HYBRID AWD · 2.0L 4, auto CVT Awd · AWD",
+            "score": 60,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Midpoint of the 58-point CR-V and 60-point Corolla Cross hybrid anchors. The redesigned 43-MPG FWD RAV4 fits between these compact hybrid crossover comparisons; this is not a carried-forward published RAV4 score."
       }
     },
     {
@@ -2337,14 +2452,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "2.5 Turbo Premium Plus AWD",
         "sources": [
           "cx30"
         ],
-        "note": "Turbo Premium Plus is the documented CTS grade; its turbo powertrain and 25-MPG EPA record replace the old non-turbo assumptions. Rear accommodation stays tight.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Mazda Radar Cruise Control and Cruising and Traffic Support. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "2.5 Turbo Premium Plus AWD — Mazda Radar Cruise Control and Cruising and Traffic Support. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Mazda Radar Cruise Control and Cruising and Traffic Support",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -2392,7 +2513,9 @@
           "city": "22",
           "highway": "30",
           "weight": "4000"
-        }
+        },
+        "assessment_score": 46,
+        "basis": "historical"
       }
     },
     {
@@ -2510,15 +2633,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "LX FWD",
         "sources": [
           "sportage",
           "sportage_specs"
         ],
-        "note": "LX now includes stop/go cruise and LFA2. Cloth/manual-seat equipment is less plush than SX-Prestige, but avoids paying for the old power-door constraint.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Kia Smart Cruise Control and Lane Following Assist 2. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "LX FWD — Kia Smart Cruise Control and Lane Following Assist 2. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Kia Smart Cruise Control and Lane Following Assist 2",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -2567,7 +2696,9 @@
           "city": "42",
           "highway": "44",
           "weight": "4000"
-        }
+        },
+        "assessment_score": 56,
+        "basis": "historical"
       }
     },
     {
@@ -2679,18 +2810,24 @@
       "commute": {
         "components": [
           4,
-          4,
-          3
+          5,
+          4
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "2.5 S Premium Plus AWD",
         "sources": [
           "cx5"
         ],
-        "note": "The all-new 2026 Premium Plus explicitly includes CTS with Lane Change Assist and a power rear gate. Large touchscreen controls and actual ride/noise need a test drive.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Mazda CTS with Lane Change Assist and Driver Monitoring. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "2.5 S Premium Plus AWD — Mazda CTS with Lane Change Assist and Driver Monitoring. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Mazda CTS with Lane Change Assist and Driver Monitoring",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "5/5: selected Premium Plus explicitly includes CTS with Lane Change Assist, which can execute a driver-indicated lane change when conditions permit. This is a broader steering task set than basic lane centering.",
+          "4/5: the selected Premium Plus explicitly includes Driver Monitoring alongside CTS. This supports a higher supervision/usability estimate than generic hands-on warning alone; no measured safeguards or steering-quality result is inferred."
+        ]
       },
       "mountain": {
         "components": [
@@ -2718,15 +2855,33 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "2.5 S Premium Plus AWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "cx5"
+          "cx5",
+          "epa_50290"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 47,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "MAZDA CX-30 4WD · 2.5L 4, auto stk 4wd · 4WD",
+            "score": 46,
+            "source": "aceee"
+          },
+          {
+            "year": 2024,
+            "model": "BMW X1 xDrive28i · 2.0L 4, auto Awd [P] · AWD",
+            "score": 49,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Estimate near the 46-point CX-30 and 49-point X1 gas crossover anchors. The redesigned 26-MPG AWD CX-5 is placed between their 25- and 28-MPG references; size and emissions differences remain editorial judgments."
       }
     },
     {
@@ -2839,19 +2994,25 @@
       },
       "commute": {
         "components": [
+          5,
           4,
-          4,
-          3
+          4
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "SE Standard Range RWD",
         "sources": [
           "ioniq5"
         ],
-        "note": "Entry SE Standard Range has stop/go cruise and LFA. The 245-mile EPA range is not the long-range model. Spacious flat-floor cabin; manual rear gate at this trim.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Hyundai HDA, SCC2, navigation-based cruise and Lane Following Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "SE Standard Range RWD — Hyundai HDA, SCC2, navigation-based cruise and Lane Following Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Hyundai HDA, SCC2, navigation-based cruise and Lane Following Assist",
+        "component_notes": [
+          "5/5: the 2026 SE Standard Range matrix lists SCC2 with Stop & Go and navigation-based curve speed control. The extra route-aware speed function is credited beyond ordinary following cruise; normal restart and road-condition restrictions still apply.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "4/5: the selected grade lists Forward Attention Warning and SCC2 response to an unresponsive driver. These additional monitoring/response functions support the editorial estimate; HDA2 and assisted lane changes belong to higher trims and are not credited."
+        ]
       },
       "mountain": {
         "components": [
@@ -2879,15 +3040,28 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "SE Standard Range RWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "ioniq5"
+          "ioniq5",
+          "aceee_2024_greenest",
+          "epa_49961"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 62,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Hyundai Ioniq 5",
+            "score": 62,
+            "source": "aceee_2024_greenest"
+          }
+        ],
+        "adjustment_note": "Carry the historical Ioniq 5 model-level 62-point proxy with zero adjustment. The current smaller-battery SE Standard Range is not the exact 2024 table configuration; 29 kWh/100 miles supports retaining this broad estimate."
       }
     },
     {
@@ -3009,7 +3183,7 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Select RWD Standard Range",
         "sources": [
@@ -3017,8 +3191,14 @@
           "mache_guide",
           "ford_adas"
         ],
-        "note": "Select retains adaptive cruise with lane centering. Technology Package and paid BlueCruise are unselected and receive no hands-free credit. Standard battery has 260 EPA miles.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Ford adaptive cruise with lane centering; BlueCruise unselected. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Select RWD Standard Range — Ford adaptive cruise with lane centering; BlueCruise unselected. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Ford adaptive cruise with lane centering; BlueCruise unselected",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -3048,15 +3228,34 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "Select RWD Standard Range",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "mache"
+          "mache",
+          "aceee_2024_greenest",
+          "epa_50204"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 60,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Hyundai Ioniq 5",
+            "score": 62,
+            "source": "aceee_2024_greenest"
+          },
+          {
+            "year": 2024,
+            "model": "Kia EV6",
+            "score": 63,
+            "source": "aceee_2024_greenest"
+          }
+        ],
+        "adjustment_note": "Estimate 2 points below the 62-point Ioniq 5 anchor (and below the 63-point EV6). The selected 31.4 kWh/100-mile crossover is less efficient than the 29-kWh Ioniq 5; battery and production differences are approximated, not a lifecycle calculation."
       }
     },
     {
@@ -3174,15 +3373,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Sport FWD",
         "sources": [
           "crv",
           "crv_specs"
         ],
-        "note": "Entry Sport hybrid includes Honda Sensing and Traffic Jam Assist without Sport-L liftgate pricing. Roomy cabin and straightforward controls; selected cloth/manual-gate equipment matters.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Honda Sensing: ACC with Low-Speed Follow, LKAS and Traffic Jam Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Sport FWD — Honda Sensing: ACC with Low-Speed Follow, LKAS and Traffic Jam Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Honda Sensing: ACC with Low-Speed Follow, LKAS and Traffic Jam Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -3231,7 +3436,9 @@
           "city": "43",
           "highway": "37",
           "weight": "4000"
-        }
+        },
+        "assessment_score": 58,
+        "basis": "historical"
       }
     },
     {
@@ -3241,7 +3448,7 @@
       "trim": "Premium Hybrid AWD",
       "body_style": "Crossover",
       "powertrain": "Hybrid",
-      "audit_note": "Revised entry hybrid price; EyeSight with lane centering, heated seats and standard powered rear gate. Useful roof/cargo packaging and 8.7-inch clearance; new hybrid longevity remains unknown.",
+      "audit_note": "Revised entry hybrid price; EyeSight with lane centering, heated seats and standard powered rear gate. Useful roof/cargo packaging and 8.7-inch clearance; new hybrid longevity is estimated conservatively.",
       "price": {
         "msrp": 34730,
         "destination": 1450,
@@ -3260,7 +3467,7 @@
         "sources": [
           "forester"
         ],
-        "note": "Revised entry hybrid price; EyeSight with lane centering, heated seats and standard powered rear gate. Useful roof/cargo packaging and 8.7-inch clearance; new hybrid longevity remains unknown."
+        "note": "Revised entry hybrid price; EyeSight with lane centering, heated seats and standard powered rear gate. Useful roof/cargo packaging and 8.7-inch clearance; new hybrid longevity is estimated conservatively."
       },
       "energy": {
         "epa_id": "50131",
@@ -3347,14 +3554,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Premium Hybrid AWD",
         "sources": [
           "forester"
         ],
-        "note": "Revised entry hybrid price; EyeSight with lane centering, heated seats and standard powered rear gate. Useful roof/cargo packaging and 8.7-inch clearance; new hybrid longevity remains unknown.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Subaru EyeSight: adaptive cruise and lane centering. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Premium Hybrid AWD — Subaru EyeSight: adaptive cruise and lane centering. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Subaru EyeSight: adaptive cruise and lane centering",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -3371,7 +3584,7 @@
           "roof",
           "chains"
         ],
-        "note": "Revised entry hybrid price; EyeSight with lane centering, heated seats and standard powered rear gate. Useful roof/cargo packaging and 8.7-inch clearance; new hybrid longevity remains unknown.",
+        "note": "Revised entry hybrid price; EyeSight with lane centering, heated seats and standard powered rear gate. Useful roof/cargo packaging and 8.7-inch clearance; new hybrid longevity is estimated conservatively.",
         "interior_fit": "Unmeasured: retain one rear adult plus boots/bags and check a partial seat-fold/pass-through against actual ski/board dimensions. Published cargo volume alone does not establish fit.",
         "roof": "Candidate carrier route is unverified: confirm exact roof option, feet/bars, dynamic load, carrier capacity and hatch/trunk clearance before purchase. No roof equipment is assumed included.",
         "winter": "AWD/4WD traction and clearance help access, but selected tires are not assumed to be winter-rated. Carry compliant chains and check the manual.",
@@ -3382,15 +3595,27 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "Premium Hybrid AWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "forester"
+          "forester",
+          "epa_50131"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 55,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "KIA Sportage Hybrid FWD · 1.6L 4, auto · FWD",
+            "score": 56,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Estimate 1 point below the 56-point Sportage hybrid crossover anchor. The selected 35-MPG AWD Forester has greater use-phase fuel demand than the 42-MPG FWD reference; the new hybrid system is treated as a proxy, not a measured result."
       }
     },
     {
@@ -3508,15 +3733,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "2026.5 SV FWD",
         "sources": [
           "rogue",
           "rogue_specs"
         ],
-        "note": "SV supplies ProPILOT and power liftgate without Rock Creek packaging. FWD is the cheaper reference build; its 32-MPG EPA record is not the Rock Creek AWD record.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Nissan hands-on ProPILOT Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "2026.5 SV FWD — Nissan hands-on ProPILOT Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Nissan hands-on ProPILOT Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -3545,15 +3776,33 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "2026.5 SV FWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "rogue"
+          "rogue",
+          "epa_49464"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 52,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "BMW X1 xDrive28i · 2.0L 4, auto Awd [P] · AWD",
+            "score": 49,
+            "source": "aceee"
+          },
+          {
+            "year": 2024,
+            "model": "Honda HR-V FWD · 2.0L 4, auto CVT · FWD",
+            "score": 50,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Estimate 2 points above the 50-point HR-V and 3 above the 49-point X1 gas crossover anchors. The selected 32-MPG FWD Rogue improves on their 28 MPG, with its larger crossover packaging tempering the editorial efficiency benefit."
       }
     },
     {
@@ -3673,15 +3922,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "S+ FWD, 18-inch steel wheels",
         "sources": [
           "leaf",
           "leaf_specs"
         ],
-        "note": "Redesigned S+ includes hands-on ProPILOT and has 303 EPA miles. It is not the old CHAdeMO LEAF; Platinum wheels and power-door equipment are unselected.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Nissan hands-on ProPILOT Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "S+ FWD, 18-inch steel wheels — Nissan hands-on ProPILOT Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Nissan hands-on ProPILOT Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -3710,15 +3965,28 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "S+ FWD, 18-inch steel wheels",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "leaf"
+          "leaf",
+          "aceee_2024_greenest",
+          "epa_49975"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 64,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Nissan Leaf",
+            "score": 66,
+            "source": "aceee_2024_greenest"
+          }
+        ],
+        "adjustment_note": "Estimate 2 points below the 2024 Leaf model-level 66-point anchor. The redesigned 75-kWh, 303-mile S+ changes the battery and vehicle package substantially; its 27.8 kWh/100-mile consumption supports a strong but more cautious lifecycle estimate."
       }
     },
     {
@@ -3834,14 +4102,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "SE FWD",
         "sources": [
           "tucson"
         ],
-        "note": "Entry SE FWD has SCC and LFA with 38 MPG. Do not inherit Limited AWD features, powered gate or the AWD energy record.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Hyundai SCC with Stop & Go and Lane Following Assist; HDA unselected. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "SE FWD — Hyundai SCC with Stop & Go and Lane Following Assist; HDA unselected. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Hyundai SCC with Stop & Go and Lane Following Assist; HDA unselected",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -3869,15 +4143,27 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "SE FWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "tucson"
+          "tucson",
+          "epa_51096"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 56,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "KIA Sportage Hybrid FWD · 1.6L 4, auto · FWD",
+            "score": 56,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Carry the 56-point Sportage hybrid crossover proxy without adjustment. The related compact hybrid crossover configuration and selected 38-MPG FWD reference support the same broad environmental class, without claiming identical emissions or lifecycle inventories."
       }
     },
     {
@@ -3995,14 +4281,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Premium AWD, 18-inch wheels",
         "sources": [
           "solterra"
         ],
-        "note": "2026 battery/charging update and 288-mile EPA range replace predecessor assumptions. Standard assistance and AWD; Premium does not receive Limited powered-gate credit.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Subaru driver assistance: adaptive cruise and lane tracing. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Premium AWD, 18-inch wheels — Subaru driver assistance: adaptive cruise and lane tracing. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Subaru driver assistance: adaptive cruise and lane tracing",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -4030,15 +4322,28 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "Premium AWD, 18-inch wheels",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "solterra"
+          "solterra",
+          "aceee_2024_greenest",
+          "epa_49982"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 64,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Toyota bZ4X",
+            "score": 66,
+            "source": "aceee_2024_greenest"
+          }
+        ],
+        "adjustment_note": "Estimate 2 points below the 66-point bZ4X historical anchor. The related AWD electric crossover has revised battery/charging hardware and 28 kWh/100-mile consumption, versus 25.8 for the selected FWD bZ; the adjustment is editorial."
       }
     },
     {
@@ -4156,14 +4461,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "XLE FWD, 57.7-kWh battery",
         "sources": [
           "bz"
         ],
-        "note": "Entry XLE FWD uses the smaller battery and 236-mile EPA range; it is not FWD Plus or Limited AWD. Standard Toyota Safety Sense and powered rear door.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Toyota Safety Sense: DRCC and Lane Tracing Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "XLE FWD, 57.7-kWh battery — Toyota Safety Sense: DRCC and Lane Tracing Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Toyota Safety Sense: DRCC and Lane Tracing Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -4191,15 +4502,28 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "XLE FWD, 57.7-kWh battery",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "bz"
+          "bz",
+          "aceee_2024_greenest",
+          "epa_49983"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 66,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Toyota bZ4X",
+            "score": 66,
+            "source": "aceee_2024_greenest"
+          }
+        ],
+        "adjustment_note": "Carry the 66-point bZ4X historical model-family proxy without adjustment. The revised 57.7-kWh FWD bZ and 25.8 kWh/100-mile consumption support this efficient crossover estimate; the predecessor score is not a published rating for the redesign."
       }
     },
     {
@@ -4319,20 +4643,27 @@
       },
       "commute": {
         "components": [
-          4,
-          4,
-          3
+          5,
+          5,
+          4
         ],
         "subscription_per_year": 1188,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Standard RWD, 18-inch wheels + FSD subscription",
         "sources": [
           "modely",
-          "fsd"
+          "fsd",
+          "tesla_fsd_manual"
         ],
-        "note": "Cash price before savings/incentives. Paid FSD (Supervised) is selected and costed for five years; driver supervision is mandatory. Sparse physical controls constrain ergonomics.",
-        "package": "Selected FSD (Supervised), $99/month ($1,188/year) for all five years; hands-on/attention requirements apply. No free trial or lifetime entitlement assumed."
+        "note": "Assessment of the selected Tesla Full Self-Driving (Supervised), paid subscription selected. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Standard RWD, 18-inch wheels + FSD subscription — Tesla Full Self-Driving (Supervised), paid subscription selected. Five years of $99/month FSD (Supervised) are included in Cost.",
+        "system": "Tesla Full Self-Driving (Supervised), paid subscription selected",
+        "component_notes": [
+          "5/5: the selected, costed FSD (Supervised) subscription adds route-aware speed control and handling of traffic lights, stop signs and intersections beyond ordinary following cruise. The driver must supervise and can need to intervene.",
+          "5/5: the selected supervised system adds route turns and lane changes to continuous steering. This reflects broader supported tasks, not autonomous driving or a measured safety advantage.",
+          "4/5: cabin-camera attention monitoring and integrated route following reduce some manual mode changes. Attention alerts, interventions and software/visibility limits remain material; this is an editorial usability estimate, not a safeguards test rating."
+        ]
       },
       "mountain": {
         "components": [
@@ -4361,15 +4692,34 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "Standard RWD, 18-inch wheels + FSD subscription",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "modely"
+          "modely",
+          "aceee_2024_greenest",
+          "epa_50040"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 65,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Toyota bZ4X",
+            "score": 66,
+            "source": "aceee_2024_greenest"
+          },
+          {
+            "year": 2024,
+            "model": "Hyundai Ioniq 5",
+            "score": 62,
+            "source": "aceee_2024_greenest"
+          }
+        ],
+        "adjustment_note": "Estimate 1 point below the 66-point bZ4X anchor and above the 62-point Ioniq 5. The selected 24.3 kWh/100-mile RWD crossover has favorable operational efficiency; different battery, production and packaging prevent treating it as equivalent to the bZ4X."
       }
     },
     {
@@ -4484,20 +4834,27 @@
       },
       "commute": {
         "components": [
-          4,
+          5,
           4,
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Light Standard Range RWD",
         "sources": [
           "ev6",
-          "ev6_specs"
+          "ev6_specs",
+          "ev6_assist_matrix"
         ],
-        "note": "Entry Light includes HDA and stop/go cruise. The standard-range 237-mile battery is selected; Wind AWD and its powered-hatch equipment are not borrowed.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Kia HDA, navigation-based SCC with Stop & Go and Lane Following Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Light Standard Range RWD — Kia HDA, navigation-based SCC with Stop & Go and Lane Following Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Kia HDA, navigation-based SCC with Stop & Go and Lane Following Assist",
+        "component_notes": [
+          "5/5: selected Light navigation-based SCC with Stop & Go and curve control adds route-aware speed adaptation to ordinary following cruise. This is a capability estimate, not a claim of smoother braking in an instrumented test.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited. Light receives HDA, not the higher-grade HDA2 lane-change feature.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -4526,15 +4883,28 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "Light Standard Range RWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "ev6"
+          "ev6",
+          "aceee_2024_greenest",
+          "epa_50215"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 63,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Kia EV6",
+            "score": 63,
+            "source": "aceee_2024_greenest"
+          }
+        ],
+        "adjustment_note": "Carry the 63-point EV6 model-level historical proxy with zero adjustment. The selected Light Standard Range differs from the table configuration; current consumption and the smaller-range package inform the estimate without inventing an exact-build lifecycle rating."
       }
     },
     {
@@ -4652,15 +5022,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Base SH-AWD",
         "sources": [
           "rdx",
           "rdx_specs"
         ],
-        "note": "Base RDX already has ACC, speed-limited LKAS and powered tailgate. No Technology-package price or acoustic-side-glass benefit is assumed. LKAS does not provide low-speed traffic-jam steering.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected AcuraWatch: ACC with Low-Speed Follow and speed-limited LKAS. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Base SH-AWD — AcuraWatch: ACC with Low-Speed Follow and speed-limited LKAS. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "AcuraWatch: ACC with Low-Speed Follow and speed-limited LKAS",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "3/5: the selected LKAS is speed-limited and does not supply the low-speed Traffic Jam Assist steering credited on the selected Civic/Accord/CR-V. Adaptive cruise can still follow slow traffic; longitudinal and steering coverage are assessed separately.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -4709,7 +5085,9 @@
           "city": "21",
           "highway": "27",
           "weight": "4000"
-        }
+        },
+        "assessment_score": 44,
+        "basis": "historical"
       }
     },
     {
@@ -4832,15 +5210,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "xDrive28i + Driving Assistance Plus",
         "sources": [
           "x1",
           "x1_assist"
         ],
-        "note": "A manufacturer label establishes the $500 Driving Assistance Plus selection; retailer equipment description confirms ACC with steering assistance. No Professional/Technology package benefits are credited.",
-        "package": "Driving Assistance Plus is selected at $500 upfront; no subscription or Professional package credited."
+        "note": "Assessment of the selected BMW Driving Assistance Plus: ACC and steering assistance. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "xDrive28i + Driving Assistance Plus — BMW Driving Assistance Plus: ACC and steering assistance. The selected $500 Driving Assistance Plus option is included in Cost; no Professional or hands-free upgrade is selected.",
+        "system": "BMW Driving Assistance Plus: ACC and steering assistance",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -4889,7 +5273,9 @@
           "city": "25",
           "highway": "34",
           "weight": "4000"
-        }
+        },
+        "assessment_score": 49,
+        "basis": "historical"
       }
     },
     {
@@ -5007,15 +5393,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "2.5T AWD Standard",
         "sources": [
           "gv70",
           "gv70_specs"
         ],
-        "note": "Base 2.5T has heated power seats, powered liftgate, SCC and HDA. Leather, ventilation and higher-trim benefits are not assumed. Premium gasoline is costed.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Genesis SCC, Lane Following Assist and Highway Driving Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "2.5T AWD Standard — Genesis SCC, Lane Following Assist and Highway Driving Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Genesis SCC, Lane Following Assist and Highway Driving Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -5064,7 +5456,9 @@
           "city": "19",
           "highway": "26",
           "weight": "4500"
-        }
+        },
+        "assessment_score": 41,
+        "basis": "historical"
       }
     },
     {
@@ -5177,20 +5571,26 @@
       },
       "commute": {
         "components": [
-          4,
+          5,
           4,
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "EX FWD",
         "sources": [
           "niro",
           "niro_specs"
         ],
-        "note": "EX is the first documented navigation-based SCC grade; LFA is standard. Its efficient wheel configuration uses the FE EPA record, not the old SX assumption.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Kia navigation-based SCC and Lane Following Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "EX FWD — Kia navigation-based SCC and Lane Following Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Kia navigation-based SCC and Lane Following Assist",
+        "component_notes": [
+          "5/5: selected EX navigation-based Smart Cruise Control adds route-aware speed adaptation to ordinary following cruise. This is a capability estimate, not a claim of smoother braking in an instrumented test.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -5239,7 +5639,9 @@
           "city": "53",
           "highway": "54",
           "weight": "3500"
-        }
+        },
+        "assessment_score": 61,
+        "basis": "historical"
       }
     },
     {
@@ -5357,15 +5759,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "SX AWD",
         "sources": [
           "seltos",
           "seltos_specs"
         ],
-        "note": "SX is required for SCC/HDA. A powered liftgate requires an additional package that is not selected; useful AWD but ride/noise and compact back seat limit comfort.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Kia SCC, Lane Following Assist and Highway Driving Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "SX AWD — Kia SCC, Lane Following Assist and Highway Driving Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Kia SCC, Lane Following Assist and Highway Driving Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -5414,7 +5822,9 @@
           "city": "25",
           "highway": "27",
           "weight": "3500"
-        }
+        },
+        "assessment_score": 47,
+        "basis": "historical"
       }
     },
     {
@@ -5527,17 +5937,24 @@
         "components": [
           4,
           4,
-          3
+          4
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "S FWD",
         "sources": [
-          "tiguan"
+          "tiguan",
+          "vw_travel_assist"
         ],
-        "note": "All-new Tiguan S has standard IQ.DRIVE/Travel Assist. The cheapest S FWD uses the distinct 29-MPG record; SE power-gate and 4MOTION features are unselected.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Volkswagen IQ.DRIVE: Travel Assist and Emergency Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "S FWD — Volkswagen IQ.DRIVE: Travel Assist and Emergency Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Volkswagen IQ.DRIVE: Travel Assist and Emergency Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "4/5: selected IQ.DRIVE combines Travel Assist with Emergency Assist response to driver inactivity. That coordinated status/response earns an editorial usability increment over baseline hands-on warnings; it does not establish camera-based gaze tracking or a measured safety advantage."
+        ]
       },
       "mountain": {
         "components": [
@@ -5565,15 +5982,33 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "S FWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "tiguan"
+          "tiguan",
+          "epa_49469"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 48,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "BMW X1 xDrive28i · 2.0L 4, auto Awd [P] · AWD",
+            "score": 49,
+            "source": "aceee"
+          },
+          {
+            "year": 2024,
+            "model": "MAZDA CX-30 4WD · 2.5L 4, auto stk 4wd · 4WD",
+            "score": 46,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Estimate between the 49-point X1 and 46-point CX-30 gas crossover anchors. The selected 29-MPG FWD Tiguan is efficient for this group, with larger crossover packaging tempering the estimate."
       }
     },
     {
@@ -5691,15 +6126,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Sport Hybrid FWD",
         "sources": [
           "civic",
           "civic_specs"
         ],
-        "note": "Added manual-hatch alternative. Sport Hybrid is the least expensive hybrid hatch, with ACC/LKAS/TJA. Low clearance and long-gear packaging constrain mountain use; no Touring equipment is borrowed.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Honda Sensing: ACC with Low-Speed Follow, LKAS and Traffic Jam Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Sport Hybrid FWD — Honda Sensing: ACC with Low-Speed Follow, LKAS and Traffic Jam Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Honda Sensing: ACC with Low-Speed Follow, LKAS and Traffic Jam Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -5728,15 +6169,33 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "Sport Hybrid FWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "civic"
+          "civic",
+          "epa_49316"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 62,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "TOYOTA COROLLA HYBRID · 1.8L 4, auto CVT · FWD",
+            "score": 62,
+            "source": "aceee"
+          },
+          {
+            "year": 2024,
+            "model": "Hyundai Elantra Hybrid · 1.6L 4, auto · FWD",
+            "score": 62,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Carry the shared 62-point Corolla/Elantra hybrid sedan proxy with zero adjustment. The selected 48-MPG hybrid hatchback is in their efficiency and compact-size neighborhood; hatchback packaging and hybrid-system differences remain approximate."
       }
     },
     {
@@ -5852,14 +6311,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "LE FWD",
         "sources": [
           "prius"
         ],
-        "note": "Entry LE is the 57-MPG configuration with TSS 3.0 and a manual hatch. Rear headroom, low seating and clearance should be checked with the third adult.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "LE FWD — Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -5907,7 +6372,9 @@
           "city": "58",
           "highway": "58",
           "weight": "3500"
-        }
+        },
+        "assessment_score": 65,
+        "basis": "historical"
       }
     },
     {
@@ -6025,14 +6492,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "SE FWD",
         "sources": [
           "priusphev"
         ],
-        "note": "SE has 44 EPA electric miles and TSS 3.0; the plug-in battery reduces luggage flexibility. The five-year scenario assumes regular nearby charging, not all-electric driving.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "SE FWD — Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -6079,7 +6552,9 @@
           "city": "4.26 / 55",
           "highway": "3.43 / 52",
           "weight": "3500"
-        }
+        },
+        "assessment_score": 71,
+        "basis": "historical"
       }
     },
     {
@@ -6195,14 +6670,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "LE FWD",
         "sources": [
           "corolla"
         ],
-        "note": "Low-cost sedan with TSS 3.0 and 50 MPG. The conventional trunk and rear-adult space constrain three-person long-gear trips without excluding the car.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "LE FWD — Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -6250,7 +6731,9 @@
           "city": "54",
           "highway": "47",
           "weight": "3500"
-        }
+        },
+        "assessment_score": 62,
+        "basis": "historical"
       }
     },
     {
@@ -6366,14 +6849,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "LE FWD",
         "sources": [
           "camry"
         ],
-        "note": "Roomier hybrid sedan with small wheels, TSS 3.0 and 51 MPG. Trunk access is less flexible than a hatch; rear seats and ski pass-through need an actual fit check.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "LE FWD — Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -6401,15 +6890,28 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "LE FWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "camry"
+          "camry",
+          "aceee_2024_greenest",
+          "epa_49823"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 63,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Toyota Camry LE Hybrid",
+            "score": 63,
+            "source": "aceee_2024_greenest"
+          }
+        ],
+        "adjustment_note": "Carry the historical Camry LE Hybrid 63-point proxy with zero adjustment. The redesigned FWD LE remains an efficient hybrid sedan; the historical table does not establish an exact rating for the new model year."
       }
     },
     {
@@ -6525,14 +7027,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Sport FWD",
         "sources": [
           "accord"
         ],
-        "note": "Entry hybrid Sport includes Honda Sensing/TJA. Large rear seating area and trunk are useful, but low clearance and 19-inch wheels constrain ride/winter use.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Honda Sensing: ACC with Low-Speed Follow, LKAS and Traffic Jam Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Sport FWD — Honda Sensing: ACC with Low-Speed Follow, LKAS and Traffic Jam Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Honda Sensing: ACC with Low-Speed Follow, LKAS and Traffic Jam Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -6580,7 +7088,9 @@
           "city": "48",
           "highway": "42",
           "weight": "4000"
-        }
+        },
+        "assessment_score": 59,
+        "basis": "historical"
       }
     },
     {
@@ -6696,14 +7206,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Limited FWD",
         "sources": [
           "elantra"
         ],
-        "note": "Current feature matrix restricts SCC to Limited despite LFA on every trim. Select Limited with its upgraded seats; do not mistake LFA-only availability for an adaptive-cruise package. Compact trunk access and low clearance limit long-gear use.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Hyundai SCC with Stop & Go, Lane Following Assist and HDA. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Limited FWD — Hyundai SCC with Stop & Go, Lane Following Assist and HDA. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Hyundai SCC with Stop & Go, Lane Following Assist and HDA",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -6751,7 +7267,9 @@
           "city": "49",
           "highway": "52",
           "weight": "3500"
-        }
+        },
+        "assessment_score": 62,
+        "basis": "historical"
       }
     },
     {
@@ -6867,14 +7385,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Blue FWD",
         "sources": [
           "sonata"
         ],
-        "note": "Blue supplies SCC/LFA without Limited pricing and returns 51 MPG. Smart trunk release is not a powered liftgate; rear-adult room is useful but roof/gear fit remains conditional.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Hyundai SCC with Stop & Go and Lane Following Assist; HDA unselected. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Blue FWD — Hyundai SCC with Stop & Go and Lane Following Assist; HDA unselected. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Hyundai SCC with Stop & Go and Lane Following Assist; HDA unselected",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -6902,15 +7426,33 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "Blue FWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "sonata"
+          "sonata",
+          "epa_49322"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 62,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Honda ACCORD SPORT/TOURING · 2.0L 4, auto CVT · FWD",
+            "score": 59,
+            "source": "aceee"
+          },
+          {
+            "year": 2024,
+            "model": "Hyundai Elantra Hybrid · 1.6L 4, auto · FWD",
+            "score": 62,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Estimate at the 62-point Elantra hybrid anchor and above the 59-point Accord Sport/Touring. The 51-MPG Blue configuration favors operational efficiency, while midsize packaging prevents assuming the smaller, best-scoring hybrid results."
       }
     },
     {
@@ -7026,14 +7568,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "2.5 Turbo Premium Plus AWD",
         "sources": [
           "mazda3"
         ],
-        "note": "This is the documented CTS automatic hatch configuration. Turbo AWD has a 26-MPG EPA record; no power hatch. Rear space and low clearance constrain three-adult mountain trips.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Mazda Radar Cruise Control and Cruising and Traffic Support. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "2.5 Turbo Premium Plus AWD — Mazda Radar Cruise Control and Cruising and Traffic Support. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Mazda Radar Cruise Control and Cruising and Traffic Support",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -7081,7 +7629,9 @@
           "city": "23",
           "highway": "31",
           "weight": "3500"
-        }
+        },
+        "assessment_score": 48,
+        "basis": "historical"
       }
     },
     {
@@ -7194,17 +7744,24 @@
         "components": [
           4,
           4,
-          3
+          4
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "S DSG FWD",
         "sources": [
-          "gti"
+          "gti",
+          "vw_travel_assist"
         ],
-        "note": "S includes IQ.DRIVE/Travel Assist and automatic DSG. Supportive sport seats suit some drivers, but a firmer ride and low clearance are relevant comfort/winter tradeoffs.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Volkswagen IQ.DRIVE: Travel Assist and Emergency Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "S DSG FWD — Volkswagen IQ.DRIVE: Travel Assist and Emergency Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Volkswagen IQ.DRIVE: Travel Assist and Emergency Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "4/5: selected IQ.DRIVE combines Travel Assist with Emergency Assist response to driver inactivity. That coordinated status/response earns an editorial usability increment over baseline hands-on warnings; it does not establish camera-based gaze tracking or a measured safety advantage."
+        ]
       },
       "mountain": {
         "components": [
@@ -7252,7 +7809,9 @@
           "city": "24",
           "highway": "33",
           "weight": "3500"
-        }
+        },
+        "assessment_score": 49,
+        "basis": "historical"
       }
     },
     {
@@ -7368,14 +7927,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Sport AWD",
         "sources": [
           "impreza"
         ],
-        "note": "Entry Sport has EyeSight with lane centering and AWD. Manual hatch is allowed; clearance is lower than Crosstrek despite the traction system.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Subaru EyeSight: adaptive cruise and lane centering. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Sport AWD — Subaru EyeSight: adaptive cruise and lane centering. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Subaru EyeSight: adaptive cruise and lane centering",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -7423,7 +7988,9 @@
           "city": "27",
           "highway": "34",
           "weight": "3500"
-        }
+        },
+        "assessment_score": 51,
+        "basis": "historical"
       }
     },
     {
@@ -7539,14 +8106,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Sport Hybrid AWD",
         "sources": [
           "crosstrek"
         ],
-        "note": "New conventional hybrid, not the older plug-in Crosstrek. EyeSight, AWD and 8.7-inch clearance help winter access; actual rear/luggage fit is still conditional.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Subaru EyeSight: adaptive cruise and lane centering. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Sport Hybrid AWD — Subaru EyeSight: adaptive cruise and lane centering. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Subaru EyeSight: adaptive cruise and lane centering",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -7574,15 +8147,33 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "Sport Hybrid AWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "crosstrek"
+          "crosstrek",
+          "epa_49538"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 57,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "TOYOTA COROLLA CROSS HYBRID AWD · 2.0L 4, auto CVT Awd · AWD",
+            "score": 60,
+            "source": "aceee"
+          },
+          {
+            "year": 2024,
+            "model": "KIA Sportage Hybrid FWD · 1.6L 4, auto · FWD",
+            "score": 56,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Estimate between the 60-point Corolla Cross and 56-point Sportage hybrid crossover anchors. The selected 36-MPG AWD compact Subaru has greater fuel demand than those 42-MPG references; its smaller package partly offsets that disadvantage."
       }
     },
     {
@@ -7698,14 +8289,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "S AWD",
         "sources": [
           "corollacross"
         ],
-        "note": "Entry hybrid S includes TSS 3.0 and AWD. Modest rear space and manual-gate equipment keep the price below an unnecessary liftgate upgrade.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "S AWD — Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Toyota Safety Sense 3.0: DRCC and Lane Tracing Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -7753,7 +8350,9 @@
           "city": "46",
           "highway": "40",
           "weight": "3500"
-        }
+        },
+        "assessment_score": 60,
+        "basis": "historical"
       }
     },
     {
@@ -7869,14 +8468,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "LX FWD",
         "sources": [
           "hrv"
         ],
-        "note": "LX has Honda Sensing with ACC/LKAS, so EX-L is unnecessary for assistance. Modest 2.0L power and rear-seat/cargo fit need a loaded-trip check.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Honda Sensing: ACC with Low-Speed Follow and speed-limited LKAS. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "LX FWD — Honda Sensing: ACC with Low-Speed Follow and speed-limited LKAS. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Honda Sensing: ACC with Low-Speed Follow and speed-limited LKAS",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "3/5: the selected LKAS is speed-limited and does not supply the low-speed Traffic Jam Assist steering credited on the selected Civic/Accord/CR-V. Adaptive cruise can still follow slow traffic; longitudinal and steering coverage are assessed separately.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -7924,7 +8529,9 @@
           "city": "26",
           "highway": "32",
           "weight": "3500"
-        }
+        },
+        "assessment_score": 50,
+        "basis": "historical"
       }
     },
     {
@@ -7934,7 +8541,7 @@
       "trim": "LT1 FWD",
       "body_style": "Crossover",
       "powertrain": "EV",
-      "audit_note": "Base LT1 has ACC. Corrective lane keeping is not continuous centering. The owner manual also describes optional Hands-On Steering Assist with connected-plan requirements; selected-trim hardware and entitlement are unverified, so no centering capability is inferred from the manual.",
+      "audit_note": "Estimated absent for the selected base LT1: the available trim evidence supports ACC and corrective lane keeping. The manual describes optional Hands-On Steering Assist with connected-plan conditions; base-grade fitment/entitlement is not established. Best estimate is no continuous centering (0/5), rather than crediting an unselected option. This is estimated fitment, not a verified absence.",
       "price": {
         "msrp": 33600,
         "destination": 1395,
@@ -7949,12 +8556,15 @@
         "california_eligible": true,
         "power_liftgate": false,
         "adaptive_cruise": true,
-        "lane_centering": null,
+        "lane_centering": false,
         "sources": [
           "equinoxev",
           "equinoxev_manual"
         ],
-        "note": "Base LT1 has ACC. Corrective lane keeping is not continuous centering. The owner manual also describes optional Hands-On Steering Assist with connected-plan requirements; selected-trim hardware and entitlement are unverified, so no centering capability is inferred from the manual."
+        "note": "Estimated absent for the selected base LT1: the available trim evidence supports ACC and corrective lane keeping. The manual describes optional Hands-On Steering Assist with connected-plan conditions; base-grade fitment/entitlement is not established. Best estimate is no continuous centering (0/5), rather than crediting an unselected option. This is estimated fitment, not a verified absence.",
+        "estimates": {
+          "lane_centering": "Estimated absent for the selected base LT1: the available trim evidence supports ACC and corrective lane keeping. The manual describes optional Hands-On Steering Assist with connected-plan conditions; base-grade fitment/entitlement is not established. Best estimate is no continuous centering (0/5), rather than crediting an unselected option. This is estimated fitment, not a verified absence."
+        }
       },
       "energy": {
         "epa_id": "49953",
@@ -8043,15 +8653,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "LT1 FWD",
         "sources": [
           "equinoxev",
           "equinoxev_manual"
         ],
-        "note": "Base LT1 has ACC. Corrective lane keeping is not continuous centering. The owner manual also describes optional Hands-On Steering Assist with connected-plan requirements; selected-trim hardware and entitlement are unverified, so no centering capability is inferred from the manual.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited. Base ACC is selected. A complete, current Super Cruise build quote with all prerequisites and renewal costs is pending; optional centering receives no credit. Optional Hands-On Steering Assist is also unverified for this build; the manual is not proof of fitment. Lane-centering zero is withheld credit, not a claim that every Equinox EV lacks this capability."
+        "note": "Assessment of the selected Chevrolet ACC; corrective Lane Keep Assist; continuous steering estimated absent. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "LT1 FWD — Chevrolet ACC; corrective Lane Keep Assist; continuous steering estimated absent. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Chevrolet ACC; corrective Lane Keep Assist; continuous steering estimated absent",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "0/5: selected build is assessed as having corrective lane support rather than continuous centering. Estimated absent for the selected base LT1: the available trim evidence supports ACC and corrective lane keeping. The manual describes optional Hands-On Steering Assist with connected-plan conditions; base-grade fitment/entitlement is not established. Best estimate is no continuous centering (0/5), rather than crediting an unselected option. This is estimated fitment, not a verified absence.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -8079,15 +8695,28 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "LT1 FWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "equinoxev"
+          "equinoxev",
+          "aceee_2024_greenest",
+          "epa_49953"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 60,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Hyundai Ioniq 5",
+            "score": 62,
+            "source": "aceee_2024_greenest"
+          }
+        ],
+        "adjustment_note": "Estimate 2 points below the 62-point Ioniq 5 anchor. The 319-mile Equinox EV is a larger-range electric crossover with 31.1 kWh/100-mile consumption versus 29 for the selected Ioniq 5; manufacturing/battery impacts are approximated rather than calculated."
       }
     },
     {
@@ -8205,14 +8834,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2027,
         "configuration": "LT FWD",
         "sources": [
           "bolt"
         ],
-        "note": "New 2027 Bolt is on sale with 262 EPA miles and standard ACC. Super Cruise needs extra packages; no centering credit or paid entitlement is inferred for base LT.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited. Base ACC is selected. A complete, current Super Cruise build quote with all prerequisites and renewal costs is pending; optional centering receives no credit."
+        "note": "Assessment of the selected Chevrolet ACC; corrective Lane Keep Assist; Super Cruise unselected. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "LT FWD — Chevrolet ACC; corrective Lane Keep Assist; Super Cruise unselected. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Chevrolet ACC; corrective Lane Keep Assist; Super Cruise unselected",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "0/5: selected build is assessed as having corrective lane support rather than continuous centering. Super Cruise is an unselected package; its steering benefit is not included.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -8240,15 +8875,28 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "LT FWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "bolt"
+          "bolt",
+          "aceee_2024_greenest",
+          "epa_50372"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 65,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Nissan Leaf",
+            "score": 66,
+            "source": "aceee_2024_greenest"
+          }
+        ],
+        "adjustment_note": "Estimate 1 point below the 66-point historical Leaf hatchback anchor. The redesigned Bolt is a compact EV at 28.2 kWh/100 miles, but the new battery/charging package cannot inherit the predecessor Leaf or Bolt rating unchanged."
       }
     },
     {
@@ -8368,20 +9016,27 @@
       },
       "commute": {
         "components": [
-          4,
-          4,
-          3
+          5,
+          5,
+          4
         ],
         "subscription_per_year": 1188,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "Standard RWD + FSD subscription",
         "sources": [
           "model3",
-          "fsd"
+          "fsd",
+          "tesla_fsd_manual"
         ],
-        "note": "Cash price before savings/incentives. Five years of $99/month FSD (Supervised) are explicitly costed; driver supervision is mandatory. Conventional trunk and sparse controls affect utility/ergonomics.",
-        "package": "Selected FSD (Supervised), $99/month ($1,188/year) for all five years; hands-on/attention requirements apply. No free trial or lifetime entitlement assumed."
+        "note": "Assessment of the selected Tesla Full Self-Driving (Supervised), paid subscription selected. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "Standard RWD + FSD subscription — Tesla Full Self-Driving (Supervised), paid subscription selected. Five years of $99/month FSD (Supervised) are included in Cost.",
+        "system": "Tesla Full Self-Driving (Supervised), paid subscription selected",
+        "component_notes": [
+          "5/5: the selected, costed FSD (Supervised) subscription adds route-aware speed control and handling of traffic lights, stop signs and intersections beyond ordinary following cruise. The driver must supervise and can need to intervene.",
+          "5/5: the selected supervised system adds route turns and lane changes to continuous steering. This reflects broader supported tasks, not autonomous driving or a measured safety advantage.",
+          "4/5: cabin-camera attention monitoring and integrated route following reduce some manual mode changes. Attention alerts, interventions and software/visibility limits remain material; this is an editorial usability estimate, not a safeguards test rating."
+        ]
       },
       "mountain": {
         "components": [
@@ -8410,15 +9065,34 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "Standard RWD + FSD subscription",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "model3"
+          "model3",
+          "aceee_2024_greenest",
+          "epa_50251"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 67,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Nissan Leaf",
+            "score": 66,
+            "source": "aceee_2024_greenest"
+          },
+          {
+            "year": 2024,
+            "model": "Toyota bZ4X",
+            "score": 66,
+            "source": "aceee_2024_greenest"
+          }
+        ],
+        "adjustment_note": "Estimate 1 point above the two 66-point Leaf/bZ4X anchors. The selected 24.3 kWh/100-mile RWD sedan has favorable operational efficiency and sedan packaging; the small editorial uplift is not a measured manufacturing or battery benefit."
       }
     },
     {
@@ -8538,14 +9212,20 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "SEL AWD",
         "sources": [
           "tucsonphev"
         ],
-        "note": "SEL provides SCC/LFA, powered gate and 32 EPA electric miles. PHEV carries extra systems and the electric-mile split is a scenario assumption.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Hyundai SCC with Stop & Go and Lane Following Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "SEL AWD — Hyundai SCC with Stop & Go and Lane Following Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Hyundai SCC with Stop & Go and Lane Following Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -8593,7 +9273,9 @@
           "city": "2.59 / 35",
           "highway": "2.19 / 35",
           "weight": "4500"
-        }
+        },
+        "assessment_score": 60,
+        "basis": "historical"
       }
     },
     {
@@ -8715,15 +9397,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "X-Line AWD",
         "sources": [
           "sportagephev",
           "sportagephev_specs"
         ],
-        "note": "Entry X-Line PHEV has SCC/LFA and powered gate, with 33 EPA electric miles. Not the more expensive X-Line Prestige equipment list.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Kia SCC with Stop & Go and Lane Following Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "X-Line AWD — Kia SCC with Stop & Go and Lane Following Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Kia SCC with Stop & Go and Lane Following Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -8772,7 +9460,9 @@
           "city": "2.63 / 36",
           "highway": "2.34 / 35",
           "weight": "4500"
-        }
+        },
+        "assessment_score": 61,
+        "basis": "historical"
       }
     },
     {
@@ -8892,15 +9582,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "SE AWD",
         "sources": [
           "rav4phev",
           "rav4phev_specs"
         ],
-        "note": "Redesigned SE plug-in offers 54 EPA electric miles, a standard power liftgate and TSS 4.0. Do not reuse the old RAV4 Prime environmental score or higher-grade charging/comfort equipment.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Toyota Safety Sense 4.0: DRCC and Lane Tracing Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "SE AWD — Toyota Safety Sense 4.0: DRCC and Lane Tracing Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Toyota Safety Sense 4.0: DRCC and Lane Tracing Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -8928,15 +9624,27 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "SE AWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "rav4phev"
+          "rav4phev",
+          "aceee_2024_greenest"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 64,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Toyota RAV4 Prime",
+            "score": 64,
+            "source": "aceee_2024_greenest"
+          }
+        ],
+        "adjustment_note": "Carry the 64-point RAV4 Prime model-family proxy with zero adjustment. The redesigned SE plug-in has changed battery, electric range and powertrain; current 40-MPG gas-mode and 101-MPGe electrical references support a comparable broad estimate, not an inherited published rating."
       }
     },
     {
@@ -9054,15 +9762,21 @@
           3
         ],
         "subscription_per_year": 0,
-        "status": "Editorial capability estimate; fitment references linked",
+        "status": "Editorial commute-capability estimate; component rationale provided",
         "source_year": 2026,
         "configuration": "EX FWD",
         "sources": [
           "k4",
           "k4_specs"
         ],
-        "note": "Affordable manual-hatch alternative with standard stop/go SCC and LFA. EX 2.0L uses the 30-MPG EPA record, not the turbo model.",
-        "package": "Named trim equipment only; no unselected paid assistance or temporary-trial benefit credited."
+        "note": "Assessment of the selected Kia SCC with Stop & Go and Lane Following Assist. Component estimates describe supported commuting tasks and supervision, not measured safety or exact-build road-test performance.",
+        "package": "EX FWD — Kia SCC with Stop & Go and Lane Following Assist. Credit the selected grade only; unselected assistance packages and temporary trials add no benefit.",
+        "system": "Kia SCC with Stop & Go and Lane Following Assist",
+        "component_notes": [
+          "4/5: selected adaptive cruise supports stop/go following. Automatic restart has operating limits; longer stops can require driver confirmation. No extra navigation or intersection-handling benefit is assumed.",
+          "4/5: selected continuous lane centering covers ordinary highway following, with low-speed assistance where supported. It is supervised steering assistance; complex intersections and automatic lane changes are not credited.",
+          "3/5: baseline supervised, hands-on operation and driver-facing status/alerts. A generic attention or drowsiness warning is not treated as camera-based gaze monitoring. No independent exact-build usability result is claimed."
+        ]
       },
       "mountain": {
         "components": [
@@ -9091,15 +9805,33 @@
         "benchmark_model": null,
         "benchmark_year": null,
         "comparable": false,
-        "status": "Unscored",
-        "source_year": "2024 coverage limit; current model-year comparison",
+        "status": "Editorial lifecycle proxy estimate",
+        "source_year": "2024 lifecycle anchors; current configuration energy/equipment",
         "configuration": "EX FWD",
         "sources": [
           "aceee",
           "aceee_coverage",
-          "k4"
+          "k4",
+          "epa_50072"
         ],
-        "note": "No comparable published lifecycle configuration verified. A redesign, battery/powertrain change or unmatched emissions/drive/wheel configuration cannot inherit an unrelated score."
+        "note": "Best available lifecycle estimate using historical powertrain/vehicle-class evidence and current configuration efficiency. Manufacturing, battery, upstream energy, tailpipe and disposal impacts remain approximate; this is not a published current-model ACEEE score.",
+        "assessment_score": 52,
+        "basis": "proxy",
+        "proxy_records": [
+          {
+            "year": 2024,
+            "model": "Subaru IMPREZA · 2.0L 4, auto CVT Awd · AWD",
+            "score": 51,
+            "source": "aceee"
+          },
+          {
+            "year": 2024,
+            "model": "Volkswagen GTI · 2.0L 4, auto · FWD",
+            "score": 49,
+            "source": "aceee"
+          }
+        ],
+        "adjustment_note": "Estimate 1 point above the 51-point Impreza and 3 above the 49-point GTI gas hatchback anchors. The selected 30-MPG non-turbo FWD compact hatch uses less fuel than those 29- and 27-MPG references; emissions/production differences remain approximate."
       }
     }
   ]
