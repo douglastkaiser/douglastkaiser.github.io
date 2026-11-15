@@ -36,7 +36,8 @@ def signed(value):
 def verify_allocation(page, cars):
     weights = read_weights(page)
     units = sum(round(w * 100) for w in weights.values())
-    check(units in (0, 500), f'Budget drift: {weights}')
+    check(units == sum(value > 0 for value in weights.values()) * 100, f'Budget drift: {weights}')
+    check(page.locator('#allocation-caption').inner_text() == (f'{units // 100} point' + ('s' if units != 100 else '') if units else 'No priorities · sorted by cost'), 'Budget caption drift')
     expected = sorted(cars, key=lambda car: (-score(car, weights), car['five'], build.name_key(car)))
     check(page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)') == [c['id'] for c in expected], 'Allocation ranking mismatch')
     for car in cars:
@@ -45,20 +46,20 @@ def verify_allocation(page, cars):
         check(page.locator(f'#detail-{car["id"]} [data-total]').inner_text() == total, 'Allocation dialog total incorrect')
     for key, value in weights.items():
         check(page.locator('#unit-' + key).evaluate("(el, off) => el.classList.contains('is-off') === off", value == 0), 'Off styling mismatch')
-        check(page.locator('#segment-' + key).evaluate('(el, value) => Math.abs(parseFloat(el.style.width) - value * 20) < .001', value), 'Overview share mismatch')
+        check(page.locator('#segment-' + key).evaluate('(el, value) => Math.abs(parseFloat(el.style.width) - value * 100 / 6) < .001', value), 'Overview share mismatch')
     return weights
 
 
 def check_commute_slider(page, cars, output):
     slider = page.locator('#w-commute')
     box = slider.bounding_box()
-    thumb_x = box['x'] + 10 + (box['width'] - 20) * .2
+    thumb_x = box['x'] + 10 + (box['width'] - 20) / 6
     center_y = box['y'] + box['height'] / 2
     page.mouse.move(thumb_x, center_y); page.mouse.down()
     page.mouse.move(box['x'] + box['width'] * .65, center_y, steps=8)
     check(read_weights(page)['commute'] > 3, 'Real dragging did not move the direct slider')
     check(read_weights(page)['cost'] < 1, 'Real dragging did not move linked sliders')
-    check(page.locator('#unit-cost').evaluate("el => el.style.getPropertyValue('--previous')") == '20%', 'Ghost marker lost interaction start')
+    check(page.locator('#unit-cost').evaluate("el => Math.abs(parseFloat(el.style.getPropertyValue('--previous')) - 100 / 6) < .001"), 'Ghost marker lost interaction start')
     check(page.locator('#unit-commute').evaluate("el => el.classList.contains('is-direct')"), 'Direct manipulation indicator missing')
     page.screenshot(path=str(output / 'allocation-dragging.png'))
     page.mouse.up()
@@ -66,7 +67,7 @@ def check_commute_slider(page, cars, output):
     page.locator('#reset').click()
     slider.focus(); slider.press('Home')
     check(page.locator('#v-commute').inner_text() == 'Off', 'Zero did not turn category off')
-    check(read_weights(page)['cost'] == 1.25, 'Freed points did not redistribute')
+    check(read_weights(page)['cost'] == 1, 'Disabling an equal-weight category changed remaining allocations')
     verify_allocation(page, cars)
     slider.press('ArrowRight')
     check(read_weights(page)['commute'] == .01, 'Fine keyboard step failed')
@@ -84,7 +85,7 @@ def check_commute_slider(page, cars, output):
     maintenance = page.locator('#w-maintenance')
     maintenance.focus(); maintenance.press('End')
     weights = verify_allocation(page, cars)
-    check(weights['maintenance'] == 4.95 and weights['cost'] == .01, 'Dragging an off category did not reactivate it')
+    check(weights['maintenance'] == 5.95 and weights['cost'] == .01, 'Dragging an off category did not reactivate it')
     page.screenshot(path=str(output / 'allocation-six-active.png'))
     for key in build.KEYS:
         control = page.locator('#w-' + key)
@@ -93,7 +94,7 @@ def check_commute_slider(page, cars, output):
     check('No priorities' in page.locator('#allocation-caption').inner_text(), 'All-off caption missing')
     page.screenshot(path=str(output / 'allocation-all-off.png'))
     maintenance.focus(); maintenance.press('ArrowRight')
-    check(read_weights(page)['maintenance'] == 5, 'Sole active category does not fill pool')
+    check(read_weights(page)['maintenance'] == 1, 'Sole active category does not fill pool')
     verify_allocation(page, cars)
     page.screenshot(path=str(output / 'allocation-one-active.png'))
     page.locator('#reset').click()

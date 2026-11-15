@@ -87,7 +87,7 @@ class RankingsTests(unittest.TestCase):
     def test_controls_and_optional_maintenance(self):
         sliders = [a for tag, a in self.elements if tag == 'input' and a.get('type') == 'range']
         self.assertEqual([s['value'] for s in sliders], ['1'] * 5 + ['0'])
-        self.assertTrue(all((s['min'], s['max'], s['step']) == ('0', '5', '0.01') for s in sliders))
+        self.assertTrue(all((s['min'], s['max'], s['step']) == ('0', '6', '0.01') for s in sliders))
         self.assertEqual({s['id'] for s in sliders}, {'w-' + key for key in build.KEYS})
         for c in self.cars:
             self.assertEqual(c['total'], sum(c['scores'][k] for k in build.KEYS[:-1]))

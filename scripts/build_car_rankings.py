@@ -371,13 +371,14 @@ def render(data):
     accents = ('#3978a8', '#7465ac', '#b47737', '#ac6084', '#41888b', '#737c96')
     for cat, accent in zip(cats, accents):
         key, value = cat['key'], cat['default']
+        share = value * 100 / len(cats)
         off = ' is-off' if not value else ''
-        controls.append(f'<div class="slider-unit{off}" id="unit-{key}" style="--accent:{accent};--share:{value * 20}%;--previous:{value * 20}%">'
+        controls.append(f'<div class="slider-unit{off}" id="unit-{key}" style="--accent:{accent};--share:{share:g}%;--previous:{share:g}%">'
                         f'<div class="line"><label for="w-{key}"><i class="category-swatch" aria-hidden="true"></i>{escape(cat["label"])}</label>'
                         f'</div><output id="v-{key}" for="w-{key}" aria-live="off">{str(value) + " pt" if value else "Off"}</output>'
                         f'<div class="range-wrap"><div class="slider-rail" aria-hidden="true"><span class="slider-fill"></span><span class="slider-previous"></span><span class="slider-stop"></span><span class="slider-thumb"></span></div>'
-                        f'<input id="w-{key}" type="range" value="{value}" min="0" max="5" step="0.01" aria-label="{escape(cat["label"])} allocation" aria-valuetext="{str(value) + " points" if value else "Off"}"></div></div>')
-        segments.append(f'<span id="segment-{key}" style="--accent:{accent};width:{value * 20}%" aria-hidden="true"></span>')
+                        f'<input id="w-{key}" type="range" value="{value}" min="0" max="{len(cats)}" step="0.01" aria-label="{escape(cat["label"])} allocation" aria-valuetext="{str(value) + " points" if value else "Off"}"></div></div>')
+        segments.append(f'<span id="segment-{key}" style="--accent:{accent};width:{share:g}%" aria-hidden="true"></span>')
     payload = dict(categories=cats, cars=[{k: c[k] for k in ('id', 'name', 'five', 'scores')} for c in cars])
     runtime_json = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c').replace('&', '\\u0026')
     handoff = (f'Generated {data["updated"]}. Edit data.json + template.html; run python3 scripts/build_car_rankings.py.\n'
@@ -391,7 +392,7 @@ def render(data):
                'Pareto paths includes every car, equivalent groups and direct dominance links.\n'
                'Rankings, Pareto and dialogs share one five-level scores object.\n'
                'Edit scripts/car_rankings_pareto.js for the embedded network engine and interface.\n'
-               'Edit scripts/car_rankings_allocation.js for the fixed five-point allocation engine.\n'
+               'Edit scripts/car_rankings_allocation.js for the one-point-per-active-category allocation engine.\n'
                'See audit.md for screened candidates, old/new ranks and outstanding evidence gaps.\n')
     counts = ' · '.join(f'{n} {label}' for label, n in sorted(Counter(c['powertrain'] for c in cars).items()))
     body_counts = ' · '.join(f'{n} {label}' for label, n in sorted(Counter(c['body_style'] for c in cars).items()))

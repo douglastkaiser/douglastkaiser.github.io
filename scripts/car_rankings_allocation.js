@@ -1,7 +1,6 @@
 /* Embedded by the page builder; also exercised directly in Node. */
 (function (root) {
   'use strict';
-  var BUDGET = 500;
   function distribute(keys, total, basis, result) {
     var remaining = keys.slice(), available = total;
     // Water-fill small shares first, so redistribution never silently turns one off.
@@ -26,8 +25,9 @@
   function set(state, key, requested, basis) {
     var result = Object.assign({}, state);
     var others = Object.keys(state).filter(function (k) { return k !== key && state[k] > 0; });
-    result[key] = requested <= 0 ? 0 : others.length ? Math.max(1, Math.min(BUDGET - others.length, Math.round(requested))) : BUDGET;
-    if (others.length) distribute(others, BUDGET - result[key], basis || state, result);
+    var budget = (others.length + (requested > 0 ? 1 : 0)) * 100;
+    result[key] = requested <= 0 ? 0 : others.length ? Math.max(1, Math.min(budget - others.length, Math.round(requested))) : budget;
+    if (others.length) distribute(others, budget - result[key], basis || state, result);
     return result;
   }
   function total(car, weights) {
