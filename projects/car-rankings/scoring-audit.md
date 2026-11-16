@@ -1,5 +1,7 @@
 # Full scoring audit — November 15, 2026
 
+Historical snapshot. The [November 16 review audit](review-audit.md) supersedes the scores and ranks below and documents the current rubric, review evidence and all 342 before/after results.
+
 Reviewed all 57 configurations across Cost, Eco, Trips, Comfort, Assistance and optional Upkeep: 342 category results. This is a source/input consistency and calculation audit with targeted fresh source checks. It is not 57 new road tests, dealer quotes or independent lifecycle studies. The before values below are the local comparison after the trip correction and before this general audit.
 
 ## Findings and corrections

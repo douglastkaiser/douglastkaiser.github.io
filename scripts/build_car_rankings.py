@@ -17,7 +17,7 @@ KEYS = ('cost', 'eco', 'mountain', 'lux', 'commute', 'maintenance')
 COMPONENTS = {
     'mountain': (('Carrying', 'Winter access', 'Trip practicality'), (40, 35, 25)),
     'lux': (('Ride/noise', 'Seating', 'Cabin ergonomics', 'Power liftgate'), (40, 30, 20, 10)),
-    'commute': (('Traffic/speed control', 'Steering coverage', 'Supervision/usability'), (40, 35, 25)),
+    'commute': (('Traffic/speed control', 'Steering coverage', 'Driver supervision'), (40, 35, 25)),
     'maintenance': (('Less disruption', 'Less routine upkeep', 'Service access'), (50, 30, 20)),
 }
 
@@ -93,6 +93,13 @@ def tiers(values):
 
 def finite(number, minimum=0, maximum=math.inf):
     return type(number) in (int, float) and math.isfinite(number) and minimum <= number <= maximum
+
+
+def capability_band(composite):
+    """Fixed rubric anchors; an ordinary 3/5 remains neutral in any cohort."""
+    if not finite(composite, 0, 500):
+        raise ValueError('Invalid capability composite')
+    return -2 if composite < 150 else -1 if composite < 250 else 0 if composite < 350 else 1 if composite < 450 else 2
 
 
 def validate(data):
@@ -192,6 +199,11 @@ def validate(data):
             raise ValueError('Comfort needs four component rationales and a review note')
         if comfort['components'][0] != 3 and not comfort.get('ride_test_evidence', '').strip():
             raise ValueError('A ride/noise departure from baseline needs comparable road-test evidence')
+        audit = car.get('score_audit', {})
+        if not all(audit.get(k) for k in ('checked', 'review_source', 'scope', 'energy_check', 'confidence')) or audit['review_source'] not in data['sources']:
+            raise ValueError('Every car needs a complete score-audit record and review source')
+        if not car['commute'].get('review_note'):
+            raise ValueError('Assistance needs a capability/execution distinction')
         eco = car['eco']
         if not isinstance(eco.get('review_note'), str) or not eco['review_note'].strip():
             raise ValueError('Eco needs a configuration-specific review note')
@@ -245,7 +257,8 @@ def prepare(data):
         vals = [value(c, key) for c in cars]
         count = len(cars)
         for car, (score, rank) in zip(cars, tiers(vals)):
-            car['scores'][key], car['ranks'][key], car['assessed_counts'][key] = score, rank, count
+            car['scores'][key] = score if key in ('cost', 'eco') else capability_band(value(car, key))
+            car['ranks'][key], car['assessed_counts'][key] = rank, count
     for car in cars:
         car['total'] = sum(car['scores'][cat['key']] * cat['default'] for cat in data['categories'])
     return sorted(cars, key=lambda c: (-c['total'], c['five'], name_key(c)))
@@ -304,7 +317,9 @@ def cost_details(car, assumptions):
 
 def assessment(data, car, cat):
     key = cat['key']; info = car['comfort' if key == 'lux' else key]
-    tier = {2: 'Highest band', 1: 'Upper band', 0: 'Middle band', -1: 'Lower band', -2: 'Lowest band'}[car['scores'][key]]
+    relative = key in ('cost', 'eco')
+    tier = ({2: 'Highest band', 1: 'Upper band', 0: 'Middle band', -1: 'Lower band', -2: 'Lowest band'} if relative else
+            {2: 'Strong capability', 1: 'Useful capability', 0: 'Workable baseline', -1: 'Constrained', -2: 'Very constrained'})[car['scores'][key]]
     rank_text = f' · #{car["ranks"][key]} of {car["assessed_counts"][key]} assessed'
     head = (f'<section class="assessment" data-assessment="{key}"><div class="assess-head"><h3>{escape(cat["label"])}</h3>'
             f'{pill(car["scores"][key])}<span class="tiernote">{tier}{rank_text}</span></div>'
@@ -342,7 +357,8 @@ def assessment(data, car, cat):
         rationale = ''.join(f'<p><b>{escape(name)}:</b> {escape(note)}</p>'
                             for name, note in zip(COMPONENTS[key][0], info['component_notes']))
         body = (f'<p>{escape(info["note"])}</p><p><b>Selected equipment:</b> {escape(info["package"])}</p>'
-                + rationale + '<p class="evidence">Component values compare supported tasks and editorial usefulness. Road conditions, restart limits, software and driver supervision still matter. A higher capability score is not a safety certification.</p>' + component_text(car, key))
+                + rationale + f'<p class="evidence">{escape(info["review_note"])}</p>'
+                + '<p class="evidence">Component values compare supported tasks and editorial usefulness. Road conditions, restart limits, software and driver supervision still matter. A higher capability score is not a safety certification.</p>' + component_text(car, key))
     else:
         rationale = ''.join(f'<p><b>{escape(name)}:</b> {escape(note)}</p>'
                             for name, note in zip(COMPONENTS[key][0], info['component_notes']))
@@ -365,7 +381,8 @@ def row(car, cats, rank):
     cells = []
     for cat in cats:
         key = cat['key']
-        label = f'{cat["label"]}: {signed(car["scores"][key])} relative to this comparison group'
+        basis = 'relative to this comparison group' if key in ('cost', 'eco') else 'on the fixed capability rubric'
+        label = f'{cat["label"]}: {signed(car["scores"][key])} {basis}'
         if key == 'eco':
             label += f'; lifecycle assessment {car["eco"]["assessment_score"]}/100; {car["eco"]["status"]}'
         cells.append(f'<span class="cell" data-category="{key}" data-label="{escape(cat["short"])}" title="{escape(label)}" aria-label="{escape(label)}">{pill(car["scores"][key])}</span>')
@@ -376,6 +393,11 @@ def row(car, cats, rank):
 
 def modal(data, car):
     cid, e = car['id'], car['energy']
+    audit = car['score_audit']
+    review = ('<details class="rubric"><summary>Review evidence and confidence</summary>'
+              f'<p class="evidence">{escape(audit["scope"])} {escape(audit["energy_check"])}</p>'
+              f'<p class="evidence">{escape(audit["confidence"])}</p>'
+              f'<p class="source-list">{link(data["sources"][audit["review_source"]])}</p></details>')
     energy_label = f'{e["kwh_per_100_miles"]:g} kWh/100 mi' if car['powertrain'] == 'EV' else f'{e["mpg"]:g} MPG'
     return (f'<section class="modal" id="detail-{cid}" aria-labelledby="title-{cid}"><a class="scrim" href="#ranking" aria-label="Close details"></a>'
             f'<div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="title-{cid}" tabindex="-1">'
@@ -384,7 +406,7 @@ def modal(data, car):
             f'<div class="statrow"><div><small>Weighted score</small><b data-total="{cid}">{signed(car["total"])}</b></div><div><small>Est. OTD</small><b>{money(car["otd"])}</b></div>'
             f'<div><small>Est. five-year cost</small><b>{money(car["five"])}</b></div><div><small>Energy reference</small><b>{escape(energy_label)}</b></div></div>'
             f'<p class="evidence">{escape(e["note"])} {escape(car["equipment"]["note"])}</p>' + evidence(data, e)
-            + '<div class="details">' + ''.join(assessment(data, car, cat) for cat in data['categories']) + '</div>'
+            + review + '<div class="details">' + ''.join(assessment(data, car, cat) for cat in data['categories']) + '</div>'
             '<div class="modal-foot">Maintenance starts off · <a class="source" href="#method">Method and assumptions</a></div></div></section>')
 
 
@@ -410,7 +432,7 @@ def render(data):
                f'{len(cars)} new-car configurations; all body styles; <= $60k estimated OTD, Orange County/Irvine tax baseline.\n'
                'Keys: cost, eco, mountain, lux, commute, maintenance. First five default 1; maintenance 0.\n'
                'Sliders span 0–2 points, with 1 centered; direct and redistributed allocations are capped at 2.\n'
-               'Five-level tiers use full-cohort midpoint percentiles; ties share scores/ranks. Every metric has an assessment.\n'
+               'Cost/Eco use full-cohort midpoint percentiles; capability scores use fixed bands around the 3/5 baseline.\n'
                'Comfort = 40% ride/noise + 30% seating + 20% ergonomics + 10% verified power liftgate.\n'
                'Cost calculated from sourced inputs and disclosed allowances; 12k miles/year, five years; no financing.\n'
                'Nearby charging at ordinary OC electricity rate by user assumption; no home installation or retail charging markup.\n'
@@ -431,10 +453,11 @@ def render(data):
         electricity_rate=f'{data["assumptions"]["electricity_per_kwh"]:g}', regular_rate=f'{data["assumptions"]["regular_per_gallon"]:g}', premium_rate=f'{data["assumptions"]["premium_per_gallon"]:g}',
         insurance_year=f'{data["assumptions"]["insurance_per_year"]:,}', repair_year=f'{data["assumptions"]["repair_reserve_per_year"]:,}',
         gas_upkeep=f'{data["assumptions"]["routine_upkeep_per_mile"]["Gas"] * 100:g}', hybrid_upkeep=f'{data["assumptions"]["routine_upkeep_per_mile"]["Hybrid"] * 100:g}', ev_upkeep=f'{data["assumptions"]["routine_upkeep_per_mile"]["EV"] * 100:g}',
-        headers=''.join(f'<span data-category="{c["key"]}" title="{escape(c["label"])}">{escape(c["short"])}</span>' for c in cats),
+        headers=''.join(f'<button type="button" data-category="{c["key"]}" data-sort="{c["key"]}" data-label="{escape(c["short"])}" title="Sort by {escape(c["label"])} score">{escape(c["short"])}<span class="sort-arrow" aria-hidden="true">↕</span></button>' for c in cats),
         rows='\n'.join(row(c, cats, i + 1) for i, c in enumerate(cars)), leader=f'Leader: {escape(cars[0]["name"])} ({signed(cars[0]["total"])})',
         modals='\n'.join(modal(data, c) for c in cars), runtime_json=runtime_json,
         pareto_script=(ROOT / 'scripts/car_rankings_pareto.js').read_text(),
+        sort_script=(ROOT / 'scripts/car_rankings_sort.js').read_text(),
         lineup=counts, body_lineup=body_counts, historical_count=historical_count,
         proxy_count=len(cars) - historical_count, screened_count=len(data['screened']),
         **{'source_' + k: link(data['sources'][v]) for k, v in dict(aceee='aceee_method', coverage='aceee_coverage', ncap='ncap',

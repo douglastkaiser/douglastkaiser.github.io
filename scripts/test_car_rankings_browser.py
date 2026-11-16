@@ -118,6 +118,55 @@ def check_commute_slider(page, cars, output):
     page.set_viewport_size({'width': 1280, 'height': 900})
 
 
+def check_sorting(page, cars, output):
+    def verify(key, direction):
+        weights = read_weights(page)
+        totals = {c['id']: score(c, weights) for c in cars}
+        weighted = sorted(cars, key=lambda c: (-totals[c['id']], c['five'], build.name_key(c)))
+        ranks = {c['id']: i for i, c in enumerate(weighted, 1)}
+        def value(c):
+            if key == 'name': return build.name_key(c)
+            if key == 'rank': return ranks[c['id']]
+            if key == 'total': return totals[c['id']]
+            return c['scores'][key]
+        # Stable tie ordering is independent of the selected direction.
+        expected = sorted(weighted, key=value, reverse=direction == 'desc')
+        actual = page.locator('#ranking .car').evaluate_all('rows => rows.map(r => ({id:r.dataset.id, rank:r.querySelector(".rank").textContent}))')
+        check([r['id'] for r in actual] == [c['id'] for c in expected], f'{key} {direction} order mismatch')
+        check(all(int(r['rank']) == ranks[r['id']] for r in actual), 'Column sort changed weighted ranks')
+        check(page.locator('#leader').inner_text() == f'Leader: {weighted[0]["name"]} ({signed(totals[weighted[0]["id"]])})', 'Column sort changed leader')
+        check(page.locator('[data-sort][aria-pressed="true"]').count() == 1, 'Sort selection is not unique')
+        check(page.locator(f'[data-sort="{key}"]').get_attribute('aria-pressed') == 'true', 'Wrong active sort')
+        check(('ascending' if direction == 'asc' else 'descending') in page.locator('#sort-status').inner_text(), 'Direction not announced')
+
+    for key in ('rank', 'name', 'total', *build.KEYS):
+        page.locator('#reset').click()
+        first = 'asc' if key in ('rank', 'name', 'total') else 'desc'
+        button = page.locator(f'[data-sort="{key}"]')
+        button.click(); verify(key, first)
+        button.click(); verify(key, 'desc' if first == 'asc' else 'asc')
+    page.locator('[data-sort="eco"]').click()
+    verify('eco', 'desc')
+    page.locator('#w-cost').focus(); page.locator('#w-cost').press('End')
+    verify('eco', 'desc')
+    # Sorting remains usable with all priorities off, including the inactive metric.
+    for key in build.KEYS:
+        page.locator('#w-' + key).focus(); page.locator('#w-' + key).press('Home')
+    verify('eco', 'desc')
+    page.locator('#reset').click(); verify('total', 'desc')
+    for width in (390, 320):
+        page.set_viewport_size({'width': width, 'height': 844})
+        for key in ('name', 'total', *build.KEYS):
+            button = page.locator(f'[data-sort="{key}"]')
+            check(button.is_visible(), f'{width}px {key} sort unavailable')
+        page.locator('[data-sort="cost"]').focus(); page.keyboard.press('Enter'); verify('cost', 'desc')
+        page.keyboard.press('Space'); verify('cost', 'asc')
+        check(page.evaluate('document.documentElement.scrollWidth <= innerWidth'), f'{width}px sort header overflow')
+        page.screenshot(path=str(output / f'sorting-{width}.png'))
+        page.locator('#reset').click()
+    page.set_viewport_size({'width': 1280, 'height': 900})
+
+
 def check_pareto(page, cars, defaults, output, uri):
     byid = {c['id']: c for c in cars}
 
@@ -278,7 +327,8 @@ def main():
             for key in build.KEYS:
                 cell = page.locator(f'#ranking [data-id="{car["id"]}"] [data-category="{key}"]')
                 check(cell.inner_text() == build.signed(car['scores'][key]), 'Row score mismatch')
-                check(cell.get_attribute('aria-label').startswith(f'{next(cat["label"] for cat in data["categories"] if cat["key"] == key)}: {build.signed(car["scores"][key])} relative to this comparison group'), 'Accessible score mismatch')
+                basis = 'relative to this comparison group' if key in ('cost', 'eco') else 'on the fixed capability rubric'
+                check(cell.get_attribute('aria-label').startswith(f'{next(cat["label"] for cat in data["categories"] if cat["key"] == key)}: {build.signed(car["scores"][key])} {basis}'), 'Accessible score mismatch')
         for requested in cases:
             page.locator('#reset').click()
             page.evaluate('''weights => { Object.entries(weights).forEach(([key, value]) => {
@@ -302,6 +352,7 @@ def main():
             check(float(page.locator('#w-' + key).input_value()) == defaults[key], 'Reset weights drift')
         check(page.locator('#ranking .car.first').count() == 1, 'Leader styling drift')
         check_commute_slider(page, cars, output)
+        check_sorting(page, cars, output)
         upkeep = page.locator('#w-maintenance')
         upkeep.focus(); upkeep.press('End')
         weights = verify_allocation(page, cars)

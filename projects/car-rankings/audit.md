@@ -1,6 +1,6 @@
 # Car rankings evidence and market-coverage audit
 
-**Latest:** [November 15 full scoring audit](scoring-audit.md) supersedes the earlier score/rank summaries below. It covers all six categories, corrections, all 57 current results and cost sensitivity.
+**Latest:** [November 16 review and scoring audit](review-audit.md) supersedes the score/rank summaries below and the [November 15 scoring snapshot](scoring-audit.md). It covers all 57 configurations, all 342 category results, review evidence, the revised rubric and sensitivity checks.
 
 Research checked November 14, 2026. Implementation baseline: `2518f55a1f9ca5958c674ad1a9365dc5bc67272e` (fetched and fast-forwarded from `main`). `data.json` contains research inputs; `index.html` is generated from the data and template. Prior audits and original screening decisions remain available in Git history.
 

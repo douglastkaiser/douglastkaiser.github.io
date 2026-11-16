@@ -1,0 +1,1297 @@
+{
+  "checked": "2026-11-16",
+  "epa_records": [
+    {
+      "id": "nx",
+      "status": "retrieved",
+      "record": {
+        "id": "49462",
+        "year": "2026",
+        "make": "Lexus",
+        "model": "NX 350h",
+        "drive": "Front-Wheel Drive",
+        "comb08": "40",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Premium Gasoline"
+      }
+    },
+    {
+      "id": "ux",
+      "status": "retrieved",
+      "record": {
+        "id": "50050",
+        "year": "2026",
+        "make": "Lexus",
+        "model": "UX 300h",
+        "drive": "Front-Wheel Drive",
+        "comb08": "43",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "cx50",
+      "status": "retrieved",
+      "record": {
+        "id": "50010",
+        "year": "2026",
+        "make": "Mazda",
+        "model": "CX-50 4WD",
+        "drive": "4-Wheel Drive",
+        "comb08": "38",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "rav4",
+      "status": "retrieved",
+      "record": {
+        "id": "50285",
+        "year": "2026",
+        "make": "Toyota",
+        "model": "RAV4",
+        "drive": "Front-Wheel Drive",
+        "comb08": "43",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "cx30",
+      "status": "retrieved",
+      "record": {
+        "id": "49864",
+        "year": "2026",
+        "make": "Mazda",
+        "model": "CX-30 4WD",
+        "drive": "4-Wheel Drive",
+        "comb08": "25",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "sportage",
+      "status": "retrieved",
+      "record": {
+        "id": "49456",
+        "year": "2026",
+        "make": "Kia",
+        "model": "Sportage Hybrid FWD",
+        "drive": "Front-Wheel Drive",
+        "comb08": "42",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "cx5",
+      "status": "retrieved",
+      "record": {
+        "id": "50290",
+        "year": "2026",
+        "make": "Mazda",
+        "model": "CX-5 4WD",
+        "drive": "4-Wheel Drive",
+        "comb08": "26",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "ioniq5",
+      "status": "retrieved",
+      "record": {
+        "id": "49961",
+        "year": "2026",
+        "make": "Hyundai",
+        "model": "Ioniq 5 Standard range",
+        "drive": "Rear-Wheel Drive",
+        "comb08": "115",
+        "combE": "29.0",
+        "range": "245",
+        "atvType": "EV",
+        "fuelType1": "Electricity"
+      }
+    },
+    {
+      "id": "mache",
+      "status": "retrieved",
+      "record": {
+        "id": "50204",
+        "year": "2026",
+        "make": "Ford",
+        "model": "Mustang Mach-E RWD",
+        "drive": "Rear-Wheel Drive",
+        "comb08": "107",
+        "combE": "31.4375",
+        "range": "260",
+        "atvType": "EV",
+        "fuelType1": "Electricity"
+      }
+    },
+    {
+      "id": "crv",
+      "status": "retrieved",
+      "record": {
+        "id": "49353",
+        "year": "2026",
+        "make": "Honda",
+        "model": "CR-V FWD",
+        "drive": "Front-Wheel Drive",
+        "comb08": "40",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "forester",
+      "status": "retrieved",
+      "record": {
+        "id": "50131",
+        "year": "2026",
+        "make": "Subaru",
+        "model": "Forester Hybrid AWD",
+        "drive": "All-Wheel Drive",
+        "comb08": "35",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "rogue",
+      "status": "retrieved",
+      "record": {
+        "id": "49464",
+        "year": "2026",
+        "make": "Nissan",
+        "model": "Rogue FWD",
+        "drive": "Front-Wheel Drive",
+        "comb08": "32",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "leaf",
+      "status": "retrieved",
+      "record": {
+        "id": "49975",
+        "year": "2026",
+        "make": "Nissan",
+        "model": "LEAF 75kWh (18 inch steel Wheels)",
+        "drive": "Front-Wheel Drive",
+        "comb08": "121",
+        "combE": "27.8215",
+        "range": "303",
+        "atvType": "EV",
+        "fuelType1": "Electricity"
+      }
+    },
+    {
+      "id": "tucson",
+      "status": "retrieved",
+      "record": {
+        "id": "51096",
+        "year": "2026",
+        "make": "Hyundai",
+        "model": "Tucson Hybrid",
+        "drive": "Front-Wheel Drive",
+        "comb08": "38",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "solterra",
+      "status": "retrieved",
+      "record": {
+        "id": "49982",
+        "year": "2026",
+        "make": "Subaru",
+        "model": "Solterra AWD",
+        "drive": "All-Wheel Drive",
+        "comb08": "120",
+        "combE": "27.9567",
+        "range": "288",
+        "atvType": "EV",
+        "fuelType1": "Electricity"
+      }
+    },
+    {
+      "id": "bz",
+      "status": "retrieved",
+      "record": {
+        "id": "49983",
+        "year": "2026",
+        "make": "Toyota",
+        "model": "bZ (energy capacity 200 Ah)",
+        "drive": "Front-Wheel Drive",
+        "comb08": "130",
+        "combE": "25.8352",
+        "range": "236",
+        "atvType": "EV",
+        "fuelType1": "Electricity"
+      }
+    },
+    {
+      "id": "modely",
+      "status": "retrieved",
+      "record": {
+        "id": "50040",
+        "year": "2026",
+        "make": "Tesla",
+        "model": "Model Y Standard RWD (18in Wheels)",
+        "drive": "Rear-Wheel Drive",
+        "comb08": "138",
+        "combE": "24.3451",
+        "range": "321",
+        "atvType": "EV",
+        "fuelType1": "Electricity"
+      }
+    },
+    {
+      "id": "ev6",
+      "status": "retrieved",
+      "record": {
+        "id": "50215",
+        "year": "2026",
+        "make": "Kia",
+        "model": "EV6 Standard Range RWD",
+        "drive": "Rear-Wheel Drive",
+        "comb08": "115",
+        "combE": "29.2248",
+        "range": "237",
+        "atvType": "EV",
+        "fuelType1": "Electricity"
+      }
+    },
+    {
+      "id": "rdx",
+      "status": "retrieved",
+      "record": {
+        "id": "49847",
+        "year": "2026",
+        "make": "Acura",
+        "model": "RDX AWD",
+        "drive": "All-Wheel Drive",
+        "comb08": "23",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Premium Gasoline"
+      }
+    },
+    {
+      "id": "x1",
+      "status": "retrieved",
+      "record": {
+        "id": "49472",
+        "year": "2026",
+        "make": "BMW",
+        "model": "X1 xDrive28i",
+        "drive": "All-Wheel Drive",
+        "comb08": "28",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Premium Gasoline"
+      }
+    },
+    {
+      "id": "gv70",
+      "status": "retrieved",
+      "record": {
+        "id": "49483",
+        "year": "2026",
+        "make": "Genesis",
+        "model": "GV70 AWD (4 Mode)",
+        "drive": "All-Wheel Drive",
+        "comb08": "23",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Premium Gasoline"
+      }
+    },
+    {
+      "id": "niro",
+      "status": "retrieved",
+      "record": {
+        "id": "49459",
+        "year": "2026",
+        "make": "Kia",
+        "model": "Niro FE",
+        "drive": "Front-Wheel Drive",
+        "comb08": "53",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "seltos",
+      "status": "retrieved",
+      "record": {
+        "id": "49505",
+        "year": "2026",
+        "make": "Kia",
+        "model": "Seltos AWD",
+        "drive": "All-Wheel Drive",
+        "comb08": "25",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "tiguan",
+      "status": "retrieved",
+      "record": {
+        "id": "49469",
+        "year": "2026",
+        "make": "Volkswagen",
+        "model": "Tiguan S",
+        "drive": "Front-Wheel Drive",
+        "comb08": "29",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "civic",
+      "status": "retrieved",
+      "record": {
+        "id": "49316",
+        "year": "2026",
+        "make": "Honda",
+        "model": "Civic 5Dr",
+        "drive": "Front-Wheel Drive",
+        "comb08": "48",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "prius",
+      "status": "retrieved",
+      "record": {
+        "id": "49301",
+        "year": "2026",
+        "make": "Toyota",
+        "model": "Prius",
+        "drive": "Front-Wheel Drive",
+        "comb08": "57",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "priusphev",
+      "status": "manufacturer estimate; no EPA ID"
+    },
+    {
+      "id": "corolla",
+      "status": "retrieved",
+      "record": {
+        "id": "49804",
+        "year": "2026",
+        "make": "Toyota",
+        "model": "Corolla Hybrid",
+        "drive": "Front-Wheel Drive",
+        "comb08": "50",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "camry",
+      "status": "retrieved",
+      "record": {
+        "id": "49823",
+        "year": "2026",
+        "make": "Toyota",
+        "model": "Camry HEV FF LE",
+        "drive": "Front-Wheel Drive",
+        "comb08": "51",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "accord",
+      "status": "retrieved",
+      "record": {
+        "id": "50056",
+        "year": "2026",
+        "make": "Honda",
+        "model": "Accord Hybrid Sport/Touring",
+        "drive": "Front-Wheel Drive",
+        "comb08": "44",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "elantra",
+      "status": "retrieved",
+      "record": {
+        "id": "49816",
+        "year": "2026",
+        "make": "Hyundai",
+        "model": "Elantra Hybrid",
+        "drive": "Front-Wheel Drive",
+        "comb08": "50",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "sonata",
+      "status": "retrieved",
+      "record": {
+        "id": "49322",
+        "year": "2026",
+        "make": "Hyundai",
+        "model": "Sonata Hybrid Blue",
+        "drive": "Front-Wheel Drive",
+        "comb08": "51",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "mazda3",
+      "status": "retrieved",
+      "record": {
+        "id": "49293",
+        "year": "2026",
+        "make": "Mazda",
+        "model": "3 5-Door 4WD",
+        "drive": "4-Wheel Drive",
+        "comb08": "26",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "gti",
+      "status": "retrieved",
+      "record": {
+        "id": "49303",
+        "year": "2026",
+        "make": "Volkswagen",
+        "model": "GTI",
+        "drive": "Front-Wheel Drive",
+        "comb08": "27",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "impreza",
+      "status": "retrieved",
+      "record": {
+        "id": "49348",
+        "year": "2026",
+        "make": "Subaru",
+        "model": "Impreza",
+        "drive": "All-Wheel Drive",
+        "comb08": "29",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "crosstrek",
+      "status": "retrieved",
+      "record": {
+        "id": "49538",
+        "year": "2026",
+        "make": "Subaru",
+        "model": "Crosstrek Hybrid AWD",
+        "drive": "All-Wheel Drive",
+        "comb08": "36",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "corollacross",
+      "status": "retrieved",
+      "record": {
+        "id": "49870",
+        "year": "2026",
+        "make": "Toyota",
+        "model": "Corolla Cross Hybrid AWD",
+        "drive": "All-Wheel Drive",
+        "comb08": "42",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "hrv",
+      "status": "retrieved",
+      "record": {
+        "id": "49341",
+        "year": "2026",
+        "make": "Honda",
+        "model": "HR-V FWD",
+        "drive": "Front-Wheel Drive",
+        "comb08": "28",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "equinoxev",
+      "status": "retrieved",
+      "record": {
+        "id": "49953",
+        "year": "2026",
+        "make": "Chevrolet",
+        "model": "Equinox EV FWD",
+        "drive": "Front-Wheel Drive",
+        "comb08": "108",
+        "combE": "31.0762",
+        "range": "319",
+        "atvType": "EV",
+        "fuelType1": "Electricity"
+      }
+    },
+    {
+      "id": "bolt",
+      "status": "retrieved",
+      "record": {
+        "id": "50372",
+        "year": "2027",
+        "make": "Chevrolet",
+        "model": "BOLT",
+        "drive": "Front-Wheel Drive",
+        "comb08": "120",
+        "combE": "28.195",
+        "range": "262",
+        "atvType": "EV",
+        "fuelType1": "Electricity"
+      }
+    },
+    {
+      "id": "model3",
+      "status": "retrieved",
+      "record": {
+        "id": "50251",
+        "year": "2026",
+        "make": "Tesla",
+        "model": "Model 3 Standard RWD",
+        "drive": "Rear-Wheel Drive",
+        "comb08": "139",
+        "combE": "24.3033",
+        "range": "321",
+        "atvType": "EV",
+        "fuelType1": "Electricity"
+      }
+    },
+    {
+      "id": "tucsonphev",
+      "status": "retrieved",
+      "record": {
+        "id": "49764",
+        "year": "2026",
+        "make": "Hyundai",
+        "model": "Tucson Plug-in Hybrid",
+        "drive": "All-Wheel Drive",
+        "comb08": "35",
+        "combE": "44.0",
+        "range": "420",
+        "atvType": "Plug-in Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "sportagephev",
+      "status": "retrieved",
+      "record": {
+        "id": "49767",
+        "year": "2026",
+        "make": "Kia",
+        "model": "Sportage Plug-in Hybrid",
+        "drive": "All-Wheel Drive",
+        "comb08": "36",
+        "combE": "43.0",
+        "range": "470",
+        "atvType": "Plug-in Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "rav4phev",
+      "status": "manufacturer estimate; no EPA ID"
+    },
+    {
+      "id": "k4",
+      "status": "retrieved",
+      "record": {
+        "id": "50072",
+        "year": "2026",
+        "make": "Kia",
+        "model": "K4 Hatchback",
+        "drive": "Front-Wheel Drive",
+        "comb08": "30",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "sienna",
+      "status": "retrieved",
+      "record": {
+        "id": "50111",
+        "year": "2026",
+        "make": "Toyota",
+        "model": "Sienna 2WD",
+        "drive": "Front-Wheel Drive",
+        "comb08": "36",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "odyssey",
+      "status": "retrieved",
+      "record": {
+        "id": "49436",
+        "year": "2026",
+        "make": "Honda",
+        "model": "Odyssey",
+        "drive": "Front-Wheel Drive",
+        "comb08": "22",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "carnivalhybrid",
+      "status": "retrieved",
+      "record": {
+        "id": "49438",
+        "year": "2026",
+        "make": "Kia",
+        "model": "Carnival Hybrid",
+        "drive": "Front-Wheel Drive",
+        "comb08": "32",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "maverickhybrid",
+      "status": "retrieved",
+      "record": {
+        "id": "50086",
+        "year": "2026",
+        "make": "Ford",
+        "model": "Maverick Lariat HEV AWD",
+        "drive": "Part-time 4-Wheel Drive",
+        "comb08": "36",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "santacruz",
+      "status": "retrieved",
+      "record": {
+        "id": "49497",
+        "year": "2026",
+        "make": "Hyundai",
+        "model": "Santa Cruz XRT AWD",
+        "drive": "All-Wheel Drive",
+        "comb08": "20",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "outback",
+      "status": "retrieved",
+      "record": {
+        "id": "49531",
+        "year": "2026",
+        "make": "Subaru",
+        "model": "Outback AWD",
+        "drive": "All-Wheel Drive",
+        "comb08": "27",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "crownsignia",
+      "status": "retrieved",
+      "record": {
+        "id": "50076",
+        "year": "2026",
+        "make": "Toyota",
+        "model": "Crown Signia AWD",
+        "drive": "All-Wheel Drive",
+        "comb08": "38",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "santafehybrid",
+      "status": "retrieved",
+      "record": {
+        "id": "49447",
+        "year": "2026",
+        "make": "Hyundai",
+        "model": "Santa Fe Hybrid FWD",
+        "drive": "Front-Wheel Drive",
+        "comb08": "36",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "sorentohybrid",
+      "status": "retrieved",
+      "record": {
+        "id": "49457",
+        "year": "2026",
+        "make": "Kia",
+        "model": "Sorento Hybrid FWD",
+        "drive": "Front-Wheel Drive",
+        "comb08": "37",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "highlanderhybrid",
+      "status": "retrieved",
+      "record": {
+        "id": "50181",
+        "year": "2026",
+        "make": "Toyota",
+        "model": "Highlander Hybrid AWD",
+        "drive": "All-Wheel Drive",
+        "comb08": "35",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "Hybrid",
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "pilot",
+      "status": "retrieved",
+      "record": {
+        "id": "50113",
+        "year": "2026",
+        "make": "Honda",
+        "model": "Pilot FWD",
+        "drive": "Front-Wheel Drive",
+        "comb08": "22",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    },
+    {
+      "id": "palisade",
+      "status": "retrieved",
+      "record": {
+        "id": "49553",
+        "year": "2026",
+        "make": "Hyundai",
+        "model": "Palisade FWD",
+        "drive": "Front-Wheel Drive",
+        "comb08": "21",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": null,
+        "fuelType1": "Regular Gasoline"
+      }
+    }
+  ],
+  "review_coverage": [
+    {
+      "id": "nx",
+      "url": "https://www.edmunds.com/lexus/nx/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Lexus NX",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "ux",
+      "url": "https://www.edmunds.com/lexus/ux/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Lexus UX",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "cx50",
+      "url": "https://www.edmunds.com/mazda/cx-50/2026/hybrid/",
+      "retrieval": "retrieved",
+      "title": "2026 Mazda CX-50 Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "rav4",
+      "url": "https://www.edmunds.com/toyota/rav4/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Toyota RAV4",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "cx30",
+      "url": "https://www.edmunds.com/mazda/cx-30/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Mazda CX-30",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "sportage",
+      "url": "https://www.edmunds.com/kia/sportage-hybrid/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Kia Sportage Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "cx5",
+      "url": "https://www.edmunds.com/mazda/cx-5/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Mazda CX-5",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "ioniq5",
+      "url": "https://www.edmunds.com/hyundai/ioniq-5/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Hyundai IONIQ 5",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "mache",
+      "url": "https://www.edmunds.com/ford/mustang-mach-e/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Ford Mustang Mach-E",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "crv",
+      "url": "https://www.edmunds.com/honda/cr-v/2026/hybrid/",
+      "retrieval": "retrieved",
+      "title": "2026 Honda CR-V Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "forester",
+      "url": "https://www.edmunds.com/subaru/forester/2026/hybrid/",
+      "retrieval": "retrieved",
+      "title": "2026 Subaru Forester Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "rogue",
+      "url": "https://www.edmunds.com/nissan/rogue/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Nissan Rogue",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "leaf",
+      "url": "https://www.edmunds.com/nissan/leaf/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Nissan LEAF",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "tucson",
+      "url": "https://www.edmunds.com/hyundai/tucson/2026/hybrid/",
+      "retrieval": "retrieved",
+      "title": "2026 Hyundai Tucson Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "solterra",
+      "url": "https://www.edmunds.com/subaru/solterra/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Subaru Solterra",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "bz",
+      "url": "https://www.edmunds.com/toyota/bz/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Toyota bZ",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "modely",
+      "url": "https://www.edmunds.com/tesla/model-y/2026/standard/",
+      "retrieval": "retrieved",
+      "title": "2026 Tesla Model Y Standard",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "ev6",
+      "url": "https://www.edmunds.com/kia/ev6/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Kia EV6",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "rdx",
+      "url": "https://www.edmunds.com/acura/rdx/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Acura RDX",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "x1",
+      "url": "https://www.edmunds.com/bmw/x1/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 BMW X1",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "gv70",
+      "url": "https://www.edmunds.com/genesis/gv70/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Genesis GV70",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "niro",
+      "url": "https://www.edmunds.com/kia/niro/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Kia Niro",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "seltos",
+      "url": "https://www.edmunds.com/kia/seltos/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Kia Seltos",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "tiguan",
+      "url": "https://www.edmunds.com/volkswagen/tiguan/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Volkswagen Tiguan",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "civic",
+      "url": "https://www.edmunds.com/honda/civic/2026/hybrid/",
+      "retrieval": "retrieved",
+      "title": "2026 Honda Civic Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "prius",
+      "url": "https://www.edmunds.com/toyota/prius/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Toyota Prius",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "priusphev",
+      "url": "https://www.edmunds.com/toyota/prius-plug-in-hybrid/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Toyota Prius Plug-In Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "corolla",
+      "url": "https://www.edmunds.com/toyota/corolla-hybrid/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Toyota Corolla Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "camry",
+      "url": "https://www.edmunds.com/toyota/camry/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Toyota Camry",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "accord",
+      "url": "https://www.edmunds.com/honda/accord/2026/hybrid/",
+      "retrieval": "retrieved",
+      "title": "2026 Honda Accord Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "elantra",
+      "url": "https://www.edmunds.com/hyundai/elantra-hybrid/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Hyundai Elantra Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "sonata",
+      "url": "https://www.edmunds.com/hyundai/sonata/2026/hybrid/",
+      "retrieval": "retrieved",
+      "title": "2026 Hyundai Sonata Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "mazda3",
+      "url": "https://www.edmunds.com/mazda/3/2026/hatchback/",
+      "retrieval": "retrieved",
+      "title": "2026 Mazda 3 Hatchback",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "gti",
+      "url": "https://www.edmunds.com/volkswagen/golf-gti/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Volkswagen Golf GTI",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "impreza",
+      "url": "https://www.edmunds.com/subaru/impreza/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Subaru Impreza",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "crosstrek",
+      "url": "https://www.edmunds.com/subaru/crosstrek/2026/hybrid/",
+      "retrieval": "retrieved",
+      "title": "2026 Subaru Crosstrek Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "corollacross",
+      "url": "https://www.edmunds.com/toyota/corolla-cross-hybrid/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Toyota Corolla Cross Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "hrv",
+      "url": "https://www.edmunds.com/honda/hr-v/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Honda HR-V",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "equinoxev",
+      "url": "https://www.edmunds.com/chevrolet/equinox-ev/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Chevy Equinox EV",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "bolt",
+      "url": "https://www.edmunds.com/chevrolet/bolt/2027/",
+      "retrieval": "retrieved",
+      "title": "2027 Chevy Bolt",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "model3",
+      "url": "https://www.edmunds.com/tesla/model-3/2026/standard/",
+      "retrieval": "retrieved",
+      "title": "2026 Tesla Model 3 Standard",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "tucsonphev",
+      "url": "https://www.edmunds.com/hyundai/tucson-plug-in-hybrid/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Hyundai Tucson Plug-In Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "sportagephev",
+      "url": "https://www.consumerreports.org/cars/kia/sportage-plug-in-hybrid/2026/road-test-report/",
+      "retrieval": "no scored review",
+      "title": "2026 Kia Sportage Plug-In Hybrid",
+      "scope": "Public road-test excerpt only; no numeric comfort score was retrieved."
+    },
+    {
+      "id": "rav4phev",
+      "url": "https://www.edmunds.com/toyota/rav4-plug-in-hybrid/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Toyota RAV4 Plug-In Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "k4",
+      "url": "https://www.edmunds.com/kia/k4/2026/hatchback/",
+      "retrieval": "retrieved",
+      "title": "2026 Kia K4 Hatchback",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "sienna",
+      "url": "https://www.edmunds.com/toyota/sienna/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Toyota Sienna",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "odyssey",
+      "url": "https://www.edmunds.com/honda/odyssey/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Honda Odyssey",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "carnivalhybrid",
+      "url": "https://www.edmunds.com/kia/carnival-hybrid/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Kia Carnival Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "maverickhybrid",
+      "url": "https://www.edmunds.com/ford/maverick/2026/hybrid/",
+      "retrieval": "retrieved",
+      "title": "2026 Ford Maverick Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "santacruz",
+      "url": "https://www.edmunds.com/hyundai/santa-cruz/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Hyundai Santa Cruz",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "outback",
+      "url": "https://www.edmunds.com/subaru/outback/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Subaru Outback",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "crownsignia",
+      "url": "https://www.edmunds.com/toyota/crown-signia/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Toyota Crown Signia",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "santafehybrid",
+      "url": "https://www.edmunds.com/hyundai/santa-fe/2026/hybrid/",
+      "retrieval": "retrieved",
+      "title": "2026 Hyundai Santa Fe Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "sorentohybrid",
+      "url": "https://www.edmunds.com/kia/sorento-hybrid/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Kia Sorento Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "highlanderhybrid",
+      "url": "https://www.edmunds.com/toyota/highlander-hybrid/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Toyota Highlander Hybrid",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "pilot",
+      "url": "https://www.edmunds.com/honda/pilot/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Honda Pilot",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "palisade",
+      "url": "https://www.edmunds.com/hyundai/palisade/2026/",
+      "retrieval": "retrieved",
+      "title": "2026 Hyundai Palisade",
+      "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    }
+  ],
+  "baseline_commit": "8ae55dc",
+  "epa_api_template": "https://www.fueleconomy.gov/ws/rest/vehicle/{id}",
+  "interpretation": "Retrieval proves source access, not exact-trim comparability. Edmunds review ratings were not converted into scores; qualitative transfer judgments and limits are in data.json and review-audit.md."
+}

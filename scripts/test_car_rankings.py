@@ -110,7 +110,7 @@ class RankingsTests(unittest.TestCase):
         for car in self.cars:
             self.assertTrue(all(car['ranks'][k] is not None for k in build.KEYS))
             self.assertEqual(set(car['assessed_counts'].values()), {len(self.cars)})
-        for stale in ('scores5', 'unscored', 'experimental', 'Current 3 levels', 'pareto-scale', 'pareto-incomplete'):
+        for stale in ('scores5', 'experimental', 'Current 3 levels', 'pareto-scale', 'pareto-incomplete'):
             self.assertNotIn(stale, self.html)
 
     def test_selected_commute_capabilities_affect_ratings(self):
@@ -120,11 +120,51 @@ class RankingsTests(unittest.TestCase):
                                 ('ioniq5', 'tucson'), ('cx5', 'cx30'),
                                 ('niro', 'k4'), ('ev6', 'k4'), ('gti', 'mache')):
             self.assertGreater(build.value(byid[enhanced], 'commute'), build.value(byid[basic], 'commute'))
-            self.assertGreater(byid[enhanced]['scores']['commute'], byid[basic]['scores']['commute'])
+            # Additional capability can share a fixed band; it must not score worse.
+            self.assertGreaterEqual(byid[enhanced]['scores']['commute'], byid[basic]['scores']['commute'])
         self.assertLess(byid['bolt']['scores']['commute'], byid['mache']['scores']['commute'])
         self.assertLess(build.value(byid['rdx'], 'commute'), build.value(byid['crv'], 'commute'))
         self.assertEqual(byid['model3']['calculated_cost']['subscriptions'], 99 * 12 * 5)
         self.assertEqual(byid['mache']['calculated_cost']['subscriptions'], 0)
+
+    def test_fixed_bands_keep_baselines_neutral_and_ignore_cohort_changes(self):
+        self.assertEqual([build.capability_band(v) for v in (0, 149, 150, 249, 250, 300, 320, 349, 350, 449, 450, 500)],
+                         [-2, -2, -1, -1, 0, 0, 0, 0, 1, 1, 2, 2])
+        for invalid in (None, True, float('nan'), -1, 501):
+            with self.assertRaises(ValueError): build.capability_band(invalid)
+        full = {c['id']: c for c in self.cars}
+        data = deepcopy(self.data); data['cars'] = data['cars'][:3]
+        for car in build.prepare(data):
+            for key in ('mountain', 'lux', 'commute', 'maintenance'):
+                self.assertEqual(car['scores'][key], full[car['id']]['scores'][key])
+        data = deepcopy(self.data)
+        for car in data['cars']:
+            car['comfort']['components'] = [3, 3, 3, 5 if car['equipment']['power_liftgate'] else 0]
+        self.assertEqual({c['scores']['lux'] for c in build.prepare(data)}, {0})
+
+    def test_full_audit_coverage_and_selected_assistance_corrections(self):
+        evidence = json.loads((build.PAGE / 'evidence-audit.json').read_text())
+        ids = {c['id'] for c in self.cars}
+        self.assertEqual({r['id'] for r in evidence['epa_records']}, ids)
+        self.assertEqual({r['id'] for r in evidence['review_coverage']}, ids)
+        byid = {c['id']: c for c in self.cars}
+        for record in evidence['epa_records']:
+            car = byid[record['id']]
+            if record['status'] == 'retrieved':
+                raw = record['record']
+                self.assertEqual(str(car['year']), raw['year'])
+                self.assertEqual(str(car['energy']['epa_id']), raw['id'])
+                self.assertEqual(car['manufacturer'], raw['make'])
+                self.assertEqual(car['energy']['epa_model'], raw['model'])
+                self.assertEqual(car['energy']['drive'], raw['drive'])
+                key, rawkey = ('kwh_per_100_miles', 'combE') if car['powertrain'] == 'EV' else ('mpg', 'comb08')
+                self.assertAlmostEqual(car['energy'][key], float(raw[rawkey]), places=3)
+        for car in self.cars:
+            self.assertIn(car['score_audit']['review_source'], car['comfort']['sources'])
+            self.assertIn('Review evidence and confidence', build.modal(self.data, car))
+        self.assertEqual(byid['seltos']['commute']['components'], [5, 4, 3])
+        self.assertEqual(byid['tucsonphev']['commute']['components'], [5, 4, 4])
+        self.assertEqual(byid['sportagephev']['commute']['components'], [4, 4, 3])
 
     def test_trip_rationales_and_unsupported_upgrade_validation(self):
         for car in self.cars:
