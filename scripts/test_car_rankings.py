@@ -142,6 +142,20 @@ class RankingsTests(unittest.TestCase):
             car['comfort']['components'] = [3, 3, 3, 5 if car['equipment']['power_liftgate'] else 0]
         self.assertEqual({c['scores']['lux'] for c in build.prepare(data)}, {0})
 
+    def test_comfort_boundaries_and_full_cohort_score_range(self):
+        self.assertEqual([build.capability_band(v, 'lux') for v in (0, 199, 200, 249, 250, 300, 349, 350, 399, 400, 500)],
+                         [-2, -2, -1, -1, 0, 0, 0, 1, 1, 2, 2])
+        for invalid in (None, True, float('nan'), -1, 501):
+            with self.assertRaises(ValueError): build.capability_band(invalid, 'lux')
+        self.assertEqual({c['scores']['lux'] for c in self.cars}, {-2, -1, 0, 1, 2})
+        byid = {c['id']: c for c in self.cars}
+        self.assertEqual(byid['prius']['scores']['lux'], -2)
+        self.assertEqual(byid['priusphev']['scores']['lux'], -2)
+        self.assertEqual(byid['outback']['scores']['lux'], 2)
+        for car in self.cars:
+            for key in ('mountain', 'commute', 'maintenance'):
+                self.assertEqual(car['scores'][key], build.capability_band(build.value(car, key)))
+
     def test_full_audit_coverage_and_selected_assistance_corrections(self):
         evidence = json.loads((build.PAGE / 'evidence-audit.json').read_text())
         ids = {c['id'] for c in self.cars}

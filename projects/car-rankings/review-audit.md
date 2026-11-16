@@ -2,6 +2,14 @@
 
 Baseline: `8ae55dc` on `main`. All 57 configurations and all 342 category results were reviewed. The cost calculation and lifecycle-anchor calculations were rerun; their raw inputs were retained. This report distinguishes source checks, qualitative judgments and unresolved measurements. It is not 57 new road tests or a claim that all 2026 trim prices, future resale values and insurance quotes were freshly verified.
 
+## Comfort boundary follow-up
+
+After this audit, Comfort's outer score boundaries were tightened so the current lineup reaches both −2 and +2. The fixed bands are now: below 2.0/5 → −2; 2.0 to below 2.5 → −1; 2.5 to below 3.5 → 0; 3.5 to below 4.0 → +1; 4.0 and above → +2. The neutral band and all component assessments remain unchanged. Trips, Assistance and Upkeep retain the original thresholds below.
+
+Both Prius variants (1.8/5) change from −1 to −2, and Outback (4.1/5) changes from +1 to +2. Comfort now has 2 cars at −2, 7 at −1, 37 at 0, 10 at +1 and 1 at +2. Default totals and ranks are regenerated from these scores. These are fixed editorial boundaries selected for the current lineup, not automatically recalculated percentiles; future lineup changes may require reviewing coverage of the extremes.
+
+The rubric and before/after tables below preserve the original audit snapshot, before this boundary follow-up. The generated comparison page contains the updated scores and ranks.
+
 ## Research coverage
 
 - Retrieved all **55 linked EPA vehicle API records** and checked model year, manufacturer, selected energy consumption and stored drivetrain reference. No energy discrepancy was found. Prius Plug-in Hybrid and RAV4 Plug-in Hybrid have no linked EPA record; a fresh 2026 Toyota model-menu lookup did not establish one. Their disclosed manufacturer/current-configuration estimates remain estimates.

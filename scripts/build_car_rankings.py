@@ -95,11 +95,12 @@ def finite(number, minimum=0, maximum=math.inf):
     return type(number) in (int, float) and math.isfinite(number) and minimum <= number <= maximum
 
 
-def capability_band(composite):
-    """Fixed rubric anchors; an ordinary 3/5 remains neutral in any cohort."""
+def capability_band(composite, key=None):
+    """Fixed rubric anchors; Comfort has narrower outer bands, with 3/5 neutral."""
     if not finite(composite, 0, 500):
         raise ValueError('Invalid capability composite')
-    return -2 if composite < 150 else -1 if composite < 250 else 0 if composite < 350 else 1 if composite < 450 else 2
+    lower, upper = (200, 400) if key == 'lux' else (150, 450)
+    return -2 if composite < lower else -1 if composite < 250 else 0 if composite < 350 else 1 if composite < upper else 2
 
 
 def validate(data):
@@ -257,7 +258,7 @@ def prepare(data):
         vals = [value(c, key) for c in cars]
         count = len(cars)
         for car, (score, rank) in zip(cars, tiers(vals)):
-            car['scores'][key] = score if key in ('cost', 'eco') else capability_band(value(car, key))
+            car['scores'][key] = score if key in ('cost', 'eco') else capability_band(value(car, key), key)
             car['ranks'][key], car['assessed_counts'][key] = rank, count
     for car in cars:
         car['total'] = sum(car['scores'][cat['key']] * cat['default'] for cat in data['categories'])
@@ -433,6 +434,7 @@ def render(data):
                'Keys: cost, eco, mountain, lux, commute, maintenance. First five default 1; maintenance 0.\n'
                'Sliders span 0–2 points, with 1 centered; direct and redistributed allocations are capped at 2.\n'
                'Cost/Eco use full-cohort midpoint percentiles; capability scores use fixed bands around the 3/5 baseline.\n'
+               'Comfort boundaries /5: 2, 2.5, 3.5, 4; other capability boundaries: 1.5, 2.5, 3.5, 4.5.\n'
                'Comfort = 40% ride/noise + 30% seating + 20% ergonomics + 10% verified power liftgate.\n'
                'Cost calculated from sourced inputs and disclosed allowances; 12k miles/year, five years; no financing.\n'
                'Nearby charging at ordinary OC electricity rate by user assumption; no home installation or retail charging markup.\n'
