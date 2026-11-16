@@ -35,6 +35,7 @@ def signed(value):
 
 def verify_allocation(page, cars):
     weights = read_weights(page)
+    check(all(0 <= value <= 2 for value in weights.values()), f'Allocation exceeds slider cap: {weights}')
     units = sum(round(w * 100) for w in weights.values())
     check(units == sum(value > 0 for value in weights.values()) * 100, f'Budget drift: {weights}')
     check(page.locator('#allocation-caption').inner_text() == (f'{units // 100} point' + ('s' if units != 100 else '') if units else 'No priorities · sorted by cost'), 'Budget caption drift')
@@ -46,6 +47,7 @@ def verify_allocation(page, cars):
         check(page.locator(f'#detail-{car["id"]} [data-total]').inner_text() == total, 'Allocation dialog total incorrect')
     for key, value in weights.items():
         check(page.locator('#unit-' + key).evaluate("(el, off) => el.classList.contains('is-off') === off", value == 0), 'Off styling mismatch')
+        check(page.locator('#unit-' + key).evaluate("(el, value) => Math.abs(parseFloat(el.style.getPropertyValue('--share')) - value * 50) < .001", value), 'Slider thumb does not match its value')
         check(page.locator('#segment-' + key).evaluate('(el, value) => Math.abs(parseFloat(el.style.width) - value * 100 / 6) < .001', value), 'Overview share mismatch')
     return weights
 
@@ -53,13 +55,13 @@ def verify_allocation(page, cars):
 def check_commute_slider(page, cars, output):
     slider = page.locator('#w-commute')
     box = slider.bounding_box()
-    thumb_x = box['x'] + 10 + (box['width'] - 20) / 6
+    thumb_x = box['x'] + 10 + (box['width'] - 20) / 2
     center_y = box['y'] + box['height'] / 2
     page.mouse.move(thumb_x, center_y); page.mouse.down()
     page.mouse.move(box['x'] + box['width'] * .65, center_y, steps=8)
-    check(read_weights(page)['commute'] > 3, 'Real dragging did not move the direct slider')
+    check(read_weights(page)['commute'] > 1, 'Real dragging did not move the direct slider')
     check(read_weights(page)['cost'] < 1, 'Real dragging did not move linked sliders')
-    check(page.locator('#unit-cost').evaluate("el => Math.abs(parseFloat(el.style.getPropertyValue('--previous')) - 100 / 6) < .001"), 'Ghost marker lost interaction start')
+    check(page.locator('#unit-cost').evaluate("el => Math.abs(parseFloat(el.style.getPropertyValue('--previous')) - 50) < .001"), 'Ghost marker lost interaction start')
     check(page.locator('#unit-commute').evaluate("el => el.classList.contains('is-direct')"), 'Direct manipulation indicator missing')
     page.screenshot(path=str(output / 'allocation-dragging.png'))
     page.mouse.up()
@@ -72,11 +74,12 @@ def check_commute_slider(page, cars, output):
     slider.press('ArrowRight')
     check(read_weights(page)['commute'] == .01, 'Fine keyboard step failed')
     slider.press('End')
-    weights = verify_allocation(page, cars)
-    check(weights['commute'] == 4.96 and weights['cost'] == .01, 'Upper bound silently disabled categories')
-    check(weights['maintenance'] == 0, 'Redistribution enabled an off category')
+    # Feedback clears after 650 ms; inspect it before the full-cohort score checks.
     check(page.locator('#unit-cost').evaluate("el => el.classList.contains('is-adjusted')"), 'Automatic-change feedback missing')
     page.screenshot(path=str(output / 'allocation-adjusted.png'))
+    weights = verify_allocation(page, cars)
+    check(weights['commute'] == 2 and weights['cost'] == .75, 'Upper bound silently disabled categories')
+    check(weights['maintenance'] == 0, 'Redistribution enabled an off category')
     # Category values themselves must remain intact even as rows reorder.
     for car in cars:
         for key in build.KEYS:
@@ -85,7 +88,7 @@ def check_commute_slider(page, cars, output):
     maintenance = page.locator('#w-maintenance')
     maintenance.focus(); maintenance.press('End')
     weights = verify_allocation(page, cars)
-    check(weights['maintenance'] == 5.95 and weights['cost'] == .01, 'Dragging an off category did not reactivate it')
+    check(weights['maintenance'] == 2 and weights['cost'] == .8, 'Dragging an off category did not reactivate it')
     page.screenshot(path=str(output / 'allocation-six-active.png'))
     for key in build.KEYS:
         control = page.locator('#w-' + key)
@@ -257,8 +260,8 @@ def main():
     output = Path('/tmp/car-rankings-preview'); output.mkdir(exist_ok=True)
     defaults = {c['key']: c['default'] for c in data['categories']}
     cases = [defaults, {k: 0 for k in build.KEYS}]
-    cases += [{k: 3 if k == chosen else 0 for k in build.KEYS} for chosen in build.KEYS]
-    cases += [dict(zip(build.KEYS, (0.5, 2, 1.5, 3, 0, 2.5)))]
+    cases += [{k: 2 if k == chosen else 0 for k in build.KEYS} for chosen in build.KEYS]
+    cases += [dict(zip(build.KEYS, (0.5, 2, 1.5, 2, 0, 1.75)))]
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, executable_path=os.environ.get('CHROMIUM_EXECUTABLE'))
         context = browser.new_context(viewport={'width': 1280, 'height': 900}, offline=True)

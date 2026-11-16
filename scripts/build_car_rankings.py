@@ -395,18 +395,21 @@ def render(data):
     for cat, accent in zip(cats, accents):
         key, value = cat['key'], cat['default']
         share = value * 100 / len(cats)
+        slider_share = value * 100 / 2
         off = ' is-off' if not value else ''
-        controls.append(f'<div class="slider-unit{off}" id="unit-{key}" style="--accent:{accent};--share:{share:g}%;--previous:{share:g}%">'
+        controls.append(f'<div class="slider-unit{off}" id="unit-{key}" style="--accent:{accent};--share:{slider_share:g}%;--previous:{slider_share:g}%">'
                         f'<div class="line"><label for="w-{key}"><i class="category-swatch" aria-hidden="true"></i>{escape(cat["label"])}</label>'
                         f'</div><output id="v-{key}" for="w-{key}" aria-live="off">{str(value) + " pt" if value else "Off"}</output>'
-                        f'<div class="range-wrap"><div class="slider-rail" aria-hidden="true"><span class="slider-fill"></span><span class="slider-previous"></span><span class="slider-stop"></span><span class="slider-thumb"></span></div>'
-                        f'<input id="w-{key}" type="range" value="{value}" min="0" max="{len(cats)}" step="0.01" aria-label="{escape(cat["label"])} allocation" aria-valuetext="{str(value) + " points" if value else "Off"}"></div></div>')
+                        f'<div class="range-wrap"><div class="slider-rail" aria-hidden="true"><span class="slider-fill"></span><span class="slider-default"></span><span class="slider-previous"></span><span class="slider-stop"></span><span class="slider-thumb"></span></div>'
+                        f'<input id="w-{key}" type="range" value="{value}" min="0" max="2" step="0.01" aria-label="{escape(cat["label"])} allocation" aria-valuetext="{str(value) + " points" if value else "Off"}">'
+                        '<div class="slider-scale" aria-hidden="true"><span>Off</span><span>1 pt</span><span>2 pt</span></div></div></div>')
         segments.append(f'<span id="segment-{key}" style="--accent:{accent};width:{share:g}%" aria-hidden="true"></span>')
     payload = dict(categories=cats, cars=[{k: c[k] for k in ('id', 'name', 'five', 'scores')} for c in cars])
     runtime_json = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c').replace('&', '\\u0026')
     handoff = (f'Generated {data["updated"]}. Edit data.json + template.html; run python3 scripts/build_car_rankings.py.\n'
                f'{len(cars)} new-car configurations; all body styles; <= $60k estimated OTD, Orange County/Irvine tax baseline.\n'
                'Keys: cost, eco, mountain, lux, commute, maintenance. First five default 1; maintenance 0.\n'
+               'Sliders span 0–2 points, with 1 centered; direct and redistributed allocations are capped at 2.\n'
                'Five-level tiers use full-cohort midpoint percentiles; ties share scores/ranks. Every metric has an assessment.\n'
                'Comfort = 40% ride/noise + 30% seating + 20% ergonomics + 10% verified power liftgate.\n'
                'Cost calculated from sourced inputs and disclosed allowances; 12k miles/year, five years; no financing.\n'
