@@ -118,6 +118,32 @@ def check_commute_slider(page, cars, output):
     page.set_viewport_size({'width': 1280, 'height': 900})
 
 
+def check_slider_snapping(page, cars):
+    slider = page.locator('#w-commute')
+    box = slider.bounding_box()
+    center_y = box['y'] + box['height'] / 2
+
+    def move_to(value):
+        page.mouse.move(box['x'] + 10 + (box['width'] - 20) * value / 2, center_y)
+        return read_weights(page)
+
+    # Moving from a previously focused slider should still start a pointer gesture.
+    page.locator('#w-cost').focus()
+    move_to(1)
+    page.mouse.down()
+    for requested, snapped in ((.53, .5), (1.03, 1), (1.47, 1.5), (1.97, 2)):
+        check(move_to(requested)['commute'] == snapped, f'Pointer did not snap near {snapped}')
+    weights = move_to(1.07)
+    check(1.05 <= weights['commute'] <= 1.09, 'Dragging out of the snap range did not restore fine movement')
+    check(.96 <= weights['cost'] < 1, 'Redistribution snapped a linked slider near one point')
+    page.mouse.up()
+    verify_allocation(page, cars)
+    page.locator('#reset').click()
+    slider.focus(); slider.press('ArrowRight')
+    check(read_weights(page)['commute'] == 1.01, 'Snapping prevented a fine keyboard step away from one point')
+    page.locator('#reset').click()
+
+
 def check_sorting(page, cars, output):
     def verify(key, direction):
         weights = read_weights(page)
@@ -352,6 +378,7 @@ def main():
             check(float(page.locator('#w-' + key).input_value()) == defaults[key], 'Reset weights drift')
         check(page.locator('#ranking .car.first').count() == 1, 'Leader styling drift')
         check_commute_slider(page, cars, output)
+        check_slider_snapping(page, cars)
         check_sorting(page, cars, output)
         fun_slider = page.locator('#w-sporty')
         fun_slider.focus(); fun_slider.press('End')

@@ -649,7 +649,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
   var data = JSON.parse(document.getElementById('ranking-data').textContent);
   var categories = data.categories, cars = data.cars;
   var rank = document.getElementById('ranking'), main = document.getElementById('main');
-  var inputs = {}, rows = {}, totals = {}, allocation = {}, interaction = null, settleTimer = null, held = false;
+  var inputs = {}, rows = {}, totals = {}, allocation = {}, interaction = null, settleTimer = null, held = null;
   var controls = document.querySelector('.controls');
   var sortState = { key: 'total', direction: 'desc' };
   var sortButtons = document.querySelectorAll('[data-sort]');
@@ -744,22 +744,30 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
   }
   categories.forEach(function (cat) {
     var key = cat.key, input = inputs[key];
-    input.addEventListener('pointerdown', function () { held = true; begin(key); });
+    input.addEventListener('pointerdown', function () { held = 'pointer'; begin(key); });
     input.addEventListener('keydown', function (event) {
-      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'].indexOf(event.key) >= 0) { held = true; begin(key); }
+      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'].indexOf(event.key) >= 0) { held = 'keyboard'; begin(key); }
     });
     input.addEventListener('input', function () {
       begin(key);
-      allocation = CarAllocation.set(allocation, key, Number(input.value) * 100, interaction.before);
+      var requested = Math.round(Number(input.value) * 100);
+      // Magnetize pointer input within four hundredths of a positive half-point.
+      if (held === 'pointer') {
+        var nearest = Math.round(requested / 50) * 50;
+        if (nearest > 0 && Math.abs(requested - nearest) <= 4) requested = nearest;
+      }
+      allocation = CarAllocation.set(allocation, key, requested, interaction.before);
       feedback(); redraw();
       // Synthetic input and assistive technology may not emit a matching release.
       if (!held) { clearTimeout(settleTimer); settleTimer = setTimeout(finish, 450); }
     });
     input.addEventListener('change', finish);
-    input.addEventListener('blur', release);
+    input.addEventListener('blur', function () {
+      if (!interaction || interaction.key === key) release();
+    });
     input.addEventListener('keyup', release);
   });
-  function release() { held = false; finish(); }
+  function release() { held = null; finish(); }
   document.addEventListener('pointerup', release);
   document.addEventListener('pointercancel', release);
   sortButtons.forEach(function (button) {
