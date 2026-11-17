@@ -1,7 +1,7 @@
 'use strict';
 const assert = require('node:assert/strict');
 const Sort = require('./car_rankings_sort.js');
-const keys = ['cost', 'eco', 'mountain', 'lux', 'commute', 'maintenance'];
+const keys = ['cost', 'eco', 'mountain', 'lux', 'commute', 'sporty'];
 const cars = [
   { id: 'a', name: 'Alpha', rank: 2, total: 1.25, five: 40000, scores: Object.fromEntries(keys.map(k => [k, -2])) },
   { id: 'b', name: 'bravo', rank: 1, total: 2.5, five: 42000, scores: Object.fromEntries(keys.map(k => [k, 1])) },

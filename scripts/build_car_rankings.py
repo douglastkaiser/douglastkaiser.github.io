@@ -13,12 +13,11 @@ from string import Template
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / 'projects/car-rankings'
-KEYS = ('cost', 'eco', 'mountain', 'lux', 'commute', 'maintenance')
+KEYS = ('cost', 'eco', 'mountain', 'lux', 'commute', 'sporty')
 COMPONENTS = {
     'mountain': (('Carrying', 'Winter access', 'Trip practicality'), (40, 35, 25)),
     'lux': (('Ride/noise', 'Seating', 'Cabin ergonomics', 'Power liftgate'), (40, 30, 20, 10)),
     'commute': (('Traffic/speed control', 'Steering coverage', 'Driver supervision'), (40, 35, 25)),
-    'maintenance': (('Less disruption', 'Less routine upkeep', 'Service access'), (50, 30, 20)),
 }
 
 
@@ -71,6 +70,8 @@ def value(car, key):
         return -car['five']
     if key == 'eco':
         return car['eco']['assessment_score']
+    if key == 'sporty':
+        return car['sporty']['rating']
     info = car['comfort' if key == 'lux' else key]
     return sum(x * w for x, w in zip(info['components'], COMPONENTS[key][1]))
 
@@ -105,7 +106,7 @@ def capability_band(composite, key=None):
 
 def validate(data):
     if tuple(c['key'] for c in data['categories']) != KEYS or [c['default'] for c in data['categories']] != [1, 1, 1, 1, 1, 0]:
-        raise ValueError('Preserve six categories, five one-point defaults and upkeep initially off')
+        raise ValueError('Preserve six categories, five one-point defaults and Sporty/Fun initially off')
     a, cars = data['assumptions'], data['cars']
     if a['years'] != 5 or not finite(a['annual_miles'], 1) or len(a['renewal_value_factors']) != a['years'] - 1:
         raise ValueError('Invalid ownership period')
@@ -190,11 +191,13 @@ def validate(data):
             raise ValueError('Mountain assessments need a review note')
         if car['powertrain'] == 'EV' and mountain['components'][2] > 3 and not mountain.get('trip_route_evidence', '').strip():
             raise ValueError('An EV trip upgrade needs loaded winter range, reserve and charging-plan evidence for the route')
-        maintenance = car['maintenance']
-        if not isinstance(maintenance.get('confidence'), str) or not maintenance['confidence'].strip():
-            raise ValueError('Maintenance needs a separate evidence-confidence description')
-        if len(maintenance.get('component_notes', [])) != 3 or any(not isinstance(note, str) or not note.strip() for note in maintenance['component_notes']):
-            raise ValueError('Maintenance needs three component rationales')
+        if 'maintenance' in car:
+            raise ValueError('Maintenance belongs in Cost, not a separate assessment')
+        sporty = car['sporty']
+        if type(sporty.get('rating')) is not int or not 1 <= sporty['rating'] <= 5:
+            raise ValueError('Sporty/Fun needs an integer editorial rating from 1 to 5')
+        if not isinstance(sporty.get('note'), str) or not sporty['note'].strip():
+            raise ValueError('Sporty/Fun needs a configuration-specific rationale')
         comfort = car['comfort']
         if len(comfort.get('component_notes', [])) != 4 or any(not isinstance(note, str) or not note.strip() for note in comfort['component_notes']) or not comfort.get('review_note'):
             raise ValueError('Comfort needs four component rationales and a review note')
@@ -236,7 +239,7 @@ def validate(data):
         for key, note in car['equipment'].get('estimates', {}).items():
             if key not in ('power_liftgate', 'adaptive_cruise', 'lane_centering') or not isinstance(note, str) or not note.strip():
                 raise ValueError('Equipment estimates need a capability and rationale')
-        for key in ('cost', 'eco', 'mountain', 'comfort', 'commute', 'maintenance'):
+        for key in ('cost', 'eco', 'mountain', 'comfort', 'commute', 'sporty'):
             info = car[key]
             if not all(info.get(k) for k in ('status', 'source_year', 'configuration', 'note')):
                 raise ValueError(f'Missing evidence context: {car["id"]}/{key}')
@@ -258,7 +261,12 @@ def prepare(data):
         vals = [value(c, key) for c in cars]
         count = len(cars)
         for car, (score, rank) in zip(cars, tiers(vals)):
-            car['scores'][key] = score if key in ('cost', 'eco') else capability_band(value(car, key), key)
+            if key in ('cost', 'eco'):
+                car['scores'][key] = score
+            elif key == 'sporty':
+                car['scores'][key] = value(car, key) - 3
+            else:
+                car['scores'][key] = capability_band(value(car, key), key)
             car['ranks'][key], car['assessed_counts'][key] = rank, count
     for car in cars:
         car['total'] = sum(car['scores'][cat['key']] * cat['default'] for cat in data['categories'])
@@ -313,6 +321,7 @@ def cost_details(car, assumptions):
     return (f'<p>{money(car["five"])} over five years / {assumptions["annual_miles"] * assumptions["years"]:,} miles, excluding financing. '
             f'{escape(car["price"]["note"])} {escape(car["cost"]["note"])}</p>' + table
             + f'<p class="evidence">Energy: {c["gallons"]:,.2f} gallons + {c["kwh"]:,.2f} kWh.{share} '
+            f'</p><p class="evidence">{escape(car["cost"].get("service_note", ""))}</p><p class="evidence">'
             'EPA AC consumption includes charging losses. Resale, insurance, upkeep and repairs are planning assumptions; no dealer, insurer or future resale quote is claimed.</p>')
 
 
@@ -321,6 +330,8 @@ def assessment(data, car, cat):
     relative = key in ('cost', 'eco')
     tier = ({2: 'Highest band', 1: 'Upper band', 0: 'Middle band', -1: 'Lower band', -2: 'Lowest band'} if relative else
             {2: 'Strong capability', 1: 'Useful capability', 0: 'Workable baseline', -1: 'Constrained', -2: 'Very constrained'})[car['scores'][key]]
+    if key == 'sporty':
+        tier = {2: 'Exceptional engagement', 1: 'Clearly engaging', 0: 'Ordinary / uncertain engagement', -1: 'Detached / cumbersome', -2: 'Utility-focused'}[car['scores'][key]]
     rank_text = f' · #{car["ranks"][key]} of {car["assessed_counts"][key]} assessed'
     head = (f'<section class="assessment" data-assessment="{key}"><div class="assess-head"><h3>{escape(cat["label"])}</h3>'
             f'{pill(car["scores"][key])}<span class="tiernote">{tier}{rank_text}</span></div>'
@@ -361,11 +372,8 @@ def assessment(data, car, cat):
                 + rationale + f'<p class="evidence">{escape(info["review_note"])}</p>'
                 + '<p class="evidence">Component values compare supported tasks and editorial usefulness. Road conditions, restart limits, software and driver supervision still matter. A higher capability score is not a safety certification.</p>' + component_text(car, key))
     else:
-        rationale = ''.join(f'<p><b>{escape(name)}:</b> {escape(note)}</p>'
-                            for name, note in zip(COMPONENTS[key][0], info['component_notes']))
-        body = (f'<p>{escape(info["note"])}</p><p><b>Evidence confidence (not scored):</b> {escape(info["confidence"])}</p>'
-                + rationale + f'<p>{escape(info["upkeep"])}</p><p><b>Repairability:</b> {escape(info["repairability"])}</p>'
-                '<p class="evidence">No current-model failure rate or numeric repairability rating is claimed. Dollar upkeep is already in Cost; this dimension concerns time and disruption.</p>' + component_text(car, key))
+        body = (f'<p>{escape(info["note"])}</p><p class="component">Editorial engagement rating: {info["rating"]}/5; Fun score = rating − 3.</p>'
+                '<p class="evidence">Fixed driver-engagement rubric: steering, handling, agility and involvement lead. Acceleration alone, a manual gearbox, off-road ability or a sporty badge does not establish +2. GR86 manual anchors +2; minivans anchor −2. Model-level review transfer remains an editorial judgment.</p>')
     ties = sum(value(other, key) == value(car, key) for other in prepare_values(data, key))
     if ties > 1:
         body += f'<p class="evidence">{ties} vehicles share this underlying value and receive the same tier and category rank.</p>'
@@ -408,7 +416,7 @@ def modal(data, car):
             f'<div><small>Est. five-year cost</small><b>{money(car["five"])}</b></div><div><small>Energy reference</small><b>{escape(energy_label)}</b></div></div>'
             f'<p class="evidence">{escape(e["note"])} {escape(car["equipment"]["note"])}</p>' + evidence(data, e)
             + review + '<div class="details">' + ''.join(assessment(data, car, cat) for cat in data['categories']) + '</div>'
-            '<div class="modal-foot">Maintenance starts off · <a class="source" href="#method">Method and assumptions</a></div></div></section>')
+            '<div class="modal-foot">Sporty/Fun starts off · <a class="source" href="#method">Method and assumptions</a></div></div></section>')
 
 
 def render(data):
@@ -431,10 +439,11 @@ def render(data):
     runtime_json = json.dumps(payload, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c').replace('&', '\\u0026')
     handoff = (f'Generated {data["updated"]}. Edit data.json + template.html; run python3 scripts/build_car_rankings.py.\n'
                f'{len(cars)} new-car configurations; all body styles; <= $60k estimated OTD, Orange County/Irvine tax baseline.\n'
-               'Keys: cost, eco, mountain, lux, commute, maintenance. First five default 1; maintenance 0.\n'
+               'Keys: cost, eco, mountain, lux, commute, sporty. First five default 1; sporty 0.\n'
                'Sliders span 0–2 points, with 1 centered; direct and redistributed allocations are capped at 2.\n'
-               'Cost/Eco use full-cohort midpoint percentiles; capability scores use fixed bands around the 3/5 baseline.\n'
+               'Cost/Eco use full-cohort midpoint percentiles; Trips/Comfort/Assist use fixed capability bands; Fun = editorial rating minus 3.\n'
                'Comfort boundaries /5: 2, 2.5, 3.5, 4; other capability boundaries: 1.5, 2.5, 3.5, 4.5.\n'
+               'Sporty/Fun: fixed 1–5 engagement rating minus 3; GR86 manual +2, minivans −2; initially off.\n'
                'Comfort = 40% ride/noise + 30% seating + 20% ergonomics + 10% verified power liftgate.\n'
                'Cost calculated from sourced inputs and disclosed allowances; 12k miles/year, five years; no financing.\n'
                'Nearby charging at ordinary OC electricity rate by user assumption; no home installation or retail charging markup.\n'

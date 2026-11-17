@@ -1,5 +1,7 @@
 # Review and scoring audit — November 16, 2026
 
+> Historical snapshot: the [November 17 lineup and Sporty/Fun audit](fun-lineup-audit.md) supersedes the lineup and maintenance-based scores below. Maintenance is now included only in Cost; Fun is the optional sixth axis.
+
 Baseline: `8ae55dc` on `main`. All 57 configurations and all 342 category results were reviewed. The cost calculation and lifecycle-anchor calculations were rerun; their raw inputs were retained. This report distinguishes source checks, qualitative judgments and unresolved measurements. It is not 57 new road tests or a claim that all 2026 trim prices, future resale values and insurance quotes were freshly verified.
 
 ## Comfort boundary follow-up

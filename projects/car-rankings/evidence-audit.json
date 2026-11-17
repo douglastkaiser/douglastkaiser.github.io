@@ -1,5 +1,5 @@
 {
-  "checked": "2026-11-16",
+  "checked": "2026-11-17",
   "epa_records": [
     {
       "id": "nx",
@@ -888,6 +888,91 @@
         "atvType": null,
         "fuelType1": "Regular Gasoline"
       }
+    },
+    {
+      "id": "gr86",
+      "status": "manufacturer/specification reference; EPA API model unavailable",
+      "record": null
+    },
+    {
+      "id": "miata",
+      "status": "retrieved",
+      "record": {
+        "id": "50275",
+        "year": "2026",
+        "make": "Mazda",
+        "model": "MX-5",
+        "drive": "Rear-Wheel Drive",
+        "comb08": "29",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "",
+        "fuelType1": "Premium Gasoline"
+      }
+    },
+    {
+      "id": "civicsi",
+      "status": "retrieved",
+      "record": {
+        "id": "49286",
+        "year": "2026",
+        "make": "Honda",
+        "model": "Civic 4Dr",
+        "drive": "Front-Wheel Drive",
+        "comb08": "31",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "",
+        "fuelType1": "Premium Gasoline"
+      }
+    },
+    {
+      "id": "id4",
+      "status": "retrieved",
+      "record": {
+        "id": "49988",
+        "year": "2026",
+        "make": "Volkswagen",
+        "model": "ID.4 AWD",
+        "drive": "All-Wheel Drive",
+        "comb08": "102",
+        "combE": "32.9685",
+        "range": "263",
+        "atvType": "EV",
+        "fuelType1": "Electricity"
+      }
+    },
+    {
+      "id": "ioniq5sel",
+      "status": "retrieved",
+      "record": {
+        "id": "49962",
+        "year": "2026",
+        "make": "Hyundai",
+        "model": "Ioniq 5 AWD (19inch Wheels)",
+        "drive": "All-Wheel Drive",
+        "comb08": "106",
+        "combE": "31.6676",
+        "range": "290",
+        "atvType": "EV",
+        "fuelType1": "Electricity"
+      }
+    },
+    {
+      "id": "tacoma",
+      "status": "retrieved",
+      "record": {
+        "id": "50090",
+        "year": "2026",
+        "make": "Toyota",
+        "model": "Tacoma SR5/Sport/Off-Road/Limited 4WD",
+        "drive": "Part-time 4-Wheel Drive",
+        "comb08": "21",
+        "combE": "0.0",
+        "range": "0",
+        "atvType": "",
+        "fuelType1": "Regular Gasoline"
+      }
     }
   ],
   "review_coverage": [
@@ -1289,6 +1374,48 @@
       "retrieval": "retrieved",
       "title": "2026 Hyundai Palisade",
       "scope": "Model-level road-test context; tested trim, seats, wheels and sometimes carryover test year differ from the selected build. Qualitative editorial judgments, not reproduced publisher scores or exact-trim measurements."
+    },
+    {
+      "id": "gr86",
+      "url": "https://www.edmunds.com/toyota/gr86/2026/",
+      "retrieval": "retrieved",
+      "title": "Toyota GR86 Manual",
+      "scope": "Qualitative model-level road-test context; exact selected trim transfer is uncertain."
+    },
+    {
+      "id": "miata",
+      "url": "https://www.edmunds.com/mazda/mx-5-miata/2026/",
+      "retrieval": "retrieved",
+      "title": "Mazda MX-5 Miata Manual",
+      "scope": "Qualitative model-level road-test context; exact selected trim transfer is uncertain."
+    },
+    {
+      "id": "civicsi",
+      "url": "https://www.edmunds.com/honda/civic/2026/si/",
+      "retrieval": "retrieved",
+      "title": "Honda Civic Si Manual",
+      "scope": "Qualitative model-level road-test context; exact selected trim transfer is uncertain."
+    },
+    {
+      "id": "id4",
+      "url": "https://www.edmunds.com/volkswagen/id4/2026/",
+      "retrieval": "retrieved",
+      "title": "Volkswagen ID.4 AWD",
+      "scope": "Qualitative model-level road-test context; exact selected trim transfer is uncertain."
+    },
+    {
+      "id": "ioniq5sel",
+      "url": "https://www.edmunds.com/hyundai/ioniq-5/2026/",
+      "retrieval": "existing model-level review",
+      "title": "Hyundai IONIQ 5 SEL AWD",
+      "scope": "Qualitative model-level road-test context; exact selected trim transfer is uncertain."
+    },
+    {
+      "id": "tacoma",
+      "url": "https://www.edmunds.com/toyota/tacoma/2026/",
+      "retrieval": "retrieved",
+      "title": "Toyota Tacoma",
+      "scope": "Qualitative model-level road-test context; exact selected trim transfer is uncertain."
     }
   ],
   "baseline_commit": "8ae55dc",

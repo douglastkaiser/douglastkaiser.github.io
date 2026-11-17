@@ -1,5 +1,7 @@
 # Car rankings evidence and market-coverage audit
 
+> Historical snapshot: the [November 17 lineup and Sporty/Fun audit](fun-lineup-audit.md) supersedes the lineup and maintenance-based scores below. Maintenance is now included only in Cost; Fun is the optional sixth axis.
+
 **Latest:** [November 16 review and scoring audit](review-audit.md) supersedes the score/rank summaries below and the [November 15 scoring snapshot](scoring-audit.md). It covers all 57 configurations, all 342 category results, review evidence, the revised rubric and sensitivity checks.
 
 Research checked November 14, 2026. Implementation baseline: `2518f55a1f9ca5958c674ad1a9365dc5bc67272e` (fetched and fast-forwarded from `main`). `data.json` contains research inputs; `index.html` is generated from the data and template. Prior audits and original screening decisions remain available in Git history.

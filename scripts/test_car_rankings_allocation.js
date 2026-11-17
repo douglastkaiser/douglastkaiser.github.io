@@ -1,12 +1,12 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const allocation = require('./car_rankings_allocation.js');
-const defaults = { cost: 100, eco: 100, mountain: 100, lux: 100, commute: 100, maintenance: 0 };
+const defaults = { cost: 100, eco: 100, mountain: 100, lux: 100, commute: 100, sporty: 0 };
 const sum = state => Object.values(state).reduce((a, b) => a + b, 0);
 
 test('dragging redistributes proportionally, keeps off categories off, and preserves the source state', () => {
   assert.deepEqual(allocation.set(defaults, 'cost', 200), { ...defaults, cost: 200, eco: 75, mountain: 75, lux: 75, commute: 75 });
-  assert.deepEqual(defaults, { cost: 100, eco: 100, mountain: 100, lux: 100, commute: 100, maintenance: 0 });
+  assert.deepEqual(defaults, { cost: 100, eco: 100, mountain: 100, lux: 100, commute: 100, sporty: 0 });
   assert.deepEqual(allocation.set({ a: 100, b: 50, c: 150, d: 0 }, 'a', 200), { a: 200, b: 25, c: 75, d: 0 });
 });
 
@@ -16,18 +16,18 @@ test('zero disables every category and positive input recovers from all-off and 
     assert.equal(sum(state), defaults[key] ? 400 : 600);
     assert.equal(state[key], defaults[key] ? 0 : 100);
   }
-  const allOn = allocation.set(defaults, 'maintenance', 100);
-  assert.deepEqual(allOn, { ...defaults, maintenance: 100 });
-  assert.deepEqual(allocation.set(allOn, 'maintenance', 0), defaults);
+  const allOn = allocation.set(defaults, 'sporty', 100);
+  assert.deepEqual(allOn, { ...defaults, sporty: 100 });
+  assert.deepEqual(allocation.set(allOn, 'sporty', 0), defaults);
   assert.deepEqual(allocation.set({ a: 200, b: 50, c: 50 }, 'a', 0), { a: 0, b: 100, c: 100 });
   assert.deepEqual(allocation.set(defaults, 'cost', 0), { ...defaults, cost: 0 });
   let state = defaults;
   for (const key of Object.keys(state)) state = allocation.set(state, key, 0);
   assert.equal(sum(state), 0);
-  state = allocation.set(state, 'maintenance', state.maintenance ? 0 : 100);
-  assert.equal(state.maintenance, 100);
-  assert.equal(allocation.set(state, 'maintenance', 12).maintenance, 100);
-  assert.equal(sum(allocation.set(state, 'maintenance', state.maintenance ? 0 : 100)), 0);
+  state = allocation.set(state, 'sporty', state.sporty ? 0 : 100);
+  assert.equal(state.sporty, 100);
+  assert.equal(allocation.set(state, 'sporty', 12).sporty, 100);
+  assert.equal(sum(allocation.set(state, 'sporty', state.sporty ? 0 : 100)), 0);
 });
 
 test('extremes and rounding preserve active categories and deterministic exact budgets', () => {

@@ -84,7 +84,7 @@ class RankingsTests(unittest.TestCase):
         ids = [a['id'] for _, a in self.elements if 'id' in a]
         self.assertEqual(len(ids), len(set(ids)))
 
-    def test_controls_and_optional_maintenance(self):
+    def test_controls_and_optional_sporty(self):
         sliders = [a for tag, a in self.elements if tag == 'input' and a.get('type') == 'range']
         self.assertEqual([s['value'] for s in sliders], ['1'] * 5 + ['0'])
         self.assertTrue(all((s['min'], s['max'], s['step']) == ('0', '2', '0.01') for s in sliders))
@@ -135,7 +135,7 @@ class RankingsTests(unittest.TestCase):
         full = {c['id']: c for c in self.cars}
         data = deepcopy(self.data); data['cars'] = data['cars'][:3]
         for car in build.prepare(data):
-            for key in ('mountain', 'lux', 'commute', 'maintenance'):
+            for key in ('mountain', 'lux', 'commute', 'sporty'):
                 self.assertEqual(car['scores'][key], full[car['id']]['scores'][key])
         data = deepcopy(self.data)
         for car in data['cars']:
@@ -153,7 +153,7 @@ class RankingsTests(unittest.TestCase):
         self.assertEqual(byid['priusphev']['scores']['lux'], -2)
         self.assertEqual(byid['outback']['scores']['lux'], 2)
         for car in self.cars:
-            for key in ('mountain', 'commute', 'maintenance'):
+            for key in ('mountain', 'commute'):
                 self.assertEqual(car['scores'][key], build.capability_band(build.value(car, key)))
 
     def test_full_audit_coverage_and_selected_assistance_corrections(self):
@@ -322,7 +322,7 @@ class RankingsTests(unittest.TestCase):
     def test_all_evidence_is_scoped_and_estimates_are_distinct(self):
         historical = 0
         for car in self.data['cars']:
-            for key in ('cost','eco','mountain','comfort','commute','maintenance'):
+            for key in ('cost','eco','mountain','comfort','commute','sporty'):
                 info = car[key]
                 for name in ('status','source_year','configuration','note','sources'): self.assertTrue(info[name])
             eco = car['eco']
@@ -352,29 +352,45 @@ class RankingsTests(unittest.TestCase):
         for stale in ('exactly twelve','forced equal thirds','Factory power liftgate','36-car shortlist','Carried-forward MPG','retained planning input'):
             self.assertNotIn(stale, self.html)
 
-    def test_maintenance_confidence_does_not_change_scores(self):
+    def test_sporty_confidence_does_not_change_scores(self):
         data = deepcopy(self.data)
         for c in data['cars']:
-            c['maintenance']['confidence'] = 'Different uncertainty description; no numeric adjustment'
+            c['sporty']['confidence'] = 'Different uncertainty description; no numeric adjustment'
             c['audit_note'] = 'New generation and new powertrain'
         expected = {c['id']: c['scores'] for c in self.cars}
         self.assertEqual(expected, {c['id']: c['scores'] for c in build.prepare(data)})
 
-    def test_redesign_and_phev_complexity_are_not_maintenance_penalties(self):
+    def test_fun_anchors_rationales_and_cohort_independence(self):
         byid = {c['id']: c for c in self.cars}
+        self.assertEqual(byid['gr86']['scores']['sporty'], 2)
+        self.assertEqual(byid['miata']['scores']['sporty'], 2)
+        self.assertEqual(byid['gti']['scores']['sporty'], 2)  # A manual is not required.
+        self.assertTrue(all(c['scores']['sporty'] == -2 for c in self.cars if c['body_style'] == 'Minivan'))
         for c in self.cars:
-            m = c['maintenance']
-            self.assertEqual(m['components'][0], 3)
-            self.assertEqual(m['components'][2], 3)
-            self.assertEqual(m['components'][1], 5 if c['powertrain'] == 'EV' else 3)
-            self.assertEqual(len(m['component_notes']), 3)
+            self.assertNotIn('maintenance', c)
             html = build.assessment(self.data, c, self.data['categories'][5])
-            self.assertIn('Evidence confidence (not scored):', html)
-            for note in m['component_notes']:
-                self.assertIn(escape(note), html)
-        self.assertEqual(byid['rav4']['scores']['maintenance'], 0)
-        self.assertEqual(byid['rav4']['maintenance']['components'], byid['corollacross']['maintenance']['components'])
-        self.assertEqual(byid['rav4phev']['maintenance']['components'], byid['rav4']['maintenance']['components'])
+            self.assertIn(escape(c['sporty']['note']), html)
+            self.assertIn('Fun score = rating − 3', html)
+            data = deepcopy(self.data); data['cars'] = [next(x for x in data['cars'] if x['id'] == c['id'])]
+            self.assertEqual(build.prepare(data)[0]['scores']['sporty'], c['scores']['sporty'])
+
+    def test_new_lineup_and_cost_preservation(self):
+        byid = {c['id']: c for c in self.cars}
+        self.assertTrue({'gr86', 'miata', 'civicsi', 'id4', 'ioniq5sel', 'tacoma'} <= set(byid))
+        self.assertIn('6MT', byid['gr86']['trim'])
+        self.assertIn('two seats', byid['miata']['mountain']['note'])
+        self.assertIn('19inch', byid['ioniq5sel']['energy']['epa_model'])
+        self.assertEqual(byid['ioniq5sel']['energy']['epa_range_miles'], 290)
+        self.assertEqual(byid['tacoma']['cost']['annual_weight_fee'], 80)
+        self.assertEqual(byid['tacoma']['energy']['mpg'], 21)
+        self.assertFalse(byid['miata']['equipment']['adaptive_cruise'])
+        self.assertFalse(byid['gr86']['equipment']['lane_centering'])
+        self.assertLess(byid['civicsi']['commute']['components'][0], 4)
+        self.assertEqual(byid['crv']['five'], 45091.0)
+        self.assertEqual(byid['ioniq5']['five'], 49744.49)
+        screened = {c['id']: c for c in self.data['screened']}
+        self.assertNotIn('ariya', byid)
+        self.assertIn('Held out', screened['ariya']['decision'])
 
     def test_eco_preserves_published_anchors_and_explains_relative_bands(self):
         byid = {c['id']: c for c in self.cars}
@@ -447,9 +463,11 @@ class RankingsTests(unittest.TestCase):
         rejects(lambda d: d['cars'][0]['commute'].update(system=''))
         rejects(lambda d: d['cars'][0]['commute'].update(component_notes=[]))
         rejects(lambda d: d['cars'][0]['commute'].update(component_notes=['valid', None, 'valid']))
-        rejects(lambda d: d['cars'][0]['maintenance'].update(confidence=''))
-        rejects(lambda d: d['cars'][0]['maintenance'].update(component_notes=[]))
-        rejects(lambda d: d['cars'][0]['maintenance'].update(component_notes=['valid', None, 'valid']))
+        for rating in (None, True, 0, 6, 3.5, '5'):
+            rejects(lambda d, rating=rating: d['cars'][0]['sporty'].update(rating=rating))
+        rejects(lambda d: d['cars'][0]['sporty'].update(note=''))
+        rejects(lambda d: d['cars'][0]['sporty'].update(sources=[]))
+        rejects(lambda d: d['cars'][0].update(maintenance={}))
         rejects(lambda d: d['cars'][0]['eco'].update(review_note=''))
         rejects(lambda d: d['cars'][0]['eco']['proxy_records'][0]['record'].update(score=1))
         rejects(lambda d: d['cars'][0]['eco']['proxy_records'][0].update(model='Unrelated model'))
