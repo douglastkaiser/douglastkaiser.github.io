@@ -50,6 +50,11 @@ test('all cars participate with proxy scores, including when metrics are off', (
       assert.equal(g.edges.length, 0);
       assert.deepEqual(pareto.upgrades(g, data.cars[0], weights), []);
     }
+    const withTopPick = pareto.buildGraph(data.cars, data.categories, weights, 'sportage');
+    assert.deepEqual(ids(withTopPick.layers[0].flatMap(group => group.members)), ['sportage']);
+    for (const car of data.cars) {
+      assert.equal(pareto.preferredPath(withTopPick, car, weights).at(-1).id, 'sportage');
+    }
   }
 });
 

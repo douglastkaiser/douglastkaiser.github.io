@@ -41,7 +41,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 .view-tabs{display:flex;gap:6px;margin:0 0 14px;border-bottom:1px solid var(--line);padding-bottom:8px}.view-tabs button,.pareto-button{font:inherit;color:var(--ink);border:1px solid var(--line);background:#fff;border-radius:7px;padding:8px 12px;cursor:pointer}.view-tabs [aria-selected="true"],.pareto-button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}.pareto-button:hover{border-color:var(--green)}
 #pareto h2{font-size:22px;letter-spacing:-.6px;margin:0 0 5px}#pareto h3{font-size:17px;margin:0 0 8px}#pareto p{margin:6px 0 12px}.pareto-intro,.pareto-caption{color:var(--muted);font-size:12px}.pareto-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:16px 0 12px}.pareto-toolbar label{display:flex;flex-direction:column;gap:5px;font-size:12px;font-weight:650;min-width:0}.pareto-toolbar select,#pareto-comparison select{font:inherit;max-width:100%;padding:8px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink)}.pareto-toolbar label:first-child{flex:1;min-width:180px}.pareto-views{display:flex;gap:4px}.pareto-coverage{font-weight:750;font-size:13px}.pareto-scroll{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:10px;background:#eff4f0}.pareto-stage{position:relative;display:flex;align-items:flex-start;gap:54px;width:max-content;min-width:100%;padding:16px 18px 24px}.pareto-layer{position:relative;width:170px;flex:0 0 170px;z-index:1}.pareto-layer h3{font-size:12px!important;color:var(--muted);font-weight:650;min-height:30px}.pareto-node{background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px;margin-bottom:12px;overflow-wrap:anywhere}.pareto-node.is-selected{border-color:var(--green);box-shadow:0 0 0 2px #11764b22}.pareto-node.is-path{background:#edf8f1;border-color:#8fcba9}.pareto-node.is-direct{border-color:#8fcba9}.pareto-node button{font:inherit;text-align:left;border:0;background:none;color:var(--ink);padding:5px 0;cursor:pointer;width:100%;font-size:12px;font-weight:700}.pareto-node button[aria-pressed="true"]{color:var(--green)}.pareto-node .node-score{display:block;color:var(--green);font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}.pareto-node details{font-size:11px;color:var(--muted);margin-top:4px}.pareto-node summary{cursor:pointer;padding:5px 0}.pareto-node details button{font-weight:500}.pareto-links{position:absolute;inset:0;pointer-events:none;overflow:visible}.pareto-edge{fill:none;stroke:#bbcbbf;stroke-width:1.2}.pareto-edge.is-direct{stroke:#5a9270;stroke-width:2}.pareto-edge.is-path{stroke:var(--green);stroke-width:2.6}.pareto-layer-list{margin:16px 0}.pareto-layer-list h3{color:var(--muted);font-size:13px!important}.pareto-list-group{padding:10px 0;border-top:1px solid var(--line)}.pareto-list-group>div{display:flex;flex-wrap:wrap;gap:5px;align-items:center}.pareto-list-group small{display:block;color:var(--muted);margin:5px 0}.pareto-list-group.is-selected{background:#eaf5ed}.pareto-list-group .pareto-button{padding:6px 8px;font-size:12px}
 #pareto-comparison{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;overflow-wrap:anywhere}#pareto-comparison .selected-summary{display:flex;justify-content:space-between;align-items:start;gap:14px}#pareto-comparison .selected-summary p{font-size:12px;color:var(--muted)}.selected-total{font-size:25px;color:var(--green);font-weight:800;white-space:nowrap}.next-upgrade{border-left:3px solid var(--green);padding-left:12px;margin:16px 0}.next-upgrade h4{font-size:17px;margin:4px 0}.next-upgrade small{font-size:12px;color:var(--muted)}.comparison-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.comparison-actions a{color:var(--green);font-size:12px}.alternative-label{display:flex;flex-direction:column;gap:6px;margin:14px 0;font-size:12px}.metric-comparison{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}.metric-comparison th,.metric-comparison td{padding:9px 4px;border-bottom:1px solid var(--line);text-align:right;overflow-wrap:anywhere}.metric-comparison th:first-child{width:35%;text-align:left}.metric-comparison th small{display:block;color:var(--muted);font-weight:400}.metric-comparison .improvement{color:var(--green);font-weight:750}.metric-comparison .ignored{color:var(--muted)}
-.pareto-scroll{max-height:600px;overflow:auto}.pareto-stage{gap:32px;justify-content:center}.pareto-layer{width:var(--pareto-node-width,170px);flex-basis:var(--pareto-node-width,170px)}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.pareto-scroll{max-height:600px;overflow:auto}.pareto-stage{gap:32px;justify-content:center}.pareto-layer{width:var(--pareto-node-width,170px);flex-basis:var(--pareto-node-width,170px)}.pareto-top-pick h3{color:#765018}.pareto-top-pick .pareto-node,.pareto-top-pick .pareto-list-group{border:1px solid #bd8b34;background:#fff4d9}.pareto-top-pick .pareto-list-group{border-radius:9px;padding:10px}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
 @media(max-width:650px){.pareto-toolbar{gap:10px}.pareto-toolbar label{flex:1;min-width:160px}.pareto-toolbar select{width:100%;font-size:16px}.pareto-views{width:100%}.view-tabs button,.pareto-button,.pareto-node button,.pareto-node summary{min-height:44px}#pareto-comparison{padding:12px}.selected-summary{flex-wrap:wrap}.metric-comparison{font-size:11px}}
 @media(max-width:650px){.pareto-scroll{max-height:480px}}
 @media print{.view-tabs,.pareto-toolbar,.pareto-scroll{display:none}#pareto-list{display:block!important}#pareto-comparison{break-inside:avoid}}
@@ -155,7 +155,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 </div>
 <section id="pareto" role="tabpanel" aria-labelledby="tab-pareto" hidden>
 <h2>Find the next step up</h2>
-<p class="pareto-intro">Better on at least one active score, no worse on the others. Follow the smallest score gain, or explore a different direct upgrade.</p>
+<p class="pareto-intro">The S+ Tier crowns the Pareto champion. In the tiers below, an upgrade improves at least one active score and matches or beats the rest.</p>
 <div class="pareto-toolbar">
 <label for="pareto-car">Selected car<select id="pareto-car"></select></label>
 <div class="pareto-views" role="group" aria-label="Pareto presentation"><button type="button" id="pareto-network-button" class="pareto-button" aria-pressed="true">Network</button><button type="button" id="pareto-list-button" class="pareto-button" aria-pressed="false">Grouped list</button></div>
@@ -163,7 +163,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 <p id="pareto-coverage" class="pareto-coverage" role="status" aria-live="polite" aria-atomic="true"></p>
 <div id="pareto-network" class="pareto-scroll" role="region" aria-label="Pareto network, scroll to explore cars and layers" tabindex="0"><div id="pareto-stage" class="pareto-stage"></div></div>
 <div id="pareto-list" hidden></div>
-<p class="pareto-caption">Arrows point left toward better options. Only direct upgrades are connected; layers are not weighted ranks. Positive weights change the preferred path; turning a metric off can change the network. Dominance describes these relative scores, not verified superiority of the vehicle.</p>
+<p class="pareto-caption">Arrows point left toward direct upgrades and ultimately the S+ Tier. Positive weights change the preferred path. Turning a metric off can change the score-based layers.</p>
 <p id="pareto-selection-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
 <section id="pareto-comparison" aria-label="Selected car and direct upgrades"></section>
 </section>
@@ -321,12 +321,12 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
     return active.every(function (key) { return a.scores[key] >= b.scores[key]; }) &&
       active.some(function (key) { return a.scores[key] > b.scores[key]; });
   }
-  function buildGraph(cars, categories, weights) {
+  function buildGraph(cars, categories, weights, topPickId) {
     var active = categories.map(function (cat) { return cat.key; }).filter(function (key) { return weights[key] > 0; });
     var eligible = [], profiles = new Map(), byCar = new Map();
     cars.forEach(function (car) {
       eligible.push(car);
-      var signature = JSON.stringify(active.map(function (key) { return car.scores[key]; }));
+      var signature = car.id === topPickId ? 'top-pick' : JSON.stringify(active.map(function (key) { return car.scores[key]; }));
       if (!profiles.has(signature)) profiles.set(signature, { members: [] });
       profiles.get(signature).members.push(car);
     });
@@ -337,8 +337,13 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
       group.index = i;
       group.members.forEach(function (car) { byCar.set(car.id, group); });
     });
+    var topPick = byCar.get(topPickId);
     var matrix = groups.map(function (a) {
-      return groups.map(function (b) { return dominates(a.members[0], b.members[0], active); });
+      return groups.map(function (b) {
+        // The top tier overrides dominance in this graph while keeping the real scores.
+        if (a === topPick) return b !== topPick;
+        return b !== topPick && dominates(a.members[0], b.members[0], active);
+      });
     });
     var edges = [], dominancePairs = 0;
     groups.forEach(function (a, i) {
@@ -356,7 +361,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
       remaining = remaining.filter(function (group) { return layer.indexOf(group) < 0; });
     }
     return { active: active, eligible: eligible, groups: groups, byCar: byCar,
-      edges: edges, layers: layers, dominancePairs: dominancePairs };
+      edges: edges, layers: layers, dominancePairs: dominancePairs, topPick: topPick };
   }
   function upgrades(graph, car, weights) {
     var group = graph.byCar.get(car.id);
@@ -378,6 +383,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
 
   function createView(options) {
     var data = options.data, cars = data.cars, categories = data.categories;
+    var topPickId = options.topPickId;
     var byId = new Map(cars.map(function (car) { return [car.id, car]; }));
     var cache = new Map(), graph = null, renderedGraph = null, currentWeights = {};
     var state = { active: false, presentation: 'network', selected: null, comparison: null };
@@ -425,17 +431,24 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
         '<button type="button" data-primary="' + group.index + '" data-select="' + escape(car.id) + '">' + escape(car.name) + '</button>' +
         (group.members.length > 1 ? '<details><summary>' + group.members.length + ' equivalent cars</summary>' + memberButtons(group) + '</details>' : '') + '</section>';
     }
+    function layerTitle(layer, index) {
+      if (layer[0] === graph.topPick) return 'S+ Tier';
+      if (!graph.active.length) return 'Equal active scores';
+      var scoreLayer = index - Number(Boolean(graph.topPick));
+      return scoreLayer === 0 ? 'Score frontier' : 'Layer ' + (scoreLayer + 1);
+    }
     function renderStructure() {
       var stage = el('pareto-stage');
-      stage.innerHTML = '<svg class="pareto-links" id="pareto-links" role="img" aria-label="Direct upgrade connections; arrows point toward better score profiles"></svg>' + graph.layers.map(function (layer, i) {
-        return '<section class="pareto-layer"><h3>' + (graph.active.length ? i === 0 ? 'Frontier' : 'Layer ' + (i + 1) : 'All scores equivalent') + '</h3>' + layer.map(groupNode).join('') + '</section>';
+      stage.innerHTML = '<svg class="pareto-links" id="pareto-links" role="img" aria-label="Connections to direct upgrades and the S+ Tier"></svg>' + graph.layers.map(function (layer, i) {
+        return '<section class="pareto-layer' + (layer[0] === graph.topPick ? ' pareto-top-pick' : '') + '"><h3>' + layerTitle(layer, i) + '</h3>' + layer.map(groupNode).join('') + '</section>';
       }).join('');
       el('pareto-list').innerHTML = graph.layers.map(function (layer, i) {
-        return '<section class="pareto-layer-list"><h3>' + (graph.active.length ? i === 0 ? 'Frontier' : 'Layer ' + (i + 1) : 'All scores equivalent') + '</h3>' + layer.map(function (group) {
+        return '<section class="pareto-layer-list' + (layer[0] === graph.topPick ? ' pareto-top-pick' : '') + '"><h3>' + layerTitle(layer, i) + '</h3>' + layer.map(function (group) {
           var better = graph.edges.filter(function (edge) { return edge.worse === group.index; });
+          var connectsToTopPick = better.length === 1 && graph.groups[better[0].better] === graph.topPick;
           return '<div class="pareto-list-group" data-list-node="' + group.index + '"><div>' + memberButtons(group) +
             '<strong data-group-total="' + group.index + '"></strong></div><small>' + (group.members.length > 1 ? 'Equivalent active scores. ' : '') +
-            (better.length ? 'Direct upgrades:' : graph.active.length ? 'No dominating alternative.' : 'No active metrics.') + '</small>' +
+            (group === graph.topPick ? 'Pareto champion' : connectsToTopPick ? 'S+ Tier' : better.length ? 'Direct upgrades:' : graph.active.length ? 'No dominating alternative.' : 'No active metrics.') + '</small>' +
             (better.length ? '<div>' + better.map(function (edge) { return button(graph.groups[edge.better].members[0]); }).join('') + '</div>' : '') + '</div>';
         }).join('') + '</section>';
       }).join('');
@@ -513,18 +526,20 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
       var scaleLabel = '5 levels';
       var html = '<div class="selected-summary"><div><h3>' + escape(car.name) + '</h3><p>' + escape(scaleLabel) + ' · Est. five-year cost ' + money(car.five) + '</p></div><strong class="selected-total">' + signed(total(car, currentWeights)) + '</strong></div>' +
         '<div class="comparison-actions"><a href="#detail-' + escape(car.id) + '">Research and cost breakdown ↗</a></div>';
-      if (!graph.active.length) html += '<p>No active metrics. All cars have equal active scores; cost only determines display order.</p>';
-      else if (!next) html += '<p>No dominating alternative. This car is on the frontier for the selected scores.</p>';
-      else {
+      var isTopPick = graph.byCar.get(car.id) === graph.topPick;
+      var nextIsTopPick = next && next.id === topPickId;
+      if (!graph.active.length) html += '<p>No active metrics. All cars have equal active scores.</p>';
+      if (isTopPick) html += '<p><strong>S+ Tier · Pareto champion</strong></p>';
+      else if (next) {
         var gain = total(next, currentWeights) - total(car, currentWeights);
         var tied = alternatives.filter(function (c) { return total(c, currentWeights) === total(next, currentWeights); }).length;
-        html += '<div class="next-upgrade"><small>Next dominator · smallest weighted-score gain</small><h4>' + escape(next.name) + ' · ' + signed(gain) + '</h4><p>Est. five-year cost ' + money(next.five) + '</p><div class="comparison-actions">' + button(next, 'Follow upgrade') + '<a href="#detail-' + escape(next.id) + '">Upgrade evidence ↗</a></div></div>' +
+        html += '<div class="next-upgrade"><small>' + (nextIsTopPick ? 'S+ Tier' : 'Next dominator · smallest weighted-score gain') + '</small><h4>' + escape(next.name) + (nextIsTopPick ? '' : ' · ' + signed(gain)) + '</h4><p>Est. five-year cost ' + money(next.five) + '</p><div class="comparison-actions">' + button(next, nextIsTopPick ? 'View top pick' : 'Follow upgrade') + '<a href="#detail-' + escape(next.id) + '">' + (nextIsTopPick ? 'Research and cost ↗' : 'Upgrade evidence ↗') + '</a></div></div>' +
           (tied > 1 ? '<p class="pareto-intro">' + tied + ' alternatives share the smallest gain. Lower five-year cost, then name breaks the tie; it is not a performance difference.</p>' : '') +
-          '<label class="alternative-label" for="pareto-alternative">Compare a direct upgrade (' + alternatives.length + ')<select id="pareto-alternative">' + alternatives.map(function (alt) {
+          '<label class="alternative-label" for="pareto-alternative">' + (nextIsTopPick ? 'Compare with the S+ champion' : 'Compare a direct upgrade (' + alternatives.length + ')') + '<select id="pareto-alternative">' + alternatives.map(function (alt) {
             return '<option value="' + escape(alt.id) + '"' + (alt === compared ? ' selected' : '') + '>' + escape(alt.name) + ' · ' + signed(total(alt, currentWeights)) + '</option>';
           }).join('') + '</select></label>';
-      }
-      html += '<table class="metric-comparison"><caption class="pareto-intro">Active tier comparison' + (compared ? ' · upgrade: ' + escape(compared.name) : '') + '</caption><thead><tr><th scope="col">Metric</th><th scope="col">Selected</th><th scope="col">Upgrade</th><th scope="col">Change</th></tr></thead><tbody>' + categories.map(function (cat) {
+      } else if (graph.active.length) html += '<p>No dominating alternative. This car is on the frontier for the selected scores.</p>';
+      html += '<table class="metric-comparison"><caption class="pareto-intro">Active tier comparison' + (compared ? ' · ' + escape(compared.name) : '') + '</caption><thead><tr><th scope="col">Metric</th><th scope="col">Selected</th><th scope="col">' + (nextIsTopPick ? 'S+ Tier' : 'Upgrade') + '</th><th scope="col">Change</th></tr></thead><tbody>' + categories.map(function (cat) {
         var key = cat.key, active = currentWeights[key] > 0;
         var comparable = !!compared;
         var delta = comparable ? compared.scores[key] - car.scores[key] : null;
@@ -532,7 +547,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
       }).join('') + '</tbody></table>';
       el('pareto-comparison').innerHTML = html;
       var announcement = car.name + ', ' + scaleLabel + ', score ' + signed(total(car, currentWeights)) + '. ' +
-        (!graph.active.length ? 'No active metrics.' : next ? 'Next dominator: ' + next.name + '.' : 'No dominating alternative.');
+        (isTopPick ? 'S+ Tier.' : nextIsTopPick ? 'S+ Tier: ' + next.name + '.' : next ? 'Next dominator: ' + next.name + '.' : graph.active.length ? 'No dominating alternative.' : 'No active metrics.');
       if (el('pareto-selection-status').textContent !== announcement) el('pareto-selection-status').textContent = announcement;
     }
     function syncDetails() {
@@ -553,8 +568,9 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
       syncDetails();
       if (!state.active) return;
       var mask = categories.map(function (cat) { return weights[cat.key] > 0 ? '1' : '0'; }).join('');
-      if (!cache.has(mask)) cache.set(mask, buildGraph(cars, categories, weights));
+      if (!cache.has(mask)) cache.set(mask, buildGraph(cars, categories, weights, topPickId));
       graph = cache.get(mask);
+      if (!state.selected && graph.topPick) state.selected = topPickId;
       if (!state.selected) {
         var ordered = graph.eligible.slice().sort(ascending(weights));
         state.selected = (ordered.find(function (car) { return upgrades(graph, car, weights).length; }) || ordered[0] || cars[0]).id;
@@ -659,7 +675,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;ma
   categories.forEach(function (cat) { inputs[cat.key] = document.getElementById('w-' + cat.key); });
   Array.prototype.forEach.call(rank.querySelectorAll('.car'), function (row) { rows[row.dataset.id] = row; });
   cars.forEach(function (car) { totals[car.id] = document.querySelector('[data-total="' + car.id + '"]'); });
-  var pareto = CarPareto.createView({ data: data, inputs: inputs, redraw: redraw });
+  var pareto = CarPareto.createView({ data: data, topPickId: 'sportage', redraw: redraw });
   function signed(value) { return value > 0 ? '+' + CarAllocation.number(value) : value < 0 ? '−' + CarAllocation.number(Math.abs(value)) : '0'; }
   function redraw() {
     var weights = {}, capacity = categories.length * 100;

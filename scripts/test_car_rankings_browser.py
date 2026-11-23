@@ -195,6 +195,7 @@ def check_sorting(page, cars, output):
 
 def check_pareto(page, cars, defaults, output, uri):
     byid = {c['id']: c for c in cars}
+    top_pick = 'sportage'
 
     def weights(values):
         page.evaluate('''weights => { Object.entries(weights).forEach(([key, value]) => {
@@ -204,19 +205,23 @@ def check_pareto(page, cars, defaults, output, uri):
 
     def network():
         active = [key for key in build.KEYS if float(page.locator('#w-' + key).input_value()) > 0]
-        profiles = set(tuple(c['scores'][key] for key in active) for c in cars)
+        profiles = {tuple(c['scores'][key] for key in active) for c in cars if c['id'] != top_pick}
         def dominates(a, b):
             return all(x >= y for x, y in zip(a, b)) and any(x > y for x, y in zip(a, b))
         edges = [(a, b) for a in profiles for b in profiles if dominates(a, b)
                  and not any(dominates(a, middle) and dominates(middle, b) for middle in profiles)]
+        frontier_size = sum(not any(dominates(other, p) for other in profiles) for p in profiles)
         remaining, layers = set(profiles), 0
         while remaining:
             front = {p for p in remaining if not any(dominates(other, p) for other in remaining)}
             remaining -= front
             layers += 1
-        check(page.locator('#pareto-stage .pareto-node').count() == len(profiles), 'Wrong Pareto profile count')
-        page.wait_for_function("n => document.querySelectorAll('#pareto-links [data-better]').length === n", arg=len(edges))
-        check(page.locator('#pareto-stage .pareto-layer').count() == layers, 'Wrong Pareto layer count')
+        check(page.locator('#pareto-stage .pareto-node').count() == len(profiles) + 1, 'Wrong Pareto profile count')
+        page.wait_for_function("n => document.querySelectorAll('#pareto-links [data-better]').length === n", arg=len(edges) + frontier_size)
+        check(page.locator('#pareto-stage .pareto-layer').count() == layers + 1, 'Wrong Pareto layer count')
+        top_tier = page.locator('#pareto-stage .pareto-layer').first
+        check(top_tier.locator('h3').inner_text() == 'S+ Tier', 'Network lacks the S+ Tier label')
+        check(top_tier.locator('[data-primary]').evaluate_all('buttons => buttons.map(b => b.dataset.select)') == [top_pick], 'S+ Tier is not exclusive')
 
     page.set_viewport_size({'width': 1280, 'height': 900})
     page.goto(uri)
@@ -226,10 +231,12 @@ def check_pareto(page, cars, defaults, output, uri):
     check(f'{len(cars)} comparable · 5 levels' in page.locator('#pareto-coverage').inner_text(), 'Full cohort missing')
     check(page.locator('#pareto-scale,#pareto-incomplete,#pareto-without-eco').count() == 0, 'Obsolete controls remain')
     network()
+    check(page.locator('#pareto-car').input_value() == top_pick, 'S+ champion is not selected initially')
+    check(page.locator('#pareto-comparison .selected-total').inner_text() == build.signed(byid[top_pick]['total']), 'S+ champion score changed')
     page.locator('#pareto-car').select_option('gti')
     active = [key for key in build.KEYS if defaults[key] > 0]
     target = byid['gti']
-    dominators = [c for c in cars if all(c['scores'][k] >= target['scores'][k] for k in active)
+    dominators = [c for c in cars if c['id'] != top_pick and all(c['scores'][k] >= target['scores'][k] for k in active)
                   and any(c['scores'][k] > target['scores'][k] for k in active)]
     expected = min(dominators, key=lambda c: (sum(c['scores'][k] * defaults[k] for k in build.KEYS), c['five'], build.name_key(c)))
     check(page.locator('#pareto-alternative').input_value() == expected['id'], 'Wrong next dominator for GTI')
@@ -244,6 +251,8 @@ def check_pareto(page, cars, defaults, output, uri):
 
     profiles = {}
     for car in cars:
+        if car['id'] == top_pick:
+            continue
         profiles.setdefault(tuple(car['scores'][k] for k in active), []).append(car)
     members = next(group for group in profiles.values() if len(group) > 1)
     primary, other = members[:2]
@@ -254,6 +263,9 @@ def check_pareto(page, cars, defaults, output, uri):
     check(page.locator('#pareto-car').input_value() == other['id'], 'Shared node member button failed')
     page.locator('#pareto-list-button').click()
     check(page.locator('#pareto-list').is_visible(), 'Grouped list did not open')
+    top_tier = page.locator('#pareto-list .pareto-layer-list').first
+    check(top_tier.locator('h3').inner_text() == 'S+ Tier', 'Grouped list lacks the S+ Tier label')
+    check(top_tier.locator('[data-select]').evaluate_all('buttons => buttons.map(b => b.dataset.select)') == [top_pick], 'Grouped list lacks an exclusive S+ Tier')
     page.locator('#pareto-list [data-select="gti"]').first.click()
     check(page.locator('#pareto-car').input_value() == 'gti', 'List selection failed')
     page.locator('#pareto-network-button').click()
@@ -305,6 +317,7 @@ def check_pareto(page, cars, defaults, output, uri):
     weights({key: 0 for key in build.KEYS})
     network()
     check('No active metrics' in page.locator('#pareto-comparison').inner_text(), 'All-zero state missing')
+    check(page.locator('.next-upgrade [data-select]').get_attribute('data-select') == top_pick, 'S+ champion disappeared with all metrics off')
     weights({**defaults, 'sporty': 1})
     network()
     page.locator('#reset').click()
