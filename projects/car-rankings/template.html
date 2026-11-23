@@ -117,8 +117,9 @@ $sort_script
   'use strict';
   var data = JSON.parse(document.getElementById('ranking-data').textContent);
   var categories = data.categories, cars = data.cars;
+  var topPickId = $top_pick_id, topPickBonus = $top_pick_bonus;
   var rank = document.getElementById('ranking'), main = document.getElementById('main');
-  var inputs = {}, rows = {}, totals = {}, allocation = {}, interaction = null, settleTimer = null, held = null;
+  var inputs = {}, rows = {}, allocation = {}, interaction = null, settleTimer = null, held = null;
   var controls = document.querySelector('.controls');
   var sortState = { key: 'total', direction: 'desc' };
   var sortButtons = document.querySelectorAll('[data-sort]');
@@ -127,8 +128,7 @@ $sort_script
   categories.forEach(function (cat) { allocation[cat.key] = cat.default * 100; });
   categories.forEach(function (cat) { inputs[cat.key] = document.getElementById('w-' + cat.key); });
   Array.prototype.forEach.call(rank.querySelectorAll('.car'), function (row) { rows[row.dataset.id] = row; });
-  cars.forEach(function (car) { totals[car.id] = document.querySelector('[data-total="' + car.id + '"]'); });
-  var pareto = CarPareto.createView({ data: data, topPickId: 'sportage', redraw: redraw });
+  var pareto = CarPareto.createView({ data: data, topPickId: topPickId, redraw: redraw });
   function signed(value) { return value > 0 ? '+' + CarAllocation.number(value) : value < 0 ? '−' + CarAllocation.number(Math.abs(value)) : '0'; }
   function redraw() {
     var weights = {}, capacity = categories.length * 100;
@@ -148,14 +148,22 @@ $sort_script
       document.getElementById('segment-' + key).style.width = units / capacity * 100 + '%';
       document.querySelectorAll('[data-category="' + key + '"], [data-assessment="' + key + '"]').forEach(function (el) { el.classList.toggle('category-off', !units); });
     });
-    document.getElementById('allocation-caption').textContent = activeCount ? activeCount + (activeCount === 1 ? ' point' : ' points') : (sortState.key === 'total' ? 'No priorities · sorted by cost' : 'No priorities');
-    document.getElementById('allocation-bar').setAttribute('aria-label', activeCount ? activeCount + ' of ' + categories.length + ' points active. ' + categories.map(function (cat) { return cat.label + ': ' + (allocation[cat.key] ? CarAllocation.number(weights[cat.key]) + ' points' : 'off'); }).join(', ') : 'No priorities selected; totals are zero. Column sorting remains available.');
+    document.getElementById('allocation-caption').textContent = activeCount ? activeCount + (activeCount === 1 ? ' point' : ' points') : 'No priorities';
+    document.getElementById('allocation-bar').setAttribute('aria-label', activeCount ? activeCount + ' of ' + categories.length + ' points active. ' + categories.map(function (cat) { return cat.label + ': ' + (allocation[cat.key] ? CarAllocation.number(weights[cat.key]) + ' points' : 'off'); }).join(', ') : 'No priorities selected. Column sorting remains available.');
     controls.classList.toggle('all-off', !activeCount);
     var ordered = cars.map(function (car) {
       var total = CarAllocation.total(car, weights);
       return { id: car.id, name: car.name, five: car.five, total: total, scores: car.scores };
     });
     ordered.sort(CarSort.totalOrder);
+    var actualLeader = ordered[0];
+    var topPickIndex = ordered.findIndex(function (car) { return car.id === topPickId; });
+    if (topPickIndex >= 0) {
+      // This list uses display copies. The Pareto view and details use the actual scores.
+      var topPick = Object.assign({}, ordered.splice(topPickIndex, 1)[0]);
+      topPick.total = Math.round((actualLeader.total + topPickBonus) * 100) / 100;
+      ordered.unshift(topPick);
+    }
     var leader = ordered[0];
     ordered.forEach(function (car, i) { car.rank = i + 1; });
     ordered = CarSort.order(ordered, sortState);
@@ -173,12 +181,12 @@ $sort_script
       row.querySelector('.rank').textContent = String(car.rank).padStart(2, '0');
       row.querySelector('.total').textContent = signed(car.total);
       row.classList.toggle('first', car.id === leader.id);
-      totals[car.id].textContent = signed(car.total);
       fragment.appendChild(row);
     });
     rank.appendChild(fragment);
     main.classList.toggle('sporty-off', weights.sporty === 0);
-    document.getElementById('leader').textContent = 'Leader: ' + leader.name + ' (' + signed(leader.total) + ')';
+    var viewLeader = pareto.isActive() ? actualLeader : leader;
+    document.getElementById('leader').textContent = 'Leader: ' + viewLeader.name + ' (' + signed(viewLeader.total) + ')';
     var indicator = document.getElementById('indicator');
     indicator.textContent = '● Live'; indicator.classList.add('active');
     pareto.update(weights);

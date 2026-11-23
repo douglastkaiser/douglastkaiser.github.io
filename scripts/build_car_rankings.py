@@ -14,6 +14,8 @@ from string import Template
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = ROOT / 'projects/car-rankings'
 KEYS = ('cost', 'eco', 'mountain', 'lux', 'commute', 'sporty')
+TOP_PICK_ID = 'sportage'
+TOP_PICK_BONUS = 0.1
 COMPONENTS = {
     'mountain': (('Carrying', 'Winter access', 'Trip practicality'), (40, 35, 25)),
     'lux': (('Ride/noise', 'Seating', 'Cabin ergonomics', 'Power liftgate'), (40, 30, 20, 10)),
@@ -421,6 +423,12 @@ def modal(data, car):
 
 def render(data):
     cars, cats = prepare(data), data['categories']
+    display_cars = cars
+    top_pick = next((car for car in cars if car['id'] == TOP_PICK_ID), None)
+    if top_pick is not None:
+        display_cars = [dict(top_pick, total=round(cars[0]['total'] + TOP_PICK_BONUS, 2))]
+        display_cars.extend(car for car in cars if car['id'] != TOP_PICK_ID)
+    leader = display_cars[0]
     controls, segments = [], []
     accents = ('#3978a8', '#7465ac', '#b47737', '#ac6084', '#41888b', '#737c96')
     for cat, accent in zip(cats, accents):
@@ -465,7 +473,8 @@ def render(data):
         insurance_year=f'{data["assumptions"]["insurance_per_year"]:,}', repair_year=f'{data["assumptions"]["repair_reserve_per_year"]:,}',
         gas_upkeep=f'{data["assumptions"]["routine_upkeep_per_mile"]["Gas"] * 100:g}', hybrid_upkeep=f'{data["assumptions"]["routine_upkeep_per_mile"]["Hybrid"] * 100:g}', ev_upkeep=f'{data["assumptions"]["routine_upkeep_per_mile"]["EV"] * 100:g}',
         headers=''.join(f'<button type="button" data-category="{c["key"]}" data-sort="{c["key"]}" data-label="{escape(c["short"])}" title="Sort by {escape(c["label"])} score">{escape(c["short"])}<span class="sort-arrow" aria-hidden="true">↕</span></button>' for c in cats),
-        rows='\n'.join(row(c, cats, i + 1) for i, c in enumerate(cars)), leader=f'Leader: {escape(cars[0]["name"])} ({signed(cars[0]["total"])})',
+        rows='\n'.join(row(c, cats, i + 1) for i, c in enumerate(display_cars)), leader=f'Leader: {escape(leader["name"])} ({signed(leader["total"])})',
+        top_pick_id=json.dumps(TOP_PICK_ID), top_pick_bonus=TOP_PICK_BONUS,
         modals='\n'.join(modal(data, c) for c in cars), runtime_json=runtime_json,
         pareto_script=(ROOT / 'scripts/car_rankings_pareto.js').read_text(),
         sort_script=(ROOT / 'scripts/car_rankings_sort.js').read_text(),

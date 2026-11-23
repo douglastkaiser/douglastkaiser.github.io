@@ -33,17 +33,24 @@ def signed(value):
     return ('+' if value > 0 else '−' if value < 0 else '') + f'{abs(value):g}'
 
 
+def display_ranking(cars, weights):
+    totals = {c['id']: score(c, weights) for c in cars}
+    totals['sportage'] = round(max(totals.values()) + .1, 2)
+    ordered = sorted(cars, key=lambda c: (-totals[c['id']], c['five'], build.name_key(c)))
+    return ordered, totals
+
+
 def verify_allocation(page, cars):
     weights = read_weights(page)
     check(all(0 <= value <= 2 for value in weights.values()), f'Allocation exceeds slider cap: {weights}')
     units = sum(round(w * 100) for w in weights.values())
     check(units == sum(value > 0 for value in weights.values()) * 100, f'Budget drift: {weights}')
-    check(page.locator('#allocation-caption').inner_text() == (f'{units // 100} point' + ('s' if units != 100 else '') if units else 'No priorities · sorted by cost'), 'Budget caption drift')
-    expected = sorted(cars, key=lambda car: (-score(car, weights), car['five'], build.name_key(car)))
+    check(page.locator('#allocation-caption').inner_text() == (f'{units // 100} point' + ('s' if units != 100 else '') if units else 'No priorities'), 'Budget caption drift')
+    expected, shown_totals = display_ranking(cars, weights)
     check(page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)') == [c['id'] for c in expected], 'Allocation ranking mismatch')
     for car in cars:
         total = signed(score(car, weights))
-        check(page.locator(f'#ranking [data-id="{car["id"]}"] .total').inner_text() == total, 'Allocation row total incorrect')
+        check(page.locator(f'#ranking [data-id="{car["id"]}"] .total').inner_text() == signed(shown_totals[car['id']]), 'Allocation row total incorrect')
         check(page.locator(f'#detail-{car["id"]} [data-total]').inner_text() == total, 'Allocation dialog total incorrect')
     for key, value in weights.items():
         check(page.locator('#unit-' + key).evaluate("(el, off) => el.classList.contains('is-off') === off", value == 0), 'Off styling mismatch')
@@ -147,8 +154,7 @@ def check_slider_snapping(page, cars):
 def check_sorting(page, cars, output):
     def verify(key, direction):
         weights = read_weights(page)
-        totals = {c['id']: score(c, weights) for c in cars}
-        weighted = sorted(cars, key=lambda c: (-totals[c['id']], c['five'], build.name_key(c)))
+        weighted, totals = display_ranking(cars, weights)
         ranks = {c['id']: i for i, c in enumerate(weighted, 1)}
         def value(c):
             if key == 'name': return build.name_key(c)
@@ -289,7 +295,8 @@ def check_pareto(page, cars, defaults, output, uri):
     check(page.locator('#pareto-comparison a').first.evaluate('el => document.activeElement === el'), 'Pareto dialog focus not restored')
 
     page.locator('#tab-rankings').click()
-    check(page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)') == [c['id'] for c in cars], 'Tab switch changed ranking')
+    ranking, _ = display_ranking(cars, defaults)
+    check(page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)') == [c['id'] for c in ranking], 'Tab switch changed ranking')
     page.locator('#ranking [data-id="civic"]').click()
     page.wait_for_function("document.activeElement.closest('#detail-civic') !== null")
     check(page.locator('#detail-civic [data-total]').inner_text() == build.signed(byid['civic']['total']), 'Rankings dialog total drift')
@@ -376,17 +383,18 @@ def main():
             }); }''', requested)
             weights = read_weights(page)
             verify_allocation(page, cars)
-            expected = sorted(cars, key=lambda c: (-score(c, weights), c['five'], build.name_key(c)))
+            expected, shown_totals = display_ranking(cars, weights)
             actual = page.locator('#ranking .car').evaluate_all("rows => rows.map(row => ({id:row.dataset.id, total:row.querySelector('.total').textContent, rank:row.querySelector('.rank').textContent}))")
             check([c['id'] for c in actual] == [c['id'] for c in expected], f'Python/browser order mismatch: {weights}')
             for i, (a, e) in enumerate(zip(actual, expected), 1):
                 total = score(e, weights)
-                check(a['total'] == signed(total), f'Wrong row total: {e["id"]}')
+                check(a['total'] == signed(shown_totals[e['id']]), f'Wrong row total: {e["id"]}')
                 check(a['rank'] == f'{i:02}', 'Wrong displayed rank')
                 check(page.locator(f'[data-total="{e["id"]}"]').inner_text() == signed(total), 'Dialog total drift')
             check(page.locator('#main').evaluate("el => el.classList.contains('sporty-off')") == (weights['sporty'] == 0), 'Fun state drift')
         page.locator('#reset').click()
-        check(page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)') == [c['id'] for c in cars], 'Reset order drift')
+        default_ranking, default_totals = display_ranking(cars, defaults)
+        check(page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)') == [c['id'] for c in default_ranking], 'Reset order drift')
         for key in build.KEYS:
             check(float(page.locator('#w-' + key).input_value()) == defaults[key], 'Reset weights drift')
         check(page.locator('#ranking .car.first').count() == 1, 'Leader styling drift')
@@ -398,7 +406,6 @@ def main():
         weights = verify_allocation(page, cars)
         for car in cars:
             expected = signed(score(car, weights))
-            check(page.locator(f'#ranking [data-id="{car["id"]}"] .total').inner_text() == expected, 'Sporty/Fun contribution incorrect')
             check(page.locator(f'#detail-{car["id"]} [data-total]').inner_text() == expected, 'Sporty/Fun dialog contribution incorrect')
         # Order changes with weighting, but every vehicle retains its category assessment.
         for car in cars:
@@ -450,7 +457,13 @@ def main():
             fallback.route(uri.split('#')[0].split('?')[0] + '*', lambda route: route.fulfill(path=str(build.PAGE / 'index.html'), content_type='text/html'))
         page = fallback.new_page(); page.goto(uri)
         check(page.locator('#ranking .car').count() == len(cars), 'No-JS rows missing')
-        check(page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)') == [c['id'] for c in cars], 'Static fallback order mismatch')
+        check(page.locator('#ranking .car').evaluate_all('rows => rows.map(r => r.dataset.id)') == [c['id'] for c in default_ranking], 'Static fallback order mismatch')
+        sportage = page.locator('#ranking .car').first
+        check(sportage.locator('.rank').inner_text() == '01', 'Static fallback Sportage rank mismatch')
+        check(sportage.locator('.total').inner_text() == signed(default_totals['sportage']), 'Static fallback Sportage score mismatch')
+        sportage.click()
+        check(page.locator('#detail-sportage [data-total]').inner_text() == signed(score(default_ranking[0], defaults)), 'Static fallback Sportage detail score changed')
+        page.locator('#detail-sportage .close').click()
         page.locator('#ranking [data-id="civic"]').click()
         check(page.locator('#detail-civic').is_visible(), 'No-JS detail failed')
         page.locator('#detail-civic .close').click()
